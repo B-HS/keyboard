@@ -1,0 +1,13 @@
+{
+    "mcpServers": {
+        "kicad": {
+            "command": "/Users/hyunseokbyun/.nvm/versions/node/v22.20.0/bin/node",
+            "args": ["/Users/hyunseokbyun/KiCAD-MCP-Server/dist/index.js"],
+            "env": {
+                "KICAD_PYTHON": "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/Current/bin/python3",
+                "PYTHONPATH": "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages",
+                "LOG_LEVEL": "info"
+            }
+        }
+    }
+}
