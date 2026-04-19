@@ -50,9 +50,11 @@ export const buildPlate2d = (keys: KeyPos[], params: PlateParams) => {
         return [translate([k.cx - spacing, y, 0], pad), translate([k.cx + spacing, y, 0], pad)]
     })
 
-    const screws = screwPositions(bounds, params.screwHoleMargin).map((pos) =>
-        translate([pos[0], pos[1], 0], circle({ radius: params.screwHoleRadius })),
-    )
+    const screws = params.screwHoleRadius > 0
+        ? screwPositions(bounds, params.screwHoleMargin).map((pos) =>
+            translate([pos[0], pos[1], 0], circle({ radius: params.screwHoleRadius })),
+        )
+        : []
 
     const cutouts = union(...switchCuts, ...stabPads, ...screws)
     return subtract(outline, cutouts)

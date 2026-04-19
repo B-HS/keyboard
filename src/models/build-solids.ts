@@ -1,8 +1,7 @@
 import { colors, primitives, transforms } from '@jscad/modeling'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
 import { keys49, computeBounds } from './layout'
-import { buildPlate } from './plate'
-import { buildCaseTop, buildCaseBottom, caseBounds, DEFAULT_CASE_PARAMS, getPlateTransform } from './case'
+import { buildCaseTop, buildCaseBottom, caseBounds, caseFrontTopZ, DEFAULT_CASE_PARAMS, getPlateTransform } from './case'
 import { buildLolin } from './lolin'
 import {
     buildPerfBoard,
@@ -22,7 +21,6 @@ const { cuboid } = primitives
 const { translate, rotateX } = transforms
 
 export type PartVisibility = {
-    plate: boolean
     caseTop: boolean
     caseBottom: boolean
     switches: boolean
@@ -41,7 +39,6 @@ export type PartVisibility = {
 const PHONE_SIZE: [number, number, number] = [77.6, 160.7, 7.85]
 const PHONE_GAP = 10
 
-const PLATE_COLOR: [number, number, number, number] = [0.88, 0.88, 0.92, 1]
 const CASE_TOP_COLOR: [number, number, number, number] = [0.2, 0.2, 0.24, 1]
 const CASE_BOTTOM_COLOR: [number, number, number, number] = [0.16, 0.16, 0.19, 1]
 const SWITCH_COLOR: [number, number, number, number] = [0.12, 0.12, 0.14, 1]
@@ -79,11 +76,6 @@ export const buildSolids = (
         t = rotateX(tiltAngle, t)
         t = translate([0, pivotY, liftZ], t)
         return t
-    }
-
-    if (visibility.plate) {
-        const plate = buildPlate(keys49, params.plate)
-        solids.push(colorize(PLATE_COLOR, applyPlateTransform(plate)))
     }
 
     if (visibility.switches && switchGeom) {
@@ -138,7 +130,7 @@ export const buildSolids = (
         const caseMinX = caseBounds(plateBounds, DEFAULT_CASE_PARAMS).minX
         const phoneCenterX = caseMinX - PHONE_GAP - PHONE_SIZE[0] / 2
         const phoneCenterY = (plateBounds.minY + plateBounds.maxY) / 2
-        const phoneCenterZ = PHONE_SIZE[2] / 2
+        const phoneCenterZ = caseFrontTopZ(plateBounds) - PHONE_SIZE[2] / 2
         const phone = translate(
             [phoneCenterX, phoneCenterY, phoneCenterZ],
             cuboid({ size: PHONE_SIZE }),

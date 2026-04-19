@@ -19,7 +19,6 @@ import {
 
 export const App: FC = () => {
     const [visibility, setVisibility] = useState<PartVisibility>({
-        plate: true,
         caseTop: true,
         caseBottom: true,
         switches: false,

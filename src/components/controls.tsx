@@ -62,10 +62,6 @@ export const Controls: FC<ControlsProps> = ({
 
             <h2>Parts</h2>
             <label>
-                <input type='checkbox' checked={visibility.plate} onChange={() => togglePart('plate')} />
-                Switch Plate
-            </label>
-            <label>
                 <input type='checkbox' checked={visibility.caseTop} onChange={() => togglePart('caseTop')} />
                 Case Top
             </label>
