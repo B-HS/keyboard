@@ -2,20 +2,19 @@ import { colors, primitives, transforms } from '@jscad/modeling'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
 import { keys49, computeBounds } from './layout'
 import { buildPlate } from './plate'
-import { buildCase, caseBounds, DEFAULT_CASE_PARAMS, getPlateTransform } from './case'
+import { buildCaseTop, buildCaseBottom, caseBounds, DEFAULT_CASE_PARAMS, getPlateTransform } from './case'
 import { buildLolin } from './lolin'
 import {
     buildPerfBoard,
     buildSlideSwitch,
     buildStabilizers,
-    buildKeycaps,
     buildFootPads,
     buildBatteryCover,
     buildBatteries,
     buildBatteryContacts,
 } from './accessories'
 import { normalizeSwitch, placeSwitches, DEFAULT_SWITCH_ORIENT, type SwitchOrient } from './switch'
-import { normalizeKeycap, placeKeycaps, DEFAULT_KEYCAP_ORIENT, type KeycapOrient } from './keycap'
+import { buildKeycapsForKeys, DEFAULT_KEYCAP_ORIENT, type KeycapOrient } from './keycap'
 import type { BuildParams } from './build-params'
 
 const { colorize } = colors
@@ -24,7 +23,8 @@ const { translate, rotateX } = transforms
 
 export type PartVisibility = {
     plate: boolean
-    case: boolean
+    caseTop: boolean
+    caseBottom: boolean
     switches: boolean
     lolin: boolean
     perfBoard: boolean
@@ -42,7 +42,8 @@ const PHONE_SIZE: [number, number, number] = [77.6, 160.7, 7.85]
 const PHONE_GAP = 10
 
 const PLATE_COLOR: [number, number, number, number] = [0.88, 0.88, 0.92, 1]
-const CASE_COLOR: [number, number, number, number] = [0.2, 0.2, 0.24, 1]
+const CASE_TOP_COLOR: [number, number, number, number] = [0.2, 0.2, 0.24, 1]
+const CASE_BOTTOM_COLOR: [number, number, number, number] = [0.16, 0.16, 0.19, 1]
 const SWITCH_COLOR: [number, number, number, number] = [0.12, 0.12, 0.14, 1]
 const LOLIN_COLOR: [number, number, number, number] = [0.1, 0.5, 0.2, 1]
 const PERFBOARD_COLOR: [number, number, number, number] = [0.75, 0.6, 0.3, 1]
@@ -60,13 +61,15 @@ export const buildSolids = (
     params: BuildParams,
     switchGeom: Geom3 | null = null,
     switchOrient: SwitchOrient = DEFAULT_SWITCH_ORIENT,
-    keycapGeom: Geom3 | null = null,
     keycapOrient: KeycapOrient = DEFAULT_KEYCAP_ORIENT,
 ): Geom3[] => {
     const solids: Geom3[] = []
 
-    if (visibility.case) {
-        solids.push(colorize(CASE_COLOR, buildCase(keys49, params)))
+    if (visibility.caseTop) {
+        solids.push(colorize(CASE_TOP_COLOR, buildCaseTop(keys49, params)))
+    }
+    if (visibility.caseBottom) {
+        solids.push(colorize(CASE_BOTTOM_COLOR, buildCaseBottom(keys49, params)))
     }
 
     const plateBounds = computeBounds(keys49, params.plate.padding)
@@ -109,16 +112,9 @@ export const buildSolids = (
     }
 
     if (visibility.keycaps) {
-        if (keycapGeom) {
-            const normalized = normalizeKeycap(keycapGeom, keycapOrient)
-            const placed = placeKeycaps(normalized, keys49)
-            for (const c of placed) {
-                solids.push(colorize(KEYCAP_COLOR, applyPlateTransform(c)))
-            }
-        } else {
-            const caps = buildKeycaps(keys49)
-            const capsOnPlate = translate([0, 0, 1.5], caps)
-            solids.push(colorize(KEYCAP_COLOR, applyPlateTransform(capsOnPlate)))
+        const caps = buildKeycapsForKeys(keys49, keycapOrient)
+        for (const c of caps) {
+            solids.push(colorize(KEYCAP_COLOR, applyPlateTransform(c)))
         }
     }
 

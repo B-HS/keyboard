@@ -1,8 +1,7 @@
 import { deserialize } from '@jscad/stl-deserializer'
 import { measurements, transforms } from '@jscad/modeling'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
-import stlUrl from './assets/cherry-mx-keycap.stl?url'
-import type { KeyPos } from './layout'
+import { U, type KeyPos } from './layout'
 
 const { measureBoundingBox } = measurements
 const { translate, rotateX, rotateY, rotateZ } = transforms
@@ -17,29 +16,62 @@ export type KeycapOrient = {
 export const DEFAULT_KEYCAP_ORIENT: KeycapOrient = {
     rotationX: Math.PI / 2,
     rotationY: 0,
-    rotationZ: (3 * Math.PI) / 2,
+    rotationZ: 0,
     mountZOffset: 6.0,
 }
 
-let cachedGeom: Geom3 | null = null
-let loadPromise: Promise<Geom3> | null = null
+const stlUrlMap = import.meta.glob('../../docs/models/keycap/STL/*.stl', {
+    query: '?url',
+    import: 'default',
+    eager: true,
+}) as Record<string, string>
 
-export const loadKeycapGeom = async (): Promise<Geom3> => {
-    if (cachedGeom) return cachedGeom
-    if (!loadPromise) {
-        loadPromise = (async () => {
-            const response = await fetch(stlUrl)
-            const buffer = await response.arrayBuffer()
-            const result = deserialize({ output: 'geometry', addColors: false }, new Uint8Array(buffer))
-            const geom = (Array.isArray(result) ? result[0] : result) as Geom3
-            cachedGeom = geom
-            return geom
-        })()
-    }
-    return loadPromise
+const ROW_TO_PROFILE: Record<number, number> = { 0: 1, 1: 2, 2: 3, 3: 4 }
+
+const rowOfKey = (k: KeyPos): number => {
+    const idx = Math.round(-k.cy / U)
+    return Math.max(0, Math.min(3, idx))
 }
 
-export const normalizeKeycap = (geom: Geom3, orient: KeycapOrient = DEFAULT_KEYCAP_ORIENT): Geom3 => {
+const keyFileName = (widthU: number, row: number): string => {
+    const profile = ROW_TO_PROFILE[row] ?? row + 1
+    return `1x${widthU} R${profile}.stl`
+}
+
+const findStlUrl = (fileName: string): string | null => {
+    for (const path in stlUrlMap) {
+        if (path.endsWith('/' + fileName)) return stlUrlMap[path]
+    }
+    return null
+}
+
+const rawCache = new Map<string, Geom3>()
+
+const loadStlGeom = async (url: string): Promise<Geom3> => {
+    const response = await fetch(url)
+    const buffer = await response.arrayBuffer()
+    const result = deserialize({ output: 'geometry', addColors: false }, new Uint8Array(buffer))
+    return (Array.isArray(result) ? result[0] : result) as Geom3
+}
+
+export const loadKeycapGeoms = async (keys: KeyPos[]): Promise<void> => {
+    const needed = new Set<string>()
+    for (const k of keys) needed.add(keyFileName(k.w, rowOfKey(k)))
+    await Promise.all(
+        Array.from(needed).map(async (fname) => {
+            if (rawCache.has(fname)) return
+            const url = findStlUrl(fname)
+            if (!url) {
+                console.warn('Missing keycap STL:', fname)
+                return
+            }
+            const geom = await loadStlGeom(url)
+            rawCache.set(fname, geom)
+        }),
+    )
+}
+
+const orientGeom = (geom: Geom3, orient: KeycapOrient): Geom3 => {
     let g = geom
     if (orient.rotationX) g = rotateX(orient.rotationX, g)
     if (orient.rotationY) g = rotateY(orient.rotationY, g)
@@ -51,5 +83,17 @@ export const normalizeKeycap = (geom: Geom3, orient: KeycapOrient = DEFAULT_KEYC
     return translate([-cx, -cy, 1.5 + orient.mountZOffset - cz], g)
 }
 
-export const placeKeycaps = (normalized: Geom3, keys: KeyPos[]): Geom3[] =>
-    keys.map((k) => translate([k.cx, k.cy, 0], normalized))
+export const buildKeycapsForKeys = (
+    keys: KeyPos[],
+    orient: KeycapOrient = DEFAULT_KEYCAP_ORIENT,
+): Geom3[] => {
+    const out: Geom3[] = []
+    for (const k of keys) {
+        const fname = keyFileName(k.w, rowOfKey(k))
+        const raw = rawCache.get(fname)
+        if (!raw) continue
+        const normalized = orientGeom(raw, orient)
+        out.push(translate([k.cx, k.cy, 0], normalized))
+    }
+    return out
+}

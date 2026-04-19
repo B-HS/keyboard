@@ -1,5 +1,2 @@
 node_modules
-dist
-*.stl
-*.dxf
 .DS_Store

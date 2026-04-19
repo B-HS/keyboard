@@ -2,7 +2,7 @@ import { writeFileSync, mkdirSync, rmSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { serialize as stlSerialize } from '@jscad/stl-serializer'
 import { serialize as dxfSerialize } from '@jscad/dxf-serializer'
-import { buildCase, DEFAULT_CASE_PARAMS } from '../src/models/case'
+import { buildCaseTop, buildCaseBottom, DEFAULT_CASE_PARAMS } from '../src/models/case'
 import { buildPlate2d } from '../src/models/plate'
 import { buildBatteryCover as _buildBatteryCover } from '../src/models/accessories'
 import { keys49 } from '../src/models/layout'
@@ -31,8 +31,14 @@ try {
 } catch {
     // ignore if not exists
 }
+try {
+    rmSync(`${outDir}case.stl`)
+} catch {
+    // ignore if not exists
+}
 
-writeStl('case', buildCase(keys49, defaults))
+writeStl('case-top', buildCaseTop(keys49, defaults))
+writeStl('case-bottom', buildCaseBottom(keys49, defaults))
 writeStl('battery-cover', _buildBatteryCover(DEFAULT_CASE_PARAMS))
 writeDxf('plate', buildPlate2d(keys49, defaults.plate))
 

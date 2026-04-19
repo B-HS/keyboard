@@ -1,7 +1,6 @@
 import { deserialize } from '@jscad/stl-deserializer'
 import { measurements, transforms } from '@jscad/modeling'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
-import stlUrl from './assets/cherry-mx.stl?url'
 import type { KeyPos } from './layout'
 
 const { measureBoundingBox } = measurements
@@ -21,14 +20,32 @@ export const DEFAULT_SWITCH_ORIENT: SwitchOrient = {
     mountZOffset: -7.7,
 }
 
-let cachedGeom: Geom3 | null = null
-let loadPromise: Promise<Geom3> | null = null
+const stlUrlMap = import.meta.glob('../../docs/models/switch/*.{stl,STL}', {
+    query: '?url',
+    import: 'default',
+    eager: true,
+}) as Record<string, string>
 
-export const loadSwitchGeom = async (): Promise<Geom3> => {
+const findSwitchStlUrl = (): string | null => {
+    const preferred = Object.keys(stlUrlMap).find((p) => /cherry[^/]*mx[^/]*\.stl$/i.test(p))
+    if (preferred) return stlUrlMap[preferred]
+    const any = Object.keys(stlUrlMap)[0]
+    return any ? stlUrlMap[any] : null
+}
+
+let cachedGeom: Geom3 | null = null
+let loadPromise: Promise<Geom3 | null> | null = null
+
+export const loadSwitchGeom = async (): Promise<Geom3 | null> => {
     if (cachedGeom) return cachedGeom
     if (!loadPromise) {
         loadPromise = (async () => {
-            const response = await fetch(stlUrl)
+            const url = findSwitchStlUrl()
+            if (!url) {
+                console.warn('Switch STL not found under docs/models/switch/*.stl')
+                return null
+            }
+            const response = await fetch(url)
             const buffer = await response.arrayBuffer()
             const result = deserialize({ output: 'geometry', addColors: false }, new Uint8Array(buffer))
             const geom = (Array.isArray(result) ? result[0] : result) as Geom3

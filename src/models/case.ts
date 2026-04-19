@@ -19,6 +19,7 @@ export type CaseParams = {
     plateRecessWall: number
     wallThickness: number
     bottomThickness: number
+    rimInnerInset: number
 
     screwPostOuterDiameter: number
     screwPostInsertHoleDiameter: number
@@ -61,6 +62,7 @@ export const DEFAULT_CASE_PARAMS: CaseParams = {
     plateRecessWall: 6.5,
     wallThickness: 3,
     bottomThickness: 2.4,
+    rimInnerInset: 1.5,
 
     screwPostOuterDiameter: 6,
     screwPostInsertHoleDiameter: 1.5,
@@ -144,6 +146,51 @@ const outerShell = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {
         extrudeLinear({ height: maxHeight }, rect2d),
     )
     return intersect(shell, cornerClipper)
+}
+
+const upperRimLip = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {
+    const cb = caseBounds(plateBounds, caseP)
+    const wallT = caseP.wallThickness
+    const inset = caseP.rimInnerInset
+    const extraDown = 0.2
+    const extraUp = 0.2
+
+    const plateTopFront = plateBottomAtY(cb.minY, plateBounds, caseP) + 1.5
+    const plateTopBack = plateBottomAtY(cb.maxY, plateBounds, caseP) + 1.5
+    const rimTopFront = caseHeightAtY(cb.minY, plateBounds, caseP)
+    const rimTopBack = caseHeightAtY(cb.maxY, plateBounds, caseP)
+
+    const yMinOuter = cb.minY + wallT
+    const yMaxOuter = cb.maxY - wallT
+    const xMinOuter = cb.minX + wallT
+    const xMaxOuter = cb.maxX - wallT
+    const outerPoly = polygon({
+        points: [
+            [yMaxOuter, plateTopBack - extraDown],
+            [yMaxOuter, rimTopBack + extraUp],
+            [yMinOuter, rimTopFront + extraUp],
+            [yMinOuter, plateTopFront - extraDown],
+        ],
+    })
+    const outerExtruded = extrudeLinear({ height: xMaxOuter - xMinOuter }, outerPoly)
+    const outer = translate([xMinOuter, 0, 0], reorient(outerExtruded))
+
+    const yMinInner = yMinOuter + inset
+    const yMaxInner = yMaxOuter - inset
+    const xMinInner = xMinOuter + inset
+    const xMaxInner = xMaxOuter - inset
+    const innerPoly = polygon({
+        points: [
+            [yMaxInner, plateTopBack - (extraDown + 1)],
+            [yMaxInner, rimTopBack + (extraUp + 2)],
+            [yMinInner, rimTopFront + (extraUp + 2)],
+            [yMinInner, plateTopFront - (extraDown + 1)],
+        ],
+    })
+    const innerExtruded = extrudeLinear({ height: xMaxInner - xMinInner }, innerPoly)
+    const inner = translate([xMinInner, 0, 0], reorient(innerExtruded))
+
+    return subtract(outer, inner)
 }
 
 const innerCavity = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {
@@ -394,10 +441,81 @@ export const buildCase = (keys: KeyPos[], params: BuildParams, caseP: CaseParams
     const slideCutout = slideSwitchBottomCutout(caseP)
 
     shell = subtract(shell, cavity)
+    if (caseP.rimInnerInset > 0) {
+        shell = union(shell, upperRimLip(plateBounds, caseP))
+    }
     shell = union(shell, posts, tray)
     shell = subtract(shell, insertHoles, usb, bottomCutout, slideCutout)
 
     return shell
+}
+
+const ASSEMBLY_SCREW = {
+    insertRadius: 2.0,
+    insertDepth: 4.5,
+    throughRadius: 1.7,
+    headRadius: 3.2,
+    headDepth: 1.6,
+}
+
+const sliceCuboid = (plateBounds: Bounds, zMin: number, zMax: number, caseP: CaseParams): Geom3 => {
+    const cb = caseBounds(plateBounds, caseP)
+    const cx = (cb.minX + cb.maxX) / 2
+    const cy = (cb.minY + cb.maxY) / 2
+    const W = cb.maxX - cb.minX + 40
+    const L = cb.maxY - cb.minY + 40
+    const H = zMax - zMin
+    return translate([cx, cy, (zMin + zMax) / 2], cuboid({ size: [W, L, H] }))
+}
+
+const assemblyInsertsFromBelow = (plateBounds: Bounds, params: BuildParams, caseP: CaseParams): Geom3 => {
+    const positions = screwPositions(plateBounds, params.plate.screwHoleMargin)
+    const z0 = caseP.bottomThickness
+    const holes = positions.map(([x, y]) =>
+        translate(
+            [x, y, z0 + ASSEMBLY_SCREW.insertDepth / 2 - 0.01],
+            cylinder({ radius: ASSEMBLY_SCREW.insertRadius, height: ASSEMBLY_SCREW.insertDepth, segments: 32 }),
+        ),
+    )
+    return union(...holes)
+}
+
+const assemblyThroughsFromBelow = (plateBounds: Bounds, params: BuildParams, caseP: CaseParams): Geom3 => {
+    const positions = screwPositions(plateBounds, params.plate.screwHoleMargin)
+    const items: Geom3[] = []
+    for (const [x, y] of positions) {
+        items.push(
+            translate(
+                [x, y, caseP.bottomThickness / 2],
+                cylinder({ radius: ASSEMBLY_SCREW.throughRadius, height: caseP.bottomThickness + 0.02, segments: 32 }),
+            ),
+        )
+        items.push(
+            translate(
+                [x, y, ASSEMBLY_SCREW.headDepth / 2 - 0.005],
+                cylinder({ radius: ASSEMBLY_SCREW.headRadius, height: ASSEMBLY_SCREW.headDepth, segments: 32 }),
+            ),
+        )
+    }
+    return union(...items)
+}
+
+export const buildCaseTop = (keys: KeyPos[], params: BuildParams, caseP: CaseParams = DEFAULT_CASE_PARAMS): Geom3 => {
+    const full = buildCase(keys, params, caseP)
+    const plateBounds = computeBounds(keys, params.plate.padding)
+    const slicer = sliceCuboid(plateBounds, caseP.bottomThickness, 500, caseP)
+    const sliced = intersect(full, slicer)
+    const inserts = assemblyInsertsFromBelow(plateBounds, params, caseP)
+    return subtract(sliced, inserts)
+}
+
+export const buildCaseBottom = (keys: KeyPos[], params: BuildParams, caseP: CaseParams = DEFAULT_CASE_PARAMS): Geom3 => {
+    const full = buildCase(keys, params, caseP)
+    const plateBounds = computeBounds(keys, params.plate.padding)
+    const slicer = sliceCuboid(plateBounds, -0.5, caseP.bottomThickness, caseP)
+    const sliced = intersect(full, slicer)
+    const throughs = assemblyThroughsFromBelow(plateBounds, params, caseP)
+    return subtract(sliced, throughs)
 }
 
 export const getPlateTransform = (plateBounds: Bounds, caseP: CaseParams = DEFAULT_CASE_PARAMS) => ({

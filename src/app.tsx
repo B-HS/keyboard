@@ -9,7 +9,8 @@ import {
     DEFAULT_SWITCH_ORIENT,
     DEFAULT_KEYCAP_ORIENT,
     loadSwitchGeom,
-    loadKeycapGeom,
+    loadKeycapGeoms,
+    keys49,
     type BuildParams,
     type PartVisibility,
     type SwitchOrient,
@@ -19,7 +20,8 @@ import {
 export const App: FC = () => {
     const [visibility, setVisibility] = useState<PartVisibility>({
         plate: true,
-        case: true,
+        caseTop: true,
+        caseBottom: true,
         switches: false,
         lolin: false,
         perfBoard: false,
@@ -36,20 +38,20 @@ export const App: FC = () => {
     const [switchOrient, setSwitchOrient] = useState<SwitchOrient>(DEFAULT_SWITCH_ORIENT)
     const [switchGeom, setSwitchGeom] = useState<Geom3 | null>(null)
     const [keycapOrient, setKeycapOrient] = useState<KeycapOrient>(DEFAULT_KEYCAP_ORIENT)
-    const [keycapGeom, setKeycapGeom] = useState<Geom3 | null>(null)
+    const [keycapsReady, setKeycapsReady] = useState(0)
 
     useEffect(() => {
         loadSwitchGeom()
             .then(setSwitchGeom)
             .catch((e) => console.error('Switch STL load failed', e))
-        loadKeycapGeom()
-            .then(setKeycapGeom)
+        loadKeycapGeoms(keys49)
+            .then(() => setKeycapsReady((n) => n + 1))
             .catch((e) => console.error('Keycap STL load failed', e))
     }, [])
 
     const solids = useMemo(
-        () => buildSolids(visibility, params, switchGeom, switchOrient, keycapGeom, keycapOrient),
-        [visibility, params, switchGeom, switchOrient, keycapGeom, keycapOrient],
+        () => buildSolids(visibility, params, switchGeom, switchOrient, keycapOrient),
+        [visibility, params, switchGeom, switchOrient, keycapOrient, keycapsReady],
     )
 
     const handleExportStl = () => {
