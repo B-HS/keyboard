@@ -1,0 +1,368 @@
+import { primitives, transforms, booleans, extrusions } from '@jscad/modeling';
+import { computeBounds, U } from './layout';
+import { buildPlate } from './plate';
+const { cuboid, cylinder, polygon, roundedRectangle } = primitives;
+const { translate, rotateX, rotateY } = transforms;
+const { union, subtract, intersect } = booleans;
+const { extrudeLinear } = extrusions;
+export const DEFAULT_CASE_PARAMS = {
+    caseMarginFront: 2,
+    caseMarginBack: 0,
+    caseMarginLeft: 2,
+    caseMarginRight: 2,
+    plateTiltDeg: 8,
+    plateFrontBottomZ: 11.25,
+    plateRecessWall: 7.5,
+    wallThickness: 2,
+    bottomThickness: 2.4,
+    topDeckThickness: 1.0,
+    topDeckKeyClearance: 0.2,
+    cornerBossSize: 6,
+    cornerBossHeight: 5,
+    cornerBossInsertRadius: 1.75,
+    cornerBossInsertDepth: 4.0,
+    cornerBossThroughRadius: 1.7,
+    cornerBossHeadRadius: 3.2,
+    cornerBossHeadDepth: 1.6,
+    screwPostOuterDiameter: 6,
+    screwPostInsertHoleDiameter: 1.5,
+    screwPostInsertDepth: 1.0,
+    usbCutoutWidth: 12.2,
+    usbCutoutHeight: 7.5,
+    usbCutoutCenterX: 9.7,
+    usbCutoutCenterZ: 6.65,
+    usbCutoutCornerRadius: 1.5,
+    usbCutoutTaperExpand: 1.0,
+    batteryDiameter: 10.5,
+    batteryLength: 44.5,
+    batterySlotTolerance: 0.2,
+    batteryGapLength: 7,
+    batteryTrayYCenter: 3,
+    batteryTrayYWidth: 12,
+    batteryTrayXStart: 73,
+    batteryEndWallThickness: 2,
+    batteryTrayUpperWall: 1.2,
+    batteryTrayFloorFlangeThickness: 1.2,
+    caseCornerRadius: 2,
+    slideSwitchX: 47,
+    slideSwitchY: 6,
+    slideSwitchCutoutWidth: 8,
+    slideSwitchCutoutLength: 6,
+};
+const reorient = (geom) => rotateX(Math.PI / 2, rotateY(Math.PI / 2, geom));
+export const caseBounds = (plateBounds, caseP) => ({
+    minX: plateBounds.minX - caseP.caseMarginLeft,
+    maxX: plateBounds.maxX + caseP.caseMarginRight,
+    minY: plateBounds.minY - caseP.caseMarginFront,
+    maxY: plateBounds.maxY + caseP.caseMarginBack,
+});
+const tiltTan = (caseP) => Math.tan((caseP.plateTiltDeg * Math.PI) / 180);
+const plateBottomAtY = (y, plateBounds, caseP) => {
+    const yFromPivot = y - plateBounds.minY;
+    return caseP.plateFrontBottomZ + yFromPivot * tiltTan(caseP);
+};
+const caseHeightAtY = (y, plateBounds, caseP) => {
+    const plateBottom = plateBottomAtY(y, plateBounds, caseP);
+    const plateTop = plateBottom + 1.5;
+    return plateTop + caseP.plateRecessWall;
+};
+export const caseFrontTopZ = (plateBounds, caseP = DEFAULT_CASE_PARAMS) => caseHeightAtY(caseBounds(plateBounds, caseP).minY, plateBounds, caseP);
+const outerShell = (plateBounds, caseP) => {
+    const cb = caseBounds(plateBounds, caseP);
+    const hFront = caseHeightAtY(cb.minY, plateBounds, caseP);
+    const hBack = caseHeightAtY(cb.maxY, plateBounds, caseP);
+    const poly = polygon({
+        points: [
+            [cb.maxY, 0],
+            [cb.maxY, hBack],
+            [cb.minY, hFront],
+            [cb.minY, 0],
+        ],
+    });
+    const extrudeWidth = cb.maxX - cb.minX;
+    const extruded = extrudeLinear({ height: extrudeWidth }, poly);
+    const shell = translate([cb.minX, 0, 0], reorient(extruded));
+    if (caseP.caseCornerRadius <= 0)
+        return shell;
+    const maxHeight = Math.max(hFront, hBack) + 10;
+    const rect2d = roundedRectangle({
+        size: [cb.maxX - cb.minX, cb.maxY - cb.minY],
+        roundRadius: caseP.caseCornerRadius,
+        segments: 64,
+    });
+    const cornerClipper = translate([(cb.minX + cb.maxX) / 2, (cb.minY + cb.maxY) / 2, -5], extrudeLinear({ height: maxHeight }, rect2d));
+    return intersect(shell, cornerClipper);
+};
+const topDeck = (keys, plateBounds, caseP) => {
+    const cb = caseBounds(plateBounds, caseP);
+    const deckTopZAt = (y) => caseHeightAtY(y, plateBounds, caseP);
+    const deckBottomZAt = (y) => plateBottomAtY(y, plateBounds, caseP) + 1.5;
+    const bFront = deckBottomZAt(cb.minY);
+    const tFront = deckTopZAt(cb.minY);
+    const bBack = deckBottomZAt(cb.maxY);
+    const tBack = deckTopZAt(cb.maxY);
+    const slabPoly = polygon({
+        points: [
+            [cb.maxY, bBack],
+            [cb.maxY, tBack],
+            [cb.minY, tFront],
+            [cb.minY, bFront],
+        ],
+    });
+    const slabExtruded = extrudeLinear({ height: cb.maxX - cb.minX }, slabPoly);
+    const slab = translate([cb.minX, 0, 0], reorient(slabExtruded));
+    const extra = caseP.topDeckKeyClearance;
+    let minCx = Infinity;
+    let maxCx = -Infinity;
+    let minCy = Infinity;
+    let maxCy = -Infinity;
+    for (const k of keys) {
+        const halfW = (k.w * U) / 2 + extra;
+        const halfH = (k.h * U) / 2 + extra;
+        if (k.cx - halfW < minCx)
+            minCx = k.cx - halfW;
+        if (k.cx + halfW > maxCx)
+            maxCx = k.cx + halfW;
+        if (k.cy - halfH < minCy)
+            minCy = k.cy - halfH;
+        if (k.cy + halfH > maxCy)
+            maxCy = k.cy + halfH;
+    }
+    const zPad = 10;
+    const cutZBottomLocal = 1.5 - zPad;
+    const cutZTopLocal = 1.5 + caseP.plateRecessWall + zPad;
+    const cutoutCornerR = Math.max(caseP.caseCornerRadius * 2 - caseP.wallThickness, 0.5);
+    const cutout2d = translate([(minCx + maxCx) / 2, (minCy + maxCy) / 2], roundedRectangle({
+        size: [maxCx - minCx, maxCy - minCy],
+        roundRadius: cutoutCornerR,
+        segments: 48,
+    }));
+    const localCutout = translate([0, 0, cutZBottomLocal], extrudeLinear({ height: cutZTopLocal - cutZBottomLocal }, cutout2d));
+    const { pivotY, tiltAngle, liftZ } = getPlateTransform(plateBounds, caseP);
+    let bigCutout = translate([0, -pivotY, 0], localCutout);
+    bigCutout = rotateX(tiltAngle, bigCutout);
+    bigCutout = translate([0, pivotY, liftZ], bigCutout);
+    const perforated = subtract(slab, bigCutout);
+    const clipRect = roundedRectangle({
+        size: [cb.maxX - cb.minX, cb.maxY - cb.minY],
+        roundRadius: caseP.caseCornerRadius,
+        segments: 64,
+    });
+    const clipper = translate([(cb.minX + cb.maxX) / 2, (cb.minY + cb.maxY) / 2, -10], extrudeLinear({ height: 400 }, clipRect));
+    return intersect(perforated, clipper);
+};
+const innerCavity = (plateBounds, caseP) => {
+    const cb = caseBounds(plateBounds, caseP);
+    const wallT = caseP.wallThickness;
+    const hFront = caseHeightAtY(cb.minY, plateBounds, caseP) + 1;
+    const hBack = caseHeightAtY(cb.maxY, plateBounds, caseP) + 1;
+    const poly = polygon({
+        points: [
+            [cb.maxY - wallT, caseP.bottomThickness],
+            [cb.maxY - wallT, hBack],
+            [cb.minY + wallT, hFront],
+            [cb.minY + wallT, caseP.bottomThickness],
+        ],
+    });
+    const extrudeWidth = cb.maxX - cb.minX - wallT * 2;
+    const extruded = extrudeLinear({ height: extrudeWidth }, poly);
+    const cavity = translate([cb.minX + wallT, 0, 0], reorient(extruded));
+    if (caseP.caseCornerRadius <= 0)
+        return cavity;
+    const innerRadius = Math.max(caseP.caseCornerRadius * 2 - wallT, 0.5);
+    const innerW = cb.maxX - cb.minX - wallT * 2;
+    const innerL = cb.maxY - cb.minY - wallT * 2;
+    const maxHeight = Math.max(hFront, hBack) + 10;
+    const rect2d = roundedRectangle({
+        size: [innerW, innerL],
+        roundRadius: innerRadius,
+        segments: 64,
+    });
+    const cornerClipper = translate([(cb.minX + cb.maxX) / 2, (cb.minY + cb.maxY) / 2, -5], extrudeLinear({ height: maxHeight }, rect2d));
+    return intersect(cavity, cornerClipper);
+};
+const makeRoundedHoleAlongY = (width, height, depth, cornerRadius) => {
+    const r = Math.min(cornerRadius, width / 2 - 0.01, height / 2 - 0.01);
+    const rect = roundedRectangle({ size: [width, height], roundRadius: r, segments: 32 });
+    const extruded = extrudeLinear({ height: depth }, rect);
+    return rotateX(Math.PI / 2, translate([0, 0, -depth / 2], extruded));
+};
+const usbCutout = (plateBounds, caseP) => {
+    const cb = caseBounds(plateBounds, caseP);
+    const wallT = caseP.wallThickness;
+    const innerY = cb.maxY - wallT;
+    const outerY = cb.maxY;
+    const innerDepth = wallT + 0.5;
+    const innerCut = translate([caseP.usbCutoutCenterX, innerY - 0.01 + innerDepth / 2, caseP.usbCutoutCenterZ], makeRoundedHoleAlongY(caseP.usbCutoutWidth, caseP.usbCutoutHeight, innerDepth, caseP.usbCutoutCornerRadius));
+    const outerW = caseP.usbCutoutWidth + caseP.usbCutoutTaperExpand * 2;
+    const outerH = caseP.usbCutoutHeight + caseP.usbCutoutTaperExpand * 2;
+    const outerRadius = caseP.usbCutoutCornerRadius + caseP.usbCutoutTaperExpand;
+    const outerDepth = wallT * 0.6 + 0.02;
+    const outerCut = translate([caseP.usbCutoutCenterX, outerY + 0.01 - outerDepth / 2, caseP.usbCutoutCenterZ], makeRoundedHoleAlongY(outerW, outerH, outerDepth, outerRadius));
+    return union(innerCut, outerCut);
+};
+const batteryTray = (caseP) => {
+    const slot = caseP.batteryLength;
+    const gap = caseP.batteryGapLength;
+    const batteryRadius = caseP.batteryDiameter / 2 + caseP.batterySlotTolerance;
+    const batteryZCenter = caseP.bottomThickness + batteryRadius;
+    const trayUpperWall = caseP.batteryTrayUpperWall;
+    const trayZBottom = batteryZCenter;
+    const trayZTop = batteryZCenter + batteryRadius + trayUpperWall;
+    const trayHeight = trayZTop - trayZBottom;
+    const trayZCenter = (trayZBottom + trayZTop) / 2;
+    const outerRadius = batteryRadius + trayUpperWall;
+    const cradleBlocks = [0, 1, 2].map((i) => {
+        const cx = caseP.batteryTrayXStart + slot / 2 + i * (slot + gap);
+        const block = translate([cx, caseP.batteryTrayYCenter, trayZCenter], cuboid({ size: [slot, caseP.batteryTrayYWidth, trayHeight] }));
+        const rounder = translate([cx, caseP.batteryTrayYCenter, batteryZCenter], rotateY(Math.PI / 2, cylinder({ radius: outerRadius, height: slot + 0.01 })));
+        return intersect(block, rounder);
+    });
+    const wallExtraHeight = caseP.batteryDiameter + trayUpperWall;
+    const wallZCenter = caseP.bottomThickness + wallExtraHeight / 2;
+    const makeEndWall = (xCenter) => {
+        const block = translate([xCenter, caseP.batteryTrayYCenter, wallZCenter], cuboid({ size: [caseP.batteryEndWallThickness, caseP.batteryTrayYWidth, wallExtraHeight] }));
+        const rounder = translate([xCenter, caseP.batteryTrayYCenter, batteryZCenter], rotateY(Math.PI / 2, cylinder({ radius: outerRadius, height: caseP.batteryEndWallThickness + 0.01 })));
+        return intersect(block, rounder);
+    };
+    const leftWall = makeEndWall(caseP.batteryTrayXStart - caseP.batteryEndWallThickness / 2);
+    const rightXMax = caseP.batteryTrayXStart + 3 * slot + 2 * gap;
+    const rightWall = makeEndWall(rightXMax + caseP.batteryEndWallThickness / 2);
+    const batteryCylinders = [0, 1, 2].map((i) => {
+        const cx = caseP.batteryTrayXStart + slot / 2 + i * (slot + gap);
+        const cylinderAlongZ = cylinder({ radius: batteryRadius, height: slot + 2 });
+        const cylinderAlongX = rotateY(Math.PI / 2, cylinderAlongZ);
+        return translate([cx, caseP.batteryTrayYCenter, batteryZCenter], cylinderAlongX);
+    });
+    const flangeThickness = caseP.batteryTrayFloorFlangeThickness;
+    const flangeXStart = caseP.batteryTrayXStart;
+    const flangeXEnd = caseP.batteryTrayXStart + 3 * slot + 2 * gap;
+    const flangeXCenter = (flangeXStart + flangeXEnd) / 2;
+    const flangeWidth = flangeXEnd - flangeXStart;
+    const flangeYBack = caseP.batteryTrayYCenter + caseP.batteryTrayYWidth / 2;
+    const flangeYFront = caseP.batteryTrayYCenter - caseP.batteryTrayYWidth / 2;
+    const flangeZBottom = caseP.bottomThickness;
+    const flangeZTop = batteryZCenter;
+    const flangeHeight = flangeZTop - flangeZBottom;
+    const flangeZCenter = (flangeZBottom + flangeZTop) / 2;
+    const backFlange = translate([flangeXCenter, flangeYBack - flangeThickness / 2, flangeZCenter], cuboid({ size: [flangeWidth, flangeThickness, flangeHeight] }));
+    const frontFlange = translate([flangeXCenter, flangeYFront + flangeThickness / 2, flangeZCenter], cuboid({ size: [flangeWidth, flangeThickness, flangeHeight] }));
+    const wireHoleRadius = 0.75;
+    const wireHoleZ = batteryZCenter + batteryRadius + 0.8;
+    const wireHoleDepth = caseP.batteryEndWallThickness + 0.5;
+    const leftWireHole = translate([caseP.batteryTrayXStart - caseP.batteryEndWallThickness / 2, caseP.batteryTrayYCenter, wireHoleZ], rotateY(Math.PI / 2, cylinder({ radius: wireHoleRadius, height: wireHoleDepth })));
+    const rightWireHole = translate([rightXMax + caseP.batteryEndWallThickness / 2, caseP.batteryTrayYCenter, wireHoleZ], rotateY(Math.PI / 2, cylinder({ radius: wireHoleRadius, height: wireHoleDepth })));
+    let tray = union(...cradleBlocks, leftWall, rightWall, backFlange, frontFlange);
+    tray = subtract(tray, ...batteryCylinders, leftWireHole, rightWireHole);
+    return tray;
+};
+const slideSwitchBottomCutout = (caseP) => {
+    return translate([caseP.slideSwitchX, caseP.slideSwitchY, caseP.bottomThickness / 2], cuboid({
+        size: [caseP.slideSwitchCutoutWidth, caseP.slideSwitchCutoutLength, caseP.bottomThickness + 0.02],
+    }));
+};
+const batteryBottomCutout = (caseP) => {
+    const slot = caseP.batteryLength;
+    const gap = caseP.batteryGapLength;
+    const xStart = caseP.batteryTrayXStart - caseP.batteryEndWallThickness;
+    const xEnd = caseP.batteryTrayXStart + 3 * slot + 2 * gap + caseP.batteryEndWallThickness;
+    const cx = (xStart + xEnd) / 2;
+    const width = xEnd - xStart;
+    const railStepZ = 1.2;
+    const outerYWidth = caseP.batteryTrayYWidth + 1;
+    const innerYWidth = caseP.batteryTrayYWidth + 3;
+    const outer = translate([cx, caseP.batteryTrayYCenter, railStepZ / 2], cuboid({ size: [width, outerYWidth, railStepZ + 0.02] }));
+    const inner = translate([cx, caseP.batteryTrayYCenter, (caseP.bottomThickness + railStepZ) / 2], cuboid({ size: [width, innerYWidth, caseP.bottomThickness - railStepZ + 0.02] }));
+    return union(outer, inner);
+};
+const cornerBossCenters = (plateBounds, caseP) => {
+    const cb = caseBounds(plateBounds, caseP);
+    const wallT = caseP.wallThickness;
+    const s = caseP.cornerBossSize;
+    const xLo = cb.minX + wallT + s / 2;
+    const xHi = cb.maxX - wallT - s / 2;
+    const yLo = cb.minY + wallT + s / 2;
+    const yHi = cb.maxY - wallT - s / 2;
+    return [
+        [xLo, yLo],
+        [xHi, yLo],
+        [xLo, yHi],
+        [xHi, yHi],
+    ];
+};
+const cornerBosses = (plateBounds, caseP) => {
+    const s = caseP.cornerBossSize;
+    const h = caseP.cornerBossHeight;
+    const zCenter = caseP.bottomThickness + h / 2;
+    const positions = cornerBossCenters(plateBounds, caseP);
+    const blocks = positions.map(([x, y]) => translate([x, y, zCenter], cuboid({ size: [s, s, h] })));
+    return union(...blocks);
+};
+const cornerBossInsertHoles = (plateBounds, caseP) => {
+    const r = caseP.cornerBossInsertRadius;
+    const depth = caseP.cornerBossInsertDepth;
+    const zCenter = caseP.bottomThickness + depth / 2 - 0.01;
+    const positions = cornerBossCenters(plateBounds, caseP);
+    const holes = positions.map(([x, y]) => translate([x, y, zCenter], cylinder({ radius: r, height: depth, segments: 32 })));
+    return union(...holes);
+};
+const cornerBossThroughs = (plateBounds, caseP) => {
+    const tr = caseP.cornerBossThroughRadius;
+    const hr = caseP.cornerBossHeadRadius;
+    const hd = caseP.cornerBossHeadDepth;
+    const positions = cornerBossCenters(plateBounds, caseP);
+    const items = [];
+    for (const [x, y] of positions) {
+        items.push(translate([x, y, caseP.bottomThickness / 2], cylinder({ radius: tr, height: caseP.bottomThickness + 0.02, segments: 32 })));
+        items.push(translate([x, y, hd / 2 - 0.005], cylinder({ radius: hr, height: hd, segments: 32 })));
+    }
+    return union(...items);
+};
+export const buildCase = (keys, params, caseP = DEFAULT_CASE_PARAMS) => {
+    const plateBounds = computeBounds(keys, params.plate.padding);
+    let shell = outerShell(plateBounds, caseP);
+    const cavity = innerCavity(plateBounds, caseP);
+    const usb = usbCutout(plateBounds, caseP);
+    const tray = batteryTray(caseP);
+    const bottomCutout = batteryBottomCutout(caseP);
+    const slideCutout = slideSwitchBottomCutout(caseP);
+    shell = subtract(shell, cavity);
+    if (caseP.topDeckThickness > 0) {
+        shell = union(shell, topDeck(keys, plateBounds, caseP));
+    }
+    const plateLocal = buildPlate(keys, { ...params.plate, screwHoleRadius: 0 });
+    const { pivotY, tiltAngle, liftZ } = getPlateTransform(plateBounds, caseP);
+    let plateTilted = translate([0, -pivotY, 0], plateLocal);
+    plateTilted = rotateX(tiltAngle, plateTilted);
+    plateTilted = translate([0, pivotY, liftZ], plateTilted);
+    shell = union(shell, tray, plateTilted, cornerBosses(plateBounds, caseP));
+    shell = subtract(shell, usb, bottomCutout, slideCutout, cornerBossInsertHoles(plateBounds, caseP));
+    return shell;
+};
+const sliceCuboid = (plateBounds, zMin, zMax, caseP) => {
+    const cb = caseBounds(plateBounds, caseP);
+    const cx = (cb.minX + cb.maxX) / 2;
+    const cy = (cb.minY + cb.maxY) / 2;
+    const W = cb.maxX - cb.minX + 40;
+    const L = cb.maxY - cb.minY + 40;
+    const H = zMax - zMin;
+    return translate([cx, cy, (zMin + zMax) / 2], cuboid({ size: [W, L, H] }));
+};
+export const buildCaseTop = (keys, params, caseP = DEFAULT_CASE_PARAMS) => {
+    const full = buildCase(keys, params, caseP);
+    const plateBounds = computeBounds(keys, params.plate.padding);
+    const slicer = sliceCuboid(plateBounds, caseP.bottomThickness, 500, caseP);
+    return intersect(full, slicer);
+};
+export const buildCaseBottom = (keys, params, caseP = DEFAULT_CASE_PARAMS) => {
+    const full = buildCase(keys, params, caseP);
+    const plateBounds = computeBounds(keys, params.plate.padding);
+    const slicer = sliceCuboid(plateBounds, -0.5, caseP.bottomThickness, caseP);
+    const sliced = intersect(full, slicer);
+    return subtract(sliced, cornerBossThroughs(plateBounds, caseP));
+};
+export const getPlateTransform = (plateBounds, caseP = DEFAULT_CASE_PARAMS) => ({
+    pivotY: plateBounds.minY,
+    tiltAngle: (caseP.plateTiltDeg * Math.PI) / 180,
+    liftZ: caseP.plateFrontBottomZ,
+});
