@@ -2,7 +2,7 @@ import { primitives, transforms, booleans } from '@jscad/modeling'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
 import type { Bounds, KeyPos } from './layout'
 import { caseBounds, type CaseParams } from './case'
-import { U } from './layout'
+import { DEFAULT_STAB, U } from './layout'
 
 const { cuboid, cylinder, torus, sphere } = primitives
 const { translate, rotateY } = transforms
@@ -13,9 +13,12 @@ export const buildPerfBoard = (plateBounds: Bounds, caseP: CaseParams): Geom3 =>
     const length = 40
     const thickness = 1.6
 
-    const backWallInner = caseBounds(plateBounds, caseP).maxY - caseP.wallThickness
+    const cb = caseBounds(plateBounds, caseP)
+    const innerXMin = cb.minX + caseP.wallThickness
+    const backWallInner = cb.maxY - caseP.wallThickness
     const lolinLength = 34.3
-    const centerX = caseP.usbCutoutCenterX
+    const bossClearance = caseP.cornerBossSize + 2
+    const centerX = innerXMin + bossClearance + width / 2
     const centerY = backWallInner - lolinLength - length / 2 - 2
     const bottomZ = caseP.bottomThickness
     const centerZ = bottomZ + thickness / 2
@@ -45,16 +48,15 @@ export const buildSlideSwitch = (_plateBounds: Bounds, caseP: CaseParams): Geom3
 }
 
 export const buildStabilizers = (keys: KeyPos[]): Geom3 => {
-    const stabSet = new Set([2, 2.75])
-    const stabOffset = 11.938 / 2
     const stemRadius = 1.75
     const stemHeight = 6
+    const padOffsetY = DEFAULT_STAB.padOffsetY
 
     const cylinders: Geom3[] = []
     for (const k of keys) {
-        if (!stabSet.has(k.w)) continue
-        const offset = k.w === 2 ? stabOffset : k.w === 2.75 ? 11.938 / 2 : 0
-        const y = k.cy - 1.5
+        const offset = DEFAULT_STAB.spacingByWidth[k.w]
+        if (offset === undefined) continue
+        const y = k.cy + padOffsetY
         const leftStem = translate(
             [k.cx - offset, y, stemHeight / 2],
             cylinder({ radius: stemRadius, height: stemHeight }),
@@ -232,7 +234,7 @@ export const buildBatteryCover = (caseP: CaseParams): Geom3 => {
 export const buildFootPads = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {
     const radius = 3
     const height = 2
-    const inset = 8
+    const inset = 5
 
     const cb = caseBounds(plateBounds, caseP)
     const positions: Array<[number, number]> = [

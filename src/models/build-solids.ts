@@ -14,6 +14,7 @@ import {
 } from './accessories'
 import { normalizeSwitch, placeSwitches, DEFAULT_SWITCH_ORIENT, type SwitchOrient } from './switch'
 import { buildKeycapsForKeys, DEFAULT_KEYCAP_ORIENT, type KeycapOrient } from './keycap'
+import { normalizeStabilizer, placeStabilizers, DEFAULT_STABILIZER_ORIENT, type StabilizerOrient } from './stabilizer'
 import type { BuildParams } from './build-params'
 
 const { colorize } = colors
@@ -34,24 +35,29 @@ export type PartVisibility = {
     batteries: boolean
     batteryContacts: boolean
     phone: boolean
+    wobkeyZen65: boolean
 }
 
 const PHONE_SIZE: [number, number, number] = [77.6, 160.7, 7.85]
 const PHONE_GAP = 10
 
-const CASE_TOP_COLOR: [number, number, number, number] = [0.2, 0.2, 0.24, 1]
-const CASE_BOTTOM_COLOR: [number, number, number, number] = [0.16, 0.16, 0.19, 1]
-const SWITCH_COLOR: [number, number, number, number] = [0.12, 0.12, 0.14, 1]
+const WOBKEY_ZEN65_SIZE: [number, number, number] = [315, 112, 28]
+const WOBKEY_ZEN65_GAP = 15
+
+const CASE_TOP_COLOR: [number, number, number, number] = [0.77, 0.77, 0.77, 1]
+const CASE_BOTTOM_COLOR: [number, number, number, number] = [0.77, 0.77, 0.77, 1]
+const SWITCH_COLOR: [number, number, number, number] = [0.77, 0.77, 0.77, 1]
 const LOLIN_COLOR: [number, number, number, number] = [0.1, 0.5, 0.2, 1]
 const PERFBOARD_COLOR: [number, number, number, number] = [0.75, 0.6, 0.3, 1]
 const SLIDE_COLOR: [number, number, number, number] = [0.7, 0.7, 0.7, 1]
-const STAB_COLOR: [number, number, number, number] = [0.95, 0.95, 0.95, 1]
-const KEYCAP_COLOR: [number, number, number, number] = [0.85, 0.85, 0.9, 0.85]
+const STAB_COLOR: [number, number, number, number] = [0.77, 0.77, 0.77, 1]
+const KEYCAP_COLOR: [number, number, number, number] = [0.77, 0.77, 0.77, 1]
 const FOOTPAD_COLOR: [number, number, number, number] = [0.1, 0.1, 0.1, 1]
-const BATTERY_COVER_COLOR: [number, number, number, number] = [0.25, 0.25, 0.3, 1]
+const BATTERY_COVER_COLOR: [number, number, number, number] = [0.77, 0.77, 0.77, 1]
 const BATTERY_COLOR: [number, number, number, number] = [0.85, 0.75, 0.3, 1]
 const CONTACT_COLOR: [number, number, number, number] = [0.8, 0.8, 0.85, 1]
 const PHONE_COLOR: [number, number, number, number] = [0.4, 0.6, 0.8, 0.6]
+const WOBKEY_COLOR: [number, number, number, number] = [0.75, 0.45, 0.35, 0.6]
 
 export const buildSolids = (
     visibility: PartVisibility,
@@ -59,6 +65,8 @@ export const buildSolids = (
     switchGeom: Geom3 | null = null,
     switchOrient: SwitchOrient = DEFAULT_SWITCH_ORIENT,
     keycapOrient: KeycapOrient = DEFAULT_KEYCAP_ORIENT,
+    stabilizerGeom: Geom3 | null = null,
+    stabilizerOrient: StabilizerOrient = DEFAULT_STABILIZER_ORIENT,
 ): Geom3[] => {
     const solids: Geom3[] = []
 
@@ -99,8 +107,16 @@ export const buildSolids = (
     }
 
     if (visibility.stabilizers) {
-        const stabs = buildStabilizers(keys49)
-        if (stabs) solids.push(colorize(STAB_COLOR, applyPlateTransform(stabs)))
+        if (stabilizerGeom) {
+            const normalized = normalizeStabilizer(stabilizerGeom, stabilizerOrient)
+            const placed = placeStabilizers(normalized, keys49, stabilizerOrient)
+            for (const s of placed) {
+                solids.push(colorize(STAB_COLOR, applyPlateTransform(s)))
+            }
+        } else {
+            const stabs = buildStabilizers(keys49)
+            if (stabs) solids.push(colorize(STAB_COLOR, applyPlateTransform(stabs)))
+        }
     }
 
     if (visibility.keycaps) {
@@ -136,6 +152,18 @@ export const buildSolids = (
             cuboid({ size: PHONE_SIZE }),
         )
         solids.push(colorize(PHONE_COLOR, phone))
+    }
+
+    if (visibility.wobkeyZen65) {
+        const caseMaxX = caseBounds(plateBounds, DEFAULT_CASE_PARAMS).maxX
+        const centerX = caseMaxX + WOBKEY_ZEN65_GAP + WOBKEY_ZEN65_SIZE[0] / 2
+        const centerY = (plateBounds.minY + plateBounds.maxY) / 2
+        const centerZ = WOBKEY_ZEN65_SIZE[2] / 2
+        const ref = translate(
+            [centerX, centerY, centerZ],
+            cuboid({ size: WOBKEY_ZEN65_SIZE }),
+        )
+        solids.push(colorize(WOBKEY_COLOR, ref))
     }
 
     return solids

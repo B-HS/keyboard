@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import type { PartVisibility, BuildParams, SwitchOrient, KeycapOrient } from '../models'
+import type { PartVisibility, BuildParams, SwitchOrient, KeycapOrient, StabilizerOrient } from '../models'
 
 type ControlsProps = {
     visibility: PartVisibility
@@ -10,6 +10,8 @@ type ControlsProps = {
     setSwitchOrient: (o: SwitchOrient) => void
     keycapOrient: KeycapOrient
     setKeycapOrient: (o: KeycapOrient) => void
+    stabilizerOrient: StabilizerOrient
+    setStabilizerOrient: (o: StabilizerOrient) => void
     onExportStl: () => void
 }
 
@@ -35,6 +37,8 @@ export const Controls: FC<ControlsProps> = ({
     setSwitchOrient,
     keycapOrient,
     setKeycapOrient,
+    stabilizerOrient,
+    setStabilizerOrient,
     onExportStl,
 }) => {
     const togglePart = (key: keyof PartVisibility) => {
@@ -51,6 +55,10 @@ export const Controls: FC<ControlsProps> = ({
 
     const updateKeycap = (patch: Partial<KeycapOrient>) => {
         setKeycapOrient({ ...keycapOrient, ...patch })
+    }
+
+    const updateStabilizer = (patch: Partial<StabilizerOrient>) => {
+        setStabilizerOrient({ ...stabilizerOrient, ...patch })
     }
 
     const toDeg = (r: number) => (r * 180) / Math.PI
@@ -112,6 +120,10 @@ export const Controls: FC<ControlsProps> = ({
             <label>
                 <input type='checkbox' checked={visibility.phone} onChange={() => togglePart('phone')} />
                 Phone (77.6×160.7×7.85mm)
+            </label>
+            <label>
+                <input type='checkbox' checked={visibility.wobkeyZen65} onChange={() => togglePart('wobkeyZen65')} />
+                WOBKEY Zen 65 (315×112×28mm)
             </label>
 
             <h2>Plate (from docs/models/49-final.jscad)</h2>
@@ -178,6 +190,57 @@ export const Controls: FC<ControlsProps> = ({
                 step={5}
                 min={-360}
                 onChange={(v) => updateKeycap({ rotationZ: fromDeg(v) })}
+            />
+
+            <h2>Stabilizer Orient</h2>
+            <NumberRow
+                label='Z Offset (mm)'
+                value={stabilizerOrient.mountZOffset}
+                step={0.1}
+                min={-50}
+                onChange={(v) => updateStabilizer({ mountZOffset: v })}
+            />
+            <NumberRow
+                label='Y Offset (mm)'
+                value={stabilizerOrient.yOffset}
+                step={0.1}
+                min={-50}
+                onChange={(v) => updateStabilizer({ yOffset: v })}
+            />
+            <NumberRow
+                label='Spacing ± (mm)'
+                value={stabilizerOrient.spacingAdjust}
+                step={0.1}
+                min={-20}
+                onChange={(v) => updateStabilizer({ spacingAdjust: v })}
+            />
+            <NumberRow
+                label='Clip below Z (mm)'
+                value={stabilizerOrient.clipBottomZ}
+                step={0.5}
+                min={-1000}
+                onChange={(v) => updateStabilizer({ clipBottomZ: v })}
+            />
+            <NumberRow
+                label='Rot X (°)'
+                value={toDeg(stabilizerOrient.rotationX)}
+                step={5}
+                min={-360}
+                onChange={(v) => updateStabilizer({ rotationX: fromDeg(v) })}
+            />
+            <NumberRow
+                label='Rot Y (°)'
+                value={toDeg(stabilizerOrient.rotationY)}
+                step={5}
+                min={-360}
+                onChange={(v) => updateStabilizer({ rotationY: fromDeg(v) })}
+            />
+            <NumberRow
+                label='Rot Z (°)'
+                value={toDeg(stabilizerOrient.rotationZ)}
+                step={5}
+                min={-360}
+                onChange={(v) => updateStabilizer({ rotationZ: fromDeg(v) })}
             />
 
             <h2>Export</h2>

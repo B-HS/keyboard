@@ -8,36 +8,42 @@ import {
     DEFAULT_BUILD_PARAMS,
     DEFAULT_SWITCH_ORIENT,
     DEFAULT_KEYCAP_ORIENT,
+    DEFAULT_STABILIZER_ORIENT,
     loadSwitchGeom,
     loadKeycapGeoms,
+    loadStabilizerGeom,
     keys49,
     type BuildParams,
     type PartVisibility,
     type SwitchOrient,
     type KeycapOrient,
+    type StabilizerOrient,
 } from './models'
 
 export const App: FC = () => {
     const [visibility, setVisibility] = useState<PartVisibility>({
         caseTop: true,
         caseBottom: true,
-        switches: false,
-        lolin: false,
-        perfBoard: false,
-        slideSwitch: false,
-        stabilizers: false,
-        keycaps: false,
-        footPads: false,
-        batteryCover: false,
-        batteries: false,
+        switches: true,
+        lolin: true,
+        perfBoard: true,
+        slideSwitch: true,
+        stabilizers: true,
+        keycaps: true,
+        footPads: true,
+        batteryCover: true,
+        batteries: true,
         batteryContacts: false,
         phone: false,
+        wobkeyZen65: false,
     })
     const [params, setParams] = useState<BuildParams>(DEFAULT_BUILD_PARAMS)
     const [switchOrient, setSwitchOrient] = useState<SwitchOrient>(DEFAULT_SWITCH_ORIENT)
     const [switchGeom, setSwitchGeom] = useState<Geom3 | null>(null)
     const [keycapOrient, setKeycapOrient] = useState<KeycapOrient>(DEFAULT_KEYCAP_ORIENT)
     const [keycapsReady, setKeycapsReady] = useState(0)
+    const [stabilizerOrient, setStabilizerOrient] = useState<StabilizerOrient>(DEFAULT_STABILIZER_ORIENT)
+    const [stabilizerGeom, setStabilizerGeom] = useState<Geom3 | null>(null)
 
     useEffect(() => {
         loadSwitchGeom()
@@ -46,11 +52,14 @@ export const App: FC = () => {
         loadKeycapGeoms(keys49)
             .then(() => setKeycapsReady((n) => n + 1))
             .catch((e) => console.error('Keycap STL load failed', e))
+        loadStabilizerGeom()
+            .then(setStabilizerGeom)
+            .catch((e) => console.error('Stabilizer STL load failed', e))
     }, [])
 
     const solids = useMemo(
-        () => buildSolids(visibility, params, switchGeom, switchOrient, keycapOrient),
-        [visibility, params, switchGeom, switchOrient, keycapOrient, keycapsReady],
+        () => buildSolids(visibility, params, switchGeom, switchOrient, keycapOrient, stabilizerGeom, stabilizerOrient),
+        [visibility, params, switchGeom, switchOrient, keycapOrient, keycapsReady, stabilizerGeom, stabilizerOrient],
     )
 
     const handleExportStl = () => {
@@ -75,6 +84,8 @@ export const App: FC = () => {
                 setSwitchOrient={setSwitchOrient}
                 keycapOrient={keycapOrient}
                 setKeycapOrient={setKeycapOrient}
+                stabilizerOrient={stabilizerOrient}
+                setStabilizerOrient={setStabilizerOrient}
                 onExportStl={handleExportStl}
             />
             <div className='viewer-wrap'>

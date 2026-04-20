@@ -53,7 +53,7 @@ export const Viewer: FC<ViewerProps> = ({ solids }) => {
     const gridOptions = {
       visuals: {
         drawCmd: "drawGrid",
-        show: true,
+        show: false,
         color: [0.4, 0.4, 0.4, 1] as [number, number, number, number],
         subColor: [0.2, 0.2, 0.2, 1] as [number, number, number, number],
         fadeOut: false,
@@ -63,7 +63,7 @@ export const Viewer: FC<ViewerProps> = ({ solids }) => {
       ticks: [25, 5] as [number, number],
     };
     const axisOptions = {
-      visuals: { drawCmd: "drawAxis", show: true },
+      visuals: { drawCmd: "drawAxis", show: false },
       size: 200,
       alwaysVisible: false,
     };

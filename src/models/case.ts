@@ -24,6 +24,14 @@ export type CaseParams = {
     topDeckThickness: number
     topDeckKeyClearance: number
 
+    cornerBossSize: number
+    cornerBossHeight: number
+    cornerBossInsertRadius: number
+    cornerBossInsertDepth: number
+    cornerBossThroughRadius: number
+    cornerBossHeadRadius: number
+    cornerBossHeadDepth: number
+
     screwPostOuterDiameter: number
     screwPostInsertHoleDiameter: number
     screwPostInsertDepth: number
@@ -56,18 +64,26 @@ export type CaseParams = {
 
 export const DEFAULT_CASE_PARAMS: CaseParams = {
     caseMarginFront: 2,
-    caseMarginBack: 2,
+    caseMarginBack: 0,
     caseMarginLeft: 2,
     caseMarginRight: 2,
     plateTiltDeg: 8,
-    plateFrontBottomZ: 10.5,
+    plateFrontBottomZ: 11.25,
 
     plateRecessWall: 7.5,
-    wallThickness: 3,
+    wallThickness: 2,
     bottomThickness: 2.4,
 
     topDeckThickness: 1.0,
     topDeckKeyClearance: 0.2,
+
+    cornerBossSize: 6,
+    cornerBossHeight: 5,
+    cornerBossInsertRadius: 1.75,
+    cornerBossInsertDepth: 4.0,
+    cornerBossThroughRadius: 1.7,
+    cornerBossHeadRadius: 3.2,
+    cornerBossHeadDepth: 1.6,
 
     screwPostOuterDiameter: 6,
     screwPostInsertHoleDiameter: 1.5,
@@ -76,7 +92,7 @@ export const DEFAULT_CASE_PARAMS: CaseParams = {
     usbCutoutWidth: 12.2,
     usbCutoutHeight: 7.5,
     usbCutoutCenterX: 9.7,
-    usbCutoutCenterZ: 6.25,
+    usbCutoutCenterZ: 6.65,
     usbCutoutCornerRadius: 1.5,
     usbCutoutTaperExpand: 1.0,
 
@@ -84,7 +100,7 @@ export const DEFAULT_CASE_PARAMS: CaseParams = {
     batteryLength: 44.5,
     batterySlotTolerance: 0.2,
     batteryGapLength: 7,
-    batteryTrayYCenter: 6,
+    batteryTrayYCenter: 3,
     batteryTrayYWidth: 12,
     batteryTrayXStart: 73,
     batteryEndWallThickness: 2,
@@ -191,6 +207,7 @@ const topDeck = (keys: KeyPos[], plateBounds: Bounds, caseP: CaseParams): Geom3 
         if (k.cy - halfH < minCy) minCy = k.cy - halfH
         if (k.cy + halfH > maxCy) maxCy = k.cy + halfH
     }
+
     const zPad = 10
     const cutZBottomLocal = 1.5 - zPad
     const cutZTopLocal = 1.5 + caseP.plateRecessWall + zPad
@@ -411,6 +428,67 @@ const batteryBottomCutout = (caseP: CaseParams): Geom3 => {
     return union(outer, inner)
 }
 
+const cornerBossCenters = (plateBounds: Bounds, caseP: CaseParams): Array<[number, number]> => {
+    const cb = caseBounds(plateBounds, caseP)
+    const wallT = caseP.wallThickness
+    const s = caseP.cornerBossSize
+    const xLo = cb.minX + wallT + s / 2
+    const xHi = cb.maxX - wallT - s / 2
+    const yLo = cb.minY + wallT + s / 2
+    const yHi = cb.maxY - wallT - s / 2
+    return [
+        [xLo, yLo],
+        [xHi, yLo],
+        [xLo, yHi],
+        [xHi, yHi],
+    ]
+}
+
+const cornerBosses = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {
+    const s = caseP.cornerBossSize
+    const h = caseP.cornerBossHeight
+    const zCenter = caseP.bottomThickness + h / 2
+    const positions = cornerBossCenters(plateBounds, caseP)
+    const blocks = positions.map(([x, y]) =>
+        translate([x, y, zCenter], cuboid({ size: [s, s, h] })),
+    )
+    return union(...blocks)
+}
+
+const cornerBossInsertHoles = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {
+    const r = caseP.cornerBossInsertRadius
+    const depth = caseP.cornerBossInsertDepth
+    const zCenter = caseP.bottomThickness + depth / 2 - 0.01
+    const positions = cornerBossCenters(plateBounds, caseP)
+    const holes = positions.map(([x, y]) =>
+        translate([x, y, zCenter], cylinder({ radius: r, height: depth, segments: 32 })),
+    )
+    return union(...holes)
+}
+
+const cornerBossThroughs = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {
+    const tr = caseP.cornerBossThroughRadius
+    const hr = caseP.cornerBossHeadRadius
+    const hd = caseP.cornerBossHeadDepth
+    const positions = cornerBossCenters(plateBounds, caseP)
+    const items: Geom3[] = []
+    for (const [x, y] of positions) {
+        items.push(
+            translate(
+                [x, y, caseP.bottomThickness / 2],
+                cylinder({ radius: tr, height: caseP.bottomThickness + 0.02, segments: 32 }),
+            ),
+        )
+        items.push(
+            translate(
+                [x, y, hd / 2 - 0.005],
+                cylinder({ radius: hr, height: hd, segments: 32 }),
+            ),
+        )
+    }
+    return union(...items)
+}
+
 export const buildCase = (keys: KeyPos[], params: BuildParams, caseP: CaseParams = DEFAULT_CASE_PARAMS): Geom3 => {
     const plateBounds = computeBounds(keys, params.plate.padding)
     let shell = outerShell(plateBounds, caseP)
@@ -432,8 +510,8 @@ export const buildCase = (keys: KeyPos[], params: BuildParams, caseP: CaseParams
     plateTilted = rotateX(tiltAngle, plateTilted)
     plateTilted = translate([0, pivotY, liftZ], plateTilted)
 
-    shell = union(shell, tray, plateTilted)
-    shell = subtract(shell, usb, bottomCutout, slideCutout)
+    shell = union(shell, tray, plateTilted, cornerBosses(plateBounds, caseP))
+    shell = subtract(shell, usb, bottomCutout, slideCutout, cornerBossInsertHoles(plateBounds, caseP))
 
     return shell
 }
@@ -459,7 +537,8 @@ export const buildCaseBottom = (keys: KeyPos[], params: BuildParams, caseP: Case
     const full = buildCase(keys, params, caseP)
     const plateBounds = computeBounds(keys, params.plate.padding)
     const slicer = sliceCuboid(plateBounds, -0.5, caseP.bottomThickness, caseP)
-    return intersect(full, slicer)
+    const sliced = intersect(full, slicer)
+    return subtract(sliced, cornerBossThroughs(plateBounds, caseP))
 }
 
 export const getPlateTransform = (plateBounds: Bounds, caseP: CaseParams = DEFAULT_CASE_PARAMS) => ({
