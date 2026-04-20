@@ -25,7 +25,7 @@ export const DEFAULT_STABILIZER_ORIENT: StabilizerOrient = {
     mountZOffset: -26.5,
     spacingAdjust: 0,
     yOffset: 0,
-    clipBottomZ: -1000,
+    clipBottomZ: -10,
 }
 
 const stlUrlMap = import.meta.glob('../../docs/models/stabilizer/*.{stl,STL}', {
