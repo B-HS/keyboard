@@ -1,4 +1,4 @@
-import { primitives, transforms, booleans, extrusions } from '@jscad/modeling'
+import { primitives, transforms, booleans, extrusions, modifiers } from '@jscad/modeling'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
 import { computeBounds, U, type Bounds, type KeyPos } from './layout'
 import type { BuildParams } from './build-params'
@@ -8,6 +8,7 @@ const { cuboid, cylinder, polygon, roundedRectangle } = primitives
 const { translate, rotateX, rotateY } = transforms
 const { union, subtract, intersect } = booleans
 const { extrudeLinear } = extrusions
+const { retessellate } = modifiers
 
 export type CaseParams = {
     caseMarginFront: number
@@ -58,8 +59,9 @@ export type CaseParams = {
 
     slideSwitchX: number
     slideSwitchY: number
+    slideSwitchZ: number
     slideSwitchCutoutWidth: number
-    slideSwitchCutoutLength: number
+    slideSwitchCutoutHeight: number
 }
 
 export const DEFAULT_CASE_PARAMS: CaseParams = {
@@ -90,29 +92,30 @@ export const DEFAULT_CASE_PARAMS: CaseParams = {
     screwPostInsertDepth: 1.0,
 
     usbCutoutWidth: 12.2,
-    usbCutoutHeight: 7.5,
+    usbCutoutHeight: 5.5,
     usbCutoutCenterX: 9.7,
-    usbCutoutCenterZ: 6.65,
+    usbCutoutCenterZ: 7.0,
     usbCutoutCornerRadius: 1.5,
-    usbCutoutTaperExpand: 1.0,
+    usbCutoutTaperExpand: 0.5,
 
     batteryDiameter: 10.5,
     batteryLength: 44.5,
     batterySlotTolerance: 0.2,
-    batteryGapLength: 7,
+    batteryGapLength: 2,
     batteryTrayYCenter: 3,
     batteryTrayYWidth: 12,
     batteryTrayXStart: 73,
     batteryEndWallThickness: 2,
-    batteryTrayUpperWall: 1.2,
-    batteryTrayFloorFlangeThickness: 1.2,
+    batteryTrayUpperWall: 1.3,
+    batteryTrayFloorFlangeThickness: 1.5,
 
     caseCornerRadius: 2,
 
     slideSwitchX: 47,
-    slideSwitchY: 6,
+    slideSwitchY: 8.6,
+    slideSwitchZ: 4.0,
     slideSwitchCutoutWidth: 8,
-    slideSwitchCutoutLength: 6,
+    slideSwitchCutoutHeight: 6,
 }
 
 const reorient = (geom: Geom3): Geom3 => rotateX(Math.PI / 2, rotateY(Math.PI / 2, geom))
@@ -321,30 +324,32 @@ const batteryTray = (caseP: CaseParams): Geom3 => {
     const trayHeight = trayZTop - trayZBottom
     const trayZCenter = (trayZBottom + trayZTop) / 2
 
+    const cradleOuterHalfY = batteryRadius + trayUpperWall
+    const cradleYWidth = cradleOuterHalfY * 2
     const outerRadius = batteryRadius + trayUpperWall
     const cradleBlocks = [0, 1, 2].map((i) => {
         const cx = caseP.batteryTrayXStart + slot / 2 + i * (slot + gap)
         const block = translate(
             [cx, caseP.batteryTrayYCenter, trayZCenter],
-            cuboid({ size: [slot, caseP.batteryTrayYWidth, trayHeight] }),
+            cuboid({ size: [slot, cradleYWidth, trayHeight] }),
         )
         const rounder = translate(
             [cx, caseP.batteryTrayYCenter, batteryZCenter],
-            rotateY(Math.PI / 2, cylinder({ radius: outerRadius, height: slot + 0.01 })),
+            rotateY(Math.PI / 2, cylinder({ radius: outerRadius, height: slot + 0.01, segments: 48 })),
         )
         return intersect(block, rounder)
     })
 
-    const wallExtraHeight = caseP.batteryDiameter + trayUpperWall
+    const wallExtraHeight = batteryRadius * 2 + trayUpperWall
     const wallZCenter = caseP.bottomThickness + wallExtraHeight / 2
     const makeEndWall = (xCenter: number): Geom3 => {
         const block = translate(
             [xCenter, caseP.batteryTrayYCenter, wallZCenter],
-            cuboid({ size: [caseP.batteryEndWallThickness, caseP.batteryTrayYWidth, wallExtraHeight] }),
+            cuboid({ size: [caseP.batteryEndWallThickness, cradleYWidth, wallExtraHeight] }),
         )
         const rounder = translate(
             [xCenter, caseP.batteryTrayYCenter, batteryZCenter],
-            rotateY(Math.PI / 2, cylinder({ radius: outerRadius, height: caseP.batteryEndWallThickness + 0.01 })),
+            rotateY(Math.PI / 2, cylinder({ radius: outerRadius, height: caseP.batteryEndWallThickness + 0.01, segments: 48 })),
         )
         return intersect(block, rounder)
     }
@@ -354,7 +359,7 @@ const batteryTray = (caseP: CaseParams): Geom3 => {
 
     const batteryCylinders = [0, 1, 2].map((i) => {
         const cx = caseP.batteryTrayXStart + slot / 2 + i * (slot + gap)
-        const cylinderAlongZ = cylinder({ radius: batteryRadius, height: slot + 2 })
+        const cylinderAlongZ = cylinder({ radius: batteryRadius, height: slot + 0.5 })
         const cylinderAlongX = rotateY(Math.PI / 2, cylinderAlongZ)
         return translate([cx, caseP.batteryTrayYCenter, batteryZCenter], cylinderAlongX)
     })
@@ -364,8 +369,8 @@ const batteryTray = (caseP: CaseParams): Geom3 => {
     const flangeXEnd = caseP.batteryTrayXStart + 3 * slot + 2 * gap
     const flangeXCenter = (flangeXStart + flangeXEnd) / 2
     const flangeWidth = flangeXEnd - flangeXStart
-    const flangeYBack = caseP.batteryTrayYCenter + caseP.batteryTrayYWidth / 2
-    const flangeYFront = caseP.batteryTrayYCenter - caseP.batteryTrayYWidth / 2
+    const flangeYBack = caseP.batteryTrayYCenter + cradleOuterHalfY
+    const flangeYFront = caseP.batteryTrayYCenter - cradleOuterHalfY
     const flangeZBottom = caseP.bottomThickness
     const flangeZTop = batteryZCenter
     const flangeHeight = flangeZTop - flangeZBottom
@@ -396,36 +401,85 @@ const batteryTray = (caseP: CaseParams): Geom3 => {
     return tray
 }
 
-const slideSwitchBottomCutout = (caseP: CaseParams): Geom3 => {
+export const batteryCoverOpening = (caseP: CaseParams) => {
+    const switchLeft = caseP.slideSwitchX - caseP.slideSwitchCutoutWidth / 2 - 2
+    const trayLeft = caseP.batteryTrayXStart - caseP.batteryEndWallThickness
+    const trayRight = caseP.batteryTrayXStart + 3 * caseP.batteryLength + 2 * caseP.batteryGapLength + caseP.batteryEndWallThickness
+    const bosses = magnetBossCenters(caseP)
+    const bossLeft = Math.min(...bosses.map(([x]) => x)) - magnetBossSizeX / 2
+    const bossRight = Math.max(...bosses.map(([x]) => x)) + magnetBossSizeX / 2
+    const xStart = Math.min(switchLeft, trayLeft, bossLeft)
+    const xEnd = Math.max(trayRight, bossRight)
+    const yStart = caseP.batteryTrayYCenter - caseP.batteryTrayYWidth / 2 - 1
+    const yEnd = caseP.batteryTrayYCenter + caseP.batteryTrayYWidth / 2 + 1
+    return { xStart, xEnd, yStart, yEnd }
+}
+
+export const MAGNET_SIZE_X = 10
+export const MAGNET_SIZE_Y = 5
+export const MAGNET_HEIGHT = 2
+export const MAGNET_CLEARANCE = 0.2
+export const COVER_THICKNESS = 2
+export const MAGNET_POCKET_DEPTH_CASE = 2 * MAGNET_HEIGHT + COVER_THICKNESS - 2.4 + 0.1
+
+const MAGNET_BOSS_WALL = 1.5
+export const magnetBossSizeX = MAGNET_SIZE_X + MAGNET_CLEARANCE + 2 * MAGNET_BOSS_WALL
+export const magnetBossSizeY = MAGNET_SIZE_Y + MAGNET_CLEARANCE + 2 * MAGNET_BOSS_WALL
+export const magnetBossHeight = MAGNET_POCKET_DEPTH_CASE + MAGNET_BOSS_WALL
+
+export const magnetBossCenters = (caseP: CaseParams): Array<[number, number]> => {
+    const trayLeft = caseP.batteryTrayXStart - caseP.batteryEndWallThickness
+    const trayRight = caseP.batteryTrayXStart + 3 * caseP.batteryLength + 2 * caseP.batteryGapLength + caseP.batteryEndWallThickness
+    const leftX = trayLeft - magnetBossSizeX / 2
+    const rightX = trayRight + magnetBossSizeX / 2
+    return [
+        [leftX, caseP.batteryTrayYCenter],
+        [rightX, caseP.batteryTrayYCenter],
+    ]
+}
+
+export const coverMagnetCenters = (caseP: CaseParams): Array<[number, number]> => {
+    return magnetBossCenters(caseP).map(([bx, by]) => [bx, by] as [number, number])
+}
+
+const batteryBottomCutout = (_plateBounds: Bounds, caseP: CaseParams): Geom3 => {
+    const o = batteryCoverOpening(caseP)
+    const cx = (o.xStart + o.xEnd) / 2
+    const cy = (o.yStart + o.yEnd) / 2
+    const width = o.xEnd - o.xStart
+    const height = o.yEnd - o.yStart
     return translate(
-        [caseP.slideSwitchX, caseP.slideSwitchY, caseP.bottomThickness / 2],
-        cuboid({
-            size: [caseP.slideSwitchCutoutWidth, caseP.slideSwitchCutoutLength, caseP.bottomThickness + 0.02],
-        }),
+        [cx, cy, caseP.bottomThickness / 2],
+        cuboid({ size: [width, height, caseP.bottomThickness + 0.02] }),
     )
 }
 
-const batteryBottomCutout = (caseP: CaseParams): Geom3 => {
-    const slot = caseP.batteryLength
-    const gap = caseP.batteryGapLength
-    const xStart = caseP.batteryTrayXStart - caseP.batteryEndWallThickness
-    const xEnd = caseP.batteryTrayXStart + 3 * slot + 2 * gap + caseP.batteryEndWallThickness
-    const cx = (xStart + xEnd) / 2
-    const width = xEnd - xStart
-
-    const railStepZ = 1.2
-    const outerYWidth = caseP.batteryTrayYWidth + 1
-    const innerYWidth = caseP.batteryTrayYWidth + 3
-
-    const outer = translate(
-        [cx, caseP.batteryTrayYCenter, railStepZ / 2],
-        cuboid({ size: [width, outerYWidth, railStepZ + 0.02] }),
+const batteryCoverCaseMagnetPockets = (caseP: CaseParams): Geom3 => {
+    const pocketZCenter = caseP.bottomThickness + MAGNET_POCKET_DEPTH_CASE / 2 - 0.01
+    const pockets = coverMagnetCenters(caseP).map(([mx, my]) =>
+        translate(
+            [mx, my, pocketZCenter],
+            cuboid({
+                size: [
+                    MAGNET_SIZE_X + MAGNET_CLEARANCE,
+                    MAGNET_SIZE_Y + MAGNET_CLEARANCE,
+                    MAGNET_POCKET_DEPTH_CASE,
+                ],
+            }),
+        ),
     )
-    const inner = translate(
-        [cx, caseP.batteryTrayYCenter, (caseP.bottomThickness + railStepZ) / 2],
-        cuboid({ size: [width, innerYWidth, caseP.bottomThickness - railStepZ + 0.02] }),
+    return union(...pockets)
+}
+
+const magnetBosses = (caseP: CaseParams): Geom3 => {
+    const zCenter = caseP.bottomThickness + magnetBossHeight / 2
+    const blocks = magnetBossCenters(caseP).map(([bx, by]) =>
+        translate(
+            [bx, by, zCenter],
+            cuboid({ size: [magnetBossSizeX, magnetBossSizeY, magnetBossHeight] }),
+        ),
     )
-    return union(outer, inner)
+    return union(...blocks)
 }
 
 const cornerBossCenters = (plateBounds: Bounds, caseP: CaseParams): Array<[number, number]> => {
@@ -496,8 +550,7 @@ export const buildCase = (keys: KeyPos[], params: BuildParams, caseP: CaseParams
     const usb = usbCutout(plateBounds, caseP)
     const tray = batteryTray(caseP)
 
-    const bottomCutout = batteryBottomCutout(caseP)
-    const slideCutout = slideSwitchBottomCutout(caseP)
+    const bottomCutout = batteryBottomCutout(plateBounds, caseP)
 
     shell = subtract(shell, cavity)
     if (caseP.topDeckThickness > 0) {
@@ -510,10 +563,10 @@ export const buildCase = (keys: KeyPos[], params: BuildParams, caseP: CaseParams
     plateTilted = rotateX(tiltAngle, plateTilted)
     plateTilted = translate([0, pivotY, liftZ], plateTilted)
 
-    shell = union(shell, tray, plateTilted, cornerBosses(plateBounds, caseP))
-    shell = subtract(shell, usb, bottomCutout, slideCutout, cornerBossInsertHoles(plateBounds, caseP))
+    shell = union(shell, tray, plateTilted, cornerBosses(plateBounds, caseP), magnetBosses(caseP))
+    shell = subtract(shell, usb, bottomCutout, cornerBossInsertHoles(plateBounds, caseP), batteryCoverCaseMagnetPockets(caseP))
 
-    return shell
+    return retessellate(shell)
 }
 
 const sliceCuboid = (plateBounds: Bounds, zMin: number, zMax: number, caseP: CaseParams): Geom3 => {

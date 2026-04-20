@@ -14,6 +14,7 @@ export const DEFAULT_BUILD_PARAMS = {
         stabilizer: {
             ...base.plate.stabilizer,
             padSize: [6.9, 14.9] as [number, number],
+            padCornerRadius: 1.0,
         },
     },
 }

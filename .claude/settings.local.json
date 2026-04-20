@@ -61,7 +61,8 @@
       "Bash(mv viewer/package.json viewer/tsconfig.json viewer/vite.config.ts viewer/index.html viewer/bun.lock ./)",
       "Bash(mv viewer/src viewer/scripts viewer/node_modules viewer/dist ./)",
       "Bash(rmdir viewer *)",
-      "Bash(rm -rf viewer/.claude)"
+      "Bash(rm -rf viewer/.claude)",
+      "Bash(qlmanage -t -s 2400 -o /Users/gkn/keyboard/docs/export/ /Users/gkn/keyboard/docs/export/insert-spec.svg)"
     ]
   },
   "enableAllProjectMcpServers": true,

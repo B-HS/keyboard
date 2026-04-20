@@ -17,7 +17,7 @@ const writeStl = (name: string, solid: unknown) => {
     console.log(`Wrote ${path} (${(buffer.length / 1024).toFixed(1)} KB)`)
 }
 
-for (const name of ['plate.stl', 'case.stl', 'plate.dxf']) {
+for (const name of ['plate.stl', 'case.stl', 'plate.dxf', 'case-top.stl', 'case-bottom.stl', 'battery-cover.stl']) {
     try {
         rmSync(`${outDir}${name}`)
     } catch {
@@ -25,8 +25,18 @@ for (const name of ['plate.stl', 'case.stl', 'plate.dxf']) {
     }
 }
 
-writeStl('case-top', buildCaseTop(keys49, defaults))
-writeStl('case-bottom', buildCaseBottom(keys49, defaults))
-writeStl('battery-cover', _buildBatteryCover(DEFAULT_CASE_PARAMS))
+writeStl('1_case-top', buildCaseTop(keys49, defaults))
+writeStl('2_case-bottom', buildCaseBottom(keys49, defaults))
+writeStl('3_battery-cover', _buildBatteryCover(DEFAULT_CASE_PARAMS))
+
+const SLA_CASE_PARAMS = {
+    ...DEFAULT_CASE_PARAMS,
+    cornerBossInsertRadius: 2.0,
+    cornerBossInsertDepth: 3.0,
+}
+
+writeStl('1_case-top_SLA', buildCaseTop(keys49, defaults, SLA_CASE_PARAMS))
+writeStl('2_case-bottom_SLA', buildCaseBottom(keys49, defaults, SLA_CASE_PARAMS))
+writeStl('3_battery-cover_SLA', _buildBatteryCover(SLA_CASE_PARAMS))
 
 console.log('\nDone. Files are in docs/export/')

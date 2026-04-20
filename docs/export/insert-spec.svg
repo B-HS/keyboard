@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="560" viewBox="0 0 780 560" font-family="Arial, sans-serif" font-size="12">
+  <style>
+    .title { font-size: 16px; font-weight: bold; }
+    .section-title { font-size: 14px; font-weight: bold; }
+    .dim { fill: #c00; font-size: 11px; font-weight: bold; }
+    .note { fill: #333; font-size: 11px; }
+    .spec { fill: #000; font-size: 12px; }
+    .callout { fill: #0066cc; font-size: 11px; font-weight: bold; }
+    .case-line { stroke: #333; stroke-width: 1.5; fill: #f5f5f5; }
+    .boss-fill { fill: #ffe8a0; stroke: #888; stroke-width: 0.5; }
+    .hole { fill: #fff; stroke: #c00; stroke-width: 1.5; }
+    .hole-cross { stroke: #c00; stroke-width: 1; }
+    .arrow { stroke: #0066cc; stroke-width: 1; fill: none; marker-end: url(#ah); }
+    .dim-line { stroke: #c00; stroke-width: 0.7; fill: none; marker-start: url(#ahd); marker-end: url(#ahd); }
+    .insert-body { fill: #d4a84a; stroke: #8b6914; stroke-width: 1; }
+    .insert-thread { stroke: #8b6914; stroke-width: 0.5; }
+    .material { fill: #e8e8e0; stroke: #666; stroke-width: 1; }
+  </style>
+
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0066cc"/>
+    </marker>
+    <marker id="ahd" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 5 L 10 0 L 8 5 L 10 10 z" fill="#c00"/>
+    </marker>
+  </defs>
+
+  <text x="390" y="28" class="title" text-anchor="middle">Threaded Insert Installation Spec — Case Top</text>
+  <text x="390" y="46" class="note" text-anchor="middle">File: case-top.stl  |  Material: SLA Resin (9000HE recommended)</text>
+
+  <!-- ===== TOP VIEW ===== -->
+  <text x="60" y="75" class="section-title">① Top View (Case-Top, viewed from ABOVE)</text>
+
+  <!-- case outline: minX=-18.76 .. maxX=256.89 (275.65 wide), minY=-72.18 .. maxY=12.97 (85.15 tall)
+       scale 2 px/mm, offset (50, 90). Rounded rect rx=2mm*2=4px -->
+  <rect x="50" y="90" width="551" height="170" rx="4" ry="4" class="case-line"/>
+
+  <!-- Corner boss fills (6×6mm squares, inset 5mm from case edge)
+       boss square in design: center ± 3mm. Boss centers (case coord):
+       FL: (-13.76, -67.18), FR: (251.89, -67.18), BL: (-13.76, 7.97), BR: (251.89, 7.97)
+       SVG coord: x = (case_x - (-18.76))*2 + 50,  y = (12.97 - case_y)*2 + 90
+       FL center SVG: (60, 250.3); BL center SVG: (60, 100); FR: (591.3, 250.3); BR: (591.3, 100) -->
+  <rect x="54"  y="244.3" width="12" height="12" class="boss-fill"/>
+  <rect x="54"  y="94"    width="12" height="12" class="boss-fill"/>
+  <rect x="585.3" y="244.3" width="12" height="12" class="boss-fill"/>
+  <rect x="585.3" y="94"    width="12" height="12" class="boss-fill"/>
+
+  <!-- insert holes (Ø3.5mm → radius 3.5 px at 2px/mm) -->
+  <!-- FL -->
+  <circle cx="60" cy="250.3" r="3.5" class="hole"/>
+  <line x1="55" y1="250.3" x2="65" y2="250.3" class="hole-cross"/>
+  <line x1="60" y1="245.3" x2="60" y2="255.3" class="hole-cross"/>
+  <!-- FR -->
+  <circle cx="591.3" cy="250.3" r="3.5" class="hole"/>
+  <line x1="586.3" y1="250.3" x2="596.3" y2="250.3" class="hole-cross"/>
+  <line x1="591.3" y1="245.3" x2="591.3" y2="255.3" class="hole-cross"/>
+  <!-- BL -->
+  <circle cx="60" cy="100" r="3.5" class="hole"/>
+  <line x1="55" y1="100" x2="65" y2="100" class="hole-cross"/>
+  <line x1="60" y1="95" x2="60" y2="105" class="hole-cross"/>
+  <!-- BR -->
+  <circle cx="591.3" cy="100" r="3.5" class="hole"/>
+  <line x1="586.3" y1="100" x2="596.3" y2="100" class="hole-cross"/>
+  <line x1="591.3" y1="95" x2="591.3" y2="105" class="hole-cross"/>
+
+  <!-- Callout labels for each corner -->
+  <text x="80" y="268" class="callout">(1) Front-Left   M3*4*3</text>
+  <text x="495" y="268" class="callout">(2) Front-Right  M3*4*3</text>
+  <text x="80" y="85" class="callout">(3) Back-Left   M3*4*3</text>
+  <text x="495" y="85" class="callout">(4) Back-Right  M3*4*3</text>
+
+  <!-- Orientation labels -->
+  <text x="325" y="290" class="note" text-anchor="middle" font-style="italic">(Front / 앞 — user side)</text>
+  <text x="325" y="79" class="note" text-anchor="middle" font-style="italic">(Back / 뒤)</text>
+  <text x="30" y="178" class="note" text-anchor="middle" font-style="italic" transform="rotate(-90 30 178)">(Left)</text>
+  <text x="625" y="178" class="note" text-anchor="middle" font-style="italic" transform="rotate(90 625 178)">(Right)</text>
+
+  <!-- Overall dimensions -->
+  <text x="325" y="302" class="dim" text-anchor="middle">Case outer: 275.65 × 85.15 mm</text>
+
+  <!-- Insert-from-top arrows (showing insertion direction) -->
+  <path d="M 60 130 L 60 112" class="arrow"/>
+  <text x="68" y="122" class="callout">INSERT↓</text>
+  <path d="M 591.3 130 L 591.3 112" class="arrow"/>
+  <text x="599" y="122" class="callout">INSERT↓</text>
+  <text x="325" y="325" class="note" text-anchor="middle">※ Inserts go DOWNWARD into boss (from boss top surface) — see section view below</text>
+
+  <!-- ===== SECTION VIEW ===== -->
+  <text x="60" y="365" class="section-title">② Section Detail (one corner boss, cut through center)</text>
+
+  <!-- Material cross-section: boss + surrounding area -->
+  <!-- Boss 6×5mm tall, centered at x=350, bottom at y=500 (scale 10px/mm) -->
+  <!-- Hole in center: Ø3.5, depth 4mm from top -->
+  <rect x="200" y="495" width="400" height="10" class="material"/>
+  <rect x="320" y="445" width="60" height="55" class="material"/>
+  <!-- hole (cavity) -->
+  <rect x="332.5" y="445" width="35" height="40" fill="#fff" stroke="#c00" stroke-width="1" stroke-dasharray="3,2"/>
+  <!-- insert (brass) -->
+  <rect x="335" y="447" width="30" height="38" class="insert-body"/>
+  <line x1="337" y1="449" x2="363" y2="449" class="insert-thread"/>
+  <line x1="337" y1="455" x2="363" y2="455" class="insert-thread"/>
+  <line x1="337" y1="461" x2="363" y2="461" class="insert-thread"/>
+  <line x1="337" y1="467" x2="363" y2="467" class="insert-thread"/>
+  <line x1="337" y1="473" x2="363" y2="473" class="insert-thread"/>
+  <line x1="337" y1="479" x2="363" y2="479" class="insert-thread"/>
+
+  <!-- Top reference line / labels -->
+  <line x1="380" y1="445" x2="450" y2="445" class="arrow" style="marker-end:none"/>
+  <text x="455" y="449" class="callout">Boss top surface (Z = 7.6mm)</text>
+  <line x1="380" y1="495" x2="450" y2="495" class="arrow" style="marker-end:none"/>
+  <text x="455" y="499" class="callout">Case floor (Z = 2.4mm)</text>
+  <line x1="380" y1="505" x2="450" y2="505" class="arrow" style="marker-end:none"/>
+  <text x="455" y="509" class="callout">Boss base (Z = 2.4mm)</text>
+
+  <!-- Dimensions -->
+  <text x="250" y="440" class="dim" text-anchor="middle">Ø 4.0 mm</text>
+  <line x1="232" y1="445" x2="332.5" y2="445" class="dim-line"/>
+
+  <text x="292" y="475" class="dim">depth 3 mm</text>
+  <line x1="300" y1="445" x2="300" y2="485" class="dim-line"/>
+
+  <text x="350" y="525" class="dim" text-anchor="middle">boss 6 × 6 mm</text>
+
+  <!-- INSERT arrow -->
+  <path d="M 350 415 L 350 443" class="arrow"/>
+  <text x="358" y="430" class="callout">INSERT DIRECTION</text>
+
+  <!-- ===== SPEC BOX ===== -->
+  <rect x="50" y="470" width="140" height="80" fill="#fffbe6" stroke="#333" stroke-width="1"/>
+  <text x="60" y="488" class="section-title">Specification</text>
+  <text x="60" y="507" class="spec">• Insert type: M3 brass</text>
+  <text x="60" y="521" class="spec">• Thread: M3 × 0.5</text>
+  <text x="60" y="535" class="spec">• Body: Ø 4.0 × 3 mm (M3*4*3)</text>
+  <text x="60" y="549" class="spec">• Quantity: 4 (four corners)</text>
+
+  <!-- Order note for JLC -->
+  <rect x="620" y="340" width="155" height="210" fill="#eef7ee" stroke="#333" stroke-width="1"/>
+  <text x="630" y="358" class="section-title">JLC3DP Order Note</text>
+  <text x="630" y="377" class="spec">Install 4× M3 brass</text>
+  <text x="630" y="391" class="spec">threaded inserts into</text>
+  <text x="630" y="405" class="spec">case-top.stl at the 4</text>
+  <text x="630" y="419" class="spec">corner holes shown in</text>
+  <text x="630" y="433" class="spec">the top view (marked</text>
+  <text x="630" y="447" class="spec">with red crosses).</text>
+  <text x="630" y="466" class="spec">Each hole: Ø4.0×3mm</text>
+  <text x="630" y="480" class="spec">Insert FROM boss top</text>
+  <text x="630" y="494" class="spec">(downward), flush with</text>
+  <text x="630" y="508" class="spec">boss top surface.</text>
+  <text x="630" y="528" class="spec" font-weight="bold">Method: press-fit or</text>
+  <text x="630" y="542" class="spec" font-weight="bold">adhesive (SLA resin)</text>
+</svg>

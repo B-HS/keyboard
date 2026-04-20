@@ -11,6 +11,8 @@ import {
     buildBatteryCover,
     buildBatteries,
     buildBatteryContacts,
+    buildCaseMagnets,
+    buildCoverMagnets,
 } from './accessories'
 import { normalizeSwitch, placeSwitches, DEFAULT_SWITCH_ORIENT, type SwitchOrient } from './switch'
 import { buildKeycapsForKeys, DEFAULT_KEYCAP_ORIENT, type KeycapOrient } from './keycap'
@@ -32,6 +34,8 @@ export type PartVisibility = {
     keycaps: boolean
     footPads: boolean
     batteryCover: boolean
+    caseMagnets: boolean
+    coverMagnets: boolean
     batteries: boolean
     batteryContacts: boolean
     phone: boolean
@@ -132,6 +136,14 @@ export const buildSolids = (
 
     if (visibility.batteryCover) {
         solids.push(colorize(BATTERY_COVER_COLOR, buildBatteryCover(DEFAULT_CASE_PARAMS)))
+    }
+
+    if (visibility.caseMagnets) {
+        solids.push(colorize([0.7, 0.7, 0.75, 1], buildCaseMagnets(DEFAULT_CASE_PARAMS)))
+    }
+
+    if (visibility.coverMagnets) {
+        solids.push(colorize([0.55, 0.55, 0.6, 1], buildCoverMagnets(DEFAULT_CASE_PARAMS)))
     }
 
     if (visibility.batteries) {

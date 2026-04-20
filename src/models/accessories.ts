@@ -1,7 +1,8 @@
 import { primitives, transforms, booleans } from '@jscad/modeling'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
+const { subtract } = booleans
 import type { Bounds, KeyPos } from './layout'
-import { caseBounds, type CaseParams } from './case'
+import { caseBounds, batteryCoverOpening, coverMagnetCenters, MAGNET_SIZE_X, MAGNET_SIZE_Y, MAGNET_HEIGHT, COVER_THICKNESS, type CaseParams } from './case'
 import { DEFAULT_STAB, U } from './layout'
 
 const { cuboid, cylinder, torus, sphere } = primitives
@@ -30,13 +31,13 @@ export const buildSlideSwitch = (_plateBounds: Bounds, caseP: CaseParams): Geom3
     const bodyL = 6.8
     const bodyW = 2.8
     const bodyH = 2.7
-    const handleW = 1.5
     const handleL = 2
+    const handleW = 1.5
     const handleH = 1.5
 
     const centerX = caseP.slideSwitchX
     const centerY = caseP.slideSwitchY
-    const bodyBottomZ = caseP.bottomThickness
+    const bodyBottomZ = caseP.slideSwitchZ
     const bodyCenterZ = bodyBottomZ + bodyH / 2
 
     const body = translate([centerX, centerY, bodyCenterZ], cuboid({ size: [bodyL, bodyW, bodyH] }))
@@ -144,30 +145,15 @@ const domContact = (x: number, y: number, z: number): Geom3 => {
     return union(base, dome)
 }
 
-const contactPlate = (xCenter: number, y: number, zBottom: number, length: number): Geom3 => {
-    return translate([xCenter, y, zBottom + 0.25], cuboid({ size: [length, 8, 0.5] }))
-}
-
 export const buildBatteryContacts = (caseP: CaseParams): Geom3 => {
     const slot = caseP.batteryLength
     const gap = caseP.batteryGapLength
     const zCenter = caseP.bottomThickness + caseP.batteryDiameter / 2 + caseP.batterySlotTolerance
-    const zPlate = caseP.bottomThickness + 0.1
     const y = caseP.batteryTrayYCenter
 
     const parts: Geom3[] = []
 
     parts.push(domContact(caseP.batteryTrayXStart - 0.25, y, zCenter))
-
-    for (let i = 0; i < 2; i++) {
-        const prevBatteryPlusX = caseP.batteryTrayXStart + (i + 1) * slot + i * gap
-        const nextBatteryMinusX = prevBatteryPlusX + gap
-        const plateCenter = (prevBatteryPlusX + nextBatteryMinusX) / 2
-
-        parts.push(contactPlate(plateCenter, y, zPlate, gap - 1))
-        parts.push(springCoil(prevBatteryPlusX + 0.3, y, zCenter, 1, gap / 2 - 0.5))
-        parts.push(domContact(nextBatteryMinusX - 0.25, y, zCenter))
-    }
 
     const rightX = caseP.batteryTrayXStart + 3 * slot + 2 * gap + 0.25
     parts.push(springCoil(rightX, y, zCenter, -1, 5))
@@ -175,60 +161,53 @@ export const buildBatteryContacts = (caseP: CaseParams): Geom3 => {
     return union(...parts)
 }
 
+export const buildCaseMagnets = (caseP: CaseParams): Geom3 => {
+    const zCenter = COVER_THICKNESS + MAGNET_HEIGHT + MAGNET_HEIGHT / 2
+    const magnets = coverMagnetCenters(caseP).map(([mx, my]) =>
+        translate(
+            [mx, my, zCenter],
+            cuboid({ size: [MAGNET_SIZE_X, MAGNET_SIZE_Y, MAGNET_HEIGHT] }),
+        ),
+    )
+    return union(...magnets)
+}
+
+export const buildCoverMagnets = (caseP: CaseParams): Geom3 => {
+    const zCenter = COVER_THICKNESS + MAGNET_HEIGHT / 2
+    const magnets = coverMagnetCenters(caseP).map(([mx, my]) =>
+        translate(
+            [mx, my, zCenter],
+            cuboid({ size: [MAGNET_SIZE_X, MAGNET_SIZE_Y, MAGNET_HEIGHT] }),
+        ),
+    )
+    return union(...magnets)
+}
+
 export const buildBatteryCover = (caseP: CaseParams): Geom3 => {
-    const slot = caseP.batteryLength
-    const gap = caseP.batteryGapLength
-    const xStart = caseP.batteryTrayXStart - caseP.batteryEndWallThickness
-    const xEnd = caseP.batteryTrayXStart + 3 * slot + 2 * gap + caseP.batteryEndWallThickness
+    const o = batteryCoverOpening(caseP)
+    const clearance = 0.15
+    const xStart = o.xStart + clearance
+    const xEnd = o.xEnd - clearance
+    const yStart = o.yStart + clearance
+    const yEnd = o.yEnd - clearance
+
+    const zBottom = 0
+    const zTop = COVER_THICKNESS
     const cx = (xStart + xEnd) / 2
+    const cy = (yStart + yEnd) / 2
+    const cz = (zBottom + zTop) / 2
+    const width = xEnd - xStart
+    const length = yEnd - yStart
 
-    const clearance = 0.2
-    const lipOverhang = 0.7
-    const railStepZ = 1.2
+    const plate = translate([cx, cy, cz], cuboid({ size: [width, length, COVER_THICKNESS] }))
 
-    const bodyWidth = xEnd - xStart - clearance * 2
-    const bodyLength = caseP.batteryTrayYWidth + 1 - clearance * 2
-    const bodyThickness = railStepZ - 0.1
-    const bodyCenterZ = 0.1 + bodyThickness / 2
-
-    const body = translate(
-        [cx, caseP.batteryTrayYCenter, bodyCenterZ],
-        cuboid({ size: [bodyWidth, bodyLength, bodyThickness] }),
+    const fingerHoleRadius = 4
+    const fingerHole = translate(
+        [cx, cy, cz],
+        cylinder({ radius: fingerHoleRadius, height: COVER_THICKNESS + 0.02, segments: 48 }),
     )
 
-    const lipLength = bodyLength + lipOverhang * 2
-    const lipThickness = caseP.bottomThickness - railStepZ - 0.1
-    const lipCenterZ = railStepZ + lipThickness / 2
-    const lip = translate(
-        [cx, caseP.batteryTrayYCenter, lipCenterZ],
-        cuboid({ size: [bodyWidth, lipLength, lipThickness] }),
-    )
-
-    const grip = translate(
-        [xEnd - clearance - 1.5, caseP.batteryTrayYCenter, bodyCenterZ - bodyThickness / 2 - 0.5],
-        cuboid({ size: [3, bodyLength - 2, 1.0] }),
-    )
-
-    const ridgeHeight = 2.5
-    const ridgeWidth = Math.min(caseP.batteryGapLength - 2, 4.5)
-    const ridgeLength = bodyLength - 2
-    const ridgeZCenter = railStepZ + lipThickness + ridgeHeight / 2
-    const ridges: Geom3[] = []
-    for (let i = 0; i < 2; i++) {
-        const gapCenterX =
-            caseP.batteryTrayXStart +
-            (i + 1) * caseP.batteryLength +
-            i * caseP.batteryGapLength +
-            caseP.batteryGapLength / 2
-        ridges.push(
-            translate(
-                [gapCenterX, caseP.batteryTrayYCenter, ridgeZCenter],
-                cuboid({ size: [ridgeWidth, ridgeLength, ridgeHeight] }),
-            ),
-        )
-    }
-
-    return union(body, lip, grip, ...ridges)
+    return subtract(plate, fingerHole)
 }
 
 export const buildFootPads = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {

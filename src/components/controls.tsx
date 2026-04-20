@@ -110,6 +110,14 @@ export const Controls: FC<ControlsProps> = ({
                 Battery Cover
             </label>
             <label>
+                <input type='checkbox' checked={visibility.caseMagnets} onChange={() => togglePart('caseMagnets')} />
+                Magnets — Case Top
+            </label>
+            <label>
+                <input type='checkbox' checked={visibility.coverMagnets} onChange={() => togglePart('coverMagnets')} />
+                Magnets — Battery Cover
+            </label>
+            <label>
                 <input type='checkbox' checked={visibility.batteries} onChange={() => togglePart('batteries')} />
                 Batteries (3×AAA)
             </label>
