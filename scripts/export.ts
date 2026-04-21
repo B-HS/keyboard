@@ -57,13 +57,13 @@ const repairStlWithAdmesh = (stlPath: string) => {
     }
 }
 
-const writeStl = (name: string, solid: unknown) => {
+const writeStl = (name: string, solid: unknown, skipAdmesh = false) => {
     const data = stlSerialize({ binary: true }, solid)
     const buffer = Buffer.concat(data.map((chunk: ArrayBuffer | Uint8Array) => Buffer.from(chunk as ArrayBuffer)))
     const path = `${outDir}${name}.stl`
     writeFileSync(path, buffer)
     console.log(`Wrote ${path} (${(buffer.length / 1024).toFixed(1)} KB)`)
-    repairStlWithAdmesh(path)
+    if (!skipAdmesh) repairStlWithAdmesh(path)
 }
 
 for (const name of [
