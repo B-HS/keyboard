@@ -109,10 +109,6 @@ export const Controls: FC<ControlsProps> = ({
                 <input type='checkbox' checked={visibility.wobkeyZen65} onChange={() => togglePart('wobkeyZen65')} />
                 WOBKEY Zen 65 (315×112×28mm)
             </label>
-            <label>
-                <input type='checkbox' checked={visibility.sla} onChange={() => togglePart('sla')} />
-                SLA Variant (Ø4 insert pockets)
-            </label>
 
             <h2>Plate (from docs/models/49-final.jscad)</h2>
             <NumberRow label='Thickness' value={params.plate.thickness} onChange={(v) => updatePlate({ thickness: v })} />

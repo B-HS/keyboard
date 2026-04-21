@@ -1,7 +1,7 @@
 import { colors, primitives, transforms } from '@jscad/modeling'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
 import { keys49, computeBounds } from './layout'
-import { buildCaseTop, buildCaseBottom, caseBounds, caseFrontTopZ, DEFAULT_CASE_PARAMS, SLA_CASE_PARAMS, getPlateTransform, plateBoundsFromGeom } from './case'
+import { buildCaseTop, buildCaseBottom, caseBounds, caseFrontTopZ, DEFAULT_CASE_PARAMS, getPlateTransform, plateBoundsFromGeom } from './case'
 import { buildLolin } from './lolin'
 import { buildStabilizers, buildFootPads } from './accessories'
 import { normalizeSwitch, placeSwitches, DEFAULT_SWITCH_ORIENT, type SwitchOrient } from './switch'
@@ -24,7 +24,6 @@ export type PartVisibility = {
     footPads: boolean
     phone: boolean
     wobkeyZen65: boolean
-    sla: boolean
 }
 
 const PHONE_SIZE: [number, number, number] = [77.6, 160.7, 7.85]
@@ -60,7 +59,7 @@ export const buildSolids = (
         ? plateBoundsFromGeom(plateGeom)
         : computeBounds(keys49, params.plate.padding)
 
-    const caseP = visibility.sla ? SLA_CASE_PARAMS : DEFAULT_CASE_PARAMS
+    const caseP = DEFAULT_CASE_PARAMS
 
     if (visibility.caseTop) {
         solids.push(colorize(CASE_TOP_COLOR, buildCaseTop(keys49, params, caseP, plateBounds)))

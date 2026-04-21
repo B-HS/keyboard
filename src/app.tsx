@@ -33,7 +33,6 @@ export const App: FC = () => {
     footPads: true,
     phone: false,
     wobkeyZen65: false,
-    sla: false,
   });
   const [params, setParams] = useState<BuildParams>(DEFAULT_BUILD_PARAMS);
   const [switchOrient, setSwitchOrient] = useState<SwitchOrient>(

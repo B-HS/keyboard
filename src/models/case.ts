@@ -66,7 +66,7 @@ export const DEFAULT_CASE_PARAMS: CaseParams = {
     wallThickness: 2,
     upperWallInsetX: 2,
     upperWallInsetY: 2,
-    bottomThickness: 2.4,
+    bottomThickness: 3.0,
 
     sideFastenerSize: 6,
     sideFastenerHeight: 6.0,
@@ -77,7 +77,7 @@ export const DEFAULT_CASE_PARAMS: CaseParams = {
     sideFastenerHeadDepth: 2.0,
     sideFastenerYRatios: [0.5, 0.75],
 
-    plateMountPostRadius: 2.5,
+    plateMountPostRadius: 3.0,
     plateMountInsertRadius: 1.25,
     plateMountInsertDepth: 4.0,
     plateMountHeadRadius: 2.6,
@@ -91,16 +91,6 @@ export const DEFAULT_CASE_PARAMS: CaseParams = {
     usbCutoutTaperExpand: 0.5,
 
     caseCornerRadius: 2,
-}
-
-export const SLA_CASE_PARAMS: CaseParams = {
-    ...DEFAULT_CASE_PARAMS,
-    plateMountPostRadius: 3.0,
-    plateMountInsertRadius: 1.8,
-    plateMountInsertDepth: 7.0,
-    sideFastenerInsertRadius: 1.8,
-    sideFastenerInsertDepth: 7.0,
-    sideFastenerHeight: 8.0,
 }
 
 const reorient = (geom: Geom3): Geom3 => rotateX(Math.PI / 2, rotateY(Math.PI / 2, geom))
@@ -334,7 +324,7 @@ const plateMountPillars = (
         const height = zCaseTop + 2
         return translate(
             [xLocal, yCase, height / 2],
-            cylinder({ radius: r, height, segments: 48 }),
+            cylinder({ radius: r, height, segments: 32 }),
         )
     })
 
@@ -403,17 +393,17 @@ export const buildCaseTop = (
     shell = intersect(shell, topSlicer)
 
     const cavity = steppedInnerCavity(plateBounds, caseP, plateThickness)
-    shell = subtract(shell, cavity)
+    shell = retessellate(subtract(shell, cavity))
 
-    shell = union(shell, sideFastenerBosses(plateBounds, caseP))
-    shell = subtract(
+    shell = retessellate(union(shell, sideFastenerBosses(plateBounds, caseP)))
+    shell = retessellate(subtract(
         shell,
         usbCutout(plateBounds, caseP),
         sideFastenerInsertHoles(plateBounds, caseP),
         plateMountHeadClearance(plateBounds, caseP, screwHoleMargin, plateThickness),
-    )
+    ))
 
-    return retessellate(shell)
+    return shell
 }
 
 const floorSlab = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {
@@ -452,8 +442,7 @@ export const buildCaseBottom = (
         plateMountInsertPockets(plateBounds, caseP, screwHoleMargin),
         sideFastenerThroughs(plateBounds, caseP),
     )
-
-    return retessellate(bottom)
+    return bottom
 }
 
 export const getPlateTransform = (plateBounds: Bounds, caseP: CaseParams = DEFAULT_CASE_PARAMS) => ({
