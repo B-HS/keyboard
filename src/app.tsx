@@ -26,26 +26,25 @@ export const App: FC = () => {
     caseTop: true,
     caseBottom: true,
     plate: true,
-    switches: true,
-    lolin: true,
-    stabilizers: true,
-    keycaps: true,
-    footPads: true,
+    switches: false,
+    lolin: false,
+    stabilizers: false,
+    keycaps: false,
+    footPads: false,
     phone: false,
     wobkeyZen65: false,
-    sla: false,
   });
   const [params, setParams] = useState<BuildParams>(DEFAULT_BUILD_PARAMS);
   const [switchOrient, setSwitchOrient] = useState<SwitchOrient>(
-    DEFAULT_SWITCH_ORIENT
+    DEFAULT_SWITCH_ORIENT,
   );
   const [switchGeom, setSwitchGeom] = useState<Geom3 | null>(null);
   const [keycapOrient, setKeycapOrient] = useState<KeycapOrient>(
-    DEFAULT_KEYCAP_ORIENT
+    DEFAULT_KEYCAP_ORIENT,
   );
   const [keycapsReady, setKeycapsReady] = useState(0);
   const [stabilizerOrient, setStabilizerOrient] = useState<StabilizerOrient>(
-    DEFAULT_STABILIZER_ORIENT
+    DEFAULT_STABILIZER_ORIENT,
   );
   const [stabilizerGeom, setStabilizerGeom] = useState<Geom3 | null>(null);
   const [plateGeom, setPlateGeom] = useState<Geom3 | null>(null);
@@ -72,10 +71,10 @@ export const App: FC = () => {
       import.meta.hot.accept("./models", () => setHmrTick((n) => n + 1));
       import.meta.hot.accept("./models/case", () => setHmrTick((n) => n + 1));
       import.meta.hot.accept("./models/accessories", () =>
-        setHmrTick((n) => n + 1)
+        setHmrTick((n) => n + 1),
       );
       import.meta.hot.accept("./models/build-solids", () =>
-        setHmrTick((n) => n + 1)
+        setHmrTick((n) => n + 1),
       );
       import.meta.hot.accept("./models/plate", () => setHmrTick((n) => n + 1));
     }
@@ -91,7 +90,7 @@ export const App: FC = () => {
         keycapOrient,
         stabilizerGeom,
         stabilizerOrient,
-        plateGeom
+        plateGeom,
       ),
     [
       visibility,
@@ -104,7 +103,7 @@ export const App: FC = () => {
       stabilizerOrient,
       plateGeom,
       hmrTick,
-    ]
+    ],
   );
 
   const handleExportStl = () => {
@@ -136,7 +135,8 @@ export const App: FC = () => {
       <div className="viewer-wrap">
         <Viewer solids={solids} />
         <div className="help">
-          LMB/MMB: 회전 · RMB or Shift+드래그: 이동 · 휠: 커서 기준 줌 · F: 프레이밍
+          LMB/MMB: 회전 · RMB or Shift+드래그: 이동 · 휠: 커서 기준 줌 · F:
+          프레이밍
         </div>
       </div>
     </div>

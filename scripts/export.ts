@@ -3,10 +3,9 @@ import { fileURLToPath } from 'node:url'
 import { serialize as stlSerialize } from '@jscad/stl-serializer'
 import { deserialize as stlDeserialize } from '@jscad/stl-deserializer'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
-import { buildCaseTop, buildCaseBottom, DEFAULT_CASE_PARAMS, SLA_CASE_PARAMS, plateBoundsFromGeom } from '../src/models/case'
+import { buildCaseTop, buildCaseBottom, DEFAULT_CASE_PARAMS, plateBoundsFromGeom } from '../src/models/case'
 import { keys49, computeBounds } from '../src/models/layout'
 import { defaults } from './load-defaults'
-import { writeInsertSpec } from './generate-spec'
 
 const outDir = fileURLToPath(new URL('../docs/export/', import.meta.url))
 mkdirSync(outDir, { recursive: true })
@@ -38,12 +37,8 @@ const writeStl = (name: string, solid: unknown) => {
 }
 
 for (const name of [
-    'plate.stl', 'case.stl', 'plate.dxf', 'case-top.stl', 'case-bottom.stl', 'battery-cover.stl',
-    '1_case-top.stl', '2_case-bottom.stl', '3_battery-cover.stl', '3_plate.stl',
-    '1_case-top_SLA.stl', '2_case-bottom_SLA.stl', '3_battery-cover_SLA.stl', '3_plate_SLA.stl',
-    'insert-spec.svg', 'insert-spec.png',
-    'insert-spec-case-top.svg', 'insert-spec-case-top.png',
-    'insert-spec-case-bottom.svg', 'insert-spec-case-bottom.png',
+    'plate.stl', 'case.stl', 'plate.dxf', 'case-top.stl', 'case-bottom.stl',
+    '1_case-top.stl', '2_case-bottom.stl',
 ]) {
     try {
         rmSync(`${outDir}${name}`)
@@ -54,10 +49,5 @@ for (const name of [
 
 writeStl('1_case-top', buildCaseTop(keys49, defaults, DEFAULT_CASE_PARAMS, plateBounds))
 writeStl('2_case-bottom', buildCaseBottom(keys49, defaults, DEFAULT_CASE_PARAMS, plateBounds))
-
-writeStl('1_case-top_SLA', buildCaseTop(keys49, defaults, SLA_CASE_PARAMS, plateBounds))
-writeStl('2_case-bottom_SLA', buildCaseBottom(keys49, defaults, SLA_CASE_PARAMS, plateBounds))
-
-writeInsertSpec({ plateBounds, screwHoleMargin: defaults.plate.screwHoleMargin }, outDir)
 
 console.log('\nDone. Files are in docs/export/')

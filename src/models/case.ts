@@ -28,6 +28,7 @@ export type CaseParams = {
     upperWallInsetX: number
     upperWallInsetY: number
     bottomThickness: number
+    plateClearance: number
 
     sideFastenerSize: number
     sideFastenerHeight: number
@@ -66,7 +67,8 @@ export const DEFAULT_CASE_PARAMS: CaseParams = {
     wallThickness: 2,
     upperWallInsetX: 2,
     upperWallInsetY: 2,
-    bottomThickness: 2.4,
+    bottomThickness: 3.2,
+    plateClearance: 0.25,
 
     sideFastenerSize: 6,
     sideFastenerHeight: 6.0,
@@ -74,42 +76,32 @@ export const DEFAULT_CASE_PARAMS: CaseParams = {
     sideFastenerInsertDepth: 4.0,
     sideFastenerThroughRadius: 1.7,
     sideFastenerHeadRadius: 2.6,
-    sideFastenerHeadDepth: 2.0,
+    sideFastenerHeadDepth: 1.6,
     sideFastenerYRatios: [0.5, 0.75],
 
-    plateMountPostRadius: 2.5,
+    plateMountPostRadius: 2.75,
     plateMountInsertRadius: 1.25,
-    plateMountInsertDepth: 4.0,
+    plateMountInsertDepth: 3.0,
     plateMountHeadRadius: 2.6,
     plateMountHeadHeight: 2.5,
 
     usbCutoutWidth: 12.2,
-    usbCutoutHeight: 5.5,
+    usbCutoutHeight: 5.0,
     usbCutoutCenterX: 9.7,
     usbCutoutCenterZ: 7.0,
     usbCutoutCornerRadius: 1.5,
     usbCutoutTaperExpand: 0.5,
 
-    caseCornerRadius: 2,
-}
-
-export const SLA_CASE_PARAMS: CaseParams = {
-    ...DEFAULT_CASE_PARAMS,
-    plateMountPostRadius: 3.0,
-    plateMountInsertRadius: 1.8,
-    plateMountInsertDepth: 7.0,
-    sideFastenerInsertRadius: 1.8,
-    sideFastenerInsertDepth: 7.0,
-    sideFastenerHeight: 8.0,
+    caseCornerRadius: 1,
 }
 
 const reorient = (geom: Geom3): Geom3 => rotateX(Math.PI / 2, rotateY(Math.PI / 2, geom))
 
 export const caseBounds = (plateBounds: Bounds, caseP: CaseParams): Bounds => ({
-    minX: plateBounds.minX - caseP.caseMarginLeft,
-    maxX: plateBounds.maxX + caseP.caseMarginRight,
-    minY: plateBounds.minY - caseP.caseMarginFront,
-    maxY: plateBounds.maxY + caseP.caseMarginBack,
+    minX: plateBounds.minX - caseP.caseMarginLeft - caseP.plateClearance,
+    maxX: plateBounds.maxX + caseP.caseMarginRight + caseP.plateClearance,
+    minY: plateBounds.minY - caseP.caseMarginFront - caseP.plateClearance,
+    maxY: plateBounds.maxY + caseP.caseMarginBack + caseP.plateClearance,
 })
 
 const tiltTan = (caseP: CaseParams): number => Math.tan((caseP.plateTiltDeg * Math.PI) / 180)
@@ -321,26 +313,34 @@ const plateMountPillars = (
     caseP: CaseParams,
     screwHoleMargin: number,
 ): Geom3 => {
-    const r = caseP.plateMountPostRadius
+    const side = caseP.plateMountPostRadius * 2
+    const half = side / 2
     const positions = plateMountPositions(plateBounds, screwHoleMargin)
     const pivotY = plateBounds.minY
     const theta = (caseP.plateTiltDeg * Math.PI) / 180
     const liftZ = caseP.plateFrontBottomZ
+    const pocketCenterShift = (caseP.plateMountInsertDepth * Math.sin(theta)) / 2
 
     const pillars = positions.map(([xLocal, yLocal]) => {
         const yShifted = yLocal - pivotY
-        const yCase = pivotY + yShifted * Math.cos(theta)
-        const zCaseTop = liftZ + yShifted * Math.sin(theta)
-        const height = zCaseTop + 2
-        return translate(
-            [xLocal, yCase, height / 2],
-            cylinder({ radius: r, height, segments: 48 }),
-        )
+        const yCenter = pivotY + yShifted * Math.cos(theta) + pocketCenterShift
+        const yFront = yCenter - half
+        const yBack = yCenter + half
+        const zFront = liftZ + (yFront - pivotY) * Math.tan(theta)
+        const zBack = liftZ + (yBack - pivotY) * Math.tan(theta)
+        const profile = polygon({
+            points: [
+                [yFront, 0],
+                [yBack, 0],
+                [yBack, zBack],
+                [yFront, zFront],
+            ],
+        })
+        const extruded = extrudeLinear({ height: side }, profile)
+        return translate([xLocal - half, 0, 0], reorient(extruded))
     })
 
-    const fullPillars = union(...pillars)
-    const belowPlateBottom = tiltedSlabAtPlateLocalZ(plateBounds, caseP, 0)
-    return intersect(fullPillars, belowPlateBottom)
+    return union(...pillars)
 }
 
 const plateMountInsertPockets = (
@@ -428,7 +428,7 @@ const floorSlab = (plateBounds: Bounds, caseP: CaseParams): Geom3 => {
         segments: 64,
     })
     return translate(
-        [cx, cy, caseP.bottomThickness / 2],
+        [cx, cy, 0],
         extrudeLinear({ height: caseP.bottomThickness }, rect2d),
     )
 }
