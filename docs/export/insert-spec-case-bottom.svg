@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="462.2010551748222" viewBox="0 0 820 462.2010551748222" font-family="Arial, sans-serif" font-size="11">
+  <style>
+    .title { font-size: 18px; font-weight: bold; }
+    .subtitle { font-size: 14px; font-weight: bold; }
+    .dim { fill: #c00; font-size: 12px; font-weight: bold; }
+    .callout { fill: #0066cc; font-size: 11px; font-weight: bold; }
+    .note { fill: #333; font-size: 11px; }
+    .spec { fill: #000; font-size: 12px; }
+    .case { stroke: #333; stroke-width: 1.5; fill: #f5f5f5; }
+    .plate-outline { stroke: #888; stroke-width: 0.8; stroke-dasharray: 4,3; fill: none; }
+    .hole { fill: #fff; stroke: #c00; stroke-width: 1.5; }
+    .pillar { fill: #ffe8a0; stroke: #888; stroke-width: 0.8; }
+    .boss { fill: #d4e8d4; stroke: #888; stroke-width: 0.8; }
+    .insert-body { fill: #d4a84a; stroke: #8b6914; stroke-width: 1; }
+    .insert-thread { stroke: #8b6914; stroke-width: 0.5; }
+</style>
+
+  <text x="410" y="30" class="title" text-anchor="middle">Threaded Insert Spec — 2_case-bottom_SLA.stl</text>
+  <text x="410" y="50" class="note" text-anchor="middle">Hole: Ø3.6 × 7mm  |  Insert: M3*4*5 brass  |  Qty: 4</text>
+
+  <text x="30" y="75" class="subtitle">① Top view — pillar-top insert pockets (open UPWARD)</text>
+  <text x="30" y="90" class="note">View from above. Pillars are vertical; pocket axis tilted 8° to match plate. Inserts install from pillar top downward.</text>
+
+  <rect x="30" y="110" width="551.29726905555" height="172.20105517482222" rx="4" ry="4" class="case"/>
+  <rect x="34" y="114" width="543.29726905555" height="164.20105517482222" rx="2" ry="2" class="plate-outline"/>
+  
+    <circle cx="40" cy="272.2010551748222" r="6" class="pillar"/>
+    <circle cx="40" cy="272.2010551748222" r="3.6" class="hole"/>
+    <text x="50" y="275.2010551748222" class="callout">⑤ BL</text>
+    <circle cx="571.29726905555" cy="272.2010551748222" r="6" class="pillar"/>
+    <circle cx="571.29726905555" cy="272.2010551748222" r="3.6" class="hole"/>
+    <text x="531.29726905555" y="275.2010551748222" class="callout">⑥ BR</text>
+    <circle cx="40" cy="120" r="6" class="pillar"/>
+    <circle cx="40" cy="120" r="3.6" class="hole"/>
+    <text x="50" y="123" class="callout">⑦ FL</text>
+    <circle cx="571.29726905555" cy="120" r="6" class="pillar"/>
+    <circle cx="571.29726905555" cy="120" r="3.6" class="hole"/>
+    <text x="531.29726905555" y="123" class="callout">⑧ FR</text>
+
+  <text x="305.648634527775" y="125" class="note" text-anchor="middle" font-style="italic">← Back (Y+)</text>
+  <text x="305.648634527775" y="277.2010551748222" class="note" text-anchor="middle" font-style="italic">→ Front (Y−, user side)</text>
+  <text x="305.648634527775" y="300.2010551748222" class="dim" text-anchor="middle">275.649 × 86.101 mm  (plate-derived)</text>
+
+  <text x="620" y="80" class="subtitle">③ Hole Section</text>
+  <rect x="650" y="100" width="100" height="170" fill="#e8e8e0" stroke="#666" stroke-width="1"/>
+  <rect x="682" y="100" width="36" height="70" fill="#fff" stroke="#c00" stroke-width="1.5"/>
+  <rect x="683" y="100" width="34" height="50" class="insert-body"/>
+  <line x1="685" y1="105" x2="715" y2="105" class="insert-thread"/>
+  <line x1="685" y1="115" x2="715" y2="115" class="insert-thread"/>
+  <line x1="685" y1="125" x2="715" y2="125" class="insert-thread"/>
+  <line x1="685" y1="135" x2="715" y2="135" class="insert-thread"/>
+  <line x1="685" y1="145" x2="715" y2="145" class="insert-thread"/>
+  <text x="630" y="138" class="dim">Ø 3.6 mm</text>
+  <text x="760" y="140" class="dim">7.0 mm</text>
+  <text x="635" y="280" class="callout">Hole Ø3.6 × 7mm</text>
+  <text x="635" y="295" class="callout">Insert Ø4 × 5mm brass</text>
+  <text x="635" y="310" class="callout">(2mm empty below insert)</text>
+
+
+  <rect x="30" y="322.2010551748222" width="760" height="120" fill="#fffbe6" stroke="#333" stroke-width="1"/>
+  <text x="40" y="342.2010551748222" class="subtitle">JLC3DP Order Spec (this file)</text>
+  <text x="40" y="364.2010551748222" class="spec">• Material: SLA Resin (9000HE or equivalent)</text>
+  <text x="40" y="382.2010551748222" class="spec">• Surface finish: Threaded Insert, type M3*4*5</text>
+  <text x="40" y="400.2010551748222" class="spec">• Hole (already modeled): Ø3.6 × 7mm tilted 8°, 4 pockets at plate-corner pillars</text>
+  <text x="40" y="418.2010551748222" class="spec">• Screw used: M3×6 button head (inserted from above plate, through plate hole, into insert at pillar top)</text>
+</svg>

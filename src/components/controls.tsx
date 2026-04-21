@@ -78,20 +78,16 @@ export const Controls: FC<ControlsProps> = ({
                 Case Bottom
             </label>
             <label>
+                <input type='checkbox' checked={visibility.plate} onChange={() => togglePart('plate')} />
+                Plate (보강판)
+            </label>
+            <label>
                 <input type='checkbox' checked={visibility.switches} onChange={() => togglePart('switches')} />
                 Switches (Cherry MX)
             </label>
             <label>
                 <input type='checkbox' checked={visibility.lolin} onChange={() => togglePart('lolin')} />
                 LOLIN S3 Mini
-            </label>
-            <label>
-                <input type='checkbox' checked={visibility.perfBoard} onChange={() => togglePart('perfBoard')} />
-                Perf Board (50×40×1.6)
-            </label>
-            <label>
-                <input type='checkbox' checked={visibility.slideSwitch} onChange={() => togglePart('slideSwitch')} />
-                Slide Switch
             </label>
             <label>
                 <input type='checkbox' checked={visibility.stabilizers} onChange={() => togglePart('stabilizers')} />
@@ -106,32 +102,16 @@ export const Controls: FC<ControlsProps> = ({
                 Foot Pads
             </label>
             <label>
-                <input type='checkbox' checked={visibility.batteryCover} onChange={() => togglePart('batteryCover')} />
-                Battery Cover
-            </label>
-            <label>
-                <input type='checkbox' checked={visibility.caseMagnets} onChange={() => togglePart('caseMagnets')} />
-                Magnets — Case Top
-            </label>
-            <label>
-                <input type='checkbox' checked={visibility.coverMagnets} onChange={() => togglePart('coverMagnets')} />
-                Magnets — Battery Cover
-            </label>
-            <label>
-                <input type='checkbox' checked={visibility.batteries} onChange={() => togglePart('batteries')} />
-                Batteries (3×AAA)
-            </label>
-            <label>
-                <input type='checkbox' checked={visibility.batteryContacts} onChange={() => togglePart('batteryContacts')} />
-                Battery Contacts
-            </label>
-            <label>
                 <input type='checkbox' checked={visibility.phone} onChange={() => togglePart('phone')} />
                 Phone (77.6×160.7×7.85mm)
             </label>
             <label>
                 <input type='checkbox' checked={visibility.wobkeyZen65} onChange={() => togglePart('wobkeyZen65')} />
                 WOBKEY Zen 65 (315×112×28mm)
+            </label>
+            <label>
+                <input type='checkbox' checked={visibility.sla} onChange={() => togglePart('sla')} />
+                SLA Variant (Ø4 insert pockets)
             </label>
 
             <h2>Plate (from docs/models/49-final.jscad)</h2>

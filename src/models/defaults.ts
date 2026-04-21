@@ -11,6 +11,13 @@ export const DEFAULT_BUILD_PARAMS = {
     plate: {
         ...base.plate,
         switchCutoutSize: 13.95,
+        padding: {
+            top: 2.475,
+            bottom: 4.475,
+            left: 2.475,
+            right: 2.475,
+        },
+        screwHoleMargin: 3,
         stabilizer: {
             ...base.plate.stabilizer,
             padSize: [6.9, 14.9] as [number, number],

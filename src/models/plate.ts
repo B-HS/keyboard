@@ -1,11 +1,49 @@
 import { primitives, transforms, booleans, extrusions } from '@jscad/modeling'
 import type { Geom3 } from '@jscad/modeling/src/geometries/types'
+import { deserialize } from '@jscad/stl-deserializer'
 import { computeBounds, screwPositions, stabbedKeys, type Bounds, type KeyPos, type Padding, type StabSpec } from './layout'
 
 const { roundedRectangle, circle } = primitives
 const { translate } = transforms
 const { union, subtract } = booleans
 const { extrudeLinear } = extrusions
+
+const plateStlUrlMap = import.meta.glob('../../docs/models/plate/*.{stl,STL}', {
+    query: '?url',
+    import: 'default',
+    eager: true,
+}) as Record<string, string>
+
+const findPlateStlUrl = (): string | null => {
+    const keys = Object.keys(plateStlUrlMap)
+    return keys.length > 0 ? plateStlUrlMap[keys[0]] : null
+}
+
+let cachedPlateGeom: Geom3 | null = null
+let plateLoadPromise: Promise<Geom3 | null> | null = null
+
+export const loadPlateGeom = async (): Promise<Geom3 | null> => {
+    if (cachedPlateGeom) return cachedPlateGeom
+    if (!plateLoadPromise) {
+        plateLoadPromise = (async () => {
+            const url = findPlateStlUrl()
+            if (!url) {
+                console.warn('Plate STL not found under docs/models/plate/*.stl')
+                return null
+            }
+            const response = await fetch(url)
+            const buffer = await response.arrayBuffer()
+            const result = deserialize(
+                { output: 'geometry', addColors: false },
+                new Uint8Array(buffer),
+            )
+            const geom = (Array.isArray(result) ? result[0] : result) as Geom3
+            cachedPlateGeom = geom
+            return geom
+        })()
+    }
+    return plateLoadPromise
+}
 
 export type PlateParams = {
     thickness: number

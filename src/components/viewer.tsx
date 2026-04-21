@@ -15,6 +15,22 @@ type ViewerProps = {
   solids: Geom3[];
 };
 
+type Vec3 = [number, number, number];
+
+const sub = (a: Vec3, b: Vec3): Vec3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const add = (a: Vec3, b: Vec3): Vec3 => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+const scale = (a: Vec3, s: number): Vec3 => [a[0] * s, a[1] * s, a[2] * s];
+const cross = (a: Vec3, b: Vec3): Vec3 => [
+  a[1] * b[2] - a[2] * b[1],
+  a[2] * b[0] - a[0] * b[2],
+  a[0] * b[1] - a[1] * b[0],
+];
+const len = (a: Vec3): number => Math.hypot(a[0], a[1], a[2]);
+const norm = (a: Vec3): Vec3 => {
+  const l = len(a) || 1;
+  return [a[0] / l, a[1] / l, a[2] / l];
+};
+
 export const Viewer: FC<ViewerProps> = ({ solids }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const solidsRef = useRef<Geom3[]>(solids);
@@ -37,8 +53,8 @@ export const Viewer: FC<ViewerProps> = ({ solids }) => {
 
     const camera = {
       ...perspectiveCamera.defaults,
-      position: [0, 0, 500] as [number, number, number],
-      target: [0, 0, 0] as [number, number, number],
+      position: [0, 0, 500] as Vec3,
+      target: [0, 0, 0] as Vec3,
     };
     let orbitState = { ...orbitControls.defaults };
 
@@ -75,10 +91,7 @@ export const Viewer: FC<ViewerProps> = ({ solids }) => {
     const frameToSolids = () => {
       if (solidsRef.current.length === 0) return;
       const bb = measureAggregateBoundingBox(solidsRef.current);
-      const [[x0, y0, z0], [x1, y1, z1]] = bb as [
-        [number, number, number],
-        [number, number, number],
-      ];
+      const [[x0, y0, z0], [x1, y1, z1]] = bb as [Vec3, Vec3];
       const cx = (x0 + x1) / 2;
       const cy = (y0 + y1) / 2;
       const cz = (z0 + z1) / 2;
@@ -115,25 +128,26 @@ export const Viewer: FC<ViewerProps> = ({ solids }) => {
     };
     render();
 
-    let dragging = false;
-    let shift = false;
+    type DragMode = "none" | "orbit" | "pan";
+    let dragMode: DragMode = "none";
     let lastX = 0;
     let lastY = 0;
 
     const onDown = (e: MouseEvent) => {
-      dragging = true;
-      shift = e.shiftKey || e.button === 2;
+      e.preventDefault();
       lastX = e.clientX;
       lastY = e.clientY;
+      const isPan = e.button === 2 || e.shiftKey;
+      dragMode = isPan ? "pan" : "orbit";
     };
     const onUp = () => {
-      dragging = false;
+      dragMode = "none";
     };
     const onMove = (e: MouseEvent) => {
-      if (!dragging) return;
+      if (dragMode === "none") return;
       const dx = ((e.clientX - lastX) * Math.PI) / (canvas.width / dpr);
       const dy = ((e.clientY - lastY) * Math.PI) / (canvas.height / dpr);
-      if (shift) {
+      if (dragMode === "pan") {
         const updated = orbitControls.pan(
           { controls: orbitState, camera, speed: 300 },
           [dx, dy],
@@ -143,7 +157,7 @@ export const Viewer: FC<ViewerProps> = ({ solids }) => {
         camera.target = updated.camera.target;
       } else {
         const updated = orbitControls.rotate(
-          { controls: orbitState, camera, speed: 1 },
+          { controls: orbitState, camera, speed: 1.2 },
           [dx, dy],
         );
         orbitState = { ...orbitState, ...updated.controls };
@@ -155,20 +169,56 @@ export const Viewer: FC<ViewerProps> = ({ solids }) => {
       lastX = e.clientX;
       lastY = e.clientY;
     };
+
+    const cursorWorldPoint = (clientX: number, clientY: number): Vec3 => {
+      const rect = canvas.getBoundingClientRect();
+      const ndcX = ((clientX - rect.left) / rect.width) * 2 - 1;
+      const ndcY = -(((clientY - rect.top) / rect.height) * 2 - 1);
+
+      const target = camera.target as Vec3;
+      const position = camera.position as Vec3;
+      const forward = norm(sub(target, position));
+      const worldUp: Vec3 = [0, 0, 1];
+      const rightDir = norm(cross(forward, worldUp));
+      const upDir = cross(rightDir, forward);
+
+      const dist = len(sub(target, position));
+      const fovY = (camera as { fov: number }).fov;
+      const halfH = dist * Math.tan(fovY / 2);
+      const aspect = rect.width / rect.height;
+      const halfW = halfH * aspect;
+
+      return add(
+        add(target, scale(rightDir, ndcX * halfW)),
+        scale(upDir, ndcY * halfH),
+      );
+    };
+
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      const [tx, ty, tz] = camera.target as [number, number, number];
-      const [px, py, pz] = camera.position;
-      const dx = px - tx;
-      const dy = py - ty;
-      const dz = pz - tz;
-      const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-      const factor = Math.pow(1.15, e.deltaY / 100);
-      const newDist = Math.max(20, Math.min(5000, dist * factor));
-      const scale = newDist / dist;
-      camera.position = [tx + dx * scale, ty + dy * scale, tz + dz * scale];
+      const pivot = cursorWorldPoint(e.clientX, e.clientY);
+      const target = camera.target as Vec3;
+      const position = camera.position as Vec3;
+      const factor = Math.pow(1.12, e.deltaY / 100);
+
+      const newTarget = add(pivot, scale(sub(target, pivot), factor));
+      const newPosition = add(pivot, scale(sub(position, pivot), factor));
+      const newDist = len(sub(newPosition, newTarget));
+      if (newDist < 20 || newDist > 5000) return;
+
+      camera.target = newTarget;
+      camera.position = newPosition;
       perspectiveCamera.update(camera, camera);
     };
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement) return;
+      if (e.target instanceof HTMLTextAreaElement) return;
+      if (e.key === "f" || e.key === "F") {
+        frameToSolids();
+      }
+    };
+
     const onContextMenu = (e: Event) => e.preventDefault();
 
     canvas.addEventListener("mousedown", onDown);
@@ -176,6 +226,7 @@ export const Viewer: FC<ViewerProps> = ({ solids }) => {
     window.addEventListener("mousemove", onMove);
     canvas.addEventListener("wheel", onWheel, { passive: false });
     canvas.addEventListener("contextmenu", onContextMenu);
+    window.addEventListener("keydown", onKey);
 
     const onResize = () => {
       resize();
@@ -194,6 +245,7 @@ export const Viewer: FC<ViewerProps> = ({ solids }) => {
       window.removeEventListener("mousemove", onMove);
       canvas.removeEventListener("wheel", onWheel);
       canvas.removeEventListener("contextmenu", onContextMenu);
+      window.removeEventListener("keydown", onKey);
       window.removeEventListener("resize", onResize);
     };
   }, []);

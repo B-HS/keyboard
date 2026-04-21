@@ -2,22 +2,23 @@
 
 대화 재개용 요약. 이 파일 읽으면 전체 맥락 파악 가능.
 
+**상태: JLC3DP 주문 완료 (SLA Resin + Threaded Insert)**
+
 ---
 
 ## 🎯 프로젝트 개요
 
-**목표**: 49키 커스텀 키보드 자체 제작 (핸드와이어드, USB-C 유선 + BLE 무선, 3D 프린팅 케이스)
+**목표**: 49키 커스텀 키보드 자체 제작 (핸드와이어드, USB-C 유선, 3D 프린팅 케이스)
 
 **핵심 스펙**:
 - 레이아웃: 49키 (Row 0: 14×1u / Row 1: 1.5+11×1u+1.5u / Row 2: 2+10×1u+2u / Row 3: 1u+2×1.25u+2×2.75u(split spacebar)+5×1u)
 - 컨트롤러: **LOLIN S3 Mini** (ESP32-S3FH4R2)
 - 펌웨어: **RMK (Rust)** — Vial 네이티브
-- 연결: **USB-C 유선 + BLE 5.0 무선**
-- 전원: **3×AAA 알카라인** (직렬 4.5V, **배터리 직결**, 양 끝 접점만)
-- 플레이트: **3D 프린트 일체형** (case-top에 union 통합)
-- 케이스: **3D 프린팅 상/하 분할** (JLC3DP SLS PA12 Nylon 추천, thocky 사운드)
+- 연결: **USB-C 유선 전용** (무선·배터리 완전 제거)
+- 플레이트: **사용자 제공 STL** (`docs/models/plate/keyboard-plate.stl`)
+- 케이스: **3D 프린팅 상/하 분할 + 샌드위치 구조**
 - 타이핑 각도: **8° 틸트**
-- 배터리 뚜껑: **자석식 평판** (네오디뮴 10×5×2mm × 4개)
+- 체결: **M3×6 button head × 8개** (모두 통일)
 
 ---
 
@@ -31,246 +32,265 @@ keyboard/
 │   ├── app.tsx                  # HMR accept + model re-build 트리거
 │   ├── vite-env.d.ts
 │   ├── components/
-│   │   ├── viewer.tsx           # @jscad/regl-renderer (grid/axis hidden)
-│   │   └── controls.tsx         # 사이드바 체크박스/Orient 컨트롤
+│   │   ├── viewer.tsx           # Blender/KiCad 스타일 카메라
+│   │   └── controls.tsx         # 사이드바 + SLA toggle
 │   └── models/
-│       ├── layout.ts            # 49.json 파싱 + DEFAULT_STAB
-│       ├── plate.ts             # 플레이트 2D/3D (case에 union)
-│       ├── case.ts              # 케이스 + 배터리 트레이 + 보스 + deck + 자석
+│       ├── layout.ts            # 49.json 파싱
+│       ├── plate.ts             # buildPlate + loadPlateGeom (STL)
+│       ├── case.ts              # 메인 케이스 빌더 (DEFAULT/SLA params)
 │       ├── lolin.ts             # LOLIN S3 Mini 시각화
 │       ├── switch.ts            # Cherry MX STL 로드
-│       ├── keycap.ts            # Cherry MX 키캡 STL 로드 (폭×행)
+│       ├── keycap.ts            # Cherry MX 키캡 STL 로드
 │       ├── stabilizer.ts        # 스태빌 STL 로드
-│       ├── accessories.ts       # perf board / slide switch / 고무발 / 커버 / 배터리 / 접점 / 자석
-│       ├── reference.ts         # jscad 소스 파서 (49-final.jscad)
-│       ├── defaults.ts          # 플레이트 파라미터 override (13.95 switchCut, R1 stab pad)
+│       ├── accessories.ts       # 고무발 / 스태빌 geometry
+│       ├── reference.ts         # 49-final.jscad 파서
+│       ├── defaults.ts          # 플레이트 파라미터 override
 │       ├── build-params.ts
-│       ├── build-solids.ts      # 조립 + 색상 + phone/WOBKEY 비교
-│       └── index.ts             # public API
+│       ├── build-solids.ts      # 조립 + SLA/default 선택
+│       └── index.ts             # public API (loadPlateGeom 포함)
 ├── scripts/
-│   ├── export.ts                # STL export → docs/export/
+│   ├── export.ts                # STL export + insert-spec 생성
+│   ├── generate-spec.ts         # SVG/PNG spec 생성 (resvg-js)
 │   ├── load-defaults.ts
-│   └── verify.ts
+│   └── verify.ts                # 치수 검증
 ├── docs/
 │   ├── models/
-│   │   ├── 49-final.jscad       # 플레이트 소스
-│   │   ├── 49.json              # KLE 레이아웃
-│   │   ├── switch/cherry mx.*   # Cherry MX 3D
-│   │   ├── keycap/STL/*.stl     # 36개 키캡 STL (폭 × R1-R4)
+│   │   ├── 49-final.jscad       # 레퍼런스 (fallback용)
+│   │   ├── 49.json              # KLE 레이아웃 (truth source)
+│   │   ├── plate/
+│   │   │   ├── keyboard-plate.stl   # ⭐ 사용자 제공 plate (source of truth)
+│   │   │   └── plate.jscad          # KLE-NG 출처
+│   │   ├── switch/cherry mx.*
+│   │   ├── keycap/STL/*.stl
 │   │   └── stabilizer/*.stl
-│   ├── specs/
-│   │   └── parts.md / parts_specification.md / dim_s3_mini_v1.0.0.pdf / sch_s3_mini_v1.0.0.pdf
-│   └── export/                  # 주문용 산출물
-│       ├── case-top.stl
-│       ├── case-bottom.stl
-│       └── battery-cover.stl
-├── .github/workflows/deploy.yml # GitHub Pages 자동 배포
-├── vite.config.ts               # base: '/keyboard/' (프로덕션)
-├── tsconfig.json                # noEmit: true + types: [node, vite/client]
+│   └── export/                  # JLC 주문용 산출물
+│       ├── 1_case-top.stl               # PA12 self-tap
+│       ├── 2_case-bottom.stl            # PA12 self-tap
+│       ├── 1_case-top_SLA.stl           # SLA insert ⭐
+│       ├── 2_case-bottom_SLA.stl        # SLA insert ⭐
+│       ├── insert-spec-case-top.svg/png
+│       └── insert-spec-case-bottom.svg/png
+├── .github/workflows/deploy.yml
+├── vite.config.ts               # base: '/keyboard/'
+├── tsconfig.json                # noEmit: true
 └── context.md
 ```
 
 ---
 
-## 🔧 확정된 설계 결정 (최신)
+## 🏗 샌드위치 구조 (현재 설계)
 
-1. **펌웨어 RMK** (Rust): Vial 네이티브 + BLE/USB 듀얼
-2. **MCU ESP32-S3** (LOLIN S3 Mini)
-3. **3×AAA 알카라인 직결**: 중간 접점 없이 배터리끼리 직접 맞닿음, 양 끝에 dome(+)/spring(-) 2개만
-4. **케이스 상/하 분할** (Z=bottomThickness=2.4mm): seam이 foot pad 바로 위에 깔려 눈에 거의 안 보임
-5. **플레이트 → case-top에 통합** (union, `screwHoleRadius: 0`)
-6. **Top Deck (ㄱ자 꺾임)**: 측벽 plate top → 안쪽 1mm 수평 → 키캡 둘레 감쌈
-7. **코너 보스 4개**: 6×6×5mm, M3 숏 힛셋 (Ø3.5×4mm)
-8. **플레이트 8° 틸트**, 피벗 Y=plateBounds.minY
-9. **4방향 마진 비대칭**: F=2, **B=0**, L=2, R=2 (tilt로 인한 deck strip 불균형 보정)
-10. **벽 두께 2mm** (마진과 동일)
-11. **배터리 뚜껑 = 자석식 평판**:
-    - T-slot 폐지, opening 직사각형 (배터리 + 슬라이드 스위치 영역 포함)
-    - 커버 1.5mm 두께, 케이스 외면과 flush
-    - 중앙 Ø8mm finger hole로 당겨서 뗌
-    - 자석 2개 위치 (좌/우 end wall 바로 옆 boss), 위치당 case+cover 각 1개씩 = 총 4개
-12. **슬라이드 스위치 floor 마운트**: Z=3.5mm (body 바닥), 핸들 Z=2.0-3.5 (커버 위에 위치해 간섭 없음). 커버 제거 시 노출
-13. **스위치 컷아웃 13.95mm** (MJF +0.1 오버 고려)
-14. **스태빌 pad R1.0mm** (R0.5 → 1.0, 뾰족 포인트 둔화)
-15. **UEW 에나멜선 0.6mm** / **RS63 0.6mm 유연납** / **캡톤 + 폼테이프**
+```
+위
+│   [Keycaps]           ← 키캡 (외부)
+│┌─────────────────────┐
+││  Top Case           │ ← 상판 (뚜껑 역할, 옆벽 체결 4 insert)
+││  ┌───────────────┐  │
+││  │    Switches   │  │
+││  ├───────────────┤  │
+││  │     Plate     │  │ ← plate (사용자 STL, 기둥 위에 얹힘)
+││  ┌─┴────────┐┌──┴┐  │
+││  │          ││   │  │ ← 4 기둥 (하판에서 솟음, 상단 tilted)
+││  │  LOLIN   ││   │  │
+││  └──────────┘└───┘  │
+│└──╧═══════════════╧──┘ ← 하판 (floor + pillars + 옆벽 체결 관통)
+아래
+```
+
+**핵심 특징**:
+- Plate은 하판의 4개 수직 기둥 위에 얹힘 (tilted pocket으로 8° 정렬)
+- Top case는 뚜껑처럼 씌워져 옆벽 2/4·3/4 Y 위치에서 하판과 체결
+- 조립 순서: 하판 → plate 장착 → 스위치/핸드와이어 → 상판 씌움
 
 ---
 
-## 📐 현재 케이스 파라미터 (`case.ts DEFAULT_CASE_PARAMS`)
+## 🔧 확정된 설계 결정 (최종)
+
+1. **무선·배터리 완전 제거** → USB-C 유선 전용
+2. **펌웨어 RMK** (Rust): Vial 네이티브, USB-C only
+3. **MCU ESP32-S3** (LOLIN S3 Mini, 양면폼으로 하판 고정)
+4. **케이스 샌드위치**: 하판(floor+기둥) + plate + 상판(뚜껑)
+5. **Plate은 사용자 STL**: `keyboard-plate.stl`, 케이스가 자동으로 bounds에 맞춰 스케일
+6. **8° 틸트**, pivot Y=plateBounds.minY, plateFrontBottomZ=10
+7. **벽 두께 2mm**, case margin 2mm 사방
+8. **Upper wall inset**: X=2, Y=2 (키캡-벽 gap: 좌우 1mm, 앞 2.48mm, 뒤 0.48mm)
+9. **옆벽 체결**: Y=2/4, 3/4 위치, 좌우 총 4개 (6×6×6mm 보스)
+10. **기둥**: 4개, plate 나사홀 위치, 수직 원기둥 (top만 tilted)
+11. **Plate mount head clearance hole**: 상판 upper wall에 Ø5.2×3mm, tilted 정렬
+12. **USB-C cutout 단순화**: 단일 관통홀 (Ø12.2×5.5 × depth 4mm, no taper)
+13. **나사 통일**: M3×6 button head (head Ø5×H2, thread Ø3×L6) × 8개
+
+---
+
+## 📐 현재 케이스 파라미터 (case.ts)
+
+### DEFAULT_CASE_PARAMS (PA12 SLS self-tap)
 
 ```ts
-caseMarginFront: 2, caseMarginBack: 0, caseMarginLeft: 2, caseMarginRight: 2
+caseMarginFront/Back/Left/Right: 2
 plateTiltDeg: 8
-plateFrontBottomZ: 11.25
+plateFrontBottomZ: 10
 
-plateRecessWall: 7.5        // rim top = deck top
+plateRecessWall: 7.5
 wallThickness: 2
-bottomThickness: 2.4        // split Z (case top/bottom 경계)
+upperWallInsetX: 2
+upperWallInsetY: 2
+bottomThickness: 2.4
 
-topDeckThickness: 1.0
-topDeckKeyClearance: 0.2
+// Side fastener (옆벽 체결, 4개)
+sideFastenerSize: 6          // 6×6mm 보스
+sideFastenerHeight: 6.0      // 보스 높이
+sideFastenerInsertRadius: 1.25   // Ø2.5 self-tap pilot
+sideFastenerInsertDepth: 4.0
+sideFastenerThroughRadius: 1.7   // Ø3.4 하판 관통
+sideFastenerHeadRadius: 2.6      // Ø5.2 counterbore
+sideFastenerHeadDepth: 2.0       // M3 button head 높이
+sideFastenerYRatios: [0.5, 0.75]
 
-cornerBossSize: 6
-cornerBossHeight: 5
-cornerBossInsertRadius: 1.75  // M3 숏 힛셋 Ø3.5
-cornerBossInsertDepth: 4.0
-cornerBossThroughRadius: 1.7
-cornerBossHeadRadius: 3.2
-cornerBossHeadDepth: 1.6
+// Plate mount pillar (하판 기둥, 4개)
+plateMountPostRadius: 2.5        // Ø5 기둥
+plateMountInsertRadius: 1.25     // Ø2.5 self-tap
+plateMountInsertDepth: 4.0
+plateMountHeadRadius: 2.6        // 상판 head clearance
+plateMountHeadHeight: 2.5
 
 // USB-C
 usbCutoutWidth: 12.2, usbCutoutHeight: 5.5
 usbCutoutCenterX: 9.7, usbCutoutCenterZ: 7.0
-usbCutoutCornerRadius: 1.5, usbCutoutTaperExpand: 0.5
-
-// 배터리 직결
-batteryDiameter: 10.5, batteryLength: 44.5, batterySlotTolerance: 0.2
-batteryGapLength: 2         // 1mm tolerance × 2 (배터리 3개 거의 맞닿음)
-batteryTrayYCenter: 3, batteryTrayYWidth: 12
-batteryTrayXStart: 73
-batteryEndWallThickness: 2
-batteryTrayUpperWall: 1.3
-batteryTrayFloorFlangeThickness: 1.5
+usbCutoutCornerRadius: 1.5
 
 caseCornerRadius: 2
-
-// 슬라이드 스위치
-slideSwitchX: 47, slideSwitchY: 6, slideSwitchZ: 3.5
-slideSwitchCutoutWidth: 8, slideSwitchCutoutHeight: 6
-
-// 자석 (10×5×2mm 직사각)
-MAGNET_SIZE_X: 10, MAGNET_SIZE_Y: 5, MAGNET_HEIGHT: 2
-MAGNET_CLEARANCE: 0.2
-MAGNET_POCKET_DEPTH_CASE: 2.1   // 완전 매립
-MAGNET_POCKET_DEPTH_COVER: 1.1  // 부분 매립 (0.9mm 돌출)
-magnetBossSizeX: 12, magnetBossSizeY: 7, magnetBossHeight: 4.1
 ```
 
-**플레이트 override (defaults.ts)**:
-- switchCutoutSize: 13.95 (MJF 오버사이즈 보정)
-- stabilizer.padSize: [6.9, 14.9]
-- stabilizer.padCornerRadius: 1.0
+### SLA_CASE_PARAMS (SLA Resin + brass insert) — **주문한 버전**
 
-**최종 외곽 치수**:
-- 전체: **275.65 × 85.15mm**
-- 플레이트: 271.65 × 83.15mm (R1)
-- 앞 높이: ~19.4mm / 뒤 높이: ~30.8mm
-- Deck strip 너비: 좌/우/뒤 2.8mm, 앞 1.5mm
+```ts
+...DEFAULT_CASE_PARAMS,
+plateMountPostRadius: 3.0        // Ø6 (insert 주변 1.2mm wall)
+plateMountInsertRadius: 1.8      // Ø3.6 (M3*4*5 insert용)
+plateMountInsertDepth: 7.0       // 5mm insert + 2mm 여유
+sideFastenerInsertRadius: 1.8    // Ø3.6
+sideFastenerInsertDepth: 7.0
+sideFastenerHeight: 8.0          // 7mm pocket + 1mm cap
+```
 
-**배터리 트레이 X**:
-- Start: 73, End: 208.5 (= 73 + 3×44.5 + 2×2)
-- 자석 boss: 좌(X=68) + 우(X=214.5), Y=3 (tray center)
-- 커버 opening X: 41~220.5 (슬라이드 스위치 + 배터리 트레이 + 자석 boss 전부 포함)
+### 최종 외곽 치수 (사용자 plate STL 기준)
+
+- **Plate**: 271.65 × 82.10 × 1.5mm (사용자 STL)
+- **Case outer**: 275.65 × 86.10mm
+- **앞 높이**: ~18.5mm / **뒤 높이**: ~30.6mm
+
+### 주요 위치 (case 좌표)
+
+- **Plate 나사홀 (= 기둥 XY)**: (−8.999, 8.476), (256.649, 8.476), (−8.999, −67.625), (256.649, −67.625)
+- **옆벽 체결**: X=−9/256.65, Y=−29.575 (2/4) / Y=−7.05 (3/4)
+- **USB-C**: X=9.7, Z=7 (뒷벽)
 
 ---
 
 ## 🔨 케이스 빌드 순서 (case.ts)
 
-1. **outerShell**: 사다리꼴 polygon extrude + R2 라운딩
-2. **innerCavity subtract**
-3. **topDeck union** (플레이트 톱 ~ 벽 톱 영역, U 그리드 기반 single cutout)
-4. **플레이트 통합** (`screwHoleRadius: 0` 오버라이드) union + tilt
-5. **batteryTray union**: cradle × 3 (cylinder-intersect 원형) + 원호 end wall × 2 + 플랜지 × 2
-6. **cornerBosses union** (4개 모서리 M3 힛셋용)
-7. **magnetBosses union** (2개 end wall 옆, 자석용)
-8. **Subtract**: USB 컷아웃 + 배터리 커버 사각 opening + 코너 보스 인서트홀 + 자석 포켓
-9. **retessellate** (coplanar polygon 병합, 메시 정리)
+### buildCaseTop (상판)
+1. `outerShell` (사다리꼴 polygon extrude + R2 라운딩)
+2. Z slicer로 Z ≥ bottomThickness 부분만
+3. `steppedInnerCavity` subtract (plate top plane 기준 stepped)
+4. `sideFastenerBosses` union (4개 옆벽 보스)
+5. Subtract: `usbCutout`, `sideFastenerInsertHoles`, `plateMountHeadClearance`
+6. `retessellate`
 
-**상/하 분할**:
-- `sliceCuboid` Z=bottomThickness=2.4 기준
-- Top: Z ≥ 2.4, Bottom: Z ≤ 2.4
-- Bottom에 코너 보스 관통공/카운터보어 subtract
+### buildCaseBottom (하판)
+1. `floorSlab` (단순 roundedRectangle extrude, Z=0~2.4) — mesh 깔끔
+2. `plateMountPillars` union (4개 수직 원기둥, 상단은 tilted plane으로 clip)
+3. Subtract: `plateMountInsertPockets` (tilted), `sideFastenerThroughs` (counterbore + through hole)
+4. `retessellate`
 
----
+### Plate 렌더링
+- `loadPlateGeom()` (src/models/plate.ts) — STL deserialize
+- `plateBoundsFromGeom()` — bounds 자동 추출
+- `applyPlateTransform()` — 8° tilt 적용
 
-## 🧲 자석 시스템 상세
-
-**구매 스펙**:
-- 네오디뮴 **10×5×2mm N52** × 4개
-- 자화 방향: 2mm 두께 방향 (Z axis)
-- 쿠팡/AliExpress "10x5x2 네오디뮴 N52"
-- 10개 팩 2~3천원
-
-**위치 / Z 배치**:
-- 위치당 2개 (case 자석 1 + cover 자석 1)
-- Case 자석 Z=2.4~4.4 (boss 안에 완전 매립)
-- Cover 자석 Z=0.4~2.4 (cover 안 + 0.9mm 돌출)
-- Z=2.4 interface 에서 서로 접촉 → 최대 pull force
-
-**접착**:
-- 순간접착제 (Loctite 401) 또는 AXIA 투명 주사기 에폭시
-- 극성 확인: 두 자석 맞물려 딸깍 붙는 방향으로 설치
-- 실수로 N-N 으로 넣으면 밀어냄 → 경화 전 확인 필수
-
-**Pull force**: 10×5×2 N52 pair = ~1.5 kgf × 2 = **3 kgf** (커버 4g 대비 750배)
+**상/하 분리**: 별도 함수 (slice 방식 버림). 완전히 독립된 빌드.
 
 ---
 
-## 🧩 배치된 부품 (뷰어 토글)
+## 🧩 부품 (뷰어 토글)
 
-| 부품 | 위치 | 기본 |
+| 부품 | 기본 | 비고 |
 |------|------|------|
-| Case Top | 플레이트 통합 | ON |
-| Case Bottom | | ON |
-| Switches | Cherry MX STL | ON |
-| LOLIN S3 Mini | X=9.7, Y=-7.15 | ON |
-| Perf Board | 50×40, 좌측 벽 옆 | ON |
-| Slide Switch | (47, 6, 3.5) floor mount | ON |
-| Stabilizers | STL (DEFAULT_STAB 테이블) | ON |
-| Keycaps | 폭×R 프로파일 매핑 | ON |
-| Foot Pads | Ø6×2 × 4, inset 5 | ON |
-| Battery Cover | 자석식 평판 + finger hole | ON |
-| **Magnets** | 10×5×2mm × 4개 | ON |
-| Batteries | 3×AAA | ON |
-| Battery Contacts | 양 끝 dome/spring만 | OFF |
-| Phone | 77.6×160.7×7.85 | OFF |
-| WOBKEY Zen 65 | 315×112×28 | OFF |
+| Case Top | ON | |
+| Case Bottom | ON | |
+| Plate | ON | STL 로드 |
+| Switches | ON | Cherry MX STL |
+| LOLIN S3 Mini | ON | 양면폼 고정 가정 |
+| Stabilizers | ON | STL |
+| Keycaps | ON | 폭×R 매핑 |
+| Foot Pads | ON | Ø6×2 × 4개, 코너 inset 5 |
+| Phone | OFF | 크기 비교용 |
+| WOBKEY Zen 65 | OFF | 크기 비교용 |
+| **SLA Variant** | **OFF** | 체크하면 SLA_CASE_PARAMS 사용 |
 
-**Orient 컨트롤** (Switch/Keycap/Stabilizer): Z Offset, Rot X/Y/Z
-- Stabilizer 추가: spacingAdjust, yOffset, clipBottomZ
-
-**Row → 키캡 프로파일**: OEM 스타일 (Row0 → R2, Row1 → R3, Row2 → R4, Row3 → R4 등 user config)
+**제거된 부품** (무선 관련): Battery Cover, Magnets, Batteries, Battery Contacts, Perf Board, Slide Switch
 
 ---
 
-## 📦 Export (주문용)
+## 📦 Export (docs/export/)
 
 ```bash
-bun run export   # → docs/export/ 에 3개 파일
+bun run export
 ```
 
-- `case-top.stl` (~780KB)
-- `case-bottom.stl` (~140KB)
-- `battery-cover.stl` (~25KB)
+생성 파일:
 
-**JLC3DP 조건**: 모든 벽 ≥ 1.2mm ✓, 인서트 주변 ≥ 1.25mm ✓
+| 파일 | 용도 |
+|---|---|
+| `1_case-top.stl` | PA12 SLS self-tap (대안) |
+| `2_case-bottom.stl` | PA12 SLS self-tap (대안) |
+| **`1_case-top_SLA.stl`** | **SLA Resin + M3*4*5 insert ⭐** |
+| **`2_case-bottom_SLA.stl`** | **SLA Resin + M3*4*5 insert ⭐** |
+| `insert-spec-case-top.svg/png` | JLC 참조 도면 (부품별) |
+| `insert-spec-case-bottom.svg/png` | JLC 참조 도면 (부품별) |
 
-**추천 재질 순위**:
-1. **SLS PA12 Nylon (3201PA-F)** — 최우선, MJF와 동일 재료, 저렴
-2. MJF PA12
-3. FDM PC
-4. ❌ SLA Resin — 힛셋 인서트 불가 (열경화성)
+Insert spec 자동 생성: `scripts/generate-spec.ts` + `@resvg/resvg-js`.
 
 ---
 
-## 🛒 부품 상태
+## 🛒 부품 / 주문 상태
 
-### ✅ 보유
-- LOLIN S3 Mini / TPS63020 / GVMRZ 슬라이드 스위치
-- AA 스프링 접점 (콤비 세트), 하지만 직결 방식이라 **양 끝 2개만 사용**
+### ✅ JLC3DP 주문 완료
+- **1_case-top_SLA.stl** (SLA Resin + Threaded Insert M3*4*5 × 4)
+- **2_case-bottom_SLA.stl** (SLA Resin + Threaded Insert M3*4*5 × 4)
+- **Insert 총 8개** 자동 설치되어 배송
+- JLC preview 노란 경고는 있지만 붉은 오류(unprintable) 없음
+
+### ✅ 보유 부품
+- LOLIN S3 Mini
+- Cherry MX × 49, 키캡 STL
+- MX Plate-mount 스태빌 (2u × 2 + 2.75u × 2)
 - 1N4148 × 300, UEW 0.6mm × 10m, 만능보드 70×90
-- Cherry MX × 49, 키캡 STL, MX Plate-mount 스태빌
-- M3 하드웨어 + 고무발 Ø6×2
+- M3×6 button head × 44 pack
+- 고무발 Ø6×2
 - HAKKO FX-600 + RS63 + 플럭스펜 + 캡톤 + 폼테이프
-- AAA 알카라인
+- 양면폼 테이프 (LOLIN 고정용)
 
-### ❌ 주문 필요
-- **case-top/bottom/battery-cover STL** (JLC3DP SLS PA12 Nylon 추천)
-- **M3 숏 힛셋 인서트 × 4** (Ø3.5×4mm)
-- **네오디뮴 자석 10×5×2mm N52 × 4개**
-- **순간접착제** (Loctite 401 or 시아노아크릴레이트) 자석 고정용
-- **MX 스태빌 4세트** (2u × 2 + 2.75u × 2)
+### ❌ 추가로 필요할 수 있음
+- **Plate 별도 주문** (keyboard-plate.stl — 사용자 파일 그대로)
 - **Krytox 205g0** (스태빌 튜닝, 선택)
+
+---
+
+## 🔩 조립 순서
+
+1. SLA 케이스 수령 (insert 8개 기 설치됨)
+2. Insert에 M3 나사 시험 삽입 → 헛돌거나 안 박히면 JLC에 컴플레인
+3. 하판 기둥 4개 위에 plate 얹기
+4. **M3×6 × 4개** 위에서 plate 나사홀 → pillar insert 체결 (tilted 축)
+5. Plate에 Cherry MX 스위치 clip 장착
+6. 스위치에 다이오드 + UEW 에나멜선 핸드와이어
+7. LOLIN S3 Mini에 와이어 납땜, 하판에 양면폼으로 고정
+8. USB-C 연결 테스트
+9. 상판을 위에서 씌움 (기둥 피하면서)
+10. **M3×6 × 4개** 하판 아래에서 → 옆벽 insert 체결
+11. 키캡 장착
 
 ---
 
@@ -278,16 +298,18 @@ bun run export   # → docs/export/ 에 3개 파일
 
 ```bash
 bun run dev        # http://localhost:5173
-bun run export     # STL 생성
-bun scripts/verify.ts
+bun run export     # STL + insert-spec 자동 생성
+bun scripts/verify.ts   # 치수 검증 + plate STL alignment 확인
 bun run build      # 프로덕션
 ```
 
-**조작**: 드래그(회전) · Shift+드래그(이동) · 휠(줌)
+**카메라 조작 (Blender/KiCad 스타일)**:
+- LMB/MMB 드래그: 회전 (orbit)
+- RMB or Shift+드래그: 이동 (pan)
+- 휠: 커서 위치 기준 줌
+- F 키: 모든 솔리드에 맞춰 프레이밍
 
-**뷰어 설정**: Grid/Axis 숨김, 색상 통일 `[0.07, 0.07, 0.1]` 블랙
-
-**HMR**: `import.meta.hot.accept('./models/...')` 로 모델 파일 변경 시 자동 재렌더
+**HMR**: `import.meta.hot.accept('./models/...')` — 모델 파일 변경시 자동 재렌더
 
 ---
 
@@ -295,7 +317,6 @@ bun run build      # 프로덕션
 
 - `vite.config.ts`: `base: '/keyboard/'` (build 시만)
 - `.github/workflows/deploy.yml`: main push → 자동 배포
-- Settings → Pages → Source: **GitHub Actions**
 - URL: **https://b-hs.github.io/keyboard/**
 
 ---
@@ -304,20 +325,17 @@ bun run build      # 프로덕션
 
 - **Vite 8.0.9**
 - **React 19.2.5**
-- **@vitejs/plugin-react 6.0.1**
 - **TypeScript 6.0.3**
-- **Bun 1.3.0** (런타임)
-- `tsconfig.json`: `noEmit: true` + `types: [node, vite/client]`
+- **Bun 1.3.0**
+- `@resvg/resvg-js 2.6.2` (SVG→PNG 렌더링)
 
 ---
 
 ## ⏳ 남은 작업
 
-- [ ] JLC3DP 주문 (SLS PA12 Nylon 추천, 3 파일)
-- [ ] M3 숏 힛셋 인서트 × 4 주문
-- [ ] 네오디뮴 자석 10×5×2 × 4 주문
-- [ ] MX 스태빌 4세트 주문
-- [ ] 순간접착제 준비
+- [ ] JLC3DP 배송 대기
+- [ ] Plate 별도 주문 (`keyboard-plate.stl`)
+- [ ] 배송 후 insert 품질 체크
 - [ ] RMK `keyboard.toml` 작성 (Row/Col 핀 매핑, Vial 키맵)
 - [ ] 핸드와이어 조립 + 테스트
 - [ ] GitHub Pages 배포 확인
@@ -326,34 +344,38 @@ bun run build      # 프로덕션
 
 ## 🐛 주요 수정 이력 (최신 순)
 
-- **Vite 5 → 8, React 18 → 19, TS 5 → 6** 업그레이드
-- **Stale .js 파일 대량 삭제** (`tsc -b` 잔재, 16개 삭제) → HMR 정상화
-- **tsconfig `noEmit: true`** 추가 (더 이상 .js 안 만들어짐)
-- **HMR accept** app.tsx 에 명시적 추가 (models/* 변경 감지)
-- **자석식 배터리 커버 재설계**: T-slot 완전 폐지 → 평판 + 4개 자석 (10×5×2mm N52)
-- **자석 pocket 깊이 분리**: CASE 2.1mm (완전 매립), COVER 1.1mm (부분 매립) → 커버 flush 가능
-- **커버 중앙 Ø8mm finger hole** (외부 돌출 grip 제거)
-- **커버 두께 1.5mm** (이전 2.4 → 얇게)
-- **커버 opening X 연장**: 슬라이드 스위치 영역까지 (X=41~220.5)
-- **배터리 직결**: 중간 4개 접점 제거, 양 끝 dome/spring 2개만
-- **배터리 gap 7 → 2mm** (tolerance 만)
-- **슬라이드 스위치 위치**: floor Z=3.5mm (핸들 Z=2.0-3.5, 커버 Z=0-1.5 위)
-- **배터리 트레이 크래들 = 원형** (cylinder-intersect 복구)
-- **배터리 upperWall 1.75 → 1.3** (얇게)
-- **retessellate 추가** (CSG 결과 메시 정리)
-- **스위치 컷아웃 14.0 → 13.95** (MJF 오버사이즈 보정)
-- **스태빌 pad R0.5 → R1.0** (뾰족 포인트 둔화)
-- **코너 보스 인서트 Ø4 → Ø3.5** (보스 벽 1.25mm)
-- **플레이트 case-top 통합** (union, screwHoleRadius: 0)
-- **중앙 나사 포스트 제거**
-- **코너 보스 4개 + 아래 M3 체결** 추가 (상/하 조립)
-- **케이스 상/하 분할** (Z=2.4 seam)
-- **Top Deck** 추가: world frame (Y,Z) polygon
-- **4방향 마진 비대칭** (F=2, B=0, L=2, R=2)
-- **wallThickness 3 → 2**
-- **USB-C 컷아웃 Z 6.25 → 7.0**, taperExpand 1.0 → 0.5
-- **스위치/키캡/스태빌 STL 로더** (import.meta.glob)
-- **스태빌 시각화 버그 fix** (DEFAULT_STAB.spacingByWidth 테이블 사용)
+### 주문 직전 최종 수정
+- **floorSlab** 단순화: `outerShell` slice → `roundedRectangle` extrude (JLC zigzag unprintable 에러 해결)
+- **Pillar 수직화**: tilted cylinder → vertical cylinder + tilted top clip (mesh 깔끔)
+- **SLA pocket**: Ø4×5 → **Ø3.6×7mm** (JLC 실제 hole 요구사항 반영)
+- **SLA pillar** Ø5→Ø6 (Ø3.6 insert 주변 wall 1.2mm 확보)
+- **플레이트 나사머리 clearance** 상판에 추가 (Ø5.2×3mm, tilt 정렬)
+- **upperWallInsetY** 3 → 2 (back 음수 gap → 양수로)
+- **plateFrontBottomZ** 9.75 → 10 (stab clip 여유)
+
+### 구조 재설계
+- **무선 관련 전면 제거**: 배터리 케이스·커버·자석·슬라이드 스위치·배터리·만능보드
+- **샌드위치 구조 재설계**: plate를 하판 기둥에 직결, 상판은 뚜껑, 옆벽 2/4·3/4 체결 4개
+- **플레이트 → STL 로드 방식**: 코드 generate 대신 사용자 파일 사용, 자동 bounds 추출
+- **Case auto-scale to plate**: plate STL만 바꾸면 케이스 자동 맞춤
+
+### 뷰어/카메라
+- **Blender/KiCad 스타일 카메라**: LMB/MMB orbit, RMB pan, cursor zoom, F key framing
+- **SLA toggle**: 뷰어에서 PA12 / SLA 전환
+
+### 체결 규격 통일
+- **M3×6 button head × 8개**로 완전 통일 (plate 4 + side 4)
+- PA12 self-tap: Ø2.5 pilot × 4mm
+- SLA insert: Ø3.6 × 7mm depth, M3*4*5 황동 insert
+
+### Export 파이프라인
+- **insert-spec SVG/PNG 자동 생성**: `scripts/generate-spec.ts` + resvg-js
+- 부품별 2개 spec 파일 분리 (case-top / case-bottom)
+
+### 초기 무선 제거 세션
+- `case.ts`에서 battery tray, slide switch cutout, magnet boss/pocket, battery cover opening 코드 제거
+- `accessories.ts`에서 `buildPerfBoard`, `buildSlideSwitch`, `buildBatteries`, `buildBatteryContacts`, `buildCaseMagnets`, `buildCoverMagnets`, `buildBatteryCover` 제거
+- `build-solids.ts` · `controls.tsx` · `app.tsx`에서 관련 PartVisibility 전부 제거
 
 ---
 
@@ -362,15 +384,15 @@ bun run build      # 프로덕션
 - LOLIN S3 Mini: https://www.wemos.cc/en/latest/s3/s3_mini.html
 - RMK: https://rmk.rs/ / https://github.com/HaoboGu/rmk
 - Vial: https://vial.rocks/
-- ESP32-S3: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
-- 참고 디자인: WOBKEY Zen 65, Keychron Q1, GMMK Pro
+- JLC3DP Threaded Insert: https://jlc3dp.com (SLA + Surface finish: Threaded Insert, type M3*4*5)
 
 ---
 
 ## 🎬 새 대화에서 시작
 
 1. 이 파일 읽어 맥락 파악
-2. `src/models/case.ts` 현재 상태 확인 (`DEFAULT_CASE_PARAMS`)
-3. `bun run dev` (사용자가 직접 실행)
-4. `bun run export` 로 최신 STL 생성
-5. 필요 시 `bun scripts/verify.ts` 로 플레이트/스태빌 위치 재확인
+2. `src/models/case.ts` 현재 상태 확인 (`DEFAULT_CASE_PARAMS` / `SLA_CASE_PARAMS`)
+3. `bun run dev` (사용자 실행)
+4. `bun run export` — STL + insert-spec 재생성
+5. `bun scripts/verify.ts` — plate STL alignment 확인
+6. JLC3DP 배송 완료시 insert 삽입 상태 검수

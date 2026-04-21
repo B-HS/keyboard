@@ -12,6 +12,7 @@ import {
   loadSwitchGeom,
   loadKeycapGeoms,
   loadStabilizerGeom,
+  loadPlateGeom,
   keys49,
   type BuildParams,
   type PartVisibility,
@@ -24,20 +25,15 @@ export const App: FC = () => {
   const [visibility, setVisibility] = useState<PartVisibility>({
     caseTop: true,
     caseBottom: true,
+    plate: true,
     switches: true,
     lolin: true,
-    perfBoard: true,
-    slideSwitch: true,
     stabilizers: true,
     keycaps: true,
     footPads: true,
-    batteryCover: true,
-    caseMagnets: true,
-    coverMagnets: true,
-    batteries: true,
-    batteryContacts: false,
     phone: false,
     wobkeyZen65: false,
+    sla: false,
   });
   const [params, setParams] = useState<BuildParams>(DEFAULT_BUILD_PARAMS);
   const [switchOrient, setSwitchOrient] = useState<SwitchOrient>(
@@ -52,6 +48,7 @@ export const App: FC = () => {
     DEFAULT_STABILIZER_ORIENT
   );
   const [stabilizerGeom, setStabilizerGeom] = useState<Geom3 | null>(null);
+  const [plateGeom, setPlateGeom] = useState<Geom3 | null>(null);
   const [hmrTick, setHmrTick] = useState(0);
 
   useEffect(() => {
@@ -64,6 +61,9 @@ export const App: FC = () => {
     loadStabilizerGeom()
       .then(setStabilizerGeom)
       .catch((e) => console.error("Stabilizer STL load failed", e));
+    loadPlateGeom()
+      .then(setPlateGeom)
+      .catch((e) => console.error("Plate STL load failed", e));
   }, []);
 
   useEffect(() => {
@@ -90,7 +90,8 @@ export const App: FC = () => {
         switchOrient,
         keycapOrient,
         stabilizerGeom,
-        stabilizerOrient
+        stabilizerOrient,
+        plateGeom
       ),
     [
       visibility,
@@ -101,6 +102,7 @@ export const App: FC = () => {
       keycapsReady,
       stabilizerGeom,
       stabilizerOrient,
+      plateGeom,
       hmrTick,
     ]
   );
@@ -134,7 +136,7 @@ export const App: FC = () => {
       <div className="viewer-wrap">
         <Viewer solids={solids} />
         <div className="help">
-          드래그: 회전 · Shift+드래그 or 우클릭: 이동 · 휠: 줌
+          LMB/MMB: 회전 · RMB or Shift+드래그: 이동 · 휠: 커서 기준 줌 · F: 프레이밍
         </div>
       </div>
     </div>
