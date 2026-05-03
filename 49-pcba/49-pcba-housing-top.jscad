@@ -1,12 +1,15 @@
 /**
  * 49-pcba Housing Top
- * 외벽이 BC_FLOOR_THICKNESS 위에서 시작, lip까지 풀 height.
+ *
+ * 모든 형상 상수는 shared/config/keyboard.ts 의 KEYBOARD_GEOMETRY 에서 주입.
+ * evaluator (viewer / export script) 가 prelude 로 const KEYBOARD_GEOMETRY = {...} 를
+ * 이 소스 앞에 prepend 한다 — 이 파일에서는 그대로 참조.
  *
  * Clean rebuild:
  *  - eps 오프셋 제거 (T-junction / 삼각형 artifact 회피)
- *  - negative shape를 outer shell 경계 밖으로 확장하여 코플래너 면 제거
+ *  - negative shape 를 outer shell 경계 밖으로 확장하여 코플래너 면 제거
  *  - 단일 subtract (모든 negative 사전 union)
- *  - generalize/retessellate 미사용 (단순 cuboid 기반은 raw 결과가 더 깔끔)
+ *  - retessellate / generalize(snap) 으로 마무리
  */
 const jscad = require('@jscad/modeling')
 const { cylinder, roundedRectangle } = jscad.primitives
@@ -15,50 +18,39 @@ const { extrudeLinear } = jscad.extrusions
 const { subtract, union } = jscad.booleans
 const { retessellate, generalize } = jscad.modifiers
 
-// === Plate / 케이스 기본 치수 ===
-const PLATE_CENTER_X = 123.825
-const PLATE_CENTER_Y = -28.575
-const PLATE_W = 271.65
-const PLATE_D = 81.15
-const PLATE_THICKNESS = 1.5
+const G = KEYBOARD_GEOMETRY
 
-const PLATE_CLEARANCE = 0.25
-const CASE_CORNER_R = 1.5
-const CORNER_SEGMENTS = 32
+// === 기본 ===
+const PLATE_CENTER_X = G.plateCenterX
+const PLATE_CENTER_Y = G.plateCenterY
+const PLATE_W = G.plateWidth
+const PLATE_D = G.plateDepth
+const PLATE_THICKNESS = G.plateThickness
 
-// === 나사홀 ↔ 모서리 끝점 대칭 설계 ===
-// 목표: 나사홀 가장자리에서 외곽/내곽 round corner tip 까지 거리 = SCREW_TIP_MARGIN.
-// 동일 코너 R 일 때, midline 배치는 외곽이 R(√2−1) 가깝고 내곽이 같은 양 멀어 비대칭.
-// → WALL 과 SCREW_OFFSET 을 다음 식으로 풀어 양쪽을 동시에 균등하게 만듬.
+const PLATE_CLEARANCE = G.plateClearance
+const CASE_CORNER_R = G.caseCornerRadius
+const CORNER_SEGMENTS = G.caseCornerSegments
+
+// === 나사홀 ↔ 모서리 끝점 대칭 (양쪽 round corner tip 까지 SCREW_TIP_MARGIN 균등) ===
 //   WALL = (INSERT_R + SCREW_TIP_MARGIN) · √2
-//   SCREW_OFFSET (외벽 수직 기준 안쪽) = WALL/2 + R·(1 − 1/√2)
-//
-// SCREW_TIP_MARGIN = 3.0 으로 설정 → WALL≈6.5 회복.
-// 2.0 으로 두면 WALL=5.09 가 되면서 screw HEAD pocket(R=2.0)의 외벽 살이
-// 0.985mm < 1.2mm (JLC 박벽 경고). 3.0 으로 올리면 head 살 1.69mm 확보.
-const INSERT_R = 1.6
-const SCREW_TIP_MARGIN = 3.0
-const SCREW_TIP_DIST = INSERT_R + SCREW_TIP_MARGIN // 4.6
-const WALL_THICKNESS = SCREW_TIP_DIST * Math.sqrt(2) // 6.505
-const SCREW_OFFSET = WALL_THICKNESS / 2 + CASE_CORNER_R * (1 - 1 / Math.sqrt(2)) // 3.692
+//   SCREW_OFFSET = WALL/2 + R · (1 − 1/√2)
+const INSERT_R = G.insertRadius
+const SCREW_TIP_MARGIN = G.screwTipMargin
+const SCREW_TIP_DIST = INSERT_R + SCREW_TIP_MARGIN
+const WALL_THICKNESS = SCREW_TIP_DIST * Math.sqrt(2)
+const SCREW_OFFSET = WALL_THICKNESS / 2 + CASE_CORNER_R * (1 - 1 / Math.sqrt(2))
 
-// Z 좌표
-// CASE_EXTRA_DEPTH: bottom housing 의 floor 가 그만큼 더 아래로 내려간 만큼,
-// top housing 의 외벽도 그만큼 더 아래(= MATING_Z)에서 시작.
-// LIP_THICKNESS 를 4 → 7 로 키워 키캡 옆면을 더 가린다 (스위치 본체 노출 방지).
-const CASE_EXTRA_DEPTH = 5
-const BC_FLOOR_THICKNESS = 4
-const MATING_Z = BC_FLOOR_THICKNESS - CASE_EXTRA_DEPTH // -1 (top housing 외벽 시작 Z)
-const PLATE_BOTTOM_Z = 7
-const PLATE_TOP_Z = PLATE_BOTTOM_Z + PLATE_THICKNESS // 8.5
-const LIP_THICKNESS = 7
-const TOP_HEIGHT_Z = PLATE_TOP_Z + LIP_THICKNESS // 15.5
+// === Z 좌표 ===
+const BC_FLOOR_THICKNESS = G.caseFloorThickness
+const FLOOR_BOTTOM_Z = G.caseFloorBottomZ
+const MATING_Z = FLOOR_BOTTOM_Z + BC_FLOOR_THICKNESS // top housing 외벽 시작 Z
+const PLATE_BOTTOM_Z = G.plateFrontBottomZ
+const PLATE_TOP_Z = PLATE_BOTTOM_Z + PLATE_THICKNESS
+const LIP_THICKNESS = G.lipThickness
+const TOP_HEIGHT_Z = PLATE_TOP_Z + LIP_THICKNESS
 
-// 키캡 개구부 lip 폭
-const OVERHANG = 2
-
-// M2 인서트 (INSERT_R 은 위 SCREW_TIP_DIST 식에 사용)
-const INSERT_DEPTH = 4
+const OVERHANG = G.lipOverhang
+const INSERT_DEPTH = G.insertDepth
 
 // === 파생 치수 ===
 const INNER_W = PLATE_W + 2 * PLATE_CLEARANCE
@@ -81,8 +73,8 @@ const MATING_POS = [
     [CENTER_X + HALF_OUT_X - SCREW_OFFSET, CENTER_Y - HALF_OUT_Y + SCREW_OFFSET],
 ]
 
-// === 외곽 셸 (Z = MATING_Z ~ TOP_HEIGHT_Z, 4코너 round) ===
-const shellH = TOP_HEIGHT_Z - MATING_Z // 16.5
+// === 외곽 셸 ===
+const shellH = TOP_HEIGHT_Z - MATING_Z
 const outerShell = translate(
     [CENTER_X, CENTER_Y, MATING_Z],
     extrudeLinear(
@@ -95,12 +87,9 @@ const outerShell = translate(
     ),
 )
 
-// === 내부 캐비티 (플레이트 공간, 4코너 round) ===
-// Z 범위: MATING_Z 아래까지 충분히 확장 → 외곽 바닥과 코플래너 발생 안 함.
-// 위쪽도 PLATE_TOP_Z 정확히 일치시키지 않고 살짝 더 올려 keycap_opening 과 ε 만큼
-// 겹치게 함 → boolean 결과 mesh 에서 동일 평면 sliver / degenerate face 제거.
-const cavityZBottom = MATING_Z - 2 // 외곽 바닥을 명확히 관통
-const cavityZTop = PLATE_TOP_Z + 0.01 // keycap_opening 과 ε overlap (코플래너 회피)
+// === 내부 캐비티 (plate 공간) ===
+const cavityZBottom = MATING_Z - 2
+const cavityZTop = PLATE_TOP_Z + 0.01 // keycap_opening 과 ε overlap → 코플래너 sliver 제거
 const cavityH = cavityZTop - cavityZBottom
 const innerCavity = translate(
     [CENTER_X, CENTER_Y, cavityZBottom],
@@ -114,9 +103,9 @@ const innerCavity = translate(
     ),
 )
 
-// === 키캡 개구부 (lip 안쪽, Z = PLATE_TOP_Z ~ TOP_HEIGHT_Z 위까지, 4코너 round) ===
+// === 키캡 개구부 (lip 안쪽) ===
 const openingZBottom = PLATE_TOP_Z
-const openingZTop = TOP_HEIGHT_Z + 2 // 외곽 위쪽을 명확히 관통
+const openingZTop = TOP_HEIGHT_Z + 2
 const openingH = openingZTop - openingZBottom
 const keycapOpening = translate(
     [CENTER_X, CENTER_Y, openingZBottom],
@@ -130,8 +119,8 @@ const keycapOpening = translate(
     ),
 )
 
-// === 4 코너 M2 인서트 홀 (블라인드, depth INSERT_DEPTH from MATING_Z) ===
-const insertZBottom = MATING_Z - 1 // 외곽 바닥 명확히 관통
+// === 4 코너 M2 인서트 홀 (블라인드, MATING_Z 부터 INSERT_DEPTH) ===
+const insertZBottom = MATING_Z - 1
 const insertZTop = MATING_Z + INSERT_DEPTH
 const insertH = insertZTop - insertZBottom
 const insertHoles = MATING_POS.map(([x, y]) =>

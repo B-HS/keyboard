@@ -10,6 +10,7 @@ import * as jscadModeling from '@jscad/modeling'
 import earcut from 'earcut'
 // @ts-expect-error - no types
 import * as stlSerializer from '@jscad/stl-serializer'
+import { JSCAD_PRELUDE } from '../shared/lib/jscad/prelude'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
@@ -25,7 +26,7 @@ const requireShim = (id: string): unknown => {
 }
 
 const evaluateMain = (source: string): unknown => {
-    const factory = new Function('require', 'module', 'exports', source) as (
+    const factory = new Function('require', 'module', 'exports', JSCAD_PRELUDE + source) as (
         req: typeof requireShim,
         mod: { exports: Record<string, unknown> },
         exp: Record<string, unknown>,
@@ -38,7 +39,7 @@ const evaluateMain = (source: string): unknown => {
 }
 
 const evaluatePlate2d = (source: string): unknown => {
-    const wrapped = source + '\nmodule.exports.plate2d = plate2d;'
+    const wrapped = JSCAD_PRELUDE + source + '\nmodule.exports.plate2d = plate2d;'
     const factory = new Function('require', 'module', 'exports', wrapped) as (
         req: typeof requireShim,
         mod: { exports: Record<string, unknown> },

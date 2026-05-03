@@ -49,7 +49,7 @@ export const PlateViewerPage: FC = () => {
 
     const toggle = (key: PartKey) => setVisibility((prev) => ({ ...prev, [key]: !prev[key] }))
 
-    const pcbFrontBottomZ = KEYBOARD_GEOMETRY.plateFrontBottomZ - KEYBOARD_GEOMETRY.pcbThickness
+    const pcbFrontBottomZ = KEYBOARD_GEOMETRY.pcbFrontBottomZ
 
     return (
         <div style={{ display: 'flex', width: '100%', height: '100vh' }}>

@@ -1,24 +1,23 @@
 /**
- * 49-pcba PCB 플레이스홀더 (extended plate 기준)
+ * 49-pcba PCB 플레이스홀더
+ * 모든 형상 상수는 shared/config/keyboard.ts 의 KEYBOARD_GEOMETRY 에서 주입.
  */
 const jscad = require('@jscad/modeling')
 const { roundedRectangle } = jscad.primitives
 const { translate } = jscad.transforms
 const { extrudeLinear } = jscad.extrusions
 
-const PLATE_CENTER_X = 123.825
-const PLATE_CENTER_Y = -28.575
-
-const PCB_W = 271.65
-const PCB_D = 81.15
-const PCB_THICKNESS = 1.6
-const PCB_CORNER_R = 1
+const G = KEYBOARD_GEOMETRY
 
 const pcb = translate(
-    [PLATE_CENTER_X, PLATE_CENTER_Y, 0],
+    [G.plateCenterX, G.plateCenterY, 0],
     extrudeLinear(
-        { height: PCB_THICKNESS },
-        roundedRectangle({ size: [PCB_W, PCB_D], roundRadius: PCB_CORNER_R, segments: 32 }),
+        { height: G.pcbThickness },
+        roundedRectangle({
+            size: [G.plateWidth, G.plateDepth],
+            roundRadius: G.pcbCornerRadius,
+            segments: 32,
+        }),
     ),
 )
 
