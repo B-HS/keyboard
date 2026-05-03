@@ -17,9 +17,9 @@ const { retessellate, generalize } = jscad.modifiers
 
 // === Plate / 케이스 기본 치수 ===
 const PLATE_CENTER_X = 123.825
-const PLATE_CENTER_Y = -29.575
-const PLATE_W = 271.55
-const PLATE_D = 83.05
+const PLATE_CENTER_Y = -28.575
+const PLATE_W = 271.65
+const PLATE_D = 81.15
 const PLATE_THICKNESS = 1.5
 
 const PLATE_CLEARANCE = 0.25

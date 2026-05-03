@@ -4,13 +4,13 @@
  * Cutout type: cherry-mx-basic
  * Stabilizer type: mx-basic
  * Plate thickness: 1.5 mm
- * Generated: 2026-05-02
+ * Generated: 2026-05-03
  *
  * This file uses the @jscad/modeling API (OpenJSCAD v2).
  * Open with: https://openjscad.xyz/
  */
 const jscad = require("@jscad/modeling");
-const { circle, cuboid, polygon, roundedRectangle } = jscad.primitives;
+const { polygon, roundedRectangle } = jscad.primitives;
 const { translate } = jscad.transforms;
 const { extrudeLinear } = jscad.extrusions;
 const { subtract, union } = jscad.booleans;
@@ -18,19 +18,86 @@ const { subtract, union } = jscad.booleans;
 const THICKNESS = 1.5; // mm
 
 // --- Plate outline ---
-const outline = translate(
-  [123.825, -29.575, 0],
-  roundedRectangle({ size: [271.55, 83.05], roundRadius: 1 }),
-);
+const outline = polygon({
+  points: [
+    [-11, 12],
+    [-11.5, 11.866],
+    [-11.866, 11.5],
+    [-12, 11],
+    [-12, -7.05],
+    [-12, -12],
+    [-12, -26.1],
+    [-12, -31.05],
+    [-12, -45.15],
+    [-12, -50.1],
+    [-12, -68.15],
+    [-11.866, -68.65],
+    [-11.5, -69.016],
+    [-11, -69.15],
+    [7.05, -69.15],
+    [12, -69.15],
+    [30.862, -69.15],
+    [35.813, -69.15],
+    [54.675, -69.15],
+    [59.625, -69.15],
+    [107.063, -69.15],
+    [112.012, -69.15],
+    [126.113, -69.15],
+    [131.063, -69.15],
+    [178.5, -69.15],
+    [183.45, -69.15],
+    [197.55, -69.15],
+    [202.5, -69.15],
+    [216.6, -69.15],
+    [221.55, -69.15],
+    [235.65, -69.15],
+    [240.6, -69.15],
+    [258.65, -69.15],
+    [259.15, -69.016],
+    [259.516, -68.65],
+    [259.65, -68.15],
+    [259.65, -50.1],
+    [259.65, -45.15],
+    [259.65, -31.05],
+    [259.65, -26.1],
+    [259.65, -12],
+    [259.65, -7.05],
+    [259.65, 11],
+    [259.516, 11.5],
+    [259.15, 11.866],
+    [258.65, 12],
+    [240.6, 12],
+    [235.65, 12],
+    [221.55, 12],
+    [216.6, 12],
+    [202.5, 12],
+    [197.55, 12],
+    [183.45, 12],
+    [178.5, 12],
+    [164.4, 12],
+    [159.45, 12],
+    [145.35, 12],
+    [140.4, 12],
+    [126.3, 12],
+    [121.35, 12],
+    [107.25, 12],
+    [102.3, 12],
+    [88.2, 12],
+    [83.25, 12],
+    [69.15, 12],
+    [64.2, 12],
+    [50.1, 12],
+    [45.15, 12],
+    [31.05, 12],
+    [26.1, 12],
+    [12, 12],
+    [7.05, 12],
+  ],
+});
 
 // --- Shared shapes ---
 const switch_shape = roundedRectangle({ size: [13.9, 13.9], roundRadius: 0.5 });
 const stab_pad = roundedRectangle({ size: [6.9, 14.9], roundRadius: 0.5 });
-const stab_backside_shape = translate(
-  [0, -0.625, 0.1],
-  cuboid({ size: [30.776, 20.15, 0.2] }),
-);
-const snap_notch_shape = translate([0, 0, 0.1], cuboid({ size: [7, 17, 0.2] }));
 
 // --- Switch cutouts ---
 const switch_0 = switch_shape; // "0,0" 1u
@@ -97,65 +164,6 @@ const stab_44_a = translate([142.843, -58.65, 0], stab_pad);
 const stab_44_b = translate([166.719, -58.65, 0], stab_pad);
 const stab_44 = union(stab_44_a, stab_44_b); // stabilizer for "3,8" (switch 44)
 
-// --- Holes ---
-const customHole_0 = translate([85.725, -29.528, 0], circle({ radius: 1.5 }));
-const customHole_1 = translate([142.875, -29.528, 0], circle({ radius: 1.5 }));
-
-// --- Backside features ---
-const stab_backside_27 = translate([9.525, -38.1, 0], stab_backside_shape);
-const stab_backside_38 = translate([238.125, -38.1, 0], stab_backside_shape);
-const stab_backside_42 = translate([83.344, -57.15, 0], stab_backside_shape);
-const stab_backside_44 = translate([154.781, -57.15, 0], stab_backside_shape);
-const snap_notch_0 = snap_notch_shape;
-const snap_notch_1 = translate([19.05, 0, 0], snap_notch_shape);
-const snap_notch_2 = translate([38.1, 0, 0], snap_notch_shape);
-const snap_notch_3 = translate([57.15, 0, 0], snap_notch_shape);
-const snap_notch_4 = translate([76.2, 0, 0], snap_notch_shape);
-const snap_notch_5 = translate([95.25, 0, 0], snap_notch_shape);
-const snap_notch_6 = translate([114.3, 0, 0], snap_notch_shape);
-const snap_notch_7 = translate([133.35, 0, 0], snap_notch_shape);
-const snap_notch_8 = translate([152.4, 0, 0], snap_notch_shape);
-const snap_notch_9 = translate([171.45, 0, 0], snap_notch_shape);
-const snap_notch_10 = translate([190.5, 0, 0], snap_notch_shape);
-const snap_notch_11 = translate([209.55, 0, 0], snap_notch_shape);
-const snap_notch_12 = translate([228.6, 0, 0], snap_notch_shape);
-const snap_notch_13 = translate([247.65, 0, 0], snap_notch_shape);
-const snap_notch_14 = translate([4.763, -19.05, 0], snap_notch_shape);
-const snap_notch_15 = translate([28.575, -19.05, 0], snap_notch_shape);
-const snap_notch_16 = translate([47.625, -19.05, 0], snap_notch_shape);
-const snap_notch_17 = translate([66.675, -19.05, 0], snap_notch_shape);
-const snap_notch_18 = translate([85.725, -19.05, 0], snap_notch_shape);
-const snap_notch_19 = translate([104.775, -19.05, 0], snap_notch_shape);
-const snap_notch_20 = translate([123.825, -19.05, 0], snap_notch_shape);
-const snap_notch_21 = translate([142.875, -19.05, 0], snap_notch_shape);
-const snap_notch_22 = translate([161.925, -19.05, 0], snap_notch_shape);
-const snap_notch_23 = translate([180.975, -19.05, 0], snap_notch_shape);
-const snap_notch_24 = translate([200.025, -19.05, 0], snap_notch_shape);
-const snap_notch_25 = translate([219.075, -19.05, 0], snap_notch_shape);
-const snap_notch_26 = translate([242.888, -19.05, 0], snap_notch_shape);
-const snap_notch_27 = translate([9.525, -38.1, 0], snap_notch_shape);
-const snap_notch_28 = translate([38.1, -38.1, 0], snap_notch_shape);
-const snap_notch_29 = translate([57.15, -38.1, 0], snap_notch_shape);
-const snap_notch_30 = translate([76.2, -38.1, 0], snap_notch_shape);
-const snap_notch_31 = translate([95.25, -38.1, 0], snap_notch_shape);
-const snap_notch_32 = translate([114.3, -38.1, 0], snap_notch_shape);
-const snap_notch_33 = translate([133.35, -38.1, 0], snap_notch_shape);
-const snap_notch_34 = translate([152.4, -38.1, 0], snap_notch_shape);
-const snap_notch_35 = translate([171.45, -38.1, 0], snap_notch_shape);
-const snap_notch_36 = translate([190.5, -38.1, 0], snap_notch_shape);
-const snap_notch_37 = translate([209.55, -38.1, 0], snap_notch_shape);
-const snap_notch_38 = translate([238.125, -38.1, 0], snap_notch_shape);
-const snap_notch_39 = translate([0, -57.15, 0], snap_notch_shape);
-const snap_notch_40 = translate([21.431, -57.15, 0], snap_notch_shape);
-const snap_notch_41 = translate([45.244, -57.15, 0], snap_notch_shape);
-const snap_notch_42 = translate([83.344, -57.15, 0], snap_notch_shape);
-const snap_notch_43 = translate([119.063, -57.15, 0], snap_notch_shape);
-const snap_notch_44 = translate([154.781, -57.15, 0], snap_notch_shape);
-const snap_notch_45 = translate([190.5, -57.15, 0], snap_notch_shape);
-const snap_notch_46 = translate([209.55, -57.15, 0], snap_notch_shape);
-const snap_notch_47 = translate([228.6, -57.15, 0], snap_notch_shape);
-const snap_notch_48 = translate([247.65, -57.15, 0], snap_notch_shape);
-
 // --- Assembly ---
 const allCutouts = union(
   switch_0,
@@ -211,67 +219,10 @@ const allCutouts = union(
   switch_46,
   switch_47,
   switch_48,
-  customHole_0,
-  customHole_1,
 );
 const plate2d = subtract(outline, allCutouts);
 const plate3d = extrudeLinear({ height: THICKNESS }, plate2d);
-const allBacksideCuts = union(
-  stab_backside_27,
-  stab_backside_38,
-  stab_backside_42,
-  stab_backside_44,
-  snap_notch_0,
-  snap_notch_1,
-  snap_notch_2,
-  snap_notch_3,
-  snap_notch_4,
-  snap_notch_5,
-  snap_notch_6,
-  snap_notch_7,
-  snap_notch_8,
-  snap_notch_9,
-  snap_notch_10,
-  snap_notch_11,
-  snap_notch_12,
-  snap_notch_13,
-  snap_notch_14,
-  snap_notch_15,
-  snap_notch_16,
-  snap_notch_17,
-  snap_notch_18,
-  snap_notch_19,
-  snap_notch_20,
-  snap_notch_21,
-  snap_notch_22,
-  snap_notch_23,
-  snap_notch_24,
-  snap_notch_25,
-  snap_notch_26,
-  snap_notch_27,
-  snap_notch_28,
-  snap_notch_29,
-  snap_notch_30,
-  snap_notch_31,
-  snap_notch_32,
-  snap_notch_33,
-  snap_notch_34,
-  snap_notch_35,
-  snap_notch_36,
-  snap_notch_37,
-  snap_notch_38,
-  snap_notch_39,
-  snap_notch_40,
-  snap_notch_41,
-  snap_notch_42,
-  snap_notch_43,
-  snap_notch_44,
-  snap_notch_45,
-  snap_notch_46,
-  snap_notch_47,
-  snap_notch_48,
-);
-const finalPlate = subtract(plate3d, allBacksideCuts);
+const finalPlate = plate3d;
 
 const main = () => finalPlate;
 

@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+    base: command === 'build' ? '/keyboard/' : '/',
     plugins: [react()],
     resolve: {
         alias: {
@@ -21,4 +22,4 @@ export default defineConfig({
             allow: [path.resolve(__dirname)],
         },
     },
-})
+}))

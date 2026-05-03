@@ -2,15 +2,15 @@
  * 49-pcba Housing Bottom — overlap union 방식
  *
  * 설계 핵심:
- *  - floor + supportRing + pillars 를 union.
- *  - ring/pillar 의 BOTTOM 을 FLOOR_TOP_Z 보다 RING_FLOOR_OVERLAP 만큼 더 아래로
+ *  - floor + supportRing 을 union.
+ *  - ring 의 BOTTOM 을 FLOOR_TOP_Z 보다 RING_FLOOR_OVERLAP 만큼 더 아래로
  *    내려서 floor 와 명시적으로 overlap → boolean 입력에 코플래너 face 없음.
  *  - ring 은 hollow rect 단일 형상.
- *  - pillar 는 정사각형 cuboid.
+ *  - 중앙 PCB 받침 pillar 는 핫스왑 PCB 라 불필요해 제거 (perimeter ring 만으로 지지).
  *  - retessellate/generalize 로 마무리.
  */
 const jscad = require('@jscad/modeling')
-const { cuboid, cylinder, rectangle, roundedRectangle } = jscad.primitives
+const { cylinder, rectangle, roundedRectangle } = jscad.primitives
 const { translate } = jscad.transforms
 const { extrudeLinear } = jscad.extrusions
 const { subtract, union } = jscad.booleans
@@ -18,9 +18,9 @@ const { retessellate, generalize } = jscad.modifiers
 
 // === Plate / 케이스 기본 치수 ===
 const PLATE_CENTER_X = 123.825
-const PLATE_CENTER_Y = -29.575
-const PLATE_W = 271.55
-const PLATE_D = 83.05
+const PLATE_CENTER_Y = -28.575
+const PLATE_W = 271.65
+const PLATE_D = 81.15
 
 const PLATE_CLEARANCE = 0.25
 const CASE_CORNER_R = 1.5
@@ -43,20 +43,13 @@ const PCB_THICKNESS = 1.6
 const PCB_BOTTOM_Z = PLATE_BOTTOM_Z - PCB_THICKNESS // 5.4
 
 // 받침 / 스크류
-const PILLAR_SIZE = 5
 const SCREW_THROUGH_R = 1.25
 const SCREW_HEAD_R = 2.0
 const SCREW_HEAD_DEPTH = 2.0
 const SUPPORT_RING_WIDTH = 5
 
-// ring/pillar 가 floor 안으로 묻히는 깊이 (코플래너 회피용 overlap)
+// ring 이 floor 안으로 묻히는 깊이 (코플래너 회피용 overlap)
 const RING_FLOOR_OVERLAP = 0.5
-
-// 중앙 PCB 마운트 위치
-const MIDDLE_HOLES = [
-    [85.725, -29.528],
-    [142.875, -29.528],
-]
 
 // === 파생 치수 ===
 const INNER_W = PLATE_W + 2 * PLATE_CLEARANCE
@@ -100,16 +93,6 @@ const supportRing = translate(
     extrudeLinear({ height: ringH }, ring2d),
 )
 
-// === 중앙 정사각형 pillar (floor 안으로 RING_FLOOR_OVERLAP 만큼 묻음) ===
-const pillarBottomZ = FLOOR_TOP_Z - RING_FLOOR_OVERLAP
-const pillarH = PCB_BOTTOM_Z - pillarBottomZ
-const middlePillars = MIDDLE_HOLES.map(([x, y]) =>
-    translate(
-        [x, y, pillarBottomZ + pillarH / 2],
-        cuboid({ size: [PILLAR_SIZE, PILLAR_SIZE, pillarH] }),
-    ),
-)
-
 // === 4 코너 스크류 negative (원형) ===
 const headPocketZBottom = FLOOR_BOTTOM_Z - 1
 const headPocketZTop = FLOOR_BOTTOM_Z + SCREW_HEAD_DEPTH
@@ -131,7 +114,7 @@ const throughHoles = MATING_POS.map(([x, y]) =>
 )
 
 // === 조립 ===
-const positives = union(floor, supportRing, ...middlePillars)
+const positives = union(floor, supportRing)
 const negatives = union(...headPockets, ...throughHoles)
 const bottomCase = retessellate(
     generalize({ snap: true, triangulate: false }, subtract(positives, negatives)),
