@@ -8,7 +8,6 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import * as jscadModeling from '@jscad/modeling'
 import earcut from 'earcut'
-// @ts-expect-error - no types
 import * as stlSerializer from '@jscad/stl-serializer'
 import { JSCAD_PRELUDE } from '../shared/lib/jscad/prelude'
 
@@ -17,7 +16,11 @@ const ROOT = join(__dirname, '..')
 const SRC_DIR = join(ROOT, '49-pcba')
 const OUT_DIR = join(SRC_DIR, 'export')
 
-const STL_FILES = ['49-pcba-housing-top', '49-pcba-housing-bottom', 'keyboard-plate-extended']
+// cleanupStl 후처리는 housing 처럼 단순 형상에선 외곽 edge 만 남겨 깔끔하지만,
+// 컷아웃이 많은 plate (외곽 1 + hole 53) 에선 boundary loop 추출 / simplifyLoop 단계에서
+// 형상이 깨질 수 있어 raw stl-serializer 결과만 사용. (kle-ng buildStl 과 동일 흐름)
+const STL_FILES_CLEANED = ['49-pcba-housing-top', '49-pcba-housing-bottom']
+const STL_FILES_RAW = ['keyboard-plate-extended']
 const PLATE_FILE = 'keyboard-plate-extended'
 
 const requireShim = (id: string): unknown => {
@@ -405,18 +408,32 @@ const buildCompleteDxf = (geom2: unknown): string => {
 
 mkdirSync(OUT_DIR, { recursive: true })
 
-for (const name of STL_FILES) {
+const serializeRaw = (geom: unknown): Buffer => {
+    const data = stlSerializer.serialize({ binary: true }, geom) as ArrayBuffer[]
+    return Buffer.concat(data.map((c) => Buffer.from(c)))
+}
+
+for (const name of STL_FILES_CLEANED) {
     const inPath = join(SRC_DIR, `${name}.jscad`)
     const outPath = join(OUT_DIR, `${name}.stl`)
     const source = await Bun.file(inPath).text()
     const geom = evaluateMain(source)
-    const data = stlSerializer.serialize({ binary: true }, geom) as ArrayBuffer[]
-    const raw = Buffer.concat(data.map((c) => Buffer.from(c)))
+    const raw = serializeRaw(geom)
     const beforeCount = raw.readUInt32LE(80)
     const cleaned = cleanupStl(raw)
     const afterCount = cleaned.readUInt32LE(80)
     writeFileSync(outPath, cleaned)
     console.log(`✓ ${name}.stl  ${cleaned.length}B  tri ${beforeCount}→${afterCount}`)
+}
+
+for (const name of STL_FILES_RAW) {
+    const inPath = join(SRC_DIR, `${name}.jscad`)
+    const outPath = join(OUT_DIR, `${name}.stl`)
+    const source = await Bun.file(inPath).text()
+    const geom = evaluateMain(source)
+    const raw = serializeRaw(geom)
+    writeFileSync(outPath, raw)
+    console.log(`✓ ${name}.stl  ${raw.length}B  tri ${raw.readUInt32LE(80)} (raw)`)
 }
 
 {
