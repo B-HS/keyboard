@@ -1,9 +1,10 @@
 import { useMemo, type FC } from 'react'
 import * as THREE from 'three'
-import { buildGeometryFromJscad } from '@shared/lib/jscad'
+import { geom3ToBufferGeometry, type Geom3 } from '@shared/lib/jscad'
+import { VIEWER_STYLE } from '@shared/config/viewer'
 
 type PlateMeshProps = {
-    source: string
+    geom: Geom3
     plateCenterX: number
     plateCenterY: number
     plateMinY: number
@@ -17,20 +18,18 @@ type PlateMeshProps = {
 }
 
 export const PlateMesh: FC<PlateMeshProps> = ({
-    source,
+    geom,
     plateCenterX,
     plateCenterY,
     plateMinY,
     frontBottomZ,
     tiltDeg,
-    color = '#a8acb3',
-    metalness = 0.85,
-    roughness = 0.35,
+    color = VIEWER_STYLE.plate.color,
+    metalness = VIEWER_STYLE.plate.metalness,
+    roughness = VIEWER_STYLE.plate.roughness,
 }) => {
-    const geometry = useMemo(() => buildGeometryFromJscad(source), [source])
-
     const transformedGeometry = useMemo(() => {
-        const cloned = geometry.clone()
+        const cloned = geom3ToBufferGeometry(geom)
         const tiltRad = (tiltDeg * Math.PI) / 180
         // pivot Y=plateMinY 기준으로 X축 회전 (plate 뒤쪽이 +Z 방향으로 올라감)
         cloned.translate(0, -plateMinY, 0)
@@ -41,7 +40,7 @@ export const PlateMesh: FC<PlateMeshProps> = ({
         cloned.computeBoundingBox()
         cloned.computeBoundingSphere()
         return cloned
-    }, [geometry, plateCenterX, plateCenterY, plateMinY, frontBottomZ, tiltDeg])
+    }, [geom, plateCenterX, plateCenterY, plateMinY, frontBottomZ, tiltDeg])
 
     return (
         <mesh geometry={transformedGeometry} castShadow receiveShadow rotation={[-Math.PI / 2, 0, 0]}>

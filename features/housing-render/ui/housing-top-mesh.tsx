@@ -1,9 +1,10 @@
 import { useMemo, type FC } from 'react'
 import * as THREE from 'three'
-import { buildGeometryFromJscad } from '@shared/lib/jscad'
+import { geom3ToBufferGeometry, type Geom3 } from '@shared/lib/jscad'
+import { VIEWER_STYLE } from '@shared/config/viewer'
 
 type HousingTopMeshProps = {
-    source: string
+    geom: Geom3
     plateCenterX: number
     plateCenterY: number
     color?: string
@@ -15,24 +16,22 @@ type HousingTopMeshProps = {
 }
 
 export const HousingTopMesh: FC<HousingTopMeshProps> = ({
-    source,
+    geom,
     plateCenterX,
     plateCenterY,
-    color = '#1a1d24',
-    metalness = 0.25,
-    roughness = 0.55,
+    color = VIEWER_STYLE.housingTop.color,
+    metalness = VIEWER_STYLE.housingTop.metalness,
+    roughness = VIEWER_STYLE.housingTop.roughness,
     baseZ = 0,
-    opacity = 0.8,
+    opacity = VIEWER_STYLE.housingTop.opacity,
 }) => {
-    const geometry = useMemo(() => buildGeometryFromJscad(source), [source])
-
     const transformedGeometry = useMemo(() => {
-        const cloned = geometry.clone()
+        const cloned = geom3ToBufferGeometry(geom)
         cloned.translate(-plateCenterX, -plateCenterY, baseZ)
         cloned.computeBoundingBox()
         cloned.computeBoundingSphere()
         return cloned
-    }, [geometry, plateCenterX, plateCenterY, baseZ])
+    }, [geom, plateCenterX, plateCenterY, baseZ])
 
     const transparent = opacity < 1
 

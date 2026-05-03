@@ -1,4 +1,4 @@
-import { useState, type CSSProperties, type FC } from 'react'
+import { useMemo, useState, type CSSProperties, type FC } from 'react'
 import { Viewport } from '@widgets/viewport'
 import { PlateMesh } from '@features/plate-render'
 import { HousingTopMesh, HousingBottomMesh } from '@features/housing-render'
@@ -6,10 +6,10 @@ import { PcbMesh } from '@features/pcb-render'
 import { OldStlMesh } from '@features/old-render'
 import { SwitchMesh, KeycapMesh } from '@features/keys-render'
 import { KEYBOARD_GEOMETRY } from '@shared/config/keyboard'
+import { VIEWER_STYLE } from '@shared/config/viewer'
+import { evaluateJscadSource } from '@shared/lib/jscad'
+import { buildHousingTopGeom, buildHousingBottomGeom, buildPcbGeom } from '../../../49-pcba/build'
 import plateSource from '../../../49-pcba/keyboard-plate-extended.jscad?raw'
-import housingTopSource from '../../../49-pcba/49-pcba-housing-top.jscad?raw'
-import housingBottomSource from '../../../49-pcba/49-pcba-housing-bottom.jscad?raw'
-import pcbSource from '../../../49-pcba/49-pcba-pcb.jscad?raw'
 import oldTopUrl from '../../../49-old/docs/export/1_case-top.stl?url'
 import oldBottomUrl from '../../../49-old/docs/export/2_case-bottom.stl?url'
 
@@ -49,7 +49,10 @@ export const PlateViewerPage: FC = () => {
 
     const toggle = (key: PartKey) => setVisibility((prev) => ({ ...prev, [key]: !prev[key] }))
 
-    const pcbFrontBottomZ = KEYBOARD_GEOMETRY.pcbFrontBottomZ
+    const plateGeom = useMemo(() => evaluateJscadSource(plateSource), [])
+    const housingTopGeom = useMemo(() => buildHousingTopGeom(), [])
+    const housingBottomGeom = useMemo(() => buildHousingBottomGeom(), [])
+    const pcbGeom = useMemo(() => buildPcbGeom(), [])
 
     return (
         <div style={{ display: 'flex', width: '100%', height: '100vh' }}>
@@ -59,7 +62,7 @@ export const PlateViewerPage: FC = () => {
                     <group rotation={[0, Math.PI, 0]}>
                         {visibility.plate && (
                             <PlateMesh
-                                source={plateSource}
+                                geom={plateGeom}
                                 plateCenterX={KEYBOARD_GEOMETRY.plateCenterX}
                                 plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
                                 plateMinY={KEYBOARD_GEOMETRY.plateMinY}
@@ -69,17 +72,17 @@ export const PlateViewerPage: FC = () => {
                         )}
                         {visibility.pcb && (
                             <PcbMesh
-                                source={pcbSource}
+                                geom={pcbGeom}
                                 plateCenterX={KEYBOARD_GEOMETRY.plateCenterX}
                                 plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
                                 plateMinY={KEYBOARD_GEOMETRY.plateMinY}
-                                frontBottomZ={pcbFrontBottomZ}
+                                frontBottomZ={KEYBOARD_GEOMETRY.pcbFrontBottomZ}
                                 tiltDeg={KEYBOARD_GEOMETRY.plateTiltDeg}
                             />
                         )}
                         {visibility.housingTop && (
                             <HousingTopMesh
-                                source={housingTopSource}
+                                geom={housingTopGeom}
                                 plateCenterX={KEYBOARD_GEOMETRY.plateCenterX}
                                 plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
                                 baseZ={0}
@@ -87,7 +90,7 @@ export const PlateViewerPage: FC = () => {
                         )}
                         {visibility.housingBottom && (
                             <HousingBottomMesh
-                                source={housingBottomSource}
+                                geom={housingBottomGeom}
                                 plateCenterX={KEYBOARD_GEOMETRY.plateCenterX}
                                 plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
                                 baseZ={0}
@@ -102,7 +105,7 @@ export const PlateViewerPage: FC = () => {
                                 plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
                                 offsetX={OLD_OFFSET_X}
                                 zOffset={KEYBOARD_GEOMETRY.caseFloorBottomZ}
-                                color='#5a5d63'
+                                color={VIEWER_STYLE.oldTop.color}
                             />
                         )}
                         {visibility.oldBottom && (
@@ -112,7 +115,7 @@ export const PlateViewerPage: FC = () => {
                                 plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
                                 offsetX={OLD_OFFSET_X}
                                 zOffset={KEYBOARD_GEOMETRY.caseFloorBottomZ}
-                                color='#3a3d43'
+                                color={VIEWER_STYLE.oldBottom.color}
                             />
                         )}
                     </group>

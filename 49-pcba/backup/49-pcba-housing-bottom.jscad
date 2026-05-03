@@ -1,126 +1,126 @@
 /**
- * 49-pcba Housing Bottom — floor + perimeter ring + 2 중앙 pillar
- * 4코너 원기둥 대신 plate margin 영역 전체를 4면 직사각 ring으로 받침 (안정성)
+ * 49-pcba Housing Bottom — overlap union 방식
+ *
+ * 모든 형상 상수는 shared/config/keyboard.ts 의 KEYBOARD_GEOMETRY 에서 주입.
+ *
+ * 설계 핵심:
+ *  - floor + supportRing 을 union.
+ *  - ring 의 BOTTOM 을 FLOOR_TOP_Z 보다 RING_FLOOR_OVERLAP 만큼 더 아래로
+ *    내려서 floor 와 명시적으로 overlap → boolean 입력에 코플래너 face 없음.
+ *  - ring 은 hollow rect 단일 형상.
+ *  - 중앙 PCB 받침 pillar 는 핫스왑 PCB 라 불필요해 제거 (perimeter ring 만으로 지지).
+ *  - retessellate / generalize(snap) 으로 마무리.
  */
-const jscad = require("@jscad/modeling");
-const { roundedRectangle, cuboid, cylinder } = jscad.primitives;
-const { translate } = jscad.transforms;
-const { extrudeLinear } = jscad.extrusions;
-const { subtract, union } = jscad.booleans;
-const { retessellate, generalize } = jscad.modifiers;
-void extrudeLinear;
+const jscad = require('@jscad/modeling')
+const { cylinder, rectangle, roundedRectangle } = jscad.primitives
+const { translate } = jscad.transforms
+const { extrudeLinear } = jscad.extrusions
+const { subtract, union } = jscad.booleans
+const { retessellate, generalize } = jscad.modifiers
 
-const PLATE_CENTER_X = 123.825;
-const PLATE_CENTER_Y = -29.575;
-const PLATE_W = 271.55;
-const PLATE_D = 83.05;
+const G = KEYBOARD_GEOMETRY
 
-const PLATE_CLEARANCE = 0.25;
-const WALL_THICKNESS = 6.5;
-const CASE_CORNER_R = 1.5;
+// === 기본 ===
+const PLATE_CENTER_X = G.plateCenterX
+const PLATE_CENTER_Y = G.plateCenterY
+const PLATE_W = G.plateWidth
+const PLATE_D = G.plateDepth
 
-const BC_FLOOR_THICKNESS = 4;
-const PLATE_BOTTOM_Z = 7;
-const PCB_THICKNESS = 1.6;
-const PCB_BOTTOM_Z = PLATE_BOTTOM_Z - PCB_THICKNESS;
+const PLATE_CLEARANCE = G.plateClearance
+const CASE_CORNER_R = G.caseCornerRadius
+const CORNER_SEGMENTS = G.caseCornerSegments
 
-const PILLAR_R = 3;
-const SCREW_THROUGH_R = 1.25; // M2 통과 (ø2.5)
-const SCREW_HEAD_R = 2.0; // M2 cap head (OD 3.8 + 여유)
-const SCREW_HEAD_DEPTH = 2.0; // pocket 깊이
+// === housing-top 과 동기 (나사홀 ↔ 모서리 끝점 대칭) ===
+const INSERT_R_FOR_OFFSET = G.insertRadius
+const SCREW_TIP_MARGIN = G.screwTipMargin
+const SCREW_TIP_DIST = INSERT_R_FOR_OFFSET + SCREW_TIP_MARGIN
+const WALL_THICKNESS = SCREW_TIP_DIST * Math.sqrt(2)
+const SCREW_OFFSET = WALL_THICKNESS / 2 + CASE_CORNER_R * (1 - 1 / Math.sqrt(2))
 
-const SUPPORT_RING_WIDTH = 5; // 4면 받침 ring 너비
+// === Z 좌표 ===
+// PCB 위치는 plate 와 독립 — supportRing 은 PCB 만 받침 (plate 는 lip + 스위치로 고정).
+const BC_FLOOR_THICKNESS = G.caseFloorThickness
+const FLOOR_BOTTOM_Z = G.caseFloorBottomZ
+const FLOOR_TOP_Z = FLOOR_BOTTOM_Z + BC_FLOOR_THICKNESS
+const PCB_BOTTOM_Z = G.pcbFrontBottomZ
+const PCB_TOP_Z = PCB_BOTTOM_Z + G.pcbThickness
 
-const MIDDLE_HOLES = [
-  [85.725, -29.528],
-  [142.875, -29.528],
-];
+// === 받침 / 스크류 ===
+const SCREW_THROUGH_R = G.screwThroughRadius
+const SCREW_HEAD_R = G.screwHeadRadius
+const SCREW_HEAD_DEPTH = G.screwHeadDepth
+const SUPPORT_RING_WIDTH = G.supportRingWidth
+const RING_FLOOR_OVERLAP = G.supportRingFloorOverlap
 
-const PLATE_MIN_X = PLATE_CENTER_X - PLATE_W / 2;
-const PLATE_MAX_X = PLATE_CENTER_X + PLATE_W / 2;
-const PLATE_MIN_Y = PLATE_CENTER_Y - PLATE_D / 2;
-const PLATE_MAX_Y = PLATE_CENTER_Y + PLATE_D / 2;
+// === 파생 치수 ===
+const INNER_W = PLATE_W + 2 * PLATE_CLEARANCE
+const INNER_D = PLATE_D + 2 * PLATE_CLEARANCE
+const OUTER_W = INNER_W + 2 * WALL_THICKNESS
+const OUTER_D = INNER_D + 2 * WALL_THICKNESS
 
-const INNER_X_MIN = PLATE_MIN_X - PLATE_CLEARANCE;
-const INNER_X_MAX = PLATE_MAX_X + PLATE_CLEARANCE;
-const INNER_Y_MIN = PLATE_MIN_Y - PLATE_CLEARANCE;
-const INNER_Y_MAX = PLATE_MAX_Y + PLATE_CLEARANCE;
-const OUTER_X_MIN = INNER_X_MIN - WALL_THICKNESS;
-const OUTER_X_MAX = INNER_X_MAX + WALL_THICKNESS;
-const OUTER_Y_MIN = INNER_Y_MIN - WALL_THICKNESS;
-const OUTER_Y_MAX = INNER_Y_MAX + WALL_THICKNESS;
-
-const OUTER_W = OUTER_X_MAX - OUTER_X_MIN;
-const OUTER_D = OUTER_Y_MAX - OUTER_Y_MIN;
-const CENTER_X = (OUTER_X_MIN + OUTER_X_MAX) / 2;
-const CENTER_Y = (OUTER_Y_MIN + OUTER_Y_MAX) / 2;
-
-const RING_OUTER_W = PLATE_W;
-const RING_OUTER_D = PLATE_D;
-const RING_INNER_W = RING_OUTER_W - 2 * SUPPORT_RING_WIDTH;
-const RING_INNER_D = RING_OUTER_D - 2 * SUPPORT_RING_WIDTH;
+const HALF_OUT_X = OUTER_W / 2
+const HALF_OUT_Y = OUTER_D / 2
 
 const MATING_POS = [
-  [OUTER_X_MIN + WALL_THICKNESS / 2, OUTER_Y_MAX - WALL_THICKNESS / 2],
-  [OUTER_X_MAX - WALL_THICKNESS / 2, OUTER_Y_MAX - WALL_THICKNESS / 2],
-  [OUTER_X_MIN + WALL_THICKNESS / 2, OUTER_Y_MIN + WALL_THICKNESS / 2],
-  [OUTER_X_MAX - WALL_THICKNESS / 2, OUTER_Y_MIN + WALL_THICKNESS / 2],
-];
+    [PLATE_CENTER_X - HALF_OUT_X + SCREW_OFFSET, PLATE_CENTER_Y + HALF_OUT_Y - SCREW_OFFSET],
+    [PLATE_CENTER_X + HALF_OUT_X - SCREW_OFFSET, PLATE_CENTER_Y + HALF_OUT_Y - SCREW_OFFSET],
+    [PLATE_CENTER_X - HALF_OUT_X + SCREW_OFFSET, PLATE_CENTER_Y - HALF_OUT_Y + SCREW_OFFSET],
+    [PLATE_CENTER_X + HALF_OUT_X - SCREW_OFFSET, PLATE_CENTER_Y - HALF_OUT_Y + SCREW_OFFSET],
+]
 
-// === Floor (OUTER 풀 footprint, Z=0 ~ BC_FLOOR_THICKNESS) — cuboid ===
+// === Floor (OUTER footprint, 4코너 round) ===
 const floor = translate(
-  [CENTER_X, CENTER_Y, BC_FLOOR_THICKNESS / 2],
-  cuboid({ size: [OUTER_W, OUTER_D, BC_FLOOR_THICKNESS] }),
-);
+    [PLATE_CENTER_X, PLATE_CENTER_Y, FLOOR_BOTTOM_Z],
+    extrudeLinear(
+        { height: BC_FLOOR_THICKNESS },
+        roundedRectangle({
+            size: [OUTER_W, OUTER_D],
+            roundRadius: CASE_CORNER_R,
+            segments: CORNER_SEGMENTS,
+        }),
+    ),
+)
 
-// === Perimeter 받침 ring (Z=BC_FLOOR_THICKNESS ~ PCB_BOTTOM_Z) — cuboid 차감으로 단순화 ===
-const ringHeight = PCB_BOTTOM_Z - BC_FLOOR_THICKNESS;
-const ringOuter = translate(
-  [PLATE_CENTER_X, PLATE_CENTER_Y, BC_FLOOR_THICKNESS + ringHeight / 2],
-  cuboid({ size: [RING_OUTER_W, RING_OUTER_D, ringHeight] }),
-);
-const ringInner = translate(
-  [PLATE_CENTER_X, PLATE_CENTER_Y, BC_FLOOR_THICKNESS + ringHeight / 2],
-  cuboid({ size: [RING_INNER_W, RING_INNER_D, ringHeight + 0.02] }),
-);
-const supportRing = subtract(ringOuter, ringInner);
+// === Support ring (단일 hollow rect, floor 안으로 RING_FLOOR_OVERLAP 만큼 묻음) ===
+const ringBottomZ = FLOOR_TOP_Z - RING_FLOOR_OVERLAP
+const ringH = PCB_BOTTOM_Z - ringBottomZ
+const ringOuter = rectangle({ size: [PLATE_W, PLATE_D] })
+const ringInner = rectangle({
+    size: [PLATE_W - 2 * SUPPORT_RING_WIDTH, PLATE_D - 2 * SUPPORT_RING_WIDTH],
+})
+const ring2d = subtract(ringOuter, ringInner)
+const supportRing = translate(
+    [PLATE_CENTER_X, PLATE_CENTER_Y, ringBottomZ],
+    extrudeLinear({ height: ringH }, ring2d),
+)
 
-// === 2 중앙 pillar (custom hole 정렬) ===
-const middlePillars = MIDDLE_HOLES.map(([x, y]) =>
-  translate(
-    [x, y, BC_FLOOR_THICKNESS + (PCB_BOTTOM_Z - BC_FLOOR_THICKNESS) / 2],
-    cylinder({
-      radius: PILLAR_R,
-      height: PCB_BOTTOM_Z - BC_FLOOR_THICKNESS,
-      segments: 32,
-    }),
-  ),
-);
-
-// === 4코너 mating 계단식 원형 클리어런스 (head pocket + through) ===
+// === 4 코너 스크류 negative ===
+const headPocketZBottom = FLOOR_BOTTOM_Z - 1
+const headPocketZTop = FLOOR_BOTTOM_Z + SCREW_HEAD_DEPTH
+const headPocketH = headPocketZTop - headPocketZBottom
 const headPockets = MATING_POS.map(([x, y]) =>
-  translate(
-    [x, y, SCREW_HEAD_DEPTH / 2 - 0.01],
-    cylinder({ radius: SCREW_HEAD_R, height: SCREW_HEAD_DEPTH, segments: 32 }),
-  ),
-);
+    translate(
+        [x, y, (headPocketZBottom + headPocketZTop) / 2],
+        cylinder({ radius: SCREW_HEAD_R, height: headPocketH, segments: 32 }),
+    ),
+)
+const throughZBottom = FLOOR_BOTTOM_Z + SCREW_HEAD_DEPTH
+const throughZTop = FLOOR_TOP_Z + 1
+const throughH = throughZTop - throughZBottom
 const throughHoles = MATING_POS.map(([x, y]) =>
-  translate(
-    [x, y, SCREW_HEAD_DEPTH + (BC_FLOOR_THICKNESS - SCREW_HEAD_DEPTH) / 2],
-    cylinder({
-      radius: SCREW_THROUGH_R,
-      height: BC_FLOOR_THICKNESS - SCREW_HEAD_DEPTH + 0.02,
-      segments: 32,
-    }),
-  ),
-);
+    translate(
+        [x, y, (throughZBottom + throughZTop) / 2],
+        cylinder({ radius: SCREW_THROUGH_R, height: throughH, segments: 32 }),
+    ),
+)
 
-let bottomCase = union(floor, supportRing, ...middlePillars);
-bottomCase = subtract(bottomCase, ...headPockets, ...throughHoles);
-bottomCase = retessellate(
-  generalize({ snap: true, triangulate: false }, bottomCase),
-);
+// === 조립 ===
+const positives = union(floor, supportRing)
+const negatives = union(...headPockets, ...throughHoles)
+const bottomCase = retessellate(
+    generalize({ snap: true, triangulate: false }, subtract(positives, negatives)),
+)
 
-const main = () => bottomCase;
+const main = () => bottomCase
 
-module.exports = { main };
+module.exports = { main }

@@ -1,8 +1,7 @@
 import * as jscadModeling from '@jscad/modeling'
 import * as THREE from 'three'
-import { JSCAD_PRELUDE } from './prelude'
 
-type Geom3 = ReturnType<typeof jscadModeling.primitives.cube>
+export type Geom3 = ReturnType<typeof jscadModeling.primitives.cube>
 type Poly3 = { vertices: ReadonlyArray<[number, number, number]> }
 
 const requireShim = (id: string): unknown => {
@@ -11,7 +10,7 @@ const requireShim = (id: string): unknown => {
 }
 
 export const evaluateJscadSource = (source: string): Geom3 => {
-    const factory = new Function('require', 'module', 'exports', JSCAD_PRELUDE + source) as (
+    const factory = new Function('require', 'module', 'exports', source) as (
         req: typeof requireShim,
         mod: { exports: Record<string, unknown> },
         exp: Record<string, unknown>,

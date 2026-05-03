@@ -1,9 +1,10 @@
 import { useMemo, type FC } from 'react'
 import * as THREE from 'three'
-import { buildGeometryFromJscad } from '@shared/lib/jscad'
+import { geom3ToBufferGeometry, type Geom3 } from '@shared/lib/jscad'
+import { VIEWER_STYLE } from '@shared/config/viewer'
 
 type PcbMeshProps = {
-    source: string
+    geom: Geom3
     plateCenterX: number
     plateCenterY: number
     plateMinY: number
@@ -16,20 +17,18 @@ type PcbMeshProps = {
 }
 
 export const PcbMesh: FC<PcbMeshProps> = ({
-    source,
+    geom,
     plateCenterX,
     plateCenterY,
     plateMinY,
     frontBottomZ,
     tiltDeg,
-    color = '#0d4a2a',
-    metalness = 0.1,
-    roughness = 0.7,
+    color = VIEWER_STYLE.pcb.color,
+    metalness = VIEWER_STYLE.pcb.metalness,
+    roughness = VIEWER_STYLE.pcb.roughness,
 }) => {
-    const geometry = useMemo(() => buildGeometryFromJscad(source), [source])
-
     const transformedGeometry = useMemo(() => {
-        const cloned = geometry.clone()
+        const cloned = geom3ToBufferGeometry(geom)
         const tiltRad = (tiltDeg * Math.PI) / 180
         cloned.translate(0, -plateMinY, 0)
         cloned.rotateX(tiltRad)
@@ -38,7 +37,7 @@ export const PcbMesh: FC<PcbMeshProps> = ({
         cloned.computeBoundingBox()
         cloned.computeBoundingSphere()
         return cloned
-    }, [geometry, plateCenterX, plateCenterY, plateMinY, frontBottomZ, tiltDeg])
+    }, [geom, plateCenterX, plateCenterY, plateMinY, frontBottomZ, tiltDeg])
 
     return (
         <mesh geometry={transformedGeometry} castShadow receiveShadow rotation={[-Math.PI / 2, 0, 0]}>

@@ -8,19 +8,15 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import * as jscadModeling from '@jscad/modeling'
 import earcut from 'earcut'
+// @ts-expect-error - no types
 import * as stlSerializer from '@jscad/stl-serializer'
-import { JSCAD_PRELUDE } from '../shared/lib/jscad/prelude'
+import { evaluateJscadSource } from '../shared/lib/jscad/jscad-to-three'
+import { buildHousingTopGeom, buildHousingBottomGeom } from '../49-pcba/build'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 const SRC_DIR = join(ROOT, '49-pcba')
 const OUT_DIR = join(SRC_DIR, 'export')
-
-// cleanupStl 후처리는 housing 처럼 단순 형상에선 외곽 edge 만 남겨 깔끔하지만,
-// 컷아웃이 많은 plate (외곽 1 + hole 53) 에선 boundary loop 추출 / simplifyLoop 단계에서
-// 형상이 깨질 수 있어 raw stl-serializer 결과만 사용. (kle-ng buildStl 과 동일 흐름)
-const STL_FILES_CLEANED = ['49-pcba-housing-top', '49-pcba-housing-bottom']
-const STL_FILES_RAW = ['keyboard-plate-extended']
 const PLATE_FILE = 'keyboard-plate-extended'
 
 const requireShim = (id: string): unknown => {
@@ -28,21 +24,8 @@ const requireShim = (id: string): unknown => {
     throw new Error(`Unsupported require('${id}')`)
 }
 
-const evaluateMain = (source: string): unknown => {
-    const factory = new Function('require', 'module', 'exports', JSCAD_PRELUDE + source) as (
-        req: typeof requireShim,
-        mod: { exports: Record<string, unknown> },
-        exp: Record<string, unknown>,
-    ) => void
-    const moduleObj: { exports: Record<string, unknown> } = { exports: {} }
-    factory(requireShim, moduleObj, moduleObj.exports)
-    const main = moduleObj.exports.main as (() => unknown) | undefined
-    if (typeof main !== 'function') throw new Error('main() not exported')
-    return main()
-}
-
 const evaluatePlate2d = (source: string): unknown => {
-    const wrapped = JSCAD_PRELUDE + source + '\nmodule.exports.plate2d = plate2d;'
+    const wrapped = source + '\nmodule.exports.plate2d = plate2d;'
     const factory = new Function('require', 'module', 'exports', wrapped) as (
         req: typeof requireShim,
         mod: { exports: Record<string, unknown> },
@@ -286,6 +269,7 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
     return result.length > 0 ? result : group
 }
 
+// @ts-expect-error - 현재 housing 도 raw STL 이라 unused. plate 형상 변경 시 재사용 가능성 있어 보존.
 const cleanupStl = (buf: Buffer): Buffer => {
     if (buf.length < 84) return buf
     const tris = parseStl(buf)
@@ -413,29 +397,33 @@ const serializeRaw = (geom: unknown): Buffer => {
     return Buffer.concat(data.map((c) => Buffer.from(c)))
 }
 
-for (const name of STL_FILES_CLEANED) {
-    const inPath = join(SRC_DIR, `${name}.jscad`)
-    const outPath = join(OUT_DIR, `${name}.stl`)
-    const source = await Bun.file(inPath).text()
-    const geom = evaluateMain(source)
-    const raw = serializeRaw(geom)
-    const beforeCount = raw.readUInt32LE(80)
-    const cleaned = cleanupStl(raw)
-    const afterCount = cleaned.readUInt32LE(80)
-    writeFileSync(outPath, cleaned)
-    console.log(`✓ ${name}.stl  ${cleaned.length}B  tri ${beforeCount}→${afterCount}`)
-}
+// === housing: ts 빌더 → raw STL (cleanup 우회) ===
+// cleanupStl 의 boundary loop 추출 / earcut 재삼각화가 자석 pocket / corner round
+// boolean 결과의 sliver 영역에서 self-intersecting 만들 수 있어 housing 도 raw 사용.
+const TS_BUILDS: { name: string; build: () => unknown }[] = [
+    { name: '49-pcba-housing-top', build: buildHousingTopGeom },
+    { name: '49-pcba-housing-bottom', build: buildHousingBottomGeom },
+]
 
-for (const name of STL_FILES_RAW) {
-    const inPath = join(SRC_DIR, `${name}.jscad`)
+for (const { name, build } of TS_BUILDS) {
     const outPath = join(OUT_DIR, `${name}.stl`)
-    const source = await Bun.file(inPath).text()
-    const geom = evaluateMain(source)
-    const raw = serializeRaw(geom)
+    const raw = serializeRaw(build())
     writeFileSync(outPath, raw)
     console.log(`✓ ${name}.stl  ${raw.length}B  tri ${raw.readUInt32LE(80)} (raw)`)
 }
 
+// === plate: KLE-NG 자동생성 jscad 텍스트 → raw STL (cleanup 우회) ===
+{
+    const inPath = join(SRC_DIR, `${PLATE_FILE}.jscad`)
+    const outPath = join(OUT_DIR, `${PLATE_FILE}.stl`)
+    const source = await Bun.file(inPath).text()
+    const geom = evaluateJscadSource(source)
+    const raw = serializeRaw(geom)
+    writeFileSync(outPath, raw)
+    console.log(`✓ ${PLATE_FILE}.stl  ${raw.length}B  tri ${raw.readUInt32LE(80)} (raw)`)
+}
+
+// === plate DXF: 동일 jscad 의 plate2d 추출 ===
 {
     const inPath = join(SRC_DIR, `${PLATE_FILE}.jscad`)
     const outPath = join(OUT_DIR, `${PLATE_FILE}.dxf`)

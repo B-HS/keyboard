@@ -27,5 +27,5 @@
             "@shared/*": ["./shared/*"]
         }
     },
-    "include": ["app", "pages", "widgets", "features", "shared", "vite.config.ts"]
+    "include": ["app", "pages", "widgets", "features", "shared", "49-pcba/build", "scripts", "vite.config.ts"]
 }
