@@ -7,9 +7,10 @@
  */
 export const VIEWER_STYLE = {
     plate: {
-        color: '#a8acb3',
-        metalness: 0.85,
-        roughness: 0.35,
+        // JLC3DP 9600 photopolymer 레진 (매트 흰색).
+        color: '#ebebe5',
+        metalness: 0,
+        roughness: 0.75,
         opacity: 1,
     },
     pcb: {
@@ -19,15 +20,17 @@ export const VIEWER_STYLE = {
         opacity: 1,
     },
     housingTop: {
-        color: '#1a1d24',
-        metalness: 0.25,
-        roughness: 0.55,
+        // 9600 레진 (plate 와 동일 출력본).
+        color: '#ebebe5',
+        metalness: 0,
+        roughness: 0.75,
         opacity: 1,
     },
     housingBottom: {
-        color: '#22262e',
-        metalness: 0.2,
-        roughness: 0.6,
+        // 9600 레진 (plate / housing-top 과 동일 출력본).
+        color: '#ebebe5',
+        metalness: 0,
+        roughness: 0.75,
         opacity: 1,
     },
     switch: {

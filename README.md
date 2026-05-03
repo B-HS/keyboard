@@ -12,3 +12,7 @@ https://editor.keyboard-tools.xyz/#share=NrBEAYBp1SMgjLeAmZUDM7IBZsFZsA2bAdmwA5s
 - 공차를 항상 1.5mm를 상정하고 출력하자 (너무 빡빡하면 사포질을 해야함)
 - 표준규격을 잘 지키자 (1.5u Tabkey 이딴거 산다고 추가지출 ㅂㄷㅂㄷ)
 
+
+## 주문 
+- 9600 Resin + 추후 도색하던가 아니면 흰색 그대로 사용해보기 (색칠은 뭐 나중에)
+- Plate는 CNC할까 생각했는데 나중에 알루로 만들 때 고려해서 그냥 CBY Resin + 3D 출력

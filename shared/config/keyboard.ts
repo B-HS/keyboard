@@ -37,9 +37,9 @@ export const KEYBOARD_GEOMETRY = {
     /** plate / PCB 외곽 ↔ 케이스 내벽 공차 (mm). 사포질로 finish 한다는 전제 하에 0.05 — 출력 후 사용자가 fitting. */
     plateClearance: 0.05,
     /** 케이스 외곽 4코너 round R. 자석 pocket 직각 모서리와 sliver 회피 위해 작게 (살벽 1.25 > R). */
-    caseCornerRadius: 0.5,
+    caseCornerRadius: 1,
     /** 코너 분할 segment 수. */
-    caseCornerSegments: 32,
+    caseCornerSegments: 36,
 
     // === 자석 결합 (네오디뮴 사각자석 10×5×2t, 세로 세움) ===
     /** 자석 X 방향 (측벽 길이 따라). 가로 10mm. */

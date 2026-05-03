@@ -1,6 +1,7 @@
 import { Suspense, useState, type CSSProperties, type FC, type PropsWithChildren, type ReactNode } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, GizmoHelper, GizmoViewport, Grid, Environment, Stats } from '@react-three/drei'
+import * as THREE from 'three'
 
 type ViewportProps = PropsWithChildren<{
     showStats?: boolean
@@ -26,13 +27,19 @@ export const Viewport: FC<ViewportProps> = ({ children, showStats = false, overl
                         ? { position: [180, 180, 220], fov: 35, near: 0.1, far: 5000 }
                         : { position: [180, 180, 220], zoom: 2.4, near: -2000, far: 5000 }
                 }
-                gl={{ antialias: true, preserveDrawingBuffer: false }}
-                style={{ background: 'linear-gradient(180deg, #3a3a3a 0%, #1f1f1f 100%)' }}>
+                gl={{
+                    antialias: true,
+                    preserveDrawingBuffer: false,
+                    toneMapping: THREE.ACESFilmicToneMapping,
+                    toneMappingExposure: 1.0,
+                }}
+                style={{ background: 'linear-gradient(180deg, #87ceeb 0%, #c8e0f0 60%, #f0f4f8 100%)' }}>
                 <Suspense fallback={null}>
                     <Lights />
                     <Floor />
                     {children}
-                    <Environment preset='studio' />
+                    {/* 'park' HDR — 야외 정오 자연광 IBL (간접조명 + 반사 환경). */}
+                    <Environment preset='park' />
                 </Suspense>
                 <OrbitControls
                     makeDefault
@@ -51,18 +58,37 @@ export const Viewport: FC<ViewportProps> = ({ children, showStats = false, overl
     )
 }
 
+/**
+ * 현실 야외 태양광 시뮬레이션 (정오 ~ 오후 3시).
+ *
+ * - Sun (directionalLight): 단일 강한 방향광 + 그림자. 색온도 5500K (#fffaf0, 약간 따뜻한 흰색).
+ *   고도 ~60° 방위각 ~30° (오후 태양 위치).
+ * - Sky / Ground (hemisphereLight): 하늘 산란광 (cool blue) + 지면 반사광 (warm earth).
+ *   현실에선 ambient 가 hemisphere 에 포함됨 → ambientLight 별도 사용 안 함.
+ * - 추가 fill 없음 — 현실엔 fill light 없음. 그림자 영역은 hemisphere + IBL (Environment) 로 채워짐.
+ */
 const Lights: FC = () => (
     <>
-        {/* 전방위 균등 조명 — 어떤 시점에서도 표면 확인 가능 */}
-        <ambientLight intensity={0.6} />
-        <hemisphereLight args={['#dde2e8', '#2a2d33', 0.45]} />
-        {/* 6방향 directional (그림자 없음 — 검사 용도) */}
-        <directionalLight position={[300, 300, 300]} intensity={0.55} />
-        <directionalLight position={[-300, 300, 300]} intensity={0.4} />
-        <directionalLight position={[300, -300, 300]} intensity={0.4} />
-        <directionalLight position={[-300, -300, 300]} intensity={0.4} />
-        <directionalLight position={[0, 0, -400]} intensity={0.35} />
-        <directionalLight position={[0, 0, 400]} intensity={0.35} />
+        {/* 하늘(파랑) + 지면(따뜻한 갈색) 산란광. ambient 대체. */}
+        <hemisphereLight args={['#bcdcff', '#6b5b3e', 0.6]} />
+
+        {/* 태양 — 단일 강한 방향광 + 그림자 */}
+        <directionalLight
+            position={[400, 800, 300]}
+            intensity={3.0}
+            color='#fffaf0'
+            castShadow
+            shadow-mapSize-width={2048}
+            shadow-mapSize-height={2048}
+            shadow-camera-near={1}
+            shadow-camera-far={2000}
+            shadow-camera-left={-300}
+            shadow-camera-right={300}
+            shadow-camera-top={300}
+            shadow-camera-bottom={-300}
+            shadow-bias={-0.0001}
+            shadow-normalBias={0.02}
+        />
     </>
 )
 
