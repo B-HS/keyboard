@@ -6,9 +6,10 @@ import {
     type Geom3,
 } from '@shared/lib/jscad'
 import { KEYBOARD_GEOMETRY } from '@shared/config/keyboard'
+import { LOLIN_DIMENSIONS, LOLIN_PLACEMENT } from './lolin'
 
 const { cuboid, polygon, roundedRectangle } = jscadModeling.primitives
-const { translate } = jscadModeling.transforms
+const { translate, rotate } = jscadModeling.transforms
 const { extrudeLinear } = jscadModeling.extrusions
 const { subtract, union } = jscadModeling.booleans
 
@@ -143,11 +144,81 @@ export const buildHousingBottomGeom = (): Geom3 => {
         ),
     )
 
+    // === LOLIN S3 Mini 마운트 (floor 함몰 + 측벽 USB-C 컷아웃) ===
+    // 디멘션/위치 single source: ./lolin.ts (viewer mesh 와 공유).
+    // floor 1.5mm 함몰 → USB-C(두께 3.16mm) 윗면 z=4.96, 매트릭스 PCB 하면(5.4)과 0.44mm 여유.
+    const { boardW: LOLIN_W, boardD: LOLIN_D } = LOLIN_DIMENSIONS
+    const {
+        recessDepth: LOLIN_RECESS_DEPTH,
+        recessClearance: LOLIN_RECESS_CLEARANCE,
+        wallInnerYBack,
+        centerX: lolinCenterX,
+        centerY: lolinCenterY,
+        usbCBottomAbsZ,
+        usbCTopAbsZ,
+    } = LOLIN_PLACEMENT
+
+    const lolinRecess = translate(
+        [lolinCenterX, lolinCenterY, FLOOR_TOP_Z - LOLIN_RECESS_DEPTH / 2],
+        cuboid({
+            size: [
+                LOLIN_W + 2 * LOLIN_RECESS_CLEARANCE,
+                LOLIN_D + 2 * LOLIN_RECESS_CLEARANCE,
+                LOLIN_RECESS_DEPTH + 0.02,
+            ],
+        }),
+    ) as Geom3
+
+    // USB-C 컷아웃 — Apple Accessory Design Guidelines § 60.4
+    // "USB-C receptacle accessory keep-out" 12.45 × 6.60mm, R3.29 라운드 (스타디움).
+    // R = H/2 와 같으면 jscad 거부 → 3.30 → 3.29. 시각적 차이 없음.
+    const USB_C_CUTOUT_W = 12.45
+    const USB_C_CUTOUT_H = 6.6
+    const USB_C_CUTOUT_R = 1.5
+    const USB_C_CUTOUT_THICKNESS = WALL_THICKNESS + 0.02
+    const usbCCenterZ = (usbCBottomAbsZ + usbCTopAbsZ) / 2
+
+    // roundedRectangle 단면을 X-Y 평면에 그리고 Z 방향 extrude → X축 +90도 회전 →
+    // 단면이 X-Z 평면으로, extrude 가 -Y 방향으로 (회전 후 Y 범위 = -THICKNESS ~ 0).
+    const usbCCutoutExtruded = extrudeLinear(
+        { height: USB_C_CUTOUT_THICKNESS },
+        roundedRectangle({
+            size: [USB_C_CUTOUT_W, USB_C_CUTOUT_H],
+            roundRadius: USB_C_CUTOUT_R,
+            segments: 48,
+        }),
+    ) as unknown as Geom3
+    const usbCCutoutRotated = rotate(
+        [Math.PI / 2, 0, 0],
+        usbCCutoutExtruded,
+    ) as Geom3
+    // translate Y = 측벽 외면 + 0.01 → 회전 후 Y 범위 [측벽외면+0.01-THICKNESS, 측벽외면+0.01]
+    //                                = [측벽안면 - 0.01, 측벽외면 + 0.01]
+    const usbCCutout = translate(
+        [
+            lolinCenterX,
+            wallInnerYBack + WALL_THICKNESS + 0.01,
+            usbCCenterZ,
+        ],
+        usbCCutoutRotated,
+    ) as Geom3
+
+    // supportRing 뒤쪽 (USB-C 영역) 도 같은 X×Z 로 cut — 케이블이 PCB 받침 ring 을
+    // 통과해 USB-C 단자에 도달하도록. ring Y 범위 = plateMaxY-supportRingWidth ~ plateMaxY.
+    const plateMaxY = G.plateMinY + PLATE_D
+    const supportRingCutCenterY = plateMaxY - G.supportRingWidth / 2
+    const supportRingCut = translate(
+        [lolinCenterX, supportRingCutCenterY, usbCCenterZ],
+        cuboid({
+            size: [USB_C_CUTOUT_W, G.supportRingWidth + 0.5, USB_C_CUTOUT_H],
+        }),
+    ) as Geom3
+
     // outer prism - wallHollow = floor + 측벽 단일 형상.
-    // 그 위에 supportRing union, 자석 pocket subtract.
+    // 그 위에 supportRing union, 자석 pocket / LOLIN 함몰 / USB-C 컷아웃 subtract.
     const floorPlusWall = subtract(outerPrism, wallHollow) as Geom3
     const positives = union(floorPlusWall, supportRing) as Geom3
-    const negatives = union(...magnetPockets) as Geom3
+    const negatives = union(...magnetPockets, lolinRecess, usbCCutout, supportRingCut) as Geom3
     return retessellate(
         generalize({ snap: true, triangulate: false }, subtract(positives, negatives)),
     )

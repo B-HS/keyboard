@@ -3,17 +3,24 @@ import { Viewport } from '@widgets/viewport'
 import { PlateMesh } from '@features/plate-render'
 import { HousingTopMesh, HousingBottomMesh } from '@features/housing-render'
 import { PcbMesh } from '@features/pcb-render'
+import { LolinMesh } from '@features/lolin-render'
 import { OldStlMesh } from '@features/old-render'
 import { SwitchMesh, KeycapMesh } from '@features/keys-render'
 import { KEYBOARD_GEOMETRY } from '@shared/config/keyboard'
 import { VIEWER_STYLE } from '@shared/config/viewer'
 import { evaluateJscadSource } from '@shared/lib/jscad'
-import { buildHousingTopGeom, buildHousingBottomGeom, buildPcbGeom } from '../../../49-pcba/build'
+import {
+    buildHousingTopGeom,
+    buildHousingBottomGeom,
+    buildPcbGeom,
+    buildLolinPcbGeom,
+    buildLolinUsbCGeom,
+} from '../../../49-pcba/build'
 import plateSource from '../../../49-pcba/keyboard-plate-extended.jscad?raw'
 import oldTopUrl from '../../../49-old/docs/export/1_case-top.stl?url'
 import oldBottomUrl from '../../../49-old/docs/export/2_case-bottom.stl?url'
 
-type CurrentPartKey = 'plate' | 'pcb' | 'housingTop' | 'housingBottom' | 'switches' | 'keycaps'
+type CurrentPartKey = 'plate' | 'pcb' | 'housingTop' | 'housingBottom' | 'lolin' | 'switches' | 'keycaps'
 type OldPartKey = 'oldTop' | 'oldBottom'
 type PartKey = CurrentPartKey | OldPartKey
 
@@ -24,6 +31,7 @@ const CURRENT_LABELS: Record<CurrentPartKey, string> = {
     pcb: 'PCB',
     housingTop: 'Housing Top',
     housingBottom: 'Housing Bottom',
+    lolin: 'LOLIN S3 Mini',
     switches: 'Switches',
     keycaps: 'Keycaps',
 }
@@ -41,6 +49,7 @@ export const PlateViewerPage: FC = () => {
         pcb: true,
         housingTop: true,
         housingBottom: true,
+        lolin: true,
         switches: true,
         keycaps: true,
         oldTop: true,
@@ -53,6 +62,8 @@ export const PlateViewerPage: FC = () => {
     const housingTopGeom = useMemo(() => buildHousingTopGeom(), [])
     const housingBottomGeom = useMemo(() => buildHousingBottomGeom(), [])
     const pcbGeom = useMemo(() => buildPcbGeom(), [])
+    const lolinPcbGeom = useMemo(() => buildLolinPcbGeom(), [])
+    const lolinUsbCGeom = useMemo(() => buildLolinUsbCGeom(), [])
 
     return (
         <div style={{ display: 'flex', width: '100%', height: '100vh' }}>
@@ -91,6 +102,15 @@ export const PlateViewerPage: FC = () => {
                         {visibility.housingBottom && (
                             <HousingBottomMesh
                                 geom={housingBottomGeom}
+                                plateCenterX={KEYBOARD_GEOMETRY.plateCenterX}
+                                plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
+                                baseZ={0}
+                            />
+                        )}
+                        {visibility.lolin && (
+                            <LolinMesh
+                                pcbGeom={lolinPcbGeom}
+                                usbCGeom={lolinUsbCGeom}
                                 plateCenterX={KEYBOARD_GEOMETRY.plateCenterX}
                                 plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
                                 baseZ={0}
