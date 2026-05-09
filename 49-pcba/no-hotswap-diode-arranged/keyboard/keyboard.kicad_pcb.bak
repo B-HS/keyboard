@@ -162,6 +162,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -173,6 +175,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -412,6 +416,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -485,6 +491,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -496,6 +504,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -735,6 +745,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -808,6 +820,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -819,6 +833,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -1058,6 +1074,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -1131,6 +1149,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -1142,6 +1162,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -1381,6 +1403,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -1454,6 +1478,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -1465,6 +1491,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -1704,6 +1732,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -1790,6 +1820,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -1854,6 +1886,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" thru_hole circle
 			(at 0 0)
@@ -1884,6 +1918,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -1895,6 +1931,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -2134,6 +2172,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -2207,6 +2247,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -2218,6 +2260,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -2457,6 +2501,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -2530,6 +2576,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -2541,6 +2589,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -2780,6 +2830,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -2853,6 +2905,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -2864,6 +2918,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -3103,6 +3159,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -3176,6 +3234,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -3187,6 +3247,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -3426,6 +3488,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -3512,6 +3576,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -3576,6 +3642,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" thru_hole circle
 			(at 0 0)
@@ -3606,6 +3674,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -3617,6 +3687,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -3856,6 +3928,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -3929,6 +4003,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -3940,6 +4016,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -4179,6 +4257,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -4252,6 +4332,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -4263,6 +4345,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -4502,6 +4586,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -4587,6 +4673,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -4723,6 +4811,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -11.938 -6.985 180)
@@ -4781,6 +4871,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -4792,6 +4884,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -5031,6 +5125,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -5104,6 +5200,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -5115,6 +5213,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -5354,6 +5454,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -5427,6 +5529,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -5438,6 +5542,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -5677,6 +5783,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -5762,6 +5870,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -5898,6 +6008,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -11.938 -6.985 180)
@@ -5956,6 +6068,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -5967,6 +6081,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -6206,6 +6322,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -6279,6 +6397,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -6290,6 +6410,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -6529,6 +6651,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -6602,6 +6726,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -6613,6 +6739,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -6852,6 +6980,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -6925,6 +7055,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -6936,6 +7068,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -7175,6 +7309,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -7248,6 +7384,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -7259,6 +7397,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -7498,6 +7638,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -7571,6 +7713,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -7582,6 +7726,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -7821,6 +7967,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -7894,6 +8042,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -7905,6 +8055,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -8144,6 +8296,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -8217,6 +8371,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -8228,6 +8384,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -8467,6 +8625,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -8540,6 +8700,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -8551,6 +8713,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -8790,6 +8954,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -8863,6 +9029,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -8874,6 +9042,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -9113,6 +9283,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -9186,6 +9358,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -9197,6 +9371,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -9436,6 +9612,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -9509,6 +9687,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -9520,6 +9700,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -9759,6 +9941,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -9832,6 +10016,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -9843,6 +10029,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -10082,6 +10270,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -10168,6 +10358,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -10232,6 +10424,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" thru_hole circle
 			(at 0 0)
@@ -10262,6 +10456,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -10273,6 +10469,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -10512,6 +10710,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -10585,6 +10785,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -10596,6 +10798,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -10835,6 +11039,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -10908,6 +11114,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -10919,6 +11127,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -11158,6 +11368,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -11231,6 +11443,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -11242,6 +11456,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -11481,6 +11697,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -11554,6 +11772,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -11565,6 +11785,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -11804,6 +12026,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -11890,6 +12114,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -11954,6 +12180,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" thru_hole circle
 			(at 0 0)
@@ -11984,6 +12212,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -11995,6 +12225,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -12234,6 +12466,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -12307,6 +12541,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -12318,6 +12554,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -12557,6 +12795,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -12630,6 +12870,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -12641,6 +12883,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -12880,6 +13124,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -12953,6 +13199,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -12964,6 +13212,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -13203,6 +13453,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -13276,6 +13528,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -13287,6 +13541,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -13526,6 +13782,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -13611,6 +13869,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -13747,6 +14007,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -11.938 -6.985 180)
@@ -13805,6 +14067,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -13816,6 +14080,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -14055,6 +14321,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -14128,6 +14396,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -14139,6 +14409,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -14378,6 +14650,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -14451,6 +14725,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -14462,6 +14738,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -14701,6 +14979,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -14774,6 +15054,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -14785,6 +15067,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -15024,6 +15308,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -15097,6 +15383,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -15108,6 +15396,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -15347,6 +15637,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -15420,6 +15712,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -15431,6 +15725,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -15670,6 +15966,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -15755,6 +16053,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -15891,6 +16191,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -11.938 -6.985 180)
@@ -15949,6 +16251,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -15960,6 +16264,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -16199,6 +16505,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -16272,6 +16580,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -16283,6 +16593,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -16522,6 +16834,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -16595,6 +16909,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -16606,6 +16922,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -16845,6 +17163,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -16918,6 +17238,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Value" "SW_Push"
 			(at 0 8 180)
@@ -16929,6 +17251,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 180)
@@ -17168,6 +17492,8 @@
 					(thickness 0.15)
 				)
 			)
+		
+			(hide yes)
 		)
 		(pad "" np_thru_hole circle
 			(at -5.08 0 180)
@@ -17256,6 +17582,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -17509,6 +17837,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -17574,6 +17904,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -17827,6 +18159,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -17892,6 +18226,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -18145,6 +18481,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -18210,6 +18548,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -18463,6 +18803,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -18528,6 +18870,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -18781,6 +19125,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -18846,6 +19192,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -19099,6 +19447,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -19164,6 +19514,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -19417,6 +19769,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -19482,6 +19836,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -19735,6 +20091,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -19800,6 +20158,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -20053,6 +20413,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -20118,6 +20480,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -20371,6 +20735,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -20436,6 +20802,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -20689,6 +21057,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -20754,6 +21124,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -21007,6 +21379,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -21072,6 +21446,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -21325,6 +21701,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -21390,6 +21768,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -21643,6 +22023,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -21708,6 +22090,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -21961,6 +22345,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -22026,6 +22412,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -22279,6 +22667,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -22344,6 +22734,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -22597,6 +22989,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -22662,6 +23056,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -22915,6 +23311,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -22980,6 +23378,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -23233,6 +23633,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -23298,6 +23700,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -23551,6 +23955,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -23616,6 +24022,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -23869,6 +24277,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -23934,6 +24344,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -24187,6 +24599,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -24252,6 +24666,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -24505,6 +24921,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -24570,6 +24988,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -24823,6 +25243,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -24888,6 +25310,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -25141,6 +25565,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -25206,6 +25632,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -25459,6 +25887,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -25524,6 +25954,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -25777,6 +26209,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -25842,6 +26276,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -26095,6 +26531,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -26160,6 +26598,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -26413,6 +26853,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -26478,6 +26920,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -26731,6 +27175,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -26796,6 +27242,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -27049,6 +27497,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -27114,6 +27564,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -27367,6 +27819,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -27432,6 +27886,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -27685,6 +28141,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -27750,6 +28208,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -28003,6 +28463,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -28068,6 +28530,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -28321,6 +28785,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -28386,6 +28852,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -28639,6 +29107,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -28704,6 +29174,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -28957,6 +29429,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -29022,6 +29496,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -29275,6 +29751,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -29340,6 +29818,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -29593,6 +30073,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -29658,6 +30140,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -29911,6 +30395,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -29976,6 +30462,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -30229,6 +30717,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -30294,6 +30784,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -30547,6 +31039,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -30612,6 +31106,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -30865,6 +31361,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -30930,6 +31428,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -31183,6 +31683,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -31248,6 +31750,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -31501,6 +32005,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -31566,6 +32072,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -31819,6 +32327,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -31884,6 +32394,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -32137,6 +32649,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -32202,6 +32716,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -32455,6 +32971,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -32520,6 +33038,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
@@ -32773,6 +33293,8 @@
 				)
 				(justify mirror)
 			)
+		
+			(hide yes)
 		)
 		(pad "1" smd roundrect
 			(at -1.65 0 180)
@@ -32806,90 +33328,6 @@
 				(xyz 0 0 0)
 			)
 		)
-	)
-	(gr_arc
-		(start 13.062501 92.6)
-		(mid 12.355401 92.3071)
-		(end 12.062501 91.6)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "0bd90827-7682-4877-a006-66d421e7a945")
-	)
-	(gr_arc
-		(start 283.712501 91.6)
-		(mid 283.419601 92.3071)
-		(end 282.712501 92.6)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "3e9851e5-ae58-476a-aa67-2c6843fb8e0d")
-	)
-	(gr_line
-		(start 13.062501 11.45)
-		(end 282.712501 11.45)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "568eea50-0628-4335-9fec-45e2fe15a4da")
-	)
-	(gr_arc
-		(start 12.062501 12.45)
-		(mid 12.355401 11.7429)
-		(end 13.062501 11.45)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "573e622f-7e6c-4acc-bee5-eda93dc1e63e")
-	)
-	(gr_arc
-		(start 282.712501 11.45)
-		(mid 283.419601 11.7429)
-		(end 283.712501 12.45)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "60c53a2e-1f08-48b2-b59d-99df7c9bef4d")
-	)
-	(gr_line
-		(start 12.062501 12.45)
-		(end 12.062501 91.6)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "8294376e-468f-407b-92f9-09c0ffe85087")
-	)
-	(gr_line
-		(start 13.062501 92.6)
-		(end 282.712501 92.6)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "d7967569-2849-4253-ba4d-facaff459372")
-	)
-	(gr_line
-		(start 283.712501 12.45)
-		(end 283.712501 91.6)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "e8d1e111-ee49-458b-81dc-f108f516a669")
 	)
 	(segment
 		(start 32.062501 44.4675)
@@ -36588,4 +37026,65 @@
 		(uuid "fb4658e2-df99-4c49-b55c-5b8318d62ff5")
 	)
 	(embedded_fonts no)
+
+	(gr_line
+		(start -10.925 -11.925)
+		(end 258.575 -11.925)
+		(stroke (width 0.05) (type default))
+		(layer "Edge.Cuts")
+		(uuid "61bfc5ad-cc7b-4d61-87b5-234347cbefe8")
+	)
+	(gr_line
+		(start 259.575 -10.925)
+		(end 259.575 68.075)
+		(stroke (width 0.05) (type default))
+		(layer "Edge.Cuts")
+		(uuid "0187432f-61fa-4e3d-978e-55bb6b71274e")
+	)
+	(gr_line
+		(start -10.925 69.075)
+		(end 258.575 69.075)
+		(stroke (width 0.05) (type default))
+		(layer "Edge.Cuts")
+		(uuid "c3206e4b-40c2-4a49-9c8a-4d2085b3e4a6")
+	)
+	(gr_line
+		(start -11.925 -10.925)
+		(end -11.925 68.075)
+		(stroke (width 0.05) (type default))
+		(layer "Edge.Cuts")
+		(uuid "e96acded-8003-49a7-ad8c-4a9ffa9e9636")
+	)
+	(gr_arc
+		(start -11.925 -10.925)
+		(mid -11.6321 -11.6321)
+		(end -10.925 -11.925)
+		(stroke (width 0.05) (type default))
+		(layer "Edge.Cuts")
+		(uuid "012c44c9-9c78-4729-ad5f-3183113cc735")
+	)
+	(gr_arc
+		(start 258.575 -11.925)
+		(mid 259.2821 -11.6321)
+		(end 259.575 -10.925)
+		(stroke (width 0.05) (type default))
+		(layer "Edge.Cuts")
+		(uuid "93cc88c4-a945-47ed-98fa-77453dff3261")
+	)
+	(gr_arc
+		(start 259.575 68.075)
+		(mid 259.2821 68.7821)
+		(end 258.575 69.075)
+		(stroke (width 0.05) (type default))
+		(layer "Edge.Cuts")
+		(uuid "d894b5cc-6ae3-4c88-994a-8db054eab230")
+	)
+	(gr_arc
+		(start -10.925 69.075)
+		(mid -11.6321 68.7821)
+		(end -11.925 68.075)
+		(stroke (width 0.05) (type default))
+		(layer "Edge.Cuts")
+		(uuid "69901779-deef-4dad-a3d1-63cd53b5b3bd")
+	)
 )
