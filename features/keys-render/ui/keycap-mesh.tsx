@@ -13,7 +13,9 @@ const keycapUrls = import.meta.glob('../../../49-old/docs/models/keycap/STL/*.st
     eager: true,
 }) as Record<string, string>
 
-const keyFileName = (k: KeyDef): string => `1x${k.w} R${k.row + 1}.stl`
+// 4 행 키보드 SA 매핑 (위→아래): R3, R2, R1, R1. 마지막 행은 2-piece 스페이스바 영역이라 R1 재사용.
+const PROFILE_BY_ROW = [3, 2, 1, 1] as const
+const keyFileName = (k: KeyDef): string => `1x${k.w} R${PROFILE_BY_ROW[k.row]}.stl`
 
 const findUrl = (fname: string): string | null => {
     for (const path in keycapUrls) {
