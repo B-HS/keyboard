@@ -2,7 +2,7 @@ import { useMemo, useState, type CSSProperties, type FC } from 'react'
 import { Viewport } from '@widgets/viewport'
 import { PlateMesh } from '@features/plate-render'
 import { HousingTopMesh, HousingBottomMesh } from '@features/housing-render'
-import { PcbMesh, PcbStlMesh } from '@features/pcb-render'
+import { PcbMesh } from '@features/pcb-render'
 import { LolinMesh } from '@features/lolin-render'
 import { OldStlMesh } from '@features/old-render'
 import { SwitchMesh, KeycapMesh } from '@features/keys-render'
@@ -19,9 +19,8 @@ import {
 import plateSource from '../../../49-pcba/keyboard-plate-extended.jscad?raw'
 import oldTopUrl from '../../../49-old/docs/export/1_case-top.stl?url'
 import oldBottomUrl from '../../../49-old/docs/export/2_case-bottom.stl?url'
-import pcbStlUrl from '../../../49-pcba/no-hotswap-diode-arranged/export/keyboard-pcb.stl?url'
 
-type CurrentPartKey = 'plate' | 'pcb' | 'pcbStl' | 'housingTop' | 'housingBottom' | 'lolin' | 'switches' | 'keycaps'
+type CurrentPartKey = 'plate' | 'pcb' | 'housingTop' | 'housingBottom' | 'lolin' | 'switches' | 'keycaps'
 type OldPartKey = 'oldTop' | 'oldBottom'
 type PartKey = CurrentPartKey | OldPartKey
 
@@ -29,8 +28,7 @@ type PartVisibility = Record<PartKey, boolean>
 
 const CURRENT_LABELS: Record<CurrentPartKey, string> = {
     plate: 'Plate',
-    pcb: 'PCB (placeholder)',
-    pcbStl: 'PCB (KiCad STL)',
+    pcb: 'PCB',
     housingTop: 'Housing Top',
     housingBottom: 'Housing Bottom',
     lolin: 'LOLIN S3 Mini',
@@ -48,8 +46,7 @@ const OLD_OFFSET_X = -330
 export const PlateViewerPage: FC = () => {
     const [visibility, setVisibility] = useState<PartVisibility>({
         plate: true,
-        pcb: false,
-        pcbStl: true,
+        pcb: true,
         housingTop: true,
         housingBottom: true,
         lolin: true,
@@ -92,14 +89,6 @@ export const PlateViewerPage: FC = () => {
                                 plateMinY={KEYBOARD_GEOMETRY.plateMinY}
                                 frontBottomZ={KEYBOARD_GEOMETRY.pcbFrontBottomZ}
                                 tiltDeg={KEYBOARD_GEOMETRY.plateTiltDeg}
-                            />
-                        )}
-                        {visibility.pcbStl && (
-                            <PcbStlMesh
-                                url={pcbStlUrl}
-                                plateCenterX={KEYBOARD_GEOMETRY.plateCenterX}
-                                plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
-                                frontBottomZ={KEYBOARD_GEOMETRY.pcbFrontBottomZ}
                             />
                         )}
                         {visibility.housingTop && (

@@ -33099,6 +33099,19 @@
 		(layer "Edge.Cuts")
 		(uuid "e8d1e111-ee49-458b-81dc-f108f516a669")
 	)
+	(gr_text "hbyun\n\n49 v2\n"
+		(at 88 84.5 0)
+		(layer "B.Cu")
+		(uuid "0cf8c2dc-f22c-4c9d-9bca-20c1fa21e1dc")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left bottom mirror)
+		)
+	)
 	(segment
 		(start 32.062501 44.4675)
 		(end 32.635001 45.04)

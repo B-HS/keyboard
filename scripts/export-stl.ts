@@ -1,12 +1,22 @@
 /**
- * jscad → STL/DXF 일괄 export + STL coplanar polygon 병합 후처리
- * CSG가 분할한 동일 평면 인접 삼각형들을 하나의 큰 polygon으로 재구성 후 fan 삼각화 →
- * STL viewer에서 외곽 edge만 보이고 내부 분할선이 사라짐.
+ * jscad → STL 일괄 export + KiCad PCB 발주 파일 + JLCPCB PCBA 부품 파일 생성.
+ *
+ *  1. Render STL → 49-pcba/export/
+ *       plate.stl
+ *       top-case.stl
+ *       bottom-case.stl
+ *  2. PCB Gerber + drill + pnp + zip → 49-pcba/export/fab/ + fab.zip
+ *  3. JLCPCB PCBA 파일 (다이오드만) → 49-pcba/export/jlcpcb/
+ *       bom.csv  (D × 49, LCSC C81598 = 1N4148W Basic Part)
+ *       cpl.csv  (D 위치)
+ *
+ * STL coplanar polygon 후처리 (cleanupStl) 는 unused — housing/plate 모두 raw 사용
+ * (boolean sliver 영역 self-intersecting 회피). 형상 단순화 시 재사용 가능하여 보존.
  */
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import * as jscadModeling from '@jscad/modeling'
+import { $ } from 'bun'
 import earcut from 'earcut'
 // @ts-expect-error - no types
 import * as stlSerializer from '@jscad/stl-serializer'
@@ -15,40 +25,33 @@ import { buildHousingTopGeom, buildHousingBottomGeom } from '../49-pcba/build'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
-const SRC_DIR = join(ROOT, '49-pcba')
-const OUT_DIR = join(SRC_DIR, 'export')
-const PLATE_FILE = 'keyboard-plate-extended'
+const PCBA_DIR = join(ROOT, '49-pcba')
+const OUT_DIR = join(PCBA_DIR, 'export')
+const FAB_DIR = join(OUT_DIR, 'fab')
+const JLC_DIR = join(OUT_DIR, 'jlcpcb')
+const ZIP_PATH = join(OUT_DIR, 'fab.zip')
+const PLATE_JSCAD = 'keyboard-plate-extended'
 
-const requireShim = (id: string): unknown => {
-    if (id === '@jscad/modeling') return jscadModeling
-    throw new Error(`Unsupported require('${id}')`)
-}
+const KICAD_PCB = join(PCBA_DIR, 'no-hotswap-diode-arranged', 'keyboard', 'keyboard.kicad_pcb')
+const KICAD_CLI = '/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli'
 
-const evaluatePlate2d = (source: string): unknown => {
-    const wrapped = source + '\nmodule.exports.plate2d = plate2d;'
-    const factory = new Function('require', 'module', 'exports', wrapped) as (
-        req: typeof requireShim,
-        mod: { exports: Record<string, unknown> },
-        exp: Record<string, unknown>,
-    ) => void
-    const moduleObj: { exports: Record<string, unknown> } = { exports: {} }
-    factory(requireShim, moduleObj, moduleObj.exports)
-    if (!moduleObj.exports.plate2d) throw new Error('plate2d not found')
-    return moduleObj.exports.plate2d
-}
+// JLCPCB Basic Part: 1N4148W (SOD-123). 대량 stock, placement 무료.
+const DIODE_LCSC = 'C81598'
+const DIODE_VALUE = '1N4148W'
+const DIODE_FOOTPRINT = 'SOD-123'
 
 // =====================================================================
-// STL 후처리: 동일 평면 인접 삼각형 병합 → fan 삼각화로 깔끔한 외곽 edge만 남김
+// STL 후처리 (현재 unused — 보존)
 // =====================================================================
 
 type V3 = [number, number, number]
 type Tri = { n: V3; v: [V3, V3, V3] }
 
-const PREC = 4 // 좌표 라운드 자릿수
+const PREC = 4
 const r = (n: number) => Number(n.toFixed(PREC))
 const rN = (n: number) => Number(n.toFixed(3))
 const vk = (p: V3) => `${r(p[0])},${r(p[1])},${r(p[2])}`
-const ek = (a: V3, b: V3) => `${vk(a)}|${vk(b)}` // 방향 있는 edge
+const ek = (a: V3, b: V3) => `${vk(a)}|${vk(b)}`
 
 const parseStl = (buf: Buffer): Tri[] => {
     const count = buf.readUInt32LE(80)
@@ -93,7 +96,6 @@ const planeKey = (t: Tri): string => {
     return `${nx}|${ny}|${nz}|${d}`
 }
 
-// 평면 normal로 직교 basis 생성
 const makeBasis = (n: V3): [V3, V3] => {
     const ax = Math.abs(n[0])
     const ay = Math.abs(n[1])
@@ -108,11 +110,8 @@ const makeBasis = (n: V3): [V3, V3] => {
     return [u, v]
 }
 
-// 평면 그룹 → 외곽 directed edge 추출 → loop stitch → earcut 삼각화
 const remeshPlaneGroup = (group: Tri[]): Tri[] => {
     if (group.length < 2) return group
-
-    // 1. 양방향 edge 카운트로 boundary 판별 (boundary edge = 그룹 내 한 번만 등장)
     const edgeCount = new Map<string, number>()
     for (const t of group) {
         for (let i = 0; i < 3; i++) {
@@ -122,8 +121,6 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
             edgeCount.set(k, (edgeCount.get(k) || 0) + 1)
         }
     }
-
-    // boundary edge: 정방향 1번 + 역방향 0번 (= 다른 삼각형이 공유 안 함)
     const directedBoundary: [V3, V3][] = []
     for (const t of group) {
         for (let i = 0; i < 3; i++) {
@@ -137,8 +134,6 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
         }
     }
     if (directedBoundary.length < 3) return group
-
-    // 2. directed edge로 closed loop 합치기
     const startMap = new Map<string, [V3, V3]>()
     for (const e of directedBoundary) startMap.set(vk(e[0]), e)
     const usedEdges = new Set<[V3, V3]>()
@@ -158,8 +153,6 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
         if (loop.length >= 3) loops.push(loop)
     }
     if (loops.length === 0) return group
-
-    // 2-b. collinear vertex 제거 (직선 위 중간점 제거 → earcut이 최소 삼각형 출력)
     const simplifyLoop = (loop: V3[]): V3[] => {
         if (loop.length < 4) return loop
         const cross = (a: V3, b: V3, c: V3): number => {
@@ -170,7 +163,6 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
             const cz = d1[0] * d2[1] - d1[1] * d2[0]
             return Math.hypot(cx, cy, cz)
         }
-        // 반복적으로 collinear vertex 제거
         let cur = loop.slice()
         let changed = true
         while (changed && cur.length > 3) {
@@ -189,16 +181,12 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
         return cur
     }
     for (let i = 0; i < loops.length; i++) loops[i] = simplifyLoop(loops[i])
-
-    // 3. 평면 normal 기준 basis로 2D 투영
     const n = group[0].n
     const [bu, bv] = makeBasis(n)
     const proj = (p: V3): [number, number] => [
         p[0] * bu[0] + p[1] * bu[1] + p[2] * bu[2],
         p[0] * bv[0] + p[1] * bv[1] + p[2] * bv[2],
     ]
-
-    // 4. 각 loop의 signed area로 outer/hole 분류 (양수 = outer, 음수 = hole)
     const signedArea = (loop: V3[]): number => {
         let s = 0
         for (let i = 0; i < loop.length; i++) {
@@ -215,8 +203,6 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
         else holes.push(l)
     }
     if (outers.length === 0) return group
-
-    // 5. 각 outer에 대해 어느 hole이 속하는지 분류 후 earcut 삼각화
     const result: Tri[] = []
     const pointInPoly = (pt: [number, number], poly: [number, number][]): boolean => {
         let inside = false
@@ -231,14 +217,12 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
         }
         return inside
     }
-
     for (const outer of outers) {
         const outerProj = outer.map(proj)
         const myHoles = holes.filter((h) => {
             const hp = proj(h[0])
             return pointInPoly(hp, outerProj)
         })
-
         const flat: number[] = []
         const allV: V3[] = []
         for (const p of outer) {
@@ -259,7 +243,7 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
         try {
             idx = earcut(flat, holeIndices)
         } catch {
-            return group // earcut 실패 시 원본 유지
+            return group
         }
         if (idx.length < 3) return group
         for (let i = 0; i < idx.length; i += 3) {
@@ -269,7 +253,7 @@ const remeshPlaneGroup = (group: Tri[]): Tri[] => {
     return result.length > 0 ? result : group
 }
 
-// @ts-expect-error - 현재 housing 도 raw STL 이라 unused. plate 형상 변경 시 재사용 가능성 있어 보존.
+// @ts-expect-error - housing/plate 모두 raw STL 사용. 형상 단순화 시 재사용 가능하여 보존.
 const cleanupStl = (buf: Buffer): Buffer => {
     if (buf.length < 84) return buf
     const tris = parseStl(buf)
@@ -287,151 +271,123 @@ const cleanupStl = (buf: Buffer): Buffer => {
 }
 
 // =====================================================================
-// DXF (plate 2D)
+// 실행
 // =====================================================================
-
-type Pt = [number, number]
-type Side = [Pt, Pt]
-
-const extractLoops = (sides: Side[]): Pt[][] => {
-    const key = (p: Pt) => `${p[0].toFixed(6)},${p[1].toFixed(6)}`
-    const startMap = new Map<string, Side>()
-    for (const s of sides) startMap.set(key(s[0]), s)
-    const used = new Set<Side>()
-    const loops: Pt[][] = []
-    for (const start of sides) {
-        if (used.has(start)) continue
-        const loop: Pt[] = [start[0]]
-        let cur = start
-        while (!used.has(cur)) {
-            used.add(cur)
-            loop.push(cur[1])
-            const next = startMap.get(key(cur[1]))
-            if (!next || used.has(next)) break
-            cur = next
-        }
-        if (loop.length >= 3) loops.push(loop)
-    }
-    return loops
-}
-
-const buildCompleteDxf = (geom2: unknown): string => {
-    const sides = jscadModeling.geometries.geom2.toSides(
-        geom2 as Parameters<typeof jscadModeling.geometries.geom2.toSides>[0],
-    ) as Side[]
-    const loops = extractLoops(sides)
-    let handleCounter = 0x100
-    const nextHandle = () => (handleCounter++).toString(16).toUpperCase()
-    const lines: string[] = []
-    const w = (...vals: (string | number)[]) => {
-        for (const v of vals) lines.push(String(v))
-    }
-    w('0', 'SECTION', '2', 'HEADER')
-    w('9', '$ACADVER', '1', 'AC1015')
-    w('9', '$INSUNITS', '70', 4)
-    w('9', '$HANDSEED', '5', 'FFFF')
-    w('0', 'ENDSEC')
-    w('0', 'SECTION', '2', 'CLASSES', '0', 'ENDSEC')
-    w('0', 'SECTION', '2', 'TABLES')
-    w('0', 'TABLE', '2', 'VPORT', '5', '8', '330', '0', '100', 'AcDbSymbolTable', '70', 0, '0', 'ENDTAB')
-    w('0', 'TABLE', '2', 'LTYPE', '5', '5', '330', '0', '100', 'AcDbSymbolTable', '70', 1)
-    w('0', 'LTYPE', '5', '14', '330', '5', '100', 'AcDbSymbolTableRecord',
-        '100', 'AcDbLinetypeTableRecord', '2', 'CONTINUOUS', '70', 0, '3', 'Solid line',
-        '72', 65, '73', 0, '40', 0.0)
-    w('0', 'ENDTAB')
-    w('0', 'TABLE', '2', 'LAYER', '5', '2', '330', '0', '100', 'AcDbSymbolTable', '70', 1)
-    w('0', 'LAYER', '5', '10', '330', '2', '100', 'AcDbSymbolTableRecord',
-        '100', 'AcDbLayerTableRecord', '2', '0', '70', 0, '62', 7, '6', 'CONTINUOUS')
-    w('0', 'ENDTAB')
-    w('0', 'TABLE', '2', 'STYLE', '5', '3', '330', '0', '100', 'AcDbSymbolTable', '70', 0, '0', 'ENDTAB')
-    w('0', 'TABLE', '2', 'VIEW', '5', '6', '330', '0', '100', 'AcDbSymbolTable', '70', 0, '0', 'ENDTAB')
-    w('0', 'TABLE', '2', 'UCS', '5', '7', '330', '0', '100', 'AcDbSymbolTable', '70', 0, '0', 'ENDTAB')
-    w('0', 'TABLE', '2', 'APPID', '5', '9', '330', '0', '100', 'AcDbSymbolTable', '70', 1)
-    w('0', 'APPID', '5', '12', '330', '9', '100', 'AcDbSymbolTableRecord',
-        '100', 'AcDbRegAppTableRecord', '2', 'ACAD', '70', 0)
-    w('0', 'ENDTAB')
-    w('0', 'TABLE', '2', 'DIMSTYLE', '5', 'A', '330', '0', '100', 'AcDbSymbolTable', '70', 0,
-        '100', 'AcDbDimStyleTable', '0', 'ENDTAB')
-    w('0', 'TABLE', '2', 'BLOCK_RECORD', '5', '1', '330', '0', '100', 'AcDbSymbolTable', '70', 1)
-    w('0', 'BLOCK_RECORD', '5', '1F', '330', '1', '100', 'AcDbSymbolTableRecord',
-        '100', 'AcDbBlockTableRecord', '2', '*MODEL_SPACE')
-    w('0', 'BLOCK_RECORD', '5', '1B', '330', '1', '100', 'AcDbSymbolTableRecord',
-        '100', 'AcDbBlockTableRecord', '2', '*PAPER_SPACE')
-    w('0', 'ENDTAB', '0', 'ENDSEC')
-    w('0', 'SECTION', '2', 'BLOCKS')
-    w('0', 'BLOCK', '5', '20', '330', '1F', '100', 'AcDbEntity', '8', '0',
-        '100', 'AcDbBlockBegin', '2', '*MODEL_SPACE', '70', 0,
-        '10', 0.0, '20', 0.0, '30', 0.0, '3', '*MODEL_SPACE', '1', '')
-    w('0', 'ENDBLK', '5', '21', '330', '1F', '100', 'AcDbEntity', '8', '0', '100', 'AcDbBlockEnd')
-    w('0', 'BLOCK', '5', '1C', '330', '1B', '100', 'AcDbEntity', '67', 1, '8', '0',
-        '100', 'AcDbBlockBegin', '2', '*PAPER_SPACE', '70', 0,
-        '10', 0.0, '20', 0.0, '30', 0.0, '3', '*PAPER_SPACE', '1', '')
-    w('0', 'ENDBLK', '5', '1D', '330', '1B', '100', 'AcDbEntity', '67', 1, '8', '0', '100', 'AcDbBlockEnd')
-    w('0', 'ENDSEC')
-    w('0', 'SECTION', '2', 'ENTITIES')
-    for (const loop of loops) {
-        const pts = loop[0][0] === loop[loop.length - 1][0] && loop[0][1] === loop[loop.length - 1][1]
-            ? loop.slice(0, -1)
-            : loop
-        const handle = nextHandle()
-        w('0', 'LWPOLYLINE', '5', handle, '330', '1F', '100', 'AcDbEntity', '8', '0',
-            '100', 'AcDbPolyline', '90', pts.length, '70', 1)
-        for (const [x, y] of pts) {
-            w('10', x.toFixed(4), '20', y.toFixed(4))
-        }
-    }
-    w('0', 'ENDSEC')
-    w('0', 'SECTION', '2', 'OBJECTS')
-    w('0', 'DICTIONARY', '5', 'C', '330', '0', '100', 'AcDbDictionary', '281', 1,
-        '3', 'ACAD_GROUP', '350', 'D')
-    w('0', 'DICTIONARY', '5', 'D', '330', 'C', '100', 'AcDbDictionary', '281', 1)
-    w('0', 'ENDSEC')
-    w('0', 'EOF')
-    return lines.join('\r\n') + '\r\n'
-}
-
-mkdirSync(OUT_DIR, { recursive: true })
 
 const serializeRaw = (geom: unknown): Buffer => {
     const data = stlSerializer.serialize({ binary: true }, geom) as ArrayBuffer[]
     return Buffer.concat(data.map((c) => Buffer.from(c)))
 }
 
-// === housing: ts 빌더 → raw STL (cleanup 우회) ===
-// cleanupStl 의 boundary loop 추출 / earcut 재삼각화가 자석 pocket / corner round
-// boolean 결과의 sliver 영역에서 self-intersecting 만들 수 있어 housing 도 raw 사용.
-const TS_BUILDS: { name: string; build: () => unknown }[] = [
-    { name: '49-pcba-housing-top', build: buildHousingTopGeom },
-    { name: '49-pcba-housing-bottom', build: buildHousingBottomGeom },
+mkdirSync(OUT_DIR, { recursive: true })
+
+// 이전 export 잔여 파일 정리 (renaming/PCB STL 제거에 따른 stale)
+const STALE = [
+    '49-pcba-housing-top.stl',
+    '49-pcba-housing-bottom.stl',
+    'keyboard-plate-extended.stl',
+    'keyboard-pcb.stl',
+    'keyboard-fab.zip',
 ]
-
-for (const { name, build } of TS_BUILDS) {
-    const outPath = join(OUT_DIR, `${name}.stl`)
-    const raw = serializeRaw(build())
-    writeFileSync(outPath, raw)
-    console.log(`✓ ${name}.stl  ${raw.length}B  tri ${raw.readUInt32LE(80)} (raw)`)
+for (const f of STALE) {
+    const p = join(OUT_DIR, f)
+    if (existsSync(p)) rmSync(p)
 }
 
-// === plate: KLE-NG 자동생성 jscad 텍스트 → raw STL (cleanup 우회) ===
+// --- 1. Render STL ---
+console.log('=== 1. Render STL ===')
+
+writeFileSync(join(OUT_DIR, 'top-case.stl'), serializeRaw(buildHousingTopGeom()))
+writeFileSync(join(OUT_DIR, 'bottom-case.stl'), serializeRaw(buildHousingBottomGeom()))
 {
-    const inPath = join(SRC_DIR, `${PLATE_FILE}.jscad`)
-    const outPath = join(OUT_DIR, `${PLATE_FILE}.stl`)
-    const source = await Bun.file(inPath).text()
-    const geom = evaluateJscadSource(source)
-    const raw = serializeRaw(geom)
-    writeFileSync(outPath, raw)
-    console.log(`✓ ${PLATE_FILE}.stl  ${raw.length}B  tri ${raw.readUInt32LE(80)} (raw)`)
+    const source = await Bun.file(join(PCBA_DIR, `${PLATE_JSCAD}.jscad`)).text()
+    writeFileSync(join(OUT_DIR, 'plate.stl'), serializeRaw(evaluateJscadSource(source)))
+}
+for (const name of ['plate.stl', 'top-case.stl', 'bottom-case.stl']) {
+    const buf = readFileSync(join(OUT_DIR, name))
+    console.log(`  ${name.padEnd(20)} ${(buf.length / 1024).toFixed(1).padStart(7)} KB  tri ${buf.readUInt32LE(80)}`)
 }
 
-// === plate DXF: 동일 jscad 의 plate2d 추출 ===
-{
-    const inPath = join(SRC_DIR, `${PLATE_FILE}.jscad`)
-    const outPath = join(OUT_DIR, `${PLATE_FILE}.dxf`)
-    const source = await Bun.file(inPath).text()
-    const plate2d = evaluatePlate2d(source)
-    const dxf = buildCompleteDxf(plate2d)
-    writeFileSync(outPath, dxf)
-    console.log(`✓ ${PLATE_FILE}.dxf (${dxf.length} bytes)`)
+// --- 2. Gerber + drill + pnp + zip ---
+console.log('\n=== 2. Fabrication outputs (PCB) ===')
+
+if (existsSync(FAB_DIR)) rmSync(FAB_DIR, { recursive: true })
+mkdirSync(FAB_DIR, { recursive: true })
+
+const LAYERS = [
+    'F.Cu', 'B.Cu',
+    'F.Silkscreen', 'B.Silkscreen',
+    'F.Mask', 'B.Mask',
+    'F.Paste', 'B.Paste',
+    'Edge.Cuts',
+].join(',')
+
+await $`${KICAD_CLI} pcb export gerbers --output ${FAB_DIR}/ --layers ${LAYERS} --no-x2 --subtract-soldermask ${KICAD_PCB}`.quiet()
+await $`${KICAD_CLI} pcb export drill --output ${FAB_DIR}/ --format excellon --excellon-separate-th --excellon-units mm ${KICAD_PCB}`.quiet()
+await $`${KICAD_CLI} pcb export pos --output ${FAB_DIR}/keyboard-pnp-top.csv --format csv --units mm --side front ${KICAD_PCB}`.quiet()
+await $`${KICAD_CLI} pcb export pos --output ${FAB_DIR}/keyboard-pnp-bottom.csv --format csv --units mm --side back ${KICAD_PCB}`.quiet()
+
+for (const f of readdirSync(FAB_DIR).sort()) {
+    console.log(`  ${f}`)
 }
 
-console.log(`\nExported to ${OUT_DIR}`)
+if (existsSync(ZIP_PATH)) rmSync(ZIP_PATH)
+await $`cd ${FAB_DIR} && zip -r ${ZIP_PATH} .`.quiet()
+console.log(`  fab.zip (${((await Bun.file(ZIP_PATH).size) / 1024).toFixed(1)} KB)`)
+
+// --- 3. JLCPCB PCBA (다이오드 only) ---
+console.log('\n=== 3. JLCPCB PCBA (diodes only) ===')
+
+if (existsSync(JLC_DIR)) rmSync(JLC_DIR, { recursive: true })
+mkdirSync(JLC_DIR, { recursive: true })
+
+type PnpRow = { ref: string; val: string; pkg: string; x: number; y: number; rot: number; side: string }
+const parsePnp = (path: string): PnpRow[] => {
+    const lines = readFileSync(path, 'utf8').trim().split('\n')
+    const rows: PnpRow[] = []
+    for (let i = 1; i < lines.length; i++) {
+        // Ref,Val,Package,PosX,PosY,Rot,Side  (Ref/Val/Package quoted)
+        const m = lines[i].match(/^"([^"]+)","([^"]+)","([^"]+)",([\d.\-]+),([\d.\-]+),([\d.\-]+),(\w+)/)
+        if (!m) continue
+        rows.push({
+            ref: m[1], val: m[2], pkg: m[3],
+            x: parseFloat(m[4]), y: parseFloat(m[5]),
+            rot: parseFloat(m[6]), side: m[7],
+        })
+    }
+    return rows
+}
+
+const pnpAll = [
+    ...parsePnp(join(FAB_DIR, 'keyboard-pnp-top.csv')),
+    ...parsePnp(join(FAB_DIR, 'keyboard-pnp-bottom.csv')),
+]
+const diodes = pnpAll.filter((r) => /^D\d+$/.test(r.ref))
+
+// CPL (JLCPCB Component Position List)
+const cplLines = ['Designator,Mid X,Mid Y,Layer,Rotation']
+for (const d of diodes) {
+    const layer = d.side === 'top' ? 'Top' : 'Bottom'
+    cplLines.push(`${d.ref},${d.x.toFixed(4)}mm,${d.y.toFixed(4)}mm,${layer},${d.rot}`)
+}
+writeFileSync(join(JLC_DIR, 'cpl.csv'), cplLines.join('\n') + '\n')
+
+// BOM (JLCPCB)
+const designators = diodes.map((d) => d.ref).sort((a, b) => {
+    const na = parseInt(a.replace(/\D/g, '')) || 0
+    const nb = parseInt(b.replace(/\D/g, '')) || 0
+    return na - nb
+}).join(',')
+const bomLines = [
+    'Comment,Designator,Footprint,LCSC Part #',
+    `${DIODE_VALUE},"${designators}",${DIODE_FOOTPRINT},${DIODE_LCSC}`,
+]
+writeFileSync(join(JLC_DIR, 'bom.csv'), bomLines.join('\n') + '\n')
+
+console.log(`  cpl.csv  (${diodes.length} diodes)`)
+console.log(`  bom.csv  (1 LCSC part: ${DIODE_LCSC} ${DIODE_VALUE})`)
+
+console.log('\n=== Done ===')
+console.log(`  STL:    ${OUT_DIR}/{plate,top-case,bottom-case}.stl`)
+console.log(`  PCB:    ${ZIP_PATH}`)
+console.log(`  PCBA:   ${JLC_DIR}/{bom,cpl}.csv`)
