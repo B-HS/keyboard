@@ -12,13 +12,13 @@ import { evaluateJscadSource } from '@shared/lib/jscad'
 import {
     buildHousingTopGeom,
     buildHousingBottomGeom,
-    buildPcbGeom,
     buildLolinPcbGeom,
     buildLolinUsbCGeom,
 } from '../../../49-pcba/build'
 import plateSource from '../../../49-pcba/keyboard-plate-extended.jscad?raw'
 import oldTopUrl from '../../../49-old/docs/export/1_case-top.stl?url'
 import oldBottomUrl from '../../../49-old/docs/export/2_case-bottom.stl?url'
+import pcbUrl from '../../../49-pcba/export/pcb.stl?url'
 
 type CurrentPartKey = 'plate' | 'pcb' | 'housingTop' | 'housingBottom' | 'lolin' | 'switches' | 'keycaps'
 type OldPartKey = 'oldTop' | 'oldBottom'
@@ -61,7 +61,6 @@ export const PlateViewerPage: FC = () => {
     const plateGeom = useMemo(() => evaluateJscadSource(plateSource), [])
     const housingTopGeom = useMemo(() => buildHousingTopGeom(), [])
     const housingBottomGeom = useMemo(() => buildHousingBottomGeom(), [])
-    const pcbGeom = useMemo(() => buildPcbGeom(), [])
     const lolinPcbGeom = useMemo(() => buildLolinPcbGeom(), [])
     const lolinUsbCGeom = useMemo(() => buildLolinUsbCGeom(), [])
 
@@ -83,12 +82,8 @@ export const PlateViewerPage: FC = () => {
                         )}
                         {visibility.pcb && (
                             <PcbMesh
-                                geom={pcbGeom}
-                                plateCenterX={KEYBOARD_GEOMETRY.plateCenterX}
-                                plateCenterY={KEYBOARD_GEOMETRY.plateCenterY}
-                                plateMinY={KEYBOARD_GEOMETRY.plateMinY}
+                                url={pcbUrl}
                                 frontBottomZ={KEYBOARD_GEOMETRY.pcbFrontBottomZ}
-                                tiltDeg={KEYBOARD_GEOMETRY.plateTiltDeg}
                             />
                         )}
                         {visibility.housingTop && (

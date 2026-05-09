@@ -11,27 +11,27 @@ export const VIEWER_STYLE = {
         color: '#ebebe5',
         metalness: 0,
         roughness: 0.75,
-        opacity: 0.5,
+        opacity: 0.8,
     },
     pcb: {
         color: '#0d4a2a',
         metalness: 0.1,
         roughness: 0.75,
-        opacity: 0.5,
+        opacity: 0.8,
     },
     housingTop: {
         // 9600 레진 (plate 와 동일 출력본).
         color: '#ebebe5',
         metalness: 0,
         roughness: 0.75,
-        opacity: 0.5,
+        opacity: 0.8,
     },
     housingBottom: {
         // 9600 레진 (plate / housing-top 과 동일 출력본).
         color: '#ebebe5',
         metalness: 0,
         roughness: 0.75,
-        opacity: 0.5,
+        opacity: 0.8,
     },
     switch: {
         color: '#1d2024',

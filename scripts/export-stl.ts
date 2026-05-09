@@ -1,12 +1,13 @@
 /**
- * jscad → STL 일괄 export + KiCad PCB 발주 파일 + JLCPCB PCBA 부품 파일 생성.
+ * jscad → STL 일괄 export + KiCad PCB STL/Gerber/PCBA 파일 생성.
  *
- *  1. Render STL → 49-pcba/export/
+ *  1. Render STL (jscad) → 49-pcba/export/
  *       plate.stl
  *       top-case.stl
  *       bottom-case.stl
- *  2. PCB Gerber + drill + pnp + zip → 49-pcba/export/fab/ + fab.zip
- *  3. JLCPCB PCBA 파일 (다이오드만) → 49-pcba/export/jlcpcb/
+ *  2. KiCad PCB STL → 49-pcba/export/pcb.stl  (viewer 에 끼우기용 실제 PCB)
+ *  3. PCB Gerber + drill + pnp + zip → 49-pcba/export/fab/ + fab.zip
+ *  4. JLCPCB PCBA (다이오드만) → 49-pcba/export/jlcpcb/
  *       bom.csv  (D × 49, LCSC C81598 = 1N4148W Basic Part)
  *       cpl.csv  (D 위치)
  *
@@ -281,12 +282,11 @@ const serializeRaw = (geom: unknown): Buffer => {
 
 mkdirSync(OUT_DIR, { recursive: true })
 
-// 이전 export 잔여 파일 정리 (renaming/PCB STL 제거에 따른 stale)
+// 이전 export 잔여 파일 정리 (renaming 에 따른 stale)
 const STALE = [
     '49-pcba-housing-top.stl',
     '49-pcba-housing-bottom.stl',
     'keyboard-plate-extended.stl',
-    'keyboard-pcb.stl',
     'keyboard-fab.zip',
 ]
 for (const f of STALE) {
@@ -308,8 +308,17 @@ for (const name of ['plate.stl', 'top-case.stl', 'bottom-case.stl']) {
     console.log(`  ${name.padEnd(20)} ${(buf.length / 1024).toFixed(1).padStart(7)} KB  tri ${buf.readUInt32LE(80)}`)
 }
 
-// --- 2. Gerber + drill + pnp + zip ---
-console.log('\n=== 2. Fabrication outputs (PCB) ===')
+// --- 2. KiCad PCB STL (viewer 끼우기용) ---
+console.log('\n=== 2. KiCad PCB STL ===')
+{
+    const pcbStl = join(OUT_DIR, 'pcb.stl')
+    await $`${KICAD_CLI} pcb export stl --include-tracks --include-pads --include-soldermask --include-silkscreen --force -o ${pcbStl} ${KICAD_PCB}`.quiet()
+    const size = ((await Bun.file(pcbStl).size) / 1024 / 1024).toFixed(1)
+    console.log(`  pcb.stl (${size} MB)`)
+}
+
+// --- 3. Gerber + drill + pnp + zip ---
+console.log('\n=== 3. Fabrication outputs (PCB) ===')
 
 if (existsSync(FAB_DIR)) rmSync(FAB_DIR, { recursive: true })
 mkdirSync(FAB_DIR, { recursive: true })
@@ -335,8 +344,8 @@ if (existsSync(ZIP_PATH)) rmSync(ZIP_PATH)
 await $`cd ${FAB_DIR} && zip -r ${ZIP_PATH} .`.quiet()
 console.log(`  fab.zip (${((await Bun.file(ZIP_PATH).size) / 1024).toFixed(1)} KB)`)
 
-// --- 3. JLCPCB PCBA (다이오드 only) ---
-console.log('\n=== 3. JLCPCB PCBA (diodes only) ===')
+// --- 4. JLCPCB PCBA (다이오드 only) ---
+console.log('\n=== 4. JLCPCB PCBA (diodes only) ===')
 
 if (existsSync(JLC_DIR)) rmSync(JLC_DIR, { recursive: true })
 mkdirSync(JLC_DIR, { recursive: true })
@@ -388,6 +397,6 @@ console.log(`  cpl.csv  (${diodes.length} diodes)`)
 console.log(`  bom.csv  (1 LCSC part: ${DIODE_LCSC} ${DIODE_VALUE})`)
 
 console.log('\n=== Done ===')
-console.log(`  STL:    ${OUT_DIR}/{plate,top-case,bottom-case}.stl`)
+console.log(`  STL:    ${OUT_DIR}/{plate,top-case,bottom-case,pcb}.stl`)
 console.log(`  PCB:    ${ZIP_PATH}`)
 console.log(`  PCBA:   ${JLC_DIR}/{bom,cpl}.csv`)

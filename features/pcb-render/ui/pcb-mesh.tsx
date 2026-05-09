@@ -1,47 +1,57 @@
-import { useMemo, type FC } from 'react'
+import { useLoader } from '@react-three/fiber'
+import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js'
 import * as THREE from 'three'
-import { geom3ToBufferGeometry, type Geom3 } from '@shared/lib/jscad'
-import { VIEWER_STYLE } from '@shared/config/viewer'
+import { useMemo, type FC } from 'react'
 
 type PcbMeshProps = {
-    geom: Geom3
-    plateCenterX: number
-    plateCenterY: number
-    plateMinY: number
-    /** PCB 앞쪽 하면이 위치할 jscad Z 값 */
+    url: string
+    /** PCB 하면이 위치할 jscad Z (보통 pcbFrontBottomZ). */
     frontBottomZ: number
-    tiltDeg: number
     color?: string
     metalness?: number
     roughness?: number
+    opacity?: number
 }
 
+/**
+ * KiCad 에서 export 한 PCB STL 을 viewer 에 띄움.
+ * STL 자체 page-origin offset 이 들어 있어 직접 매핑 X.
+ * STL bbox center 를 viewer 원점으로, minZ 를 frontBottomZ 로 정렬.
+ */
 export const PcbMesh: FC<PcbMeshProps> = ({
-    geom,
-    plateCenterX,
-    plateCenterY,
-    plateMinY,
+    url,
     frontBottomZ,
-    tiltDeg,
-    color = VIEWER_STYLE.pcb.color,
-    metalness = VIEWER_STYLE.pcb.metalness,
-    roughness = VIEWER_STYLE.pcb.roughness,
+    color = '#0d4a2a',
+    metalness = 0.1,
+    roughness = 0.7,
+    opacity = 1,
 }) => {
-    const transformedGeometry = useMemo(() => {
-        const cloned = geom3ToBufferGeometry(geom)
-        const tiltRad = (tiltDeg * Math.PI) / 180
-        cloned.translate(0, -plateMinY, 0)
-        cloned.rotateX(tiltRad)
-        cloned.translate(0, plateMinY, frontBottomZ)
-        cloned.translate(-plateCenterX, -plateCenterY, 0)
+    const geom = useLoader(STLLoader, url)
+    const transformed = useMemo(() => {
+        const cloned = geom.clone()
         cloned.computeBoundingBox()
-        cloned.computeBoundingSphere()
+        const bb = cloned.boundingBox!
+        const cx = (bb.min.x + bb.max.x) / 2
+        const cy = (bb.min.y + bb.max.y) / 2
+        const minZ = bb.min.z
+        cloned.translate(-cx, -cy, frontBottomZ - minZ)
+        cloned.computeVertexNormals()
         return cloned
-    }, [geom, plateCenterX, plateCenterY, plateMinY, frontBottomZ, tiltDeg])
+    }, [geom, frontBottomZ])
+
+    const transparent = opacity < 1
 
     return (
-        <mesh geometry={transformedGeometry} castShadow receiveShadow rotation={[-Math.PI / 2, 0, 0]}>
-            <meshStandardMaterial color={color} metalness={metalness} roughness={roughness} side={THREE.DoubleSide} />
+        <mesh geometry={transformed} castShadow receiveShadow rotation={[-Math.PI / 2, 0, 0]}>
+            <meshStandardMaterial
+                color={color}
+                metalness={metalness}
+                roughness={roughness}
+                side={THREE.DoubleSide}
+                transparent={transparent}
+                opacity={opacity}
+                depthWrite={!transparent}
+            />
         </mesh>
     )
 }
