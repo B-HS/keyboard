@@ -1,0 +1,2147 @@
+(kicad_sch (version 20250114) (generator "eeschema") (generator_version "9.0") (uuid "9e45a776-7007-48ff-b543-dc98423173b7") (paper "A4") (lib_symbols 
+
+(symbol "Device:D_Small" (pin_numbers (hide yes)) (pin_names (offset 0.254) (hide yes)) (exclude_from_sim no) (in_bom yes) (on_board yes) 
+
+(property "Reference" "D" (at -1.27 2.032 0) (effects (font (size 1.27 1.27)) (justify left))) 
+
+(property "Value" "D_Small" (at -3.81 -2.032 0) (effects (font (size 1.27 1.27)) (justify left))) 
+
+(property "Footprint" "" (at 0 0 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 0 0 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Diode, small symbol" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Device" "D" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "ki_keywords" "diode" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(symbol "D_Small_0_1" 
+
+(polyline (pts 
+
+(xy -0.762 0) 
+
+(xy 0.762 0)) (stroke (width 0) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy -0.762 -1.016) 
+
+(xy -0.762 1.016)) (stroke (width 0.254) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy 0.762 -1.016) 
+
+(xy -0.762 0) 
+
+(xy 0.762 1.016) 
+
+(xy 0.762 -1.016)) (stroke (width 0.254) (type default)) (fill (type none)))) 
+
+(symbol "D_Small_1_1" (pin passive line (at -2.54 0 0) (length 1.778) (name "K" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27))))) (pin passive line (at 2.54 0 180) (length 1.778) (name "A" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))) (embedded_fonts no)) 
+
+(symbol "Device:RotaryEncoder_Switch" (pin_names (offset 0.254) (hide yes)) (exclude_from_sim no) (in_bom yes) (on_board yes) 
+
+(property "Reference" "ROT" (at 0 6.604 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "RotaryEncoder_Switch" (at 0 -6.604 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at -3.81 4.064 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 0 6.604 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Rotary encoder, dual channel, incremental quadrate outputs, with switch" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "ki_keywords" "rotary switch encoder switch push button" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "ki_fp_filters" "RotaryEncoder*Switch*" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(symbol "RotaryEncoder_Switch_0_1" 
+
+(rectangle (start -5.08 5.08) (end 5.08 -5.08) (stroke (width 0.254) (type default)) (fill (type background))) 
+
+(polyline (pts 
+
+(xy -5.08 2.54) 
+
+(xy -3.81 2.54) 
+
+(xy -3.81 2.032)) (stroke (width 0) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy -5.08 0) 
+
+(xy -3.81 0) 
+
+(xy -3.81 -1.016) 
+
+(xy -3.302 -2.032)) (stroke (width 0) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy -5.08 -2.54) 
+
+(xy -3.81 -2.54) 
+
+(xy -3.81 -2.032)) (stroke (width 0) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy -4.318 0) 
+
+(xy -3.81 0) 
+
+(xy -3.81 1.016) 
+
+(xy -3.302 2.032)) (stroke (width 0) (type default)) (fill (type none))) (circle (center -3.81 0) (radius 0.254) (stroke (width 0) (type default)) (fill (type outline))) 
+
+(polyline (pts 
+
+(xy -0.635 -1.778) 
+
+(xy -0.635 1.778)) (stroke (width 0.254) (type default)) (fill (type none))) (circle (center -0.381 0) (radius 1.905) (stroke (width 0.254) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy -0.381 -1.778) 
+
+(xy -0.381 1.778)) (stroke (width 0.254) (type default)) (fill (type none))) (arc (start -0.381 -2.794) (mid -3.0988 -0.0635) (end -0.381 2.667) (stroke (width 0.254) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy -0.127 1.778) 
+
+(xy -0.127 -1.778)) (stroke (width 0.254) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy 0.254 2.921) 
+
+(xy -0.508 2.667) 
+
+(xy 0.127 2.286)) (stroke (width 0.254) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy 0.254 -3.048) 
+
+(xy -0.508 -2.794) 
+
+(xy 0.127 -2.413)) (stroke (width 0.254) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy 3.81 1.016) 
+
+(xy 3.81 -1.016)) (stroke (width 0.254) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy 3.81 0) 
+
+(xy 3.429 0)) (stroke (width 0.254) (type default)) (fill (type none))) (circle (center 4.318 1.016) (radius 0.127) (stroke (width 0.254) (type default)) (fill (type none))) (circle (center 4.318 -1.016) (radius 0.127) (stroke (width 0.254) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy 5.08 2.54) 
+
+(xy 4.318 2.54) 
+
+(xy 4.318 1.016)) (stroke (width 0.254) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy 5.08 -2.54) 
+
+(xy 4.318 -2.54) 
+
+(xy 4.318 -1.016)) (stroke (width 0.254) (type default)) (fill (type none)))) 
+
+(symbol "RotaryEncoder_Switch_1_1" (pin passive line (at -7.62 2.54 0) (length 2.54) (name "A" (effects (font (size 1.27 1.27)))) (number "A" (effects (font (size 1.27 1.27))))) (pin passive line (at -7.62 0 0) (length 2.54) (name "C" (effects (font (size 1.27 1.27)))) (number "C" (effects (font (size 1.27 1.27))))) (pin passive line (at -7.62 -2.54 0) (length 2.54) (name "B" (effects (font (size 1.27 1.27)))) (number "B" (effects (font (size 1.27 1.27))))) (pin passive line (at 7.62 2.54 180) (length 2.54) (name "S1" (effects (font (size 1.27 1.27)))) (number "S1" (effects (font (size 1.27 1.27))))) (pin passive line (at 7.62 -2.54 180) (length 2.54) (name "S2" (effects (font (size 1.27 1.27)))) (number "S2" (effects (font (size 1.27 1.27)))))) (embedded_fonts no)) 
+
+(symbol "Mechanical:SW_stab" (pin_names (offset 1.016)) (exclude_from_sim no) (in_bom yes) (on_board yes) 
+
+(property "Reference" "S" (at -5.08 6.35 0) (effects (font (size 1.27 1.27)) (justify left))) 
+
+(property "Value" "SW_stab" (at -5.08 3.81 0) (effects (font (size 1.27 1.27)) (justify left))) 
+
+(property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Switch stabilizer" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "ki_keywords" "stabilizer stab" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(symbol "SW_stab_0_1" 
+
+(rectangle (start -5.08 1.27) (end -2.54 -2.54) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start -5.08 -1.524) (end -2.54 -2.54) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start -4.826 2.794) (end -2.794 1.27) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start -4.064 1.27) (end -3.556 2.794) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start -4.064 -1.778) (end 4.064 -2.286) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start -4.064 -2.286) (end -3.556 -1.016) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start 2.54 1.27) (end 5.08 -2.54) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start 2.54 -1.524) (end 5.08 -2.54) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start 2.794 2.794) (end 4.826 1.27) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start 3.556 1.27) (end 4.064 2.794) (stroke (width 0) (type default)) (fill (type none))) 
+
+(rectangle (start 4.064 -2.286) (end 3.556 -1.016) (stroke (width 0) (type default)) (fill (type none)))) (embedded_fonts no)) 
+
+(symbol "Switch:SW_Push_45deg" (pin_numbers (hide yes)) (pin_names (offset 1.016) (hide yes)) (exclude_from_sim no) (in_bom yes) (on_board yes) 
+
+(property "Reference" "SW" (at 3.048 1.016 0) (effects (font (size 1.27 1.27)) (justify left))) 
+
+(property "Value" "SW_Push_45deg" (at 0 -3.81 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Push button switch, normally open, two pins, 45° tilted" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "ki_keywords" "switch normally-open pushbutton push-button" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(symbol "SW_Push_45deg_0_1" 
+
+(polyline (pts 
+
+(xy -2.54 2.54) 
+
+(xy -1.524 1.524) 
+
+(xy -1.524 1.524)) (stroke (width 0) (type default)) (fill (type none))) (circle (center -1.1684 1.1684) (radius 0.508) (stroke (width 0) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy -0.508 2.54) 
+
+(xy 2.54 -0.508)) (stroke (width 0) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy 1.016 1.016) 
+
+(xy 2.032 2.032)) (stroke (width 0) (type default)) (fill (type none))) (circle (center 1.143 -1.1938) (radius 0.508) (stroke (width 0) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy 1.524 -1.524) 
+
+(xy 2.54 -2.54) 
+
+(xy 2.54 -2.54) 
+
+(xy 2.54 -2.54)) (stroke (width 0) (type default)) (fill (type none))) (pin passive line (at -2.54 2.54 0) (length 0) (name "1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27))))) (pin passive line (at 2.54 -2.54 180) (length 0) (name "2" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))) (embedded_fonts no))) (sheet_instances (path "/" (page "1"))) (embedded_fonts no) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 29.21 22.86 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "b47650ac-27ad-4f01-9e22-681b5ca25ca7") 
+
+(property "Reference" "SW1" (at 29.21 17.78 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 29.21 19.05 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 29.21 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 29.21 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 29.21 22.86 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "aab18bbb-86df-40a5-ae6f-63151f2a4adf")) (pin "2" (uuid "b05a80ee-7c86-4bb6-81db-dc4962f07353")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW1") (unit 1))))) 
+
+(wire (pts 
+
+(xy 26.67 20.32) 
+
+(xy 25.4 20.32)) (stroke (width 0) (type default)) (uuid cd4699cd-db8f-462a-b2cd-f1131e1c5fdc)) 
+
+(wire (pts 
+
+(xy 25.4 20.32) 
+
+(xy 25.4 120.65)) (stroke (width 0) (type default)) (uuid 950f89f6-d610-4480-aa1e-5f168f76107f)) 
+
+(global_label "COL0" (shape input) (at 25.4 120.65 270) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify right)) (uuid 610fa476-1f8c-4748-88be-55dcac86221f) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 19.1491 120.65 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Device:D_Small") (at 31.75 31.75 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "868edf11-b0d7-4684-b39a-82239064e8dd") 
+
+(property "Reference" "D1" (at 33.02 30.48 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 33.02 33.02 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 31.75 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 31.75 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 31.75 31.75 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 31.75 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 31.75 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "44d4db72-a85b-4bdd-be85-8583d18f4fac")) (pin "2" (uuid "337f4828-2542-44ec-b721-a27328a1f7a9")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D1") (unit 1))))) 
+
+(wire (pts 
+
+(xy 31.75 25.4) 
+
+(xy 31.75 29.21)) (stroke (width 0) (type default)) (uuid d8089905-dbe8-4c2a-813e-703f62f6ed31)) 
+
+(wire (pts 
+
+(xy 31.75 34.29) 
+
+(xy 31.75 35.56)) (stroke (width 0) (type default)) (uuid 8fcaa078-938e-4740-b126-4234cfdd10e5)) 
+
+(wire (pts 
+
+(xy 31.75 35.56) 
+
+(xy 114.3 35.56)) (stroke (width 0) (type default)) (uuid 8f8ecec3-dc5c-4b2b-9acc-eec3b4c743c9)) 
+
+(global_label "ROW0" (shape input) (at 114.3 35.56 0) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify left)) (uuid 6c644068-a047-463b-9a9e-76a37748f78e) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 108.0491 35.56 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 41.91 22.86 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "5ba0a00a-4954-463d-978d-b643d4088618") 
+
+(property "Reference" "SW2" (at 41.91 17.78 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 41.91 19.05 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 41.91 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 41.91 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 41.91 22.86 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "01740ac9-e407-408c-a542-f28471f0606d")) (pin "2" (uuid "3b98d36f-4c71-4316-ac56-48907d2a2cf9")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW2") (unit 1))))) 
+
+(wire (pts 
+
+(xy 39.37 20.32) 
+
+(xy 38.1 20.32)) (stroke (width 0) (type default)) (uuid 34074a82-dde4-4083-ba83-858c73610b8d)) 
+
+(wire (pts 
+
+(xy 38.1 20.32) 
+
+(xy 38.1 120.65)) (stroke (width 0) (type default)) (uuid 215fd5b5-4ad0-4c28-87f4-1eb0f9a4c9d3)) 
+
+(global_label "COL1" (shape input) (at 38.1 120.65 270) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify right)) (uuid 8161ee4b-bd7d-4409-8406-6f87e0d66837) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 31.8491 120.65 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Device:D_Small") (at 44.45 31.75 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "e6b0956a-0608-4e0a-bbf8-6854045182bc") 
+
+(property "Reference" "D2" (at 45.72 30.48 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 45.72 33.02 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 44.45 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 44.45 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 44.45 31.75 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 44.45 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 44.45 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "efb9214a-0e43-4170-abc6-db84e0814f82")) (pin "2" (uuid "cae4dcd3-c837-494c-b605-6278b332e6ff")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D2") (unit 1))))) 
+
+(wire (pts 
+
+(xy 44.45 25.4) 
+
+(xy 44.45 29.21)) (stroke (width 0) (type default)) (uuid 10078c7b-e9b5-4e1b-8a63-5997bd398f5c)) 
+
+(wire (pts 
+
+(xy 44.45 34.29) 
+
+(xy 44.45 35.56)) (stroke (width 0) (type default)) (uuid a5936d19-7416-4d7d-892d-f6fa937f285b)) 
+
+(junction (at 44.45 35.56) (diameter 0) (color 0 0 0 0) (uuid 0b7e2e3f-e1ab-4689-8254-305628578db4)) 
+
+(wire (pts 
+
+(xy 44.45 35.56) 
+
+(xy 114.3 35.56)) (stroke (width 0) (type default)) (uuid b17437d5-23d5-4e32-b153-8892c92cfbc4)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 54.61 22.86 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "9d991f37-51bc-49d3-8105-274aade65013") 
+
+(property "Reference" "SW3" (at 54.61 17.78 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 54.61 19.05 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 54.61 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 54.61 22.86 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "c010d65e-7e59-4315-bc46-ba7faffb3e27")) (pin "2" (uuid "9e95ef5a-5411-47c2-8466-9ea0ecb5c75c")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW3") (unit 1))))) 
+
+(wire (pts 
+
+(xy 52.07 20.32) 
+
+(xy 50.8 20.32)) (stroke (width 0) (type default)) (uuid 075a3539-c086-41ab-b4fc-6b46e33aad91)) 
+
+(wire (pts 
+
+(xy 50.8 20.32) 
+
+(xy 50.8 120.65)) (stroke (width 0) (type default)) (uuid 32b42dde-bde4-49f1-a55a-66c43cdc9704)) 
+
+(global_label "COL2" (shape input) (at 50.8 120.65 270) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify right)) (uuid 67b2cc9e-bde5-4232-aae9-e1ad1978a1c9) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 44.5491 120.65 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Device:D_Small") (at 57.15 31.75 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "745affc3-328b-42f8-a58d-a6c7e9f3bcaf") 
+
+(property "Reference" "D3" (at 58.42 30.48 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 58.42 33.02 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 57.15 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 57.15 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 57.15 31.75 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 57.15 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 57.15 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "3021b33e-bf90-44a1-b784-6bf8f06e3ec0")) (pin "2" (uuid "169ab12b-b70d-42ae-90a0-af7f3b19a901")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D3") (unit 1))))) 
+
+(wire (pts 
+
+(xy 57.15 25.4) 
+
+(xy 57.15 29.21)) (stroke (width 0) (type default)) (uuid b7990a8b-fc38-405d-bc64-8df4989d9fd3)) 
+
+(wire (pts 
+
+(xy 57.15 34.29) 
+
+(xy 57.15 35.56)) (stroke (width 0) (type default)) (uuid a99ec151-6b7f-4189-b8a6-d8efa137fe40)) 
+
+(junction (at 57.15 35.56) (diameter 0) (color 0 0 0 0) (uuid 5948f351-46bf-4c28-b37a-02471d8dc144)) 
+
+(wire (pts 
+
+(xy 57.15 35.56) 
+
+(xy 114.3 35.56)) (stroke (width 0) (type default)) (uuid acabfb23-4ade-4b9a-a005-46926aa14a71)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 67.31 22.86 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "8de0ff16-6e1f-4c7b-b81a-4d6bbdd86dd3") 
+
+(property "Reference" "SW4" (at 67.31 17.78 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 67.31 19.05 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 67.31 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 67.31 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 67.31 22.86 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "91e5b023-661d-4f30-9a8d-de9af48702bd")) (pin "2" (uuid "bb4310b3-200d-4317-aaef-bbd3b65f3ec8")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW4") (unit 1))))) 
+
+(wire (pts 
+
+(xy 64.77 20.32) 
+
+(xy 63.5 20.32)) (stroke (width 0) (type default)) (uuid c3791544-aacb-4dbc-8be8-27548d42fcde)) 
+
+(wire (pts 
+
+(xy 63.5 20.32) 
+
+(xy 63.5 120.65)) (stroke (width 0) (type default)) (uuid 55656b69-7eb0-4502-9013-57717c3a31b2)) 
+
+(global_label "COL3" (shape input) (at 63.5 120.65 270) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify right)) (uuid 0c870479-d969-4e13-901a-17f997723e4b) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 57.2491 120.65 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Device:D_Small") (at 69.85 31.75 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "4eb90fd6-7f4f-41d4-8279-daeebdb31371") 
+
+(property "Reference" "D4" (at 71.12 30.48 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 71.12 33.02 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 69.85 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 69.85 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 69.85 31.75 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 69.85 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 69.85 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "d40bde23-dde4-4150-8cce-9157276e0acb")) (pin "2" (uuid "7a1b2125-a7b5-4168-9b39-8ef84b46920f")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D4") (unit 1))))) 
+
+(wire (pts 
+
+(xy 69.85 25.4) 
+
+(xy 69.85 29.21)) (stroke (width 0) (type default)) (uuid 9d970e37-1b2e-4adf-b8cb-e2d573f7f835)) 
+
+(wire (pts 
+
+(xy 69.85 34.29) 
+
+(xy 69.85 35.56)) (stroke (width 0) (type default)) (uuid ed0f1544-d61d-4f55-b0ae-edd0e235903b)) 
+
+(junction (at 69.85 35.56) (diameter 0) (color 0 0 0 0) (uuid d48d7367-d482-4440-85b8-48fafbd53627)) 
+
+(wire (pts 
+
+(xy 69.85 35.56) 
+
+(xy 114.3 35.56)) (stroke (width 0) (type default)) (uuid 208b446c-b052-46e1-b215-b9d4a3ec745d)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 80.01 22.86 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "4d1562d0-026a-43e3-88f4-52a7a90a5565") 
+
+(property "Reference" "SW5" (at 80.01 17.78 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 80.01 19.05 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 80.01 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 80.01 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 80.01 22.86 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "9d937f75-0a8e-446d-8396-0c94ae5dc058")) (pin "2" (uuid "2c097cdb-587a-4c68-a2a4-909767e201b9")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW5") (unit 1))))) 
+
+(wire (pts 
+
+(xy 77.47 20.32) 
+
+(xy 76.2 20.32)) (stroke (width 0) (type default)) (uuid e936acc2-c009-4c11-9c4c-71adb68cbd58)) 
+
+(wire (pts 
+
+(xy 76.2 20.32) 
+
+(xy 76.2 120.65)) (stroke (width 0) (type default)) (uuid 95b407a3-b5c3-478a-80ea-b8c66c047655)) 
+
+(global_label "COL4" (shape input) (at 76.2 120.65 270) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify right)) (uuid 09899932-e05a-423c-9476-857f98ded71d) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 69.9491 120.65 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Device:D_Small") (at 82.55 31.75 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "3348e3fb-5477-425a-8f76-ad9aa988da4c") 
+
+(property "Reference" "D5" (at 83.82 30.48 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 83.82 33.02 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 82.55 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 82.55 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 82.55 31.75 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 82.55 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 82.55 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "47f4bf1f-1196-49f5-9ad1-fa91c3972042")) (pin "2" (uuid "91ba18eb-38c9-4328-8533-97a529857cbc")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D5") (unit 1))))) 
+
+(wire (pts 
+
+(xy 82.55 25.4) 
+
+(xy 82.55 29.21)) (stroke (width 0) (type default)) (uuid 56384bf0-6c22-4052-b3be-1d0c20fa35ac)) 
+
+(wire (pts 
+
+(xy 82.55 34.29) 
+
+(xy 82.55 35.56)) (stroke (width 0) (type default)) (uuid 72792a5f-9cb0-431d-92d0-09b1b0d57a9e)) 
+
+(junction (at 82.55 35.56) (diameter 0) (color 0 0 0 0) (uuid 1ea1203f-b3e0-4ca3-b53b-a082467e99b1)) 
+
+(wire (pts 
+
+(xy 82.55 35.56) 
+
+(xy 114.3 35.56)) (stroke (width 0) (type default)) (uuid 941cba05-cbde-4b88-85d4-2aee660d30d4)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 92.71 22.86 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "907dd68d-2956-4e37-bc4c-f9cdeb271340") 
+
+(property "Reference" "SW6" (at 92.71 17.78 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 92.71 19.05 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 92.71 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 92.71 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 92.71 22.86 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "ccdecd42-ff65-4cec-8980-4a27dd66eeff")) (pin "2" (uuid "54bddee1-1e2e-4d5b-a540-d10dff3f5624")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW6") (unit 1))))) 
+
+(wire (pts 
+
+(xy 90.17 20.32) 
+
+(xy 88.9 20.32)) (stroke (width 0) (type default)) (uuid 5b7b59ad-1d7e-45a2-9419-ffb933fefff7)) 
+
+(wire (pts 
+
+(xy 88.9 20.32) 
+
+(xy 88.9 120.65)) (stroke (width 0) (type default)) (uuid 3a711d2e-5ff8-43d1-a7c6-a076d0d4977a)) 
+
+(global_label "COL5" (shape input) (at 88.9 120.65 270) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify right)) (uuid 7333dbb9-16e3-43fc-a449-2073ccc30821) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 82.6491 120.65 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Device:D_Small") (at 95.25 31.75 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "7e84bbb3-8d59-4fb1-899c-5cb0b41981f8") 
+
+(property "Reference" "D6" (at 96.52 30.48 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 96.52 33.02 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 95.25 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 95.25 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 95.25 31.75 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 95.25 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 95.25 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "6a5880e6-9097-4098-a9c3-5cb81838dbee")) (pin "2" (uuid "b330f23f-53a0-4f67-95ed-d3c05ca0385d")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D6") (unit 1))))) 
+
+(wire (pts 
+
+(xy 95.25 25.4) 
+
+(xy 95.25 29.21)) (stroke (width 0) (type default)) (uuid 5557b69e-35b3-4401-9c82-786123f7329b)) 
+
+(wire (pts 
+
+(xy 95.25 34.29) 
+
+(xy 95.25 35.56)) (stroke (width 0) (type default)) (uuid 165c3289-1473-4a51-9dc5-e180ccee2ee0)) 
+
+(junction (at 95.25 35.56) (diameter 0) (color 0 0 0 0) (uuid 75c849f8-d1a8-44fe-9a6b-b02a3518be61)) 
+
+(wire (pts 
+
+(xy 95.25 35.56) 
+
+(xy 114.3 35.56)) (stroke (width 0) (type default)) (uuid ad529e38-daaf-41ca-970b-596f0e2163e2)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 105.41 22.86 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "d55f366b-6e14-41db-80d8-e405805e5db1") 
+
+(property "Reference" "SW7" (at 105.41 17.78 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 105.41 19.05 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 105.41 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 105.41 22.86 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 105.41 22.86 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "8949962a-87d3-4bea-a7ce-e0c735cddb87")) (pin "2" (uuid "43c7fccb-e367-4726-91cd-eb8bc00b29f6")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW7") (unit 1))))) 
+
+(wire (pts 
+
+(xy 102.87 20.32) 
+
+(xy 101.6 20.32)) (stroke (width 0) (type default)) (uuid 39d36c94-3147-4bc6-a3f9-af8d3cffd44d)) 
+
+(wire (pts 
+
+(xy 101.6 20.32) 
+
+(xy 101.6 120.65)) (stroke (width 0) (type default)) (uuid b47f426f-25aa-4b8a-a436-83c258a9a4dc)) 
+
+(global_label "COL6" (shape input) (at 101.6 120.65 270) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify right)) (uuid 11e1e9d8-5380-45e5-ba86-53a2ecf98e44) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 95.3491 120.65 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Device:D_Small") (at 107.95 31.75 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "79930def-0716-4d62-a884-c18fd4d02f79") 
+
+(property "Reference" "D7" (at 109.22 30.48 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 109.22 33.02 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 107.95 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 107.95 31.75 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 107.95 31.75 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 107.95 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 107.95 31.75 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "1fe90632-c371-4e0d-bf4f-78cab955ff0f")) (pin "2" (uuid "3706b032-bbf4-491e-af3d-180378dfbde8")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D7") (unit 1))))) 
+
+(wire (pts 
+
+(xy 107.95 25.4) 
+
+(xy 107.95 29.21)) (stroke (width 0) (type default)) (uuid a782a038-2f12-4722-bbdc-b2b039bd5a66)) 
+
+(wire (pts 
+
+(xy 107.95 34.29) 
+
+(xy 107.95 35.56)) (stroke (width 0) (type default)) (uuid 95311e5e-9c22-4839-a2ac-a805ccbb3984)) 
+
+(junction (at 107.95 35.56) (diameter 0) (color 0 0 0 0) (uuid 093055bc-7aa2-4a03-96f1-a27797feb3b9)) 
+
+(wire (pts 
+
+(xy 107.95 35.56) 
+
+(xy 114.3 35.56)) (stroke (width 0) (type default)) (uuid ebf39d26-bb79-4487-a4e4-7b194733c6f0)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 29.21 43.18 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "b7f52a70-cee6-40e5-93fa-ed3e0b2a36fb") 
+
+(property "Reference" "SW8" (at 29.21 38.1 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 29.21 39.37 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 29.21 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 29.21 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 29.21 43.18 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "fe4d4d35-f040-4971-b16a-5e650b327a5c")) (pin "2" (uuid "b12217e7-ecc9-4231-8bab-811b4057f004")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW8") (unit 1))))) 
+
+(wire (pts 
+
+(xy 26.67 40.64) 
+
+(xy 25.4 40.64)) (stroke (width 0) (type default)) (uuid bf5549f9-b27f-4f2d-a4ba-829aa961b585)) 
+
+(junction (at 25.4 40.64) (diameter 0) (color 0 0 0 0) (uuid aaa6629a-1f9a-464e-bc3e-a859f34bd748)) 
+
+(wire (pts 
+
+(xy 25.4 40.64) 
+
+(xy 25.4 120.65)) (stroke (width 0) (type default)) (uuid 7004ed17-21f1-45f0-adee-889fc79f376c)) 
+
+(symbol (lib_id "Device:D_Small") (at 31.75 52.07 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "f4340859-7ade-4c82-b5e3-31cdc0eaaa14") 
+
+(property "Reference" "D8" (at 33.02 50.8 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 33.02 53.34 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 31.75 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 31.75 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 31.75 52.07 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 31.75 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 31.75 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "a889e587-a395-442d-8b10-b05bf50e00c4")) (pin "2" (uuid "48fe8821-9081-4218-8706-1b3e2f238062")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D8") (unit 1))))) 
+
+(wire (pts 
+
+(xy 31.75 45.72) 
+
+(xy 31.75 49.53)) (stroke (width 0) (type default)) (uuid dd8ae5ff-a962-44ed-b8ed-20ae512b58ce)) 
+
+(wire (pts 
+
+(xy 31.75 54.61) 
+
+(xy 31.75 55.88)) (stroke (width 0) (type default)) (uuid 7bb119ff-c8b8-4278-9237-c5ab5ab672ab)) 
+
+(wire (pts 
+
+(xy 31.75 55.88) 
+
+(xy 114.3 55.88)) (stroke (width 0) (type default)) (uuid d40108bf-b078-464a-a36a-95d0c44203ec)) 
+
+(global_label "ROW1" (shape input) (at 114.3 55.88 0) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify left)) (uuid bd8ccef6-907e-46f7-847c-9d22561c4ebc) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 108.0491 55.88 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 41.91 43.18 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "a6e9f2eb-982e-4546-b9c8-56c49a841fc1") 
+
+(property "Reference" "SW9" (at 41.91 38.1 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 41.91 39.37 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 41.91 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 41.91 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 41.91 43.18 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "6947ed9f-9044-49ae-b1be-45af1d45c8f0")) (pin "2" (uuid "8f2b6fd7-d649-4fea-a87c-c49a701e7e3c")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW9") (unit 1))))) 
+
+(wire (pts 
+
+(xy 39.37 40.64) 
+
+(xy 38.1 40.64)) (stroke (width 0) (type default)) (uuid 63244916-c691-43dc-947c-74180c937865)) 
+
+(junction (at 38.1 40.64) (diameter 0) (color 0 0 0 0) (uuid eac407d1-e1d0-4d17-8179-08c1f3044eb5)) 
+
+(wire (pts 
+
+(xy 38.1 40.64) 
+
+(xy 38.1 120.65)) (stroke (width 0) (type default)) (uuid 07f6c4b7-0e04-4256-a5c7-313262020ac2)) 
+
+(symbol (lib_id "Device:D_Small") (at 44.45 52.07 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "19b201e3-2068-460b-844b-c994f48304b6") 
+
+(property "Reference" "D9" (at 45.72 50.8 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 45.72 53.34 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 44.45 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 44.45 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 44.45 52.07 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 44.45 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 44.45 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "44b77ebe-310c-42cf-a905-84add0b6ed2b")) (pin "2" (uuid "824cc1b5-d723-4d49-a0f9-be3336d12d23")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D9") (unit 1))))) 
+
+(wire (pts 
+
+(xy 44.45 45.72) 
+
+(xy 44.45 49.53)) (stroke (width 0) (type default)) (uuid a09a3b2d-3c11-4c49-9dc1-4c380f40a99b)) 
+
+(wire (pts 
+
+(xy 44.45 54.61) 
+
+(xy 44.45 55.88)) (stroke (width 0) (type default)) (uuid 10ec0586-8c94-47b6-8069-f042d3dbc045)) 
+
+(junction (at 44.45 55.88) (diameter 0) (color 0 0 0 0) (uuid fe76a0ae-a467-4127-aa1e-cebf25e96e56)) 
+
+(wire (pts 
+
+(xy 44.45 55.88) 
+
+(xy 114.3 55.88)) (stroke (width 0) (type default)) (uuid c332210b-d124-421f-b62e-d325689d1c11)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 54.61 43.18 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "e98ece4d-9623-4350-a7f4-ccef409a707b") 
+
+(property "Reference" "SW10" (at 54.61 38.1 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 54.61 39.37 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 54.61 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 54.61 43.18 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "8783ae76-d32a-4cfb-9dd2-27b214c0875f")) (pin "2" (uuid "c63f3aba-6193-4db8-9d5a-04b6d4d3a1d3")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW10") (unit 1))))) 
+
+(wire (pts 
+
+(xy 52.07 40.64) 
+
+(xy 50.8 40.64)) (stroke (width 0) (type default)) (uuid 5cfa66f2-4d5c-4dc0-9187-5356bfbd7afe)) 
+
+(junction (at 50.8 40.64) (diameter 0) (color 0 0 0 0) (uuid e1366b3b-990a-4a95-8094-2c6316a80ebd)) 
+
+(wire (pts 
+
+(xy 50.8 40.64) 
+
+(xy 50.8 120.65)) (stroke (width 0) (type default)) (uuid 279294f6-8968-4578-9356-8920f46095f9)) 
+
+(symbol (lib_id "Device:D_Small") (at 57.15 52.07 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "dce63799-71fb-4a22-97ba-b7d0666bf0f2") 
+
+(property "Reference" "D10" (at 58.42 50.8 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 58.42 53.34 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 57.15 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 57.15 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 57.15 52.07 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 57.15 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 57.15 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "3b924fbe-9a25-43e5-a9b9-d876446bb60d")) (pin "2" (uuid "f84ac76f-53ec-4cdb-bf22-0cd38be7a223")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D10") (unit 1))))) 
+
+(wire (pts 
+
+(xy 57.15 45.72) 
+
+(xy 57.15 49.53)) (stroke (width 0) (type default)) (uuid 0621c683-4bf4-45f1-abd4-da40d9dde73e)) 
+
+(wire (pts 
+
+(xy 57.15 54.61) 
+
+(xy 57.15 55.88)) (stroke (width 0) (type default)) (uuid 4e3459df-cb83-45d9-9486-9a8f683404df)) 
+
+(junction (at 57.15 55.88) (diameter 0) (color 0 0 0 0) (uuid b3ff7e33-5cf2-4871-997a-000cbf6b57c5)) 
+
+(wire (pts 
+
+(xy 57.15 55.88) 
+
+(xy 114.3 55.88)) (stroke (width 0) (type default)) (uuid 80f6e0e1-cae4-4c69-aee3-4c66e8facf91)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 67.31 43.18 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "b5555fb7-b029-4f47-8679-ef61e850de32") 
+
+(property "Reference" "SW11" (at 67.31 38.1 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 67.31 39.37 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 67.31 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 67.31 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 67.31 43.18 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "d4bd6953-f84f-40c0-8942-0604972e8a37")) (pin "2" (uuid "c1c34d5c-0e7c-4257-b53b-31639f6a0e63")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW11") (unit 1))))) 
+
+(wire (pts 
+
+(xy 64.77 40.64) 
+
+(xy 63.5 40.64)) (stroke (width 0) (type default)) (uuid fce08c73-495e-496c-be78-3779c9cbe6c3)) 
+
+(junction (at 63.5 40.64) (diameter 0) (color 0 0 0 0) (uuid 5f3755ed-6b34-4798-8045-cf96258f04ed)) 
+
+(wire (pts 
+
+(xy 63.5 40.64) 
+
+(xy 63.5 120.65)) (stroke (width 0) (type default)) (uuid d9814b5b-0ad1-4c04-a82b-cabbc25c2829)) 
+
+(symbol (lib_id "Device:D_Small") (at 69.85 52.07 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "60455c5f-baed-4c69-a662-c9aee4173bb4") 
+
+(property "Reference" "D11" (at 71.12 50.8 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 71.12 53.34 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 69.85 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 69.85 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 69.85 52.07 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 69.85 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 69.85 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "246fb70a-a88a-456e-92d1-5d90712f5a68")) (pin "2" (uuid "6c0cbb7f-5790-45a5-88df-f7ae6d124015")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D11") (unit 1))))) 
+
+(wire (pts 
+
+(xy 69.85 45.72) 
+
+(xy 69.85 49.53)) (stroke (width 0) (type default)) (uuid b93d47f5-280a-44b3-9efa-70358b3cb461)) 
+
+(wire (pts 
+
+(xy 69.85 54.61) 
+
+(xy 69.85 55.88)) (stroke (width 0) (type default)) (uuid d20c24b9-2446-45bc-b256-6d755217596d)) 
+
+(junction (at 69.85 55.88) (diameter 0) (color 0 0 0 0) (uuid 3b9cd736-bd7c-47fc-9abb-7fd021e93f4b)) 
+
+(wire (pts 
+
+(xy 69.85 55.88) 
+
+(xy 114.3 55.88)) (stroke (width 0) (type default)) (uuid d5f4f144-bc0c-486f-bdfc-8b021de5c46b)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 80.01 43.18 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "0b1a47ac-d383-4f67-bd22-a14ef93d65ab") 
+
+(property "Reference" "SW12" (at 80.01 38.1 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 80.01 39.37 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 80.01 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 80.01 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 80.01 43.18 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "d9c29a6f-e976-4a34-968a-c3112a42675d")) (pin "2" (uuid "3d884218-efdb-47c6-9521-8040643e64c8")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW12") (unit 1))))) 
+
+(wire (pts 
+
+(xy 77.47 40.64) 
+
+(xy 76.2 40.64)) (stroke (width 0) (type default)) (uuid 5fc373be-5fea-4f45-b850-cbc3a7622bb1)) 
+
+(junction (at 76.2 40.64) (diameter 0) (color 0 0 0 0) (uuid 967966ba-3fdb-4f1f-8aa4-78231c461dda)) 
+
+(wire (pts 
+
+(xy 76.2 40.64) 
+
+(xy 76.2 120.65)) (stroke (width 0) (type default)) (uuid 5342e84d-02cb-4153-bfd5-6c00f2f04e4c)) 
+
+(symbol (lib_id "Device:D_Small") (at 82.55 52.07 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "6a9b8b40-47c5-495f-b7d8-6849ca521cca") 
+
+(property "Reference" "D12" (at 83.82 50.8 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 83.82 53.34 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 82.55 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 82.55 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 82.55 52.07 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 82.55 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 82.55 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "c22ba9d5-2779-416c-a2a5-bb7172c3763b")) (pin "2" (uuid "ccfab0d4-2c2b-477e-b17d-144b84683e2c")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D12") (unit 1))))) 
+
+(wire (pts 
+
+(xy 82.55 45.72) 
+
+(xy 82.55 49.53)) (stroke (width 0) (type default)) (uuid aad48084-8d82-4101-9eaa-00ebd5427162)) 
+
+(wire (pts 
+
+(xy 82.55 54.61) 
+
+(xy 82.55 55.88)) (stroke (width 0) (type default)) (uuid b3fb878b-a46d-419d-b58b-d46698e22451)) 
+
+(junction (at 82.55 55.88) (diameter 0) (color 0 0 0 0) (uuid fa40f878-1631-4b8c-a373-c264c79c212e)) 
+
+(wire (pts 
+
+(xy 82.55 55.88) 
+
+(xy 114.3 55.88)) (stroke (width 0) (type default)) (uuid 79ead86b-9409-4bd6-9e97-8261f0fdd622)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 92.71 43.18 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "aedd6de2-91c9-453b-b2da-8f22a1f0c877") 
+
+(property "Reference" "SW13" (at 92.71 38.1 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 92.71 39.37 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 92.71 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 92.71 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 92.71 43.18 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "b79d8549-ae90-4868-bb4c-5317d53d545d")) (pin "2" (uuid "c22d80f2-a33e-4dc0-92f8-56d5b25bb02c")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW13") (unit 1))))) 
+
+(wire (pts 
+
+(xy 90.17 40.64) 
+
+(xy 88.9 40.64)) (stroke (width 0) (type default)) (uuid 88d75a75-b5dc-49cb-b31e-b2c7415481cf)) 
+
+(junction (at 88.9 40.64) (diameter 0) (color 0 0 0 0) (uuid cabd5dc5-6f31-42c8-8d67-f587916d43ad)) 
+
+(wire (pts 
+
+(xy 88.9 40.64) 
+
+(xy 88.9 120.65)) (stroke (width 0) (type default)) (uuid 618fe9e8-4dc6-47d8-b928-ace0f4215a5b)) 
+
+(symbol (lib_id "Device:D_Small") (at 95.25 52.07 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "c167a1f5-4650-495a-a77e-6cffbfd814ef") 
+
+(property "Reference" "D13" (at 96.52 50.8 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 96.52 53.34 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 95.25 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 95.25 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 95.25 52.07 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 95.25 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 95.25 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "390d1415-72a4-46bd-bbc9-717e6abf62e1")) (pin "2" (uuid "af9633e5-cf37-4e90-bbe4-2abb70229c7b")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D13") (unit 1))))) 
+
+(wire (pts 
+
+(xy 95.25 45.72) 
+
+(xy 95.25 49.53)) (stroke (width 0) (type default)) (uuid 6cea83b9-5be2-4397-a3e3-4c696510d241)) 
+
+(wire (pts 
+
+(xy 95.25 54.61) 
+
+(xy 95.25 55.88)) (stroke (width 0) (type default)) (uuid d0b96147-4491-4025-bd3d-091992e73aba)) 
+
+(junction (at 95.25 55.88) (diameter 0) (color 0 0 0 0) (uuid ff37ef9e-0152-464a-a768-182ec6a3ce08)) 
+
+(wire (pts 
+
+(xy 95.25 55.88) 
+
+(xy 114.3 55.88)) (stroke (width 0) (type default)) (uuid 44bc7331-f73d-4b48-8590-cf89da26792f)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 105.41 43.18 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "7936442d-3534-4c4f-8993-6894ffb204c8") 
+
+(property "Reference" "SW14" (at 105.41 38.1 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 105.41 39.37 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 105.41 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 105.41 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 105.41 43.18 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "ea42532c-83be-4b3a-9c1b-33a7cebd2b11")) (pin "2" (uuid "e8026b6d-2a8e-420a-80c3-75a09131e37b")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW14") (unit 1))))) 
+
+(wire (pts 
+
+(xy 102.87 40.64) 
+
+(xy 101.6 40.64)) (stroke (width 0) (type default)) (uuid 5982fc8a-389e-4e54-a88c-eb49947f4ce6)) 
+
+(junction (at 101.6 40.64) (diameter 0) (color 0 0 0 0) (uuid def34b71-6d3f-4ba7-b87a-18c3e8b1ac37)) 
+
+(wire (pts 
+
+(xy 101.6 40.64) 
+
+(xy 101.6 120.65)) (stroke (width 0) (type default)) (uuid 701150d3-2c0c-4f76-bf39-394c6629d083)) 
+
+(symbol (lib_id "Device:D_Small") (at 107.95 52.07 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "103f6f2a-a2ef-4f76-91df-101f0431b20b") 
+
+(property "Reference" "D14" (at 109.22 50.8 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 109.22 53.34 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 107.95 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 107.95 52.07 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 107.95 52.07 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 107.95 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 107.95 52.07 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "dd40e589-f2ed-434a-be46-779853f5234e")) (pin "2" (uuid "cec2d74f-79ef-4cf4-85c4-7f7f1d317663")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D14") (unit 1))))) 
+
+(wire (pts 
+
+(xy 107.95 45.72) 
+
+(xy 107.95 49.53)) (stroke (width 0) (type default)) (uuid 72a4e9cb-1007-4bfa-a318-99815a69ad10)) 
+
+(wire (pts 
+
+(xy 107.95 54.61) 
+
+(xy 107.95 55.88)) (stroke (width 0) (type default)) (uuid d5e8eb5c-ff6b-4258-82e1-a1df0a7176be)) 
+
+(junction (at 107.95 55.88) (diameter 0) (color 0 0 0 0) (uuid d3f0e7c0-b9c1-4fe9-b1d3-d51c005848e8)) 
+
+(wire (pts 
+
+(xy 107.95 55.88) 
+
+(xy 114.3 55.88)) (stroke (width 0) (type default)) (uuid 360eecaf-2482-4076-be1f-20f70dfbbc58)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 29.21 63.5 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "0c9a8863-7d96-4e2e-abbd-6c4875fe4329") 
+
+(property "Reference" "SW15" (at 29.21 58.42 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 29.21 59.69 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.25u" (at 29.21 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 29.21 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 29.21 63.5 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "0e00b9bc-4492-4817-9eea-63b1209e50c1")) (pin "2" (uuid "630fa60a-8f18-4403-91e9-69d2a0a91830")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW15") (unit 1))))) 
+
+(wire (pts 
+
+(xy 26.67 60.96) 
+
+(xy 25.4 60.96)) (stroke (width 0) (type default)) (uuid e5dd50de-0eca-4013-a8ee-2250bce95650)) 
+
+(junction (at 25.4 60.96) (diameter 0) (color 0 0 0 0) (uuid 7186094c-2896-4cb3-95ab-08465abad960)) 
+
+(wire (pts 
+
+(xy 25.4 60.96) 
+
+(xy 25.4 120.65)) (stroke (width 0) (type default)) (uuid 9940b8a9-41a2-4d7f-81e6-ad704855435b)) 
+
+(symbol (lib_id "Device:D_Small") (at 31.75 72.39 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "4d8892eb-1303-42cf-9592-bedeb21211af") 
+
+(property "Reference" "D15" (at 33.02 71.12 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 33.02 73.66 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 31.75 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 31.75 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 31.75 72.39 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 31.75 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 31.75 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "be0e7d88-612e-47b4-853b-17926847c6ad")) (pin "2" (uuid "6d65ba19-304d-47ab-acae-974e08454a57")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D15") (unit 1))))) 
+
+(wire (pts 
+
+(xy 31.75 66.04) 
+
+(xy 31.75 69.85)) (stroke (width 0) (type default)) (uuid 3a9cf1b5-5581-4474-ad12-3a8f93e32024)) 
+
+(wire (pts 
+
+(xy 31.75 74.93) 
+
+(xy 31.75 76.2)) (stroke (width 0) (type default)) (uuid bd7e4bc8-ad37-4e4b-b89a-d06aba9d24d4)) 
+
+(wire (pts 
+
+(xy 31.75 76.2) 
+
+(xy 114.3 76.2)) (stroke (width 0) (type default)) (uuid af8232f7-9db7-4167-ae8b-287568dfe133)) 
+
+(global_label "ROW2" (shape input) (at 114.3 76.2 0) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify left)) (uuid 4cf5907d-c0ed-49b0-8363-49c88f090c7d) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 108.0491 76.2 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 41.91 63.5 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "95e43f58-8bfb-4993-9aa1-54b9e9d3f2cd") 
+
+(property "Reference" "SW16" (at 41.91 58.42 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 41.91 59.69 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 41.91 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 41.91 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 41.91 63.5 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "6b073d6e-1c79-4f26-9785-2fb74f577b56")) (pin "2" (uuid "c829b7c3-0dcb-452e-aad5-c483d3773995")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW16") (unit 1))))) 
+
+(wire (pts 
+
+(xy 39.37 60.96) 
+
+(xy 38.1 60.96)) (stroke (width 0) (type default)) (uuid f6c7fd2e-e539-4756-87e0-342077021258)) 
+
+(junction (at 38.1 60.96) (diameter 0) (color 0 0 0 0) (uuid 9085186a-be1e-4a89-ab9d-da267b3b193c)) 
+
+(wire (pts 
+
+(xy 38.1 60.96) 
+
+(xy 38.1 120.65)) (stroke (width 0) (type default)) (uuid c7288bbc-0374-446e-af84-db503e17f616)) 
+
+(symbol (lib_id "Device:D_Small") (at 44.45 72.39 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "eb3dffc6-0f26-4b2a-8d17-c53e5325da1c") 
+
+(property "Reference" "D16" (at 45.72 71.12 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 45.72 73.66 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 44.45 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 44.45 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 44.45 72.39 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 44.45 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 44.45 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "ba85acb9-0d5d-4de0-a9bf-22b1d0fd9e72")) (pin "2" (uuid "ff16dac5-725c-4465-970d-48072189b932")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D16") (unit 1))))) 
+
+(wire (pts 
+
+(xy 44.45 66.04) 
+
+(xy 44.45 69.85)) (stroke (width 0) (type default)) (uuid 4e519bb9-f016-445f-8754-fea1014cf790)) 
+
+(wire (pts 
+
+(xy 44.45 74.93) 
+
+(xy 44.45 76.2)) (stroke (width 0) (type default)) (uuid 3fbcc5a5-e554-4425-8319-37b0a0f22f98)) 
+
+(junction (at 44.45 76.2) (diameter 0) (color 0 0 0 0) (uuid 93749cb6-05f2-4717-8e4d-73f84cac8d8f)) 
+
+(wire (pts 
+
+(xy 44.45 76.2) 
+
+(xy 114.3 76.2)) (stroke (width 0) (type default)) (uuid 701c3437-f648-4dac-87e2-ceade1461f95)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 54.61 63.5 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "20e23f40-81d7-46c1-8161-3541ecac3f45") 
+
+(property "Reference" "SW17" (at 54.61 58.42 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 54.61 59.69 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 54.61 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 54.61 63.5 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "33a04be5-7ae1-430e-a7f7-16f75730071e")) (pin "2" (uuid "8d6ee7dd-3ea7-4429-abf3-49f3a09a5395")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW17") (unit 1))))) 
+
+(wire (pts 
+
+(xy 52.07 60.96) 
+
+(xy 50.8 60.96)) (stroke (width 0) (type default)) (uuid 116f78ac-19e0-46f4-8e66-910cf02fbf24)) 
+
+(junction (at 50.8 60.96) (diameter 0) (color 0 0 0 0) (uuid f31e7425-f8f2-46e3-9f7f-0c823da26265)) 
+
+(wire (pts 
+
+(xy 50.8 60.96) 
+
+(xy 50.8 120.65)) (stroke (width 0) (type default)) (uuid b74e006b-fba4-490b-84e5-bcab6d1fafd3)) 
+
+(symbol (lib_id "Device:D_Small") (at 57.15 72.39 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "a30dafaa-273e-4990-b80c-aca2221a9531") 
+
+(property "Reference" "D17" (at 58.42 71.12 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 58.42 73.66 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 57.15 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 57.15 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 57.15 72.39 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 57.15 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 57.15 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "0deec062-69bc-4d68-a373-e3fb16f7fae0")) (pin "2" (uuid "0f6fbe97-b383-4978-9494-fd9eed6e3d67")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D17") (unit 1))))) 
+
+(wire (pts 
+
+(xy 57.15 66.04) 
+
+(xy 57.15 69.85)) (stroke (width 0) (type default)) (uuid 07b87551-f346-4f60-a64a-ef41e43fab6c)) 
+
+(wire (pts 
+
+(xy 57.15 74.93) 
+
+(xy 57.15 76.2)) (stroke (width 0) (type default)) (uuid 152452e2-5c9a-4811-901d-c7b21c7ab7a8)) 
+
+(junction (at 57.15 76.2) (diameter 0) (color 0 0 0 0) (uuid 8fc39a66-0e0c-445e-a4cb-7cd3350c88d8)) 
+
+(wire (pts 
+
+(xy 57.15 76.2) 
+
+(xy 114.3 76.2)) (stroke (width 0) (type default)) (uuid cad4926e-5568-434f-9b7b-eb776d91b614)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 67.31 63.5 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "80b5c444-a438-4cfd-aea4-a1b117954ebc") 
+
+(property "Reference" "SW18" (at 67.31 58.42 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 67.31 59.69 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 67.31 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 67.31 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 67.31 63.5 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "4bab9af8-5656-447c-b711-f01996c2144a")) (pin "2" (uuid "75b8f462-c207-4d6c-acf8-89b3cde6fa96")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW18") (unit 1))))) 
+
+(wire (pts 
+
+(xy 64.77 60.96) 
+
+(xy 63.5 60.96)) (stroke (width 0) (type default)) (uuid 3f6500f6-37e8-48c3-8e0c-eaca82e660c4)) 
+
+(junction (at 63.5 60.96) (diameter 0) (color 0 0 0 0) (uuid 6210eeda-af9f-49e4-8553-b53a749d3bfd)) 
+
+(wire (pts 
+
+(xy 63.5 60.96) 
+
+(xy 63.5 120.65)) (stroke (width 0) (type default)) (uuid 7582e99b-5f29-4b1c-84fc-fd8a4cd80018)) 
+
+(symbol (lib_id "Device:D_Small") (at 69.85 72.39 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "4826ef8d-ce42-45c8-8943-372b6e74f8d8") 
+
+(property "Reference" "D18" (at 71.12 71.12 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 71.12 73.66 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 69.85 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 69.85 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 69.85 72.39 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 69.85 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 69.85 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "9f29adb7-f81b-4891-9e05-7a501506eb6d")) (pin "2" (uuid "00a102b4-667b-482b-86ca-51934a6f83ab")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D18") (unit 1))))) 
+
+(wire (pts 
+
+(xy 69.85 66.04) 
+
+(xy 69.85 69.85)) (stroke (width 0) (type default)) (uuid cfd283a0-a1c1-414c-9b66-7054c5d7109e)) 
+
+(wire (pts 
+
+(xy 69.85 74.93) 
+
+(xy 69.85 76.2)) (stroke (width 0) (type default)) (uuid b6c6a563-f5ae-410b-ad43-e6de0781e67e)) 
+
+(junction (at 69.85 76.2) (diameter 0) (color 0 0 0 0) (uuid a9fffc0a-2635-47a7-b5c0-a749305beb33)) 
+
+(wire (pts 
+
+(xy 69.85 76.2) 
+
+(xy 114.3 76.2)) (stroke (width 0) (type default)) (uuid 62a45b75-c5be-44b0-9743-96362b5e908b)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 80.01 63.5 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "75fdb7af-e928-4137-b917-da271f7ff66a") 
+
+(property "Reference" "SW19" (at 80.01 58.42 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 80.01 59.69 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 80.01 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 80.01 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 80.01 63.5 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "037b6cf8-a4cb-47a7-8656-2fcabeb2ad57")) (pin "2" (uuid "7769f330-6514-4f3d-8861-fa7b6b9856bf")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW19") (unit 1))))) 
+
+(wire (pts 
+
+(xy 77.47 60.96) 
+
+(xy 76.2 60.96)) (stroke (width 0) (type default)) (uuid 83ae038e-a626-42df-bae1-abbb6f9515c0)) 
+
+(junction (at 76.2 60.96) (diameter 0) (color 0 0 0 0) (uuid 48707525-dc68-4587-b3e9-9154ee06bcca)) 
+
+(wire (pts 
+
+(xy 76.2 60.96) 
+
+(xy 76.2 120.65)) (stroke (width 0) (type default)) (uuid 345c534c-850e-4568-9346-5ce44db9f021)) 
+
+(symbol (lib_id "Device:D_Small") (at 82.55 72.39 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "422101f4-68c5-4c5f-a0a3-2bcc11a7b4aa") 
+
+(property "Reference" "D19" (at 83.82 71.12 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 83.82 73.66 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 82.55 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 82.55 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 82.55 72.39 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 82.55 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 82.55 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "2f21c335-c8cc-4520-b759-14cc3b9e3bc7")) (pin "2" (uuid "704a78a5-4cf1-4722-8b08-5a49e2a01c86")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D19") (unit 1))))) 
+
+(wire (pts 
+
+(xy 82.55 66.04) 
+
+(xy 82.55 69.85)) (stroke (width 0) (type default)) (uuid fc404b51-08cd-41d4-af84-a73ac8b254d2)) 
+
+(wire (pts 
+
+(xy 82.55 74.93) 
+
+(xy 82.55 76.2)) (stroke (width 0) (type default)) (uuid 83385c48-bf85-4a9b-a4e9-025eeb7d0630)) 
+
+(junction (at 82.55 76.2) (diameter 0) (color 0 0 0 0) (uuid 7a17ec2b-c82d-48e1-8950-7e36e4d77e66)) 
+
+(wire (pts 
+
+(xy 82.55 76.2) 
+
+(xy 114.3 76.2)) (stroke (width 0) (type default)) (uuid dea09f6f-46aa-4f72-bc31-d4639a5cc2fc)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 92.71 63.5 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "2f39fa47-e3d7-450e-936b-ea80cd2535a9") 
+
+(property "Reference" "SW20" (at 92.71 58.42 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 92.71 59.69 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 92.71 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 92.71 63.5 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 92.71 63.5 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "a0f5d1ad-3941-455b-9996-f2884df45a55")) (pin "2" (uuid "5fd3b8d9-fb31-47d4-8c11-d3f5ab114193")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW20") (unit 1))))) 
+
+(wire (pts 
+
+(xy 90.17 60.96) 
+
+(xy 88.9 60.96)) (stroke (width 0) (type default)) (uuid dd1b715e-c083-45d7-a5f4-09db9b6db657)) 
+
+(junction (at 88.9 60.96) (diameter 0) (color 0 0 0 0) (uuid 90fb4b53-7714-4304-96a7-cb1886eeec96)) 
+
+(wire (pts 
+
+(xy 88.9 60.96) 
+
+(xy 88.9 120.65)) (stroke (width 0) (type default)) (uuid 10853783-0c1a-4327-b82c-b633e8cb6a70)) 
+
+(symbol (lib_id "Device:D_Small") (at 95.25 72.39 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "51d3b938-4db7-4db0-9720-31d781be67ff") 
+
+(property "Reference" "D20" (at 96.52 71.12 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 96.52 73.66 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 95.25 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 95.25 72.39 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 95.25 72.39 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 95.25 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 95.25 72.39 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "73253e0c-f21a-44e6-aed5-18a8cf8474d5")) (pin "2" (uuid "f06d1c53-85be-44e0-83d3-0834a3a51c96")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D20") (unit 1))))) 
+
+(wire (pts 
+
+(xy 95.25 66.04) 
+
+(xy 95.25 69.85)) (stroke (width 0) (type default)) (uuid b07aeb14-7404-46cc-87ae-5695e11e7218)) 
+
+(wire (pts 
+
+(xy 95.25 74.93) 
+
+(xy 95.25 76.2)) (stroke (width 0) (type default)) (uuid 961e19ae-eca2-4e33-8eb0-618cb63b93f6)) 
+
+(junction (at 95.25 76.2) (diameter 0) (color 0 0 0 0) (uuid e4aefa77-e70e-4af7-b623-22779c540ce6)) 
+
+(wire (pts 
+
+(xy 95.25 76.2) 
+
+(xy 114.3 76.2)) (stroke (width 0) (type default)) (uuid 897113f1-8e82-4ba3-9589-f2ad865f229f)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 29.21 83.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "ee605bcd-9e6e-40c3-8133-f76366be0bda") 
+
+(property "Reference" "SW21" (at 29.21 78.74 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 29.21 80.01 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.75u" (at 29.21 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 29.21 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 29.21 83.82 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "5a1c778e-0480-4e7e-88d4-18f10e2a3c04")) (pin "2" (uuid "be4a324b-0c86-44cd-9bde-fe26ec9dbbed")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW21") (unit 1))))) 
+
+(wire (pts 
+
+(xy 26.67 81.28) 
+
+(xy 25.4 81.28)) (stroke (width 0) (type default)) (uuid 2ffaa1a5-2fd3-4185-be17-58d23ada9414)) 
+
+(junction (at 25.4 81.28) (diameter 0) (color 0 0 0 0) (uuid e7131876-451e-48c1-8d6c-7043e7f379d7)) 
+
+(wire (pts 
+
+(xy 25.4 81.28) 
+
+(xy 25.4 120.65)) (stroke (width 0) (type default)) (uuid 966b9df0-695b-4734-9e58-0de8179ecfe4)) 
+
+(symbol (lib_id "Device:D_Small") (at 31.75 92.71 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "e3a7c2b9-fb6f-43c5-bdbb-1e448ea35cab") 
+
+(property "Reference" "D21" (at 33.02 91.44 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 33.02 93.98 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 31.75 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 31.75 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 31.75 92.71 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 31.75 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 31.75 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "73c8cd11-3c3d-4ea5-a34c-6d02c6146c61")) (pin "2" (uuid "4a6d56f8-8bbc-4e07-a7a9-29a30dfac411")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D21") (unit 1))))) 
+
+(wire (pts 
+
+(xy 31.75 86.36) 
+
+(xy 31.75 90.17)) (stroke (width 0) (type default)) (uuid 7d1660df-123b-475c-b5a6-3498b4a21d8a)) 
+
+(wire (pts 
+
+(xy 31.75 95.25) 
+
+(xy 31.75 96.52)) (stroke (width 0) (type default)) (uuid cbc554aa-233d-4838-ae71-e6db6160d7f7)) 
+
+(wire (pts 
+
+(xy 31.75 96.52) 
+
+(xy 114.3 96.52)) (stroke (width 0) (type default)) (uuid 36dac05e-d7ca-4e07-aea2-0cbe8085462f)) 
+
+(global_label "ROW3" (shape input) (at 114.3 96.52 0) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify left)) (uuid 6fff3609-7a49-466a-9f21-940d6b822b79) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 108.0491 96.52 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 41.91 83.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "f1e31cb4-8a2f-424b-b505-5247c4730e22") 
+
+(property "Reference" "SW22" (at 41.91 78.74 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 41.91 80.01 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 41.91 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 41.91 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 41.91 83.82 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "bd836dcc-46a9-4265-889e-9b77b23a868b")) (pin "2" (uuid "5b6b3c33-9b13-45fa-ae52-62a036cc9a50")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW22") (unit 1))))) 
+
+(wire (pts 
+
+(xy 39.37 81.28) 
+
+(xy 38.1 81.28)) (stroke (width 0) (type default)) (uuid 2d4b35fe-3dbd-4d00-bb0b-a46c70ab43f9)) 
+
+(junction (at 38.1 81.28) (diameter 0) (color 0 0 0 0) (uuid 515fb79e-ffc9-4bfa-97ad-fb9f96d256a9)) 
+
+(wire (pts 
+
+(xy 38.1 81.28) 
+
+(xy 38.1 120.65)) (stroke (width 0) (type default)) (uuid d0ed881b-5038-4c1f-bb10-ec197715ccb7)) 
+
+(symbol (lib_id "Device:D_Small") (at 44.45 92.71 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "6390f942-a851-4db5-b9b0-9b7f02696fd5") 
+
+(property "Reference" "D22" (at 45.72 91.44 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 45.72 93.98 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 44.45 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 44.45 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 44.45 92.71 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 44.45 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 44.45 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "85919b3c-5d0c-4aa1-bfb7-7b102cb56613")) (pin "2" (uuid "d53d7418-1e4f-44a8-9bfe-7feacf71ddb1")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D22") (unit 1))))) 
+
+(wire (pts 
+
+(xy 44.45 86.36) 
+
+(xy 44.45 90.17)) (stroke (width 0) (type default)) (uuid 11562a21-8b01-4541-aa5e-1c80783d3c30)) 
+
+(wire (pts 
+
+(xy 44.45 95.25) 
+
+(xy 44.45 96.52)) (stroke (width 0) (type default)) (uuid 52729918-74df-40a4-bffd-dd974f3ea0ea)) 
+
+(junction (at 44.45 96.52) (diameter 0) (color 0 0 0 0) (uuid 9529a6fa-985c-41f8-8597-06abc04c7fe0)) 
+
+(wire (pts 
+
+(xy 44.45 96.52) 
+
+(xy 114.3 96.52)) (stroke (width 0) (type default)) (uuid 8bf8841a-0995-4b35-97f2-2e97c348b5db)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 54.61 83.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "f16aee5a-15c3-4b69-bb37-5dcabbbebfab") 
+
+(property "Reference" "SW23" (at 54.61 78.74 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 54.61 80.01 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 54.61 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 54.61 83.82 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "08aa0586-8874-4edf-b552-d37ab806d538")) (pin "2" (uuid "844b142b-99bb-4a99-992c-45d9d9faca06")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW23") (unit 1))))) 
+
+(wire (pts 
+
+(xy 52.07 81.28) 
+
+(xy 50.8 81.28)) (stroke (width 0) (type default)) (uuid 2b6e2617-66ac-4bc9-abba-bd3cdce0223b)) 
+
+(junction (at 50.8 81.28) (diameter 0) (color 0 0 0 0) (uuid e32fdee4-834e-40a7-a8cc-423c3aa6f3dd)) 
+
+(wire (pts 
+
+(xy 50.8 81.28) 
+
+(xy 50.8 120.65)) (stroke (width 0) (type default)) (uuid abb85d8e-f3df-4bda-99b9-2e9150813bc4)) 
+
+(symbol (lib_id "Device:D_Small") (at 57.15 92.71 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "71a39aee-d10e-42a0-9cd0-fededcfa3fe3") 
+
+(property "Reference" "D23" (at 58.42 91.44 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 58.42 93.98 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 57.15 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 57.15 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 57.15 92.71 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 57.15 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 57.15 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "3ee157d8-b214-4f3b-be29-4cc217214326")) (pin "2" (uuid "fa992d18-1754-474f-aa7f-34c016683b5e")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D23") (unit 1))))) 
+
+(wire (pts 
+
+(xy 57.15 86.36) 
+
+(xy 57.15 90.17)) (stroke (width 0) (type default)) (uuid 3fd94fcc-7256-490c-87cf-cd3c0e1299cb)) 
+
+(wire (pts 
+
+(xy 57.15 95.25) 
+
+(xy 57.15 96.52)) (stroke (width 0) (type default)) (uuid ed260c06-bff1-4c0b-809f-ab601c70dcee)) 
+
+(junction (at 57.15 96.52) (diameter 0) (color 0 0 0 0) (uuid 487b21cb-1012-46bb-81a4-dbdeab63d7a4)) 
+
+(wire (pts 
+
+(xy 57.15 96.52) 
+
+(xy 114.3 96.52)) (stroke (width 0) (type default)) (uuid 9efd0fd1-7119-4965-96e3-252c57c1087e)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 67.31 83.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "0afe57d5-464e-444f-9d40-fb10eb66f1ac") 
+
+(property "Reference" "SW24" (at 67.31 78.74 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 67.31 80.01 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 67.31 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 67.31 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 67.31 83.82 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "9c9ecd84-59fd-4d8e-8ccb-a9a1608fb355")) (pin "2" (uuid "36631a36-fc00-4f48-a16e-9b11faffe7da")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW24") (unit 1))))) 
+
+(wire (pts 
+
+(xy 64.77 81.28) 
+
+(xy 63.5 81.28)) (stroke (width 0) (type default)) (uuid 9e0ae52d-da9e-4ef5-b9cd-6e570ca5a8a5)) 
+
+(junction (at 63.5 81.28) (diameter 0) (color 0 0 0 0) (uuid e296a490-476b-4aca-835a-105c45616732)) 
+
+(wire (pts 
+
+(xy 63.5 81.28) 
+
+(xy 63.5 120.65)) (stroke (width 0) (type default)) (uuid e5edecca-2648-40a7-ade5-6e96b9839c24)) 
+
+(symbol (lib_id "Device:D_Small") (at 69.85 92.71 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "800cd108-0db6-4f3f-8bea-b2bb8dacc225") 
+
+(property "Reference" "D24" (at 71.12 91.44 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 71.12 93.98 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 69.85 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 69.85 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 69.85 92.71 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 69.85 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 69.85 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "8e48b8a9-7760-4347-8194-d5d7361210b5")) (pin "2" (uuid "34ba69ba-ab13-4b7c-901d-58c3a9092413")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D24") (unit 1))))) 
+
+(wire (pts 
+
+(xy 69.85 86.36) 
+
+(xy 69.85 90.17)) (stroke (width 0) (type default)) (uuid 91ae3fa6-656d-423e-9935-74ab50b47c6c)) 
+
+(wire (pts 
+
+(xy 69.85 95.25) 
+
+(xy 69.85 96.52)) (stroke (width 0) (type default)) (uuid 63fabd4f-f5f3-4d19-9749-13b43fd44f79)) 
+
+(junction (at 69.85 96.52) (diameter 0) (color 0 0 0 0) (uuid 3acb6e9a-4136-4ef9-a737-3413a01b030a)) 
+
+(wire (pts 
+
+(xy 69.85 96.52) 
+
+(xy 114.3 96.52)) (stroke (width 0) (type default)) (uuid 89c82497-6e91-41e8-a5e6-8cc86a763dd2)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 80.01 83.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "28ba1da7-c6bc-4444-b695-1cdf024b27c5") 
+
+(property "Reference" "SW25" (at 80.01 78.74 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 80.01 80.01 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 80.01 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 80.01 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 80.01 83.82 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "72d27be4-c850-400b-8f2c-0823e5852741")) (pin "2" (uuid "331784b4-baf7-4d46-b797-4ff3b79f704a")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW25") (unit 1))))) 
+
+(wire (pts 
+
+(xy 77.47 81.28) 
+
+(xy 76.2 81.28)) (stroke (width 0) (type default)) (uuid 57999705-e58b-44c1-a945-6f0ecfb8436b)) 
+
+(junction (at 76.2 81.28) (diameter 0) (color 0 0 0 0) (uuid 8cd92fa9-50ec-45d4-923c-28615b2505d3)) 
+
+(wire (pts 
+
+(xy 76.2 81.28) 
+
+(xy 76.2 120.65)) (stroke (width 0) (type default)) (uuid 5b74edb1-63b2-4375-a6dc-e1d0b11c0a28)) 
+
+(symbol (lib_id "Device:D_Small") (at 82.55 92.71 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "6e639ee4-340d-426e-9fec-2d7075e4accb") 
+
+(property "Reference" "D25" (at 83.82 91.44 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 83.82 93.98 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 82.55 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 82.55 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 82.55 92.71 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 82.55 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 82.55 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "12ae36ad-692c-4f77-9a91-e8b88b14d6d1")) (pin "2" (uuid "a4a8a5d6-7dfb-4f51-af98-01092cc9dc2d")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D25") (unit 1))))) 
+
+(wire (pts 
+
+(xy 82.55 86.36) 
+
+(xy 82.55 90.17)) (stroke (width 0) (type default)) (uuid 625d4575-9b1b-4a0a-9125-7e05e6ae8c3f)) 
+
+(wire (pts 
+
+(xy 82.55 95.25) 
+
+(xy 82.55 96.52)) (stroke (width 0) (type default)) (uuid b5cf1979-ce9b-4d98-b278-cd39492443de)) 
+
+(junction (at 82.55 96.52) (diameter 0) (color 0 0 0 0) (uuid 6c528cfb-4245-4d1e-a8e1-95774890db67)) 
+
+(wire (pts 
+
+(xy 82.55 96.52) 
+
+(xy 114.3 96.52)) (stroke (width 0) (type default)) (uuid dcbdde75-cedf-4404-9542-572c3bcf84ae)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 92.71 83.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "792a9f8e-1755-4bd0-ba3b-6dafb83a1183") 
+
+(property "Reference" "SW26" (at 92.71 78.74 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 92.71 80.01 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 92.71 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 92.71 83.82 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 92.71 83.82 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "da3d6b8b-a6d8-43ce-847c-440135c1df45")) (pin "2" (uuid "094dfda9-b7c0-4f4d-88d5-0aba5b68f824")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW26") (unit 1))))) 
+
+(wire (pts 
+
+(xy 90.17 81.28) 
+
+(xy 88.9 81.28)) (stroke (width 0) (type default)) (uuid e84d7d5d-7f0d-4309-ae5c-ce6a61a493ed)) 
+
+(junction (at 88.9 81.28) (diameter 0) (color 0 0 0 0) (uuid a0ab2ae8-bee2-4ee5-85a7-456a387ab9da)) 
+
+(wire (pts 
+
+(xy 88.9 81.28) 
+
+(xy 88.9 120.65)) (stroke (width 0) (type default)) (uuid 1903543c-a894-4288-936d-80d272cdb138)) 
+
+(symbol (lib_id "Device:D_Small") (at 95.25 92.71 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "8219e640-a350-40ba-9d15-6c27fe937597") 
+
+(property "Reference" "D26" (at 96.52 91.44 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 96.52 93.98 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 95.25 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 95.25 92.71 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 95.25 92.71 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 95.25 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 95.25 92.71 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "a40b8d23-f3da-4c3e-ab88-1faa34a09a66")) (pin "2" (uuid "d9bdf96c-51ad-4f9f-97aa-e3e654fd6651")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D26") (unit 1))))) 
+
+(wire (pts 
+
+(xy 95.25 86.36) 
+
+(xy 95.25 90.17)) (stroke (width 0) (type default)) (uuid 7d2012b4-7177-4446-98b2-d1d76c576ae3)) 
+
+(wire (pts 
+
+(xy 95.25 95.25) 
+
+(xy 95.25 96.52)) (stroke (width 0) (type default)) (uuid d86e9838-3b1d-4f7c-accd-a1fa31e7a428)) 
+
+(junction (at 95.25 96.52) (diameter 0) (color 0 0 0 0) (uuid a6c81380-e589-4d57-a919-1ad576ed91b9)) 
+
+(wire (pts 
+
+(xy 95.25 96.52) 
+
+(xy 114.3 96.52)) (stroke (width 0) (type default)) (uuid 0964c423-fe67-4427-8652-a5a877b8c7ef)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 29.21 104.14 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "c8181578-c55f-4467-8fe8-39e5c51d5f5e") 
+
+(property "Reference" "SW27" (at 29.21 99.06 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 29.21 100.33 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 29.21 104.14 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 29.21 104.14 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 29.21 104.14 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "f0abcf19-4cc6-4c20-b8de-dac484eb4f4f")) (pin "2" (uuid "3a724fe9-f7d4-4724-8be3-4bf39b6556d4")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW27") (unit 1))))) 
+
+(wire (pts 
+
+(xy 26.67 101.6) 
+
+(xy 25.4 101.6)) (stroke (width 0) (type default)) (uuid d6cc6220-f16b-43c1-a89e-4e6b5407d0e2)) 
+
+(junction (at 25.4 101.6) (diameter 0) (color 0 0 0 0) (uuid f6392d17-3bb0-4064-807f-13ff56b86fb3)) 
+
+(wire (pts 
+
+(xy 25.4 101.6) 
+
+(xy 25.4 120.65)) (stroke (width 0) (type default)) (uuid 409f397f-e4b2-40f3-9a7c-ee25fb1efde9)) 
+
+(symbol (lib_id "Device:D_Small") (at 31.75 113.03 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "7fca895a-74dc-4ecb-80b3-f2a79d0542d7") 
+
+(property "Reference" "D27" (at 33.02 111.76 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 33.02 114.3 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 31.75 113.03 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 31.75 113.03 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 31.75 113.03 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 31.75 113.03 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 31.75 113.03 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "489a367d-50d1-4b78-8364-183d286ba44e")) (pin "2" (uuid "fda0d387-cbc0-4e4b-912c-a1e5147d0304")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D27") (unit 1))))) 
+
+(wire (pts 
+
+(xy 31.75 106.68) 
+
+(xy 31.75 110.49)) (stroke (width 0) (type default)) (uuid d4b75e3a-2007-4a0b-bb19-4aa19acbc742)) 
+
+(wire (pts 
+
+(xy 31.75 115.57) 
+
+(xy 31.75 116.84)) (stroke (width 0) (type default)) (uuid 1645ad14-e93d-4a1b-b796-259837e22842)) 
+
+(wire (pts 
+
+(xy 31.75 116.84) 
+
+(xy 114.3 116.84)) (stroke (width 0) (type default)) (uuid 495e2336-4bc4-4a6e-9b5c-cd673a06d038)) 
+
+(global_label "ROW4" (shape input) (at 114.3 116.84 0) (fields_autoplaced) (effects (font (size 1.27 1.27)) (justify left)) (uuid 3f6d6164-c51c-47e3-bbfd-df15aaf46f4a) 
+
+(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 108.0491 116.84 0) (effects (font (size 1.27 1.27)) (justify right) hide))) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 41.91 104.14 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "00ae6ec6-7bd2-441e-aaf5-9c5ad4d04f7e") 
+
+(property "Reference" "SW28" (at 41.91 99.06 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 41.91 100.33 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.00u" (at 41.91 104.14 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 41.91 104.14 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 41.91 104.14 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "828f5b75-0292-4cb8-8f05-41aa50c561ec")) (pin "2" (uuid "31bd88a2-4a0d-4231-b5a8-013c558b2f27")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW28") (unit 1))))) 
+
+(wire (pts 
+
+(xy 39.37 101.6) 
+
+(xy 38.1 101.6)) (stroke (width 0) (type default)) (uuid 12e8ad59-380d-426c-925a-d65851ce7526)) 
+
+(junction (at 38.1 101.6) (diameter 0) (color 0 0 0 0) (uuid c1f2e34d-4208-4926-a159-5d8740398e99)) 
+
+(wire (pts 
+
+(xy 38.1 101.6) 
+
+(xy 38.1 120.65)) (stroke (width 0) (type default)) (uuid f0b36255-fea1-4c7f-bd7b-65fb7bd69dba)) 
+
+(symbol (lib_id "Device:D_Small") (at 44.45 113.03 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "cb2a8caa-5d26-4090-b7cf-81a601fa95a4") 
+
+(property "Reference" "D28" (at 45.72 111.76 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 45.72 114.3 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 44.45 113.03 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 44.45 113.03 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 44.45 113.03 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 44.45 113.03 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 44.45 113.03 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "fcf95b1a-81f1-4b4f-9f93-5020453f935e")) (pin "2" (uuid "1680f471-f880-496f-803f-32762cd52902")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D28") (unit 1))))) 
+
+(wire (pts 
+
+(xy 44.45 106.68) 
+
+(xy 44.45 110.49)) (stroke (width 0) (type default)) (uuid 2dcb4fce-a77d-4eb0-be6b-5f2c8b884eeb)) 
+
+(wire (pts 
+
+(xy 44.45 115.57) 
+
+(xy 44.45 116.84)) (stroke (width 0) (type default)) (uuid 5fdc3a42-ea3e-41f4-ba30-756d72f40401)) 
+
+(junction (at 44.45 116.84) (diameter 0) (color 0 0 0 0) (uuid a8fc713a-8f1a-4b72-a75a-292289bd04c2)) 
+
+(wire (pts 
+
+(xy 44.45 116.84) 
+
+(xy 114.3 116.84)) (stroke (width 0) (type default)) (uuid a6d9f94a-f244-4532-9951-44b0c48d414c)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 54.61 104.14 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "c6f620f1-8669-4749-b481-dc850bf0365b") 
+
+(property "Reference" "SW29" (at 54.61 99.06 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 54.61 100.33 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_1.25u" (at 54.61 104.14 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 104.14 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 54.61 104.14 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "c06c3e28-8a86-4d9c-8b6f-b1c08b498398")) (pin "2" (uuid "8198a953-f589-466f-a92a-f6649a2a04a2")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW29") (unit 1))))) 
+
+(wire (pts 
+
+(xy 52.07 101.6) 
+
+(xy 50.8 101.6)) (stroke (width 0) (type default)) (uuid 60f98cec-50ad-4266-a95b-33df92dfa0cc)) 
+
+(junction (at 50.8 101.6) (diameter 0) (color 0 0 0 0) (uuid 331d31bc-1317-40bb-ab21-f3f3b817d00b)) 
+
+(wire (pts 
+
+(xy 50.8 101.6) 
+
+(xy 50.8 120.65)) (stroke (width 0) (type default)) (uuid 4b1c4416-dbfd-44e6-ae7f-ed27e2b80cb0)) 
+
+(symbol (lib_id "Device:D_Small") (at 57.15 113.03 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "fcdf1ef7-eee8-4fe1-a95f-c11a876def40") 
+
+(property "Reference" "D29" (at 58.42 111.76 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 58.42 114.3 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 57.15 113.03 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 57.15 113.03 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 57.15 113.03 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 57.15 113.03 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 57.15 113.03 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "7145c7eb-f4a3-4cc8-aa05-12748d08d131")) (pin "2" (uuid "4e60bd83-773f-4493-a8c6-7c1f709d0d0c")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D29") (unit 1))))) 
+
+(wire (pts 
+
+(xy 57.15 106.68) 
+
+(xy 57.15 110.49)) (stroke (width 0) (type default)) (uuid 0f6a0616-9836-49e0-9263-4894e0198de9)) 
+
+(wire (pts 
+
+(xy 57.15 115.57) 
+
+(xy 57.15 116.84)) (stroke (width 0) (type default)) (uuid b7fdf37c-7b9e-455c-8140-5913a2feb331)) 
+
+(junction (at 57.15 116.84) (diameter 0) (color 0 0 0 0) (uuid 2c6db8e1-dd3d-4151-bcdb-4a2cafb10928)) 
+
+(wire (pts 
+
+(xy 57.15 116.84) 
+
+(xy 114.3 116.84)) (stroke (width 0) (type default)) (uuid ac4fb6ce-c29f-45ac-bf9a-d9b4f638761d)) 
+
+(symbol (lib_id "Switch:SW_Push_45deg") (at 80.01 104.14 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "47a62a17-fbfe-4274-b36d-2e66104f2731") 
+
+(property "Reference" "SW30" (at 80.01 99.06 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "SW_Push" (at 80.01 100.33 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Footprint" "Switch_Keyboard_Cherry_MX:SW_Cherry_MX_PCB_2.75u" (at 80.01 104.14 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 80.01 104.14 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 80.01 104.14 0) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "3729b618-e97b-4849-83b2-7668226c300d")) (pin "2" (uuid "af341ca8-fe8f-4884-932e-c231ec89aea4")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "SW30") (unit 1))))) 
+
+(wire (pts 
+
+(xy 77.47 101.6) 
+
+(xy 76.2 101.6)) (stroke (width 0) (type default)) (uuid 1ac27fcb-148a-4dc4-a1aa-a39cf0171c83)) 
+
+(junction (at 76.2 101.6) (diameter 0) (color 0 0 0 0) (uuid e5586024-59ee-40a1-b409-44ef92a82d35)) 
+
+(wire (pts 
+
+(xy 76.2 101.6) 
+
+(xy 76.2 120.65)) (stroke (width 0) (type default)) (uuid dba4cc8d-7711-475e-986a-cd6d70af237c)) 
+
+(symbol (lib_id "Device:D_Small") (at 82.55 113.03 90) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "d9df4a24-db9d-417c-be1e-bb1504166e97") 
+
+(property "Reference" "D30" (at 83.82 111.76 90) (effects (font (size 1.27 1.27)) (justify right))) 
+
+(property "Value" "D" (at 83.82 114.3 90) (effects (font (size 1.27 1.27)) (justify right) (hide yes))) 
+
+(property "Footprint" "Diode_SMD:D_SOD-123" (at 82.55 113.03 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 82.55 113.03 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "" (at 82.55 113.03 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Sim.Device" "D" (at 82.55 113.03 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Sim.Pins" "1=K 2=A" (at 82.55 113.03 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "aafbfe4d-b4d6-45ae-a95f-75056106249a")) (pin "2" (uuid "71500fff-3ff5-4600-be85-c2b4418690cd")) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "D30") (unit 1))))) 
+
+(wire (pts 
+
+(xy 82.55 106.68) 
+
+(xy 82.55 110.49)) (stroke (width 0) (type default)) (uuid 75ce239c-694d-4506-b183-8a0d500b5a0e)) 
+
+(wire (pts 
+
+(xy 82.55 115.57) 
+
+(xy 82.55 116.84)) (stroke (width 0) (type default)) (uuid aa54a7b1-4714-4831-9fce-aca1f41c5504)) 
+
+(junction (at 82.55 116.84) (diameter 0) (color 0 0 0 0) (uuid ce096cc1-d5da-408e-ac46-568247863174)) 
+
+(wire (pts 
+
+(xy 82.55 116.84) 
+
+(xy 114.3 116.84)) (stroke (width 0) (type default)) (uuid 3884d398-ba1c-46b5-b5e3-c6578eebffea)) 
+
+(symbol (lib_id "Mechanical:SW_stab") (at 25.4 140.65 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "8241a6dd-c8f5-457f-a201-fe462088ea1c") 
+
+(property "Reference" "ST30" (at 31.75 139.2529 0) (effects (font (size 1.27 1.27)) (justify left))) 
+
+(property "Value" "SW_stab" (at 31.75 141.7929 0) (effects (font (size 1.27 1.27)) (justify left))) 
+
+(property "Footprint" "Mounting_Keyboard_Stabilizer:Stabilizer_Cherry_MX_2.00u" (at 25.4 140.65 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 25.4 140.65 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Switch stabilizer" (at 25.4 140.65 0) (effects (font (size 1.27 1.27)) (hide yes))) (instances (project "template" (path "/9e45a776-7007-48ff-b543-dc98423173b7" (reference "ST30") (unit 1))))))

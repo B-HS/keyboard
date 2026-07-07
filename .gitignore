@@ -5,3 +5,4 @@ keycaps/
 keyswitch_model/
 .DS_Store
 *.local
+.history/

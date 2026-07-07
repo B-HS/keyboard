@@ -1,0 +1,9 @@
+(fp_lib_table
+   (version 7)
+   (lib (name "Switch_Keyboard_Cherry_MX")(type "KiCad")(uri "${KIPRJMOD}/footprints/Switch_Keyboard_Cherry_MX.pretty")(options "")(descr ""))
+   (lib (name "Diode_THT")(type "KiCad")(uri "${KIPRJMOD}/footprints/Diode_THT.pretty")(options "")(descr ""))
+   (lib (name "MountingHole")(type "KiCad")(uri "${KIPRJMOD}/footprints/MountingHole.pretty")(options "")(descr ""))
+   (lib (name "Mounting_Keyboard_Stabilizer")(type "KiCad")(uri "${KIPRJMOD}/footprints/Mounting_Keyboard_Stabilizer.pretty")(options "")(descr ""))
+   (lib (name "ESP32-C3_SuperMini")(type "KiCad")(uri "${KIPRJMOD}/footprints/ESP32-C3_SuperMini.pretty")(options "")(descr ""))
+   (lib (name "Wire_Pads")(type "KiCad")(uri "${KIPRJMOD}/footprints/Wire_Pads.pretty")(options "")(descr ""))
+)
