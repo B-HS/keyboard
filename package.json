@@ -1,0 +1,46 @@
+{
+    "name": "split-65",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "description": "Monorepo: split keyboard cases (65 / keypad) — shared three.js renderer, per-project JSCAD parts, CNC(DXF) export",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "export:65": "bun run 65/export/export.ts",
+        "export:65-fdm": "bun run 65/export/export-fdm.ts",
+        "export:65-fdm-mini": "SCALE=0.2 bun run 65/export/export-fdm.ts",
+        "smoke:65": "bun run 65/export/smoke.ts",
+        "export:keypad": "bun run keypad/export/export.ts",
+        "smoke:keypad": "bun run keypad/export/smoke.ts",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@jscad/dxf-serializer": "^2.1.23",
+        "@jscad/modeling": "^2.13.0",
+        "@jscad/stl-serializer": "^2.1.23",
+        "react": "^19.2.7",
+        "react-dom": "^19.2.7",
+        "three": "^0.185.1"
+    },
+    "devDependencies": {
+        "@radix-ui/react-checkbox": "^1.3.7",
+        "@radix-ui/react-slider": "^1.4.3",
+        "@tailwindcss/vite": "^4.3.2",
+        "@types/bun": "^1.3.14",
+        "@types/react": "^19.2.17",
+        "@types/react-dom": "^19.2.3",
+        "@types/three": "^0.185.0",
+        "@vitejs/plugin-react": "^6.0.3",
+        "babel-plugin-react-compiler": "^1.0.0",
+        "clsx": "^2.1.1",
+        "prettier": "^3.9.4",
+        "tailwind-merge": "^3.6.0",
+        "tailwindcss": "^4.3.2",
+        "typescript": "^6.0.3",
+        "vite": "^8.1.3"
+    }
+}

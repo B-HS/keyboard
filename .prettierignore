@@ -1,0 +1,7 @@
+assets/
+dist/
+keycaps/
+keyswitch_model/
+**/raw/
+**/export-out/
+keypad/pcb/

@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+:root {
+    --background: #1a1a1f;
+    --foreground: #e8e8ea;
+    --card: rgba(20, 20, 26, 0.88);
+    --card-foreground: #e8e8ea;
+    --muted: #26262e;
+    --muted-foreground: #9a9aa2;
+    --border: #33343c;
+    --input: #2a2b33;
+    --primary: #e8e8ea;
+    --primary-foreground: #16161a;
+    --accent: #2b6cff;
+    --radius: 0rem;
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-accent: var(--accent);
+    --radius-sm: 0rem;
+    --radius-md: 0rem;
+    --radius-lg: 0rem;
+    --radius-xl: 0rem;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+input[type='color'] {
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 0;
+    border: 1px solid var(--border);
+    background: transparent;
+}
+input[type='color']::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+input[type='color']::-webkit-color-swatch {
+    border: none;
+}

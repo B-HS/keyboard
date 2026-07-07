@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "noEmit": true,
+        "skipLibCheck": true,
+        "isolatedModules": true,
+        "verbatimModuleSyntax": true,
+        "allowImportingTsExtensions": true,
+        "types": ["bun"],
+        "paths": {
+            "@/*": ["./src/*"],
+            "@app/*": ["./src/app/*"],
+            "@widgets/*": ["./src/widgets/*"],
+            "@features/*": ["./src/features/*"],
+            "@entities/*": ["./src/entities/*"],
+            "@shared/*": ["./src/shared/*"],
+            "@renderer/*": ["./src/shared/renderer/*"],
+            "@65/*": ["./65/*"],
+            "@keypad/*": ["./keypad/*"]
+        }
+    },
+    "include": ["src", "65", "keypad", "types"]
+}

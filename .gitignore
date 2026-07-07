@@ -1,0 +1,7 @@
+node_modules/
+dist/
+**/export-out/
+keycaps/
+keyswitch_model/
+.DS_Store
+*.local
