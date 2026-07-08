@@ -91,11 +91,14 @@ $KICAD pcb export svg ...                                 # 육안 확인용 F/B
 
 - 적용 후 **DRC error/warning 0** (unconnected 78/92 = 라우팅 대상만 잔존).
 
-## 6. 라우팅 완료 (2026-07-07, 사용자 직접)
+## 6. 라우팅 완결 + 발주 파일 (2026-07-08 최종)
 
-- **양측 배선 완결**: left 204 / right 263 트랙, 전부 0.25mm, **비아 0**(F.Cu=ROW 가로, B.Cu=COL 세로+다이오드 링크로 양면 분리). 총 1,321 / 1,686mm.
-- 검증: JLC 룰 DRC **위반 0 + 미연결 0** (양측). 중간에 COL 전체 누락을 검사로 발견→사용자 보완 후 재통과.
-- ~~잔여: 컨트롤러~~ → **완료(2026-07-07): ESP32-C3 SuperMini 통합** — 아래 §7.
+- **최종 배선(사용자, J1 버스 포함)**: left 270 / right 340 트랙, 전부 0.25mm, **비아 0**(F.Cu=ROW 가로, B.Cu=COL 세로+다이오드 링크), 총 2,331 / 2,655mm.
+- **최종 검증**: JLC 룰 DRC **위반 0 + 미연결 0**(양측) · sch↔pcb 넷리스트 132=132/153=153 mismatch 0. 이력: 1차에서 COL 전체 누락 발견→보완, 2차에서 J1 미배선→보완.
+- **발주 파일(2026-07-08)**: `65/pcb/order/{left,right}/`(거버 7레이어 protel 확장 + 병합 엑셀론 드릴) → **`65/pcb/order/jlcpcb-{left,right}.zip`** 업로드용. 명령: `kicad-cli pcb export gerbers --layers F.Cu,B.Cu,F.Mask,B.Mask,F.SilkS,B.SilkS,Edge.Cuts` + `export drill --format excellon --excellon-units mm --drill-origin absolute`.
+- **발주 전 최종 대조(거버 실측 ↔ 케이스 SSOT)**: 프리플라이트 DRC 0 · Edge.Cuts bbox 146.35/165.40×108.25 정확 일치(0.001mm) · Ø5.4 드릴 6좌표 = mountHoles 일치 · 공구별 홀 수 전수 일치(0.8×60/70 · 1.0×12/13 · 1.75 · 3.05 · 4.0 · 5.4×6 · 스태빌) · J1 = 크래들 직상부 · 기둥 관통 필요폭 5.052 < 5.4.
+- **JLC 주문 옵션(확정)**: left·right **별도 주문 2건**(Different Design 1 유지) · 2층 · 1.6mm · **흰색** · FR4 TG135 · **LeadFree HASL 권장** · 1oz · Outline ±0.2 · Confirm production file No · Remove Mark · 실크 없음.
+- 잔여 리스크(주문 시 인지): 케이스 실물(1/5→1:1) 미검증 상태의 선발주 — PCB↔케이스 인터페이스(외곽·6홀)는 확정 스펙이라 낮음.
 
 ## 7. 컨트롤러 — ESP32-C3 SuperMini (오프보드) + 와이어 패드열 J1
 
