@@ -1,43 +1,87 @@
-name: Deploy to GitHub Pages
+name: Deploy branches to GitHub Pages
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+    push:
+        branches: [main, v1, v2, split]
+    workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+    contents: read
+    pages: write
+    id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+    group: pages
+    cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: oven-sh/setup-bun@v2
+              with:
+                  bun-version: latest
 
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
+            - uses: actions/checkout@v4
+              with:
+                  ref: v1
+                  path: src-v1
+            - uses: actions/checkout@v4
+              with:
+                  ref: v2
+                  path: src-v2
+            - uses: actions/checkout@v4
+              with:
+                  ref: split
+                  path: src-split
 
-      - run: bun install --frozen-lockfile
+            - name: Build v1
+              working-directory: src-v1
+              run: |
+                  bun install --frozen-lockfile
+                  bunx vite build --base=/keyboard/v1/
 
-      - run: bun run build
+            - name: Build v2
+              working-directory: src-v2
+              run: |
+                  bun install --frozen-lockfile
+                  bunx vite build --base=/keyboard/v2/
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+            - name: Build split
+              working-directory: src-split
+              run: |
+                  bun install --frozen-lockfile
+                  bunx vite build --base=/keyboard/split/
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v4
-        id: deployment
+            - name: Assemble site
+              run: |
+                  mkdir -p site
+                  cp -R src-v1/dist site/v1
+                  cp -R src-v2/dist site/v2
+                  cp -R src-split/dist site/split
+                  cat > site/index.html <<'HTML'
+                  <!doctype html>
+                  <html lang="ko">
+                  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>keyboard</title>
+                  <style>body{background:#1a1a1f;color:#e8e8ea;font-family:ui-sans-serif,system-ui;display:flex;min-height:100vh;align-items:center;justify-content:center}ul{list-style:none;padding:0}a{color:#7aa2ff;text-decoration:none;font-size:1.2rem}li{margin:.6rem 0}</style>
+                  </head>
+                  <body><main><h1>keyboard</h1><ul>
+                  <li><a href="./split/">split — split-65 + keypad (현행)</a></li>
+                  <li><a href="./v2/">v2 — 49키 핸드와이어드 BLE</a></li>
+                  <li><a href="./v1/">v1 — 49키 PCBA 뷰어</a></li>
+                  </ul></main></body></html>
+                  HTML
+
+            - uses: actions/upload-pages-artifact@v3
+              with:
+                  path: site
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - id: deployment
+              uses: actions/deploy-pages@v4
