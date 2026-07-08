@@ -3,8 +3,8 @@ import { VRMLLoader } from 'three/addons/loaders/VRMLLoader.js'
 import { mergeModelByColor, type ColorGroup } from './instancing'
 import type { ModelDims, Side } from './types'
 
-const SWITCH_WRL = '/models/switch/silent_alpaca.wrl'
-const KEYCAPS_JSON = '/models/keycap/keycaps.json'
+const SWITCH_WRL = `${import.meta.env.BASE_URL}models/switch/silent_alpaca.wrl`
+const KEYCAPS_JSON = `${import.meta.env.BASE_URL}models/keycap/keycaps.json`
 const KICAD_WRL_SCALE = 2.54
 const DCS_ROWS5 = [1, 2, 3, 4, 4] as const
 

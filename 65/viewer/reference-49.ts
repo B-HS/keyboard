@@ -1,7 +1,7 @@
 import { Group, Mesh, MeshStandardMaterial, type BufferGeometry } from 'three'
 import { STLLoader } from 'three/addons/loaders/STLLoader.js'
 
-const BASE = '/models/reference-49'
+const BASE = `${import.meta.env.BASE_URL}models/reference-49`
 const CENTER = { x: 123.8, y: -28.6, z: -2 }
 const PCB_XY_OFFSET = { x: -24.1, y: 23.4 }
 

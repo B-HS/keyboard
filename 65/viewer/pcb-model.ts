@@ -2,7 +2,7 @@ import { Group } from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { Z } from '../config/dimensions'
 
-const BASE = '/models/pcb'
+const BASE = `${import.meta.env.BASE_URL}models/pcb`
 const M_TO_MM = 1000
 
 const loader = new GLTFLoader()

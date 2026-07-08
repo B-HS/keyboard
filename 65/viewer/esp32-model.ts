@@ -4,7 +4,7 @@ import { mergeModelByColor, type ColorGroup } from '@renderer/instancing'
 import type { Side } from '@renderer/types'
 import { Z, FDM_MARGIN_EXTRA, ESP32_CRADLE } from '../config/dimensions'
 
-const MODEL_URL = '/models/esp32-c3.glb'
+const MODEL_URL = `${import.meta.env.BASE_URL}models/esp32-c3.glb`
 const M_TO_MM = 1000
 
 const loader = new GLTFLoader()

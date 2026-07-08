@@ -12,7 +12,7 @@
         "isolatedModules": true,
         "verbatimModuleSyntax": true,
         "allowImportingTsExtensions": true,
-        "types": ["bun"],
+        "types": ["bun", "vite/client"],
         "paths": {
             "@/*": ["./src/*"],
             "@app/*": ["./src/app/*"],
