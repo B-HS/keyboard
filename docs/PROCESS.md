@@ -2,8 +2,24 @@
 
 > **새 세션은 이 문서를 먼저 읽는다.** 저장소 전체의 구조·뷰어·프로젝트별 상태·실행·남은 일을 정확히 담는다.
 > 기준 룰: `~/.claude/CLAUDE.md` + 코딩 컨벤션(ai-process / common / comments / fsd …).
-> 최종 갱신: 2026-07-10 · 브랜치 **`split`** · **top STL 틸트 export 버그 수정**(`ebfd2b5`): `buildTopFdm3D` 베젤이 `tiltGeom`으로 기운 채 export되어 베드 접촉이 146.3×0.8mm 모서리 띠뿐이던 문제 → CLI(`export-fdm.ts`)·웹(`stl-parts.ts`) 양쪽 top에 `untiltGeom` 적용(**untilt→flip 순서**), 베젤 면 전체(146.4×108.2) 베드 밀착·top 높이 26.8mm. 뷰어 렌더는 틸트 유지. 상세 `docs/bug/2026-07-10-top-stl-tilt-export.md`.
+> 최종 갱신: 2026-07-10(2차) · 브랜치 **`split`** · **plate 조립 불가 결함 수정 + 틸트 삭제**(미커밋): 분리 plate(홀 Ø3.4)가 기둥 Ø4.8·캡 Ø5.8을 통과 못 해 조립 경로가 없던 결함 → 사용자 확정으로 ①plate 홀 **Ø6.4**(스위치 샌드위치 고정, 트레이마운트 방식) ②기둥 넥 제거(캡 위 몸통 **Ø4.8 일정**) ③**7.5° 틸트 삭제**(`TILT_DEG=0`, 유틸은 항등으로 유지) ④웹 export에 plate 추가(측당 4장). STL: top 15.1/plate 1.5/bottom 5.0, 총 스택 16.6mm. 발주 PCB(Ø5.4) 무변경 호환. 상세 `docs/bug/2026-07-10-plate-captive-assembly.md` · `65/docs/fdm-m1-case.md` 개정 2차 블록. 아래 §4.2 틸트 서술은 **이력**.
+> 이전: 2026-07-10 · **top STL 틸트 export 버그 수정**(`ebfd2b5`): `buildTopFdm3D` 베젤이 `tiltGeom`으로 기운 채 export되어 베드 접촉이 146.3×0.8mm 모서리 띠뿐이던 문제 → CLI(`export-fdm.ts`)·웹(`stl-parts.ts`) 양쪽 top에 `untiltGeom` 적용(**untilt→flip 순서**), 베젤 면 전체(146.4×108.2) 베드 밀착·top 높이 26.8mm. 뷰어 렌더는 틸트 유지. 상세 `docs/bug/2026-07-10-top-stl-tilt-export.md`.
 > 이전: 2026-07-07 배치(①65 FDM 7.5° 틸트 §4.2 ②프론트 전면 개편 §1.5 ③웹 STL Export·1/5 검증·사포 마감 ④65 PCB 라우팅 완결 ⑤ESP32-C3 통합)는 이후 전부 커밋 반영 — keypad TS 전환 `d3f3447` · 65 PCB 라우팅 `192ec67` · 문서 최신화 `d433119` · **JLCPCB 거버·드릴 생성+발주 사양 확정** `d4d1fd3`(`65/pcb/order/jlcpcb-{left,right}.zip`, pcb-build §6) · 뷰어 BASE_URL(GitHub Pages) `f14c200`. **65 PCB는 JLC 업로드·발주만 남음.** 그 이전: 2026-06-27 `0a3e649`.
+
+---
+
+## 진행 중 (2026-07-10): plate 조립 불가 결함 수정 — 홀 확대(A안) + 기둥 단면 일정화 + 틸트 삭제
+
+> 발견: 분리 plate(홀 Ø3.4)는 기둥 몸통 Ø4.8·캡 Ø5.8을 통과할 수 없어 **물리적으로 조립 경로가 없음**(CAD 최종 위치만 성립). 사용자 확정: plate 홀 확대(스위치 샌드위치로 고정) + 넥 제거(기둥 단면 일정) + 7.5° 틸트 삭제. PCB(Ø5.4, 발주분)는 무변경 호환.
+
+- [x] a. `dimensions.ts` — TILT_DEG 7.5→0, PLATE_NECK_CLEARANCE_DIAMETER(3.4)→PLATE_PILLAR_CLEARANCE_DIAMETER(6.4), PILLAR_PLATE_NECK_DIAMETER 삭제
+- [x] b. `case-fdm.ts` — pillarSolid 넥 구간 제거(몸통 Ø4.8을 plateTop까지 일정), plate 홀 상수 교체
+- [x] c. `stl-parts.ts` — 웹 export에 plate 추가(측당 4장, 좌우 8장)
+- [x] d. 검증 — typecheck·format:check·smoke:65·export:65-fdm(top 15.1/plate 1.5/bottom 5.0)·vite build 전부 통과 (테스트 러너 없음 — test 스크립트 부재)
+- [x] e. 렌더 — Artifact 조립 검증 뷰 갱신·브라우저 확인 완료
+- [x] f. 문서 — `docs/bug/2026-07-10-plate-captive-assembly.md` + fdm-m1-case.md 개정 2차 블록 + 이 문서 최신화 (커밋은 사용자 요청 대기)
+- [x] g. 뷰어 — plate 독립 레이어 분리(top 그룹에서 제거): `LAYER_KEYS`·`FDM_LAYER_KEYS`에 'plate' 추가, `buildCaseMeshesFdm` layers 분리, 패널 라벨 '플레이트'. 형상은 동일 빌더라 자동 반영. typecheck·format·build 통과
+- [x] h. 뷰어 성능 — PCB GLB를 `mergeModelByColor`로 병합(`pcb-model.ts`): 드로우콜 좌 1,474 + 우 1,706 = **3,180 → 6**(측당 고유색 3). 부수 수정: `instancing.ts`가 인덱스드 지오메트리의 index를 버리던 버그 → `toNonIndexed()` 전개(GLB 소스 전반·ESP32 포함 삼각형 정합성 확보). typecheck·format·build 통과, 육안 확인은 사용자 dev 서버에서
 
 ---
 
@@ -80,7 +96,7 @@ src/
 - **하이브리드 투명도(그레인 제거)**: alphaHash는 조작 중 누적 불가라 원리적으로 자글자글 → `materials.ts`가 자동 전환: **조작 중(dirty) = 일반 알파 블렌딩**(그레인 0, 겹침 근사) / **idle = alphaHash + TAA 수렴**(정확). 재질에 `userData.translucent` 마킹, 모드 flip은 three 프로그램 캐시 재사용이라 저비용.
 - **웹 STL Export**: 패널 하단 섹션 — scale 입력(0.05~1, 프리셋 1/5·1/2·1:1) + Export 버튼 → 브라우저에서 `65/export/stl-parts.ts`(CLI와 동일 배향: top은 untiltGeom→flip→dropToBed) 직렬화, **좌우 × top/bottom/mock-pcb = STL 6장** 개별 다운로드. mock-pcb = fdmOutline + Ø5.4 홀 6, 두께 1.6(스케일 적용) 확인용 대용판.
 - **keypad 렌더 제거(2026-07-07)**: 뷰어는 65만 렌더(PROJECTS에서 제외). 패널은 프로젝트가 보고하는 `layerKeys`만 표시 → 스페이서 행 자동 제거(65 FDM은 벽 없음). keypad 코드·export·smoke·CI는 유지.
-- **실모델 렌더 2종**: ① PCB = kicad-cli glb export(`assets/models/pcb/{left,right}.glb`, `65/viewer/pcb-model.ts`, rotateX90°+×1000+z=pcbBottom, 절차적→GLB 스왑) — **PCB 수정 시 glb 재export 필수**(명령: pcb-build §5). ② ESP32-C3 = SnapEDA STEP→더미보드 트릭 glb(`assets/models/esp32-c3.glb`), `65/viewer/esp32-model.ts`가 **색상별 지오메트리 병합**(938 드로우콜→~6, `mergeModelByColor` 재사용, 좌우 지오메트리 공유) 후 rotateX(π)(부품 위·USB 뒤)로 크래들 안착. esp32는 **독립 레이어**(패널 행·localStorage).
+- **실모델 렌더 2종**: ① PCB = kicad-cli glb export(`assets/models/pcb/{left,right}.glb`, `65/viewer/pcb-model.ts`, rotateX90°+×1000+z=pcbBottom, 절차적→GLB 스왑) — 로드 시 `mergeModelByColor` 색상 병합(2026-07-10: 드로우콜 좌 1,474+우 1,706=3,180→6, 측당 캐시). **PCB 수정 시 glb 재export 필수**(명령: pcb-build §5). ② ESP32-C3 = SnapEDA STEP→더미보드 트릭 glb(`assets/models/esp32-c3.glb`), `65/viewer/esp32-model.ts`가 **색상별 지오메트리 병합**(938 드로우콜→~6, `mergeModelByColor` 재사용, 좌우 지오메트리 공유) 후 rotateX(π)(부품 위·USB 뒤)로 크래들 안착. esp32는 **독립 레이어**(패널 행·localStorage).
 - **부품별 스타일**: 8개 레이어(상판/PCB/하판/**ESP32**/스페이서/볼트/스위치/키캡) 각각 **visible·opacity·color** 독립 제어(`applyLayerStyle` — 기본색은 material.userData에 보존, color null=기본색 복귀). 두 프로젝트에 통합 적용.
 - **영속화**: `split-keyboards:viewer-settings:v1` localStorage 키에 레이어 스타일 + 레퍼런스 토글 저장, 새로고침 유지. 파싱 실패·스키마 불일치 시 기본값 폴백.
 - **CI 신설**: `.github/workflows/ci.yml` — bun install → typecheck → format:check → smoke×2 → export×3 → build.
@@ -129,29 +145,29 @@ src/
 
 ### 4.1 확정 파라미터 (= `65/config/dimensions.js`, SSOT)
 
-| 상수                                      | 65 값                            | keypad 값 | 비고                                                                                                  |
-| ----------------------------------------- | -------------------------------- | --------- | ----------------------------------------------------------------------------------------------------- |
-| KEY_PITCH                                 | 19.05                            | 19.05     | 1u                                                                                                    |
-| SWITCH_CUTOUT                             | **13.95**                        | **13.75** | 65=geekhack 레이저 snug / keypad=KLE-NG 기본. CNC면 kerf 무관, 실측 끼움으로 확정                     |
-| STAB_PAD                                  | 6.75×14.75 r0.5                  | 동일      | keypad는 rot 적용                                                                                     |
-| PLATE / TOP_FRAME / BOTTOM                | 1.5 / 5.0 / 1.5                  | 동일      | 베젤 5.0(상단 z +10.0)                                                                                |
-| PCB_THICKNESS                             | 1.6                              | 1.6       |                                                                                                       |
-| LATERAL_CLEARANCE                         | 1.25                             | 1.25      | 키캡↔개구부                                                                                           |
-| CASE_MARGIN                               | 5                                | 5         | 외곽 = 키 bbox + 5 (keypad 새 19키 레이아웃은 세로 스태빌 없어 충돌 없음)                             |
-| KEYCAP_GAP                                | 1.05                             | 1.05      |                                                                                                       |
-| OUTLINE_RADIUS                            | 1                                | 1         |                                                                                                       |
-| MOUNT_HOLE_DIAMETER                       | 2.4                              | 2.4       | M2 클리어런스. 베젤은 무홀                                                                            |
-| MOUNT_HOLE_INSET_FROM_EDGE                | 2.5                              | 2.5       | inset = CASE_MARGIN−2.5 = 2.5                                                                         |
-| PLATE_BOTTOM_TO_PCB_TOP / BOTTOM_GAP      | 3.5 / **3.5**                    | 3.5 / 5.0 | 에어갭 / 바텀갭. **65는 틸트 도입으로 3.5 확정**(앞행 기준, §4.2 — 8.0 검토 후 축소). keypad 5.0 유지 |
-| TILT_DEG / TILT_PIVOT_Y (65 FDM)          | **7.5°** / −76.2 (스페이스바 행) | 없음      | §4.2. `tiltRise(y)`·`tiltY(y)` 파생                                                                   |
-| PCB_MOUNT_HOLE_FDM / PLATE_NECK_CLEARANCE | **5.4** / **3.4**                | 없음      | 틸트로 확대(구 5.0/3.2): 기운 판을 수직 핀이 관통(4.8/cos7.5+1.6·tan7.5≈5.05)                         |
-| KEYCAP_BOTTOM_Z                           | plateTop+4.3=9.3                 | 동일      | 뷰어 키캡 base                                                                                        |
+| 상수                                        | 65 값                        | keypad 값 | 비고                                                                                                  |
+| ------------------------------------------- | ---------------------------- | --------- | ----------------------------------------------------------------------------------------------------- |
+| KEY_PITCH                                   | 19.05                        | 19.05     | 1u                                                                                                    |
+| SWITCH_CUTOUT                               | **13.95**                    | **13.75** | 65=geekhack 레이저 snug / keypad=KLE-NG 기본. CNC면 kerf 무관, 실측 끼움으로 확정                     |
+| STAB_PAD                                    | 6.75×14.75 r0.5              | 동일      | keypad는 rot 적용                                                                                     |
+| PLATE / TOP_FRAME / BOTTOM                  | 1.5 / 5.0 / 1.5              | 동일      | 베젤 5.0(상단 z +10.0)                                                                                |
+| PCB_THICKNESS                               | 1.6                          | 1.6       |                                                                                                       |
+| LATERAL_CLEARANCE                           | 1.25                         | 1.25      | 키캡↔개구부                                                                                           |
+| CASE_MARGIN                                 | 5                            | 5         | 외곽 = 키 bbox + 5 (keypad 새 19키 레이아웃은 세로 스태빌 없어 충돌 없음)                             |
+| KEYCAP_GAP                                  | 1.05                         | 1.05      |                                                                                                       |
+| OUTLINE_RADIUS                              | 1                            | 1         |                                                                                                       |
+| MOUNT_HOLE_DIAMETER                         | 2.4                          | 2.4       | M2 클리어런스. 베젤은 무홀                                                                            |
+| MOUNT_HOLE_INSET_FROM_EDGE                  | 2.5                          | 2.5       | inset = CASE_MARGIN−2.5 = 2.5                                                                         |
+| PLATE_BOTTOM_TO_PCB_TOP / BOTTOM_GAP        | 3.5 / **3.5**                | 3.5 / 5.0 | 에어갭 / 바텀갭. **65는 틸트 도입으로 3.5 확정**(앞행 기준, §4.2 — 8.0 검토 후 축소). keypad 5.0 유지 |
+| TILT_DEG / TILT_PIVOT_Y (65 FDM)            | **0** (2026-07-10 틸트 삭제) | 없음      | 유틸(tiltGeom/tiltRise/tiltY)은 파라메트릭으로 유지, 각도 0 항등. §4.2는 이력                         |
+| PCB_MOUNT_HOLE_FDM / PLATE_PILLAR_CLEARANCE | **5.4** / **6.4**            | 없음      | PCB 5.4=발주분 고정(캡 Ø5.8에 정지). plate 6.4=기둥 최대 단면(캡 5.8) 통과 — 조립 경로 확보           |
+| KEYCAP_BOTTOM_Z                             | plateTop+4.3=9.3             | 동일      | 뷰어 키캡 base                                                                                        |
 
 부품-로컬 상수: `top-frame.js` GAP_FILLET 1.0·ARC_SEGMENTS 8; `spacer.js` WALL_WIDTH 6; project `MODEL_DIMS.switchStemTopZ = Z.plateTop+8.5(=13.5)`; `case-meshes.js` 볼트 샤프트 r1.0·머리 r2.2·인서트 r1.6.
 
 미사용 상수(참고): `MOUNT_KEEPOUT_DIAMETER`(5), `KEYCAP_BOTTOM_SIZE`(18), `Z.stemTop`/`PLATE_TOP_TO_STEM_TOP`. `@jscad/stl-serializer`는 `export-fdm.js`가 사용.
 
-### 4.2 65 FDM 변형 — 7.5° 틸트 (현재 제작 경로, 2026-07-07)
+### 4.2 65 FDM 변형 — 7.5° 틸트 (이력 — 2026-07-10 틸트 삭제·plate 샌드위치 전환, 상단 "진행 중" 및 fdm-m1-case.md 개정 2차 참조)
 
 > 정본: `65/docs/fdm-m1-case.md`. 배경·결정 이력: `acknowledge/typing-tilt-redesign.md` §7. 코드: `65/parts/case-fdm.js`·`config/dimensions.js`.
 
@@ -176,7 +192,7 @@ bun install
 bun run dev          # React 뷰어 (기본 5173). 65+keypad 한 화면 동시
 bun run typecheck    # tsc --noEmit
 bun run export:65    # 65 DXF 10장 → 65/export-out/ (측당 5: bezel/plate/bottom/spacer-airgap/spacer-bottomgap)
-bun run export:65-fdm      # 65 FDM STL 6장 → 65/export-out/fdm/ (측당 3: top/plate/bottom, 7.5° 틸트)
+bun run export:65-fdm      # 65 FDM STL 6장 → 65/export-out/fdm/ (측당 3: top/plate/bottom, 무틸트 평판)
 bun run export:65-fdm-mini # 1/5(SCALE=0.2) 검증 모형 → 65/export-out/fdm-mini/ (끼움·조립 검증용, 사용자 결정)
 bun run export:keypad# keypad DXF 5장 → keypad/export-out/
 bun run smoke:65     # 65 부품·치수 콘솔 검증
