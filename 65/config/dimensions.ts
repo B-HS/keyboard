@@ -23,8 +23,7 @@ export const MOUNT_HOLE_INSET_FROM_EDGE = 2.5
 export const PILLAR_BODY_DIAMETER = 4.8
 export const PILLAR_PCB_CAP_DIAMETER = 5.8
 export const PILLAR_PCB_CAP_HEIGHT = 0.8
-export const PILLAR_PLATE_NECK_DIAMETER = 3.0
-export const PLATE_NECK_CLEARANCE_DIAMETER = 3.4
+export const PLATE_PILLAR_CLEARANCE_DIAMETER = 6.4
 export const PCB_MOUNT_HOLE_FDM = 5.4
 export const BOTTOM_BOSS_OUTER_DIAMETER = 6.6
 export const BOTTOM_BOSS_BORE_DIAMETER = 5.0
@@ -45,7 +44,7 @@ export const PLATE_BOTTOM_TO_PCB_TOP = 3.5
 export const BOTTOM_GAP = 3.5
 export const PLATE_TOP_TO_STEM_TOP = 11.6
 
-export const TILT_DEG = 7.5
+export const TILT_DEG = 0
 export const TILT_ANGLE = (TILT_DEG * Math.PI) / 180
 export const TILT_PIVOT_Y = -4 * KEY_PITCH
 export const tiltRise = (y: number) => (y - TILT_PIVOT_Y) * Math.sin(TILT_ANGLE)

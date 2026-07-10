@@ -9,8 +9,7 @@ import {
     PILLAR_BODY_DIAMETER,
     PILLAR_PCB_CAP_DIAMETER,
     PILLAR_PCB_CAP_HEIGHT,
-    PILLAR_PLATE_NECK_DIAMETER,
-    PLATE_NECK_CLEARANCE_DIAMETER,
+    PLATE_PILLAR_CLEARANCE_DIAMETER,
     BOTTOM_BOSS_OUTER_DIAMETER,
     BOTTOM_BOSS_BORE_DIAMETER,
     FDM_MARGIN_EXTRA,
@@ -69,11 +68,7 @@ const pillarSolid = (h: MountHole) => {
         ),
         aboveTiltPlane(
             Z.pcbTop + PILLAR_PCB_CAP_HEIGHT,
-            belowTiltPlane(Z.plateBottom, post(hp, Z.pcbTop + r - over, Z.plateBottom + r + over, PILLAR_BODY_DIAMETER)),
-        ),
-        aboveTiltPlane(
-            Z.plateBottom,
-            belowTiltPlane(Z.plateTop, post(hp, Z.plateBottom + r - over, Z.plateTop + r + over, PILLAR_PLATE_NECK_DIAMETER)),
+            belowTiltPlane(Z.plateTop, post(hp, Z.pcbTop + r - over, Z.plateTop + r + over, PILLAR_BODY_DIAMETER)),
         ),
     )
 }
@@ -94,7 +89,7 @@ const plateCuts2D = (side: Side) =>
         ...side.stabs.map((p) =>
             translate([p.x, p.y, 0], roundedRectangle({ size: [STAB_PAD_FDM.width, STAB_PAD_FDM.height], roundRadius: STAB_PAD_FDM.radius })),
         ),
-        ...side.mountHoles.map((h) => translate([h.x, h.y, 0], circle({ radius: PLATE_NECK_CLEARANCE_DIAMETER / 2, segments: SEG }))),
+        ...side.mountHoles.map((h) => translate([h.x, h.y, 0], circle({ radius: PLATE_PILLAR_CLEARANCE_DIAMETER / 2, segments: SEG }))),
     )
 
 export const buildPlateFdm3D = (side: Side) =>
