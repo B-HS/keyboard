@@ -129,14 +129,14 @@ export const buildCaseMeshesFdm = (side: Side) => {
     const pcb = jscadMesh(extrudeLinear({ height: PCB_THICKNESS }, pcbGeom), Z.pcbBottom, mat(0x2f7d32))
     const screws = buildScrews(side)
     const top = new Group()
-    top.add(topShell, plate)
+    top.add(topShell)
     const { tilt, holder } = buildTiltPivot()
     holder.add(pcb)
     const bottomGroup = new Group()
     bottomGroup.add(bottom)
     const group = new Group()
-    group.add(top, tilt, bottomGroup, screws)
-    const layers: CaseLayers = { top, pcb, bottom: bottomGroup, spacers: null, bolts: screws, switches: null, keycaps: null }
+    group.add(top, plate, tilt, bottomGroup, screws)
+    const layers: CaseLayers = { top, plate, pcb, bottom: bottomGroup, spacers: null, bolts: screws, switches: null, keycaps: null }
     return { group, tiltGroup: holder, bottomGroup, layers }
 }
 

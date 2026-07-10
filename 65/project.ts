@@ -15,7 +15,7 @@ export const meta = { id: '65', label: 'split-65 (좌+우)' }
 const GAP = 40
 const MODEL_DIMS = { keyPitch: KEY_PITCH, keycapGap: KEYCAP_GAP, keycapBottomZ: KEYCAP_BOTTOM_Z, switchStemTopZ: Z.plateTop + 8.5 }
 
-const FDM_LAYER_KEYS = ['top', 'pcb', 'bottom', 'esp32', 'bolts', 'switches', 'keycaps'] as const satisfies readonly LayerKey[]
+const FDM_LAYER_KEYS = ['top', 'plate', 'pcb', 'bottom', 'esp32', 'bolts', 'switches', 'keycaps'] as const satisfies readonly LayerKey[]
 
 export const createProject = (onChange: () => void): ProjectUnit => {
     const group = new Group()

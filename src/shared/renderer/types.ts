@@ -23,7 +23,7 @@ export type ModelDims = {
     switchStemTopZ: number
 }
 
-export const LAYER_KEYS = ['top', 'pcb', 'bottom', 'esp32', 'spacers', 'bolts', 'switches', 'keycaps'] as const
+export const LAYER_KEYS = ['top', 'plate', 'pcb', 'bottom', 'esp32', 'spacers', 'bolts', 'switches', 'keycaps'] as const
 export type LayerKey = (typeof LAYER_KEYS)[number]
 
 export type LayerStyle = { visible: boolean; opacity: number; color: string | null }

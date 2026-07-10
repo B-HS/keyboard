@@ -9,6 +9,7 @@ import { Checkbox } from '@shared/ui/checkbox'
 
 const LAYER_LABELS: Record<LayerKey, string> = {
     top: '상판',
+    plate: '플레이트',
     pcb: 'PCB',
     bottom: '하판',
     esp32: 'ESP32',
