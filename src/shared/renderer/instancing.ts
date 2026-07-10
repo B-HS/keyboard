@@ -8,7 +8,8 @@ export const mergeModelByColor = (model: Object3D) => {
     const byColor = new Map<number, BufferGeometry[]>()
     model.traverse((obj) => {
         if (!(obj instanceof Mesh)) return
-        const source = obj.geometry as BufferGeometry
+        const raw = obj.geometry as BufferGeometry
+        const source = raw.index ? raw.toNonIndexed() : raw
         const baked = new BufferGeometry()
         const position = source.getAttribute('position')
         if (!position) return
