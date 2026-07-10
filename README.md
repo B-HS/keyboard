@@ -1,68 +1,71 @@
 # split-65
 
 좌(30키)·우(35키) = **65키 분리형(split) 핫스왑 기계식 키보드 케이스**.
-JSCAD(`@jscad/modeling`)로 파라메트릭 모델링하고, three.js 실시간 뷰어로 보며 설계하고, CNC/레이저컷용 **2D DXF**로 export한다. **PCB만 빼고 전부 아크릴(cast).**
+JSCAD(`@jscad/modeling`)로 파라메트릭 모델링하고, three.js 실시간 뷰어로 보며 설계하고, **FDM(A1 mini)용 3D STL**과 CNC/레이저컷용 **2D DXF** 두 경로로 export한다. **현재 제작 경로는 FDM 3D 프린트**(나사·인서트 외 전부 출력) — 아크릴 DXF 경로는 병행 보존.
 
-> **monorepo (v0.0.1~).** 공유 three.js 렌더러(`src/renderer`) + 셸(`src/main.js`) 위에 프로젝트가 독립적으로 올라간다 — `65/`(split-65) · `keypad/`(split-keypad, 저손실 prototype). 뷰어는 65+keypad를 한 화면에 동시 렌더. 변경 이력은 [CHANGELOG.md](CHANGELOG.md), 재편 계획은 [docs/acknowledge/monorepo-keypad-migration.md](docs/acknowledge/monorepo-keypad-migration.md).
+> **monorepo (v0.0.1~).** React + TypeScript 뷰어(`src/`, FSD) 위에 프로젝트가 독립적으로 올라간다 — `65/`(split-65) · `keypad/`(split-keypad, 저손실 prototype). 뷰어는 현재 **65만 렌더**(keypad 코드·export·CI는 유지). 변경 이력은 [CHANGELOG.md](CHANGELOG.md), 재편 계획은 [docs/acknowledge/monorepo-keypad-migration.md](docs/acknowledge/monorepo-keypad-migration.md).
 
-## 구조 (stacked, 위→아래)
+## 구조 (FDM, 위→아래)
 
 ```
-🟡🔵 일체형 상판  = 베젤(5.0mm) + 보강판(1.5mm) 을 간격0으로 본딩한 1유닛 (6.5mm)
-        ┊ 3.5mm (에어갭 / 스위치가 유지 / 마운트는 좌우 벽이 받침)
-🟢 PCB  (핫스왑, 흰색 솔더마스크)
-        ┊ 5.0mm (바텀갭 / 좌우 벽)
-⚫ 하판  (1.5mm)
+top     베젤(5.0mm) + 지지 기둥 6개(Ø4.8, 일체 프린트)
+plate   보강판(1.5mm) — 스위치 클립으로 PCB와 샌드위치, 기둥 홀 Ø6.4 통과
+PCB     핫스왑, 마운트홀 Ø5.4 — 기둥 캡(Ø5.8)에 안착
+bottom  평판(1.5mm) + 보스 + ESP32-C3 크래들
 ```
 
-- **결착 = M2 관통 볼트**: 마운트 6곳/측(코너4 + 좌우 변중점2)마다 M2 볼트가 **하판 밑→위로** 관통해, 일체형 상판의 **플랜지형 M2 인서트**에 체결된다. 상단은 구멍·너트 0(베젤 솔리드 → 깨끗), 하단 머리는 고무발에 숨는다.
-- **간격재 = 좌·우 아크릴 벽**(에어갭 3.5 / 바텀갭 5.0 → 갭별 2규격): 앞·뒤는 개방. 벽이 클램프 하중을 받아 스위치를 보호한다.
-- **M2 채택으로 컴팩트**: 케이스 좌 143.35×105.25 / 우 162.4×105.25 mm, 스택 높이 18.1mm.
+- **결착 = M1 하단 진입**: 마운트 6곳/측 — M1 나사가 하판 밑에서 기둥의 열간 인서트에 체결. **상면 구멍 0**, 무틸트, 총 스택 16.6mm.
+- **조립**: plate에 스위치 체결 + PCB 결합(샌드위치) → 뒤집은 top의 기둥에 삽입(plate는 전부 통과, PCB는 캡에 정지) → bottom 덮고 M1 체결.
+- 케이스 좌 146.4×108.2 / 우 165.4×108.3 mm. 상세: [65/docs/fdm-m1-case.md](65/docs/fdm-m1-case.md)(개정 2차) · [docs/PROCESS.md](docs/PROCESS.md).
+- 이전 **아크릴 stacked 설계**(M2 관통 볼트, 스택 18.1mm)는 이력 — [docs/acknowledge/case-construction.md](docs/acknowledge/case-construction.md).
 
 ## 준비물 (구매)
 
-### 체결 부자재 (알리익스프레스 등)
+### 체결 부자재 — FDM 경로 (현행)
 
-| 부품               | 규격                             | 수량 | 비고                                                            |
-| ------------------ | -------------------------------- | :--: | --------------------------------------------------------------- |
-| **M2 볼트**        | 버튼헤드 **14~16mm**, 스테인리스 |  12  | 하단 진입. 스택 18.1에 맞춰(너무 길면 솔리드 베젤에 닿음)       |
-| **M2 열간 인서트** | 황동, **플랜지형**, L3~4         |  12  | 일체형 상판에 압입(나사산). 플랜지가 보강판 위에 걸쳐 인장 받음 |
-| **M2 평와셔**      | M2                               |  12  | 얇은 보강판(1.5)·하판 압력 분산용                               |
-| **고무발**         | Ø8~~10, 높이 3~~4mm              |  8   | 하단 볼트머리 은닉 + 미끄럼 방지                                |
-| **아크릴 접착제**  | 아크릴 솔벤트/시멘트(Weld-On 등) |  1   | 베젤+보강판 → 일체형 상판 본딩                                  |
+| 부품               | 규격          | 수량 | 비고                             |
+| ------------------ | ------------- | :--: | -------------------------------- |
+| **M1 나사**        | M1×4mm        |  12  | 하단 진입, 기둥 인서트에 체결    |
+| **M1 열간 인서트** | OD 2.0, L 2.5 |  12  | 기둥 하단 포켓(Ø1.75)에 압입     |
+| **고무발**         | 높이 3~4mm    |  8   | 하단 나사머리 은닉 + 미끄럼 방지 |
 
-> 스위치·소켓·다이오드·스태빌·컨트롤러·키캡 등 전체 빌드 목록은 **[docs/acknowledge/bom-aliexpress.md](docs/acknowledge/bom-aliexpress.md)**.
+> 스위치·소켓·다이오드·스태빌·컨트롤러·키캡 등 전체 빌드 목록은 **[docs/acknowledge/bom-aliexpress.md](docs/acknowledge/bom-aliexpress.md)**. 아크릴 경로(M2 관통 볼트·인서트·접착제)는 이력 — [docs/acknowledge/case-construction.md](docs/acknowledge/case-construction.md).
 
 ### 가공·발주 (별도)
 
-- **CNC**(cast 아크릴): 일체형 상판(베젤5.0+보강판1.5)·하판(1.5)·벽(에어갭3.5·바텀5.0). `bun run export:65` → `65/export-out/*.dxf` 윤곽으로 발주.
-- **PCB**: KiCad(`65/raw/leftplate`·`65/raw/rightplate`) → JLCPCB(흰색 솔더마스크, 핫스왑 풋프린트).
+- **FDM**(현행): `bun run export:65-fdm` → `65/export-out/fdm/*.stl` 측당 3장(top/plate/bottom)을 A1 mini로 출력. 1/5 검증 모형은 `export:65-fdm-mini`.
+- **PCB**: KiCad(`65/pcb/{left,right}`) → JLCPCB 발주 파일 `65/pcb/order/jlcpcb-{left,right}.zip` (핫스왑 풋프린트, 사양 [65/docs/pcb-build.md](65/docs/pcb-build.md)).
+- **CNC**(cast 아크릴, 병행 보존): `bun run export:65` → `65/export-out/*.dxf` 윤곽으로 발주.
 
 ## 실행
 
 ```bash
 bun install
-bun run dev          # three.js 실시간 뷰어 (localhost:5173, 65 + keypad 한 화면 동시 렌더)
-bun run export:65    # 65 DXF 10장 → 65/export-out/ (측당 5: bezel/plate/bottom/spacer-airgap/spacer-bottomgap)
-bun run export:keypad# keypad DXF 5장 → keypad/export-out/
-bun run smoke:65     # 65 부품 생성·치수 검증
-bun run smoke:keypad # keypad 부품 생성·치수 검증
-bun run build        # 뷰어 빌드
-bun run format       # prettier
+bun run dev                # three.js 실시간 뷰어 (localhost:5173, 65 좌+우)
+bun run export:65-fdm      # 65 FDM STL 6장 → 65/export-out/fdm/ (측당 3: top/plate/bottom)
+bun run export:65-fdm-mini # 1/5(SCALE=0.2) 검증 모형 → 65/export-out/fdm-mini/
+bun run export:65          # 65 DXF 10장 → 65/export-out/ (아크릴 경로, 병행 보존)
+bun run export:keypad      # keypad DXF 5장 → keypad/export-out/
+bun run smoke:65           # 65 부품 생성·치수 검증
+bun run smoke:keypad       # keypad 부품 생성·치수 검증
+bun run typecheck          # tsc --noEmit
+bun run build              # 뷰어 빌드
+bun run format             # prettier
 ```
 
-**뷰어**: 65(좌+우)와 keypad가 한 화면에 나란히 렌더. 통합 토글 7개(상판·PCB·하판·스페이서·볼트·스위치·키캡) + 비교(Zen 65·49, 기본 off) + 투명도 슬라이더(기본 80%). 드래그 회전 · 휠 확대 · 우클릭 이동.
+**뷰어**: 65(좌+우) 렌더. 부품 레이어 8개(상판·플레이트·PCB·하판·ESP32·볼트·스위치·키캡) 각각 표시·색·투명도 제어 + 비교 레퍼런스(Zen 65·49, 기본 off) + **웹 STL Export**(스케일 지정, 좌우 8장: top/plate/bottom/mock-pcb). 설정은 자동 저장. 드래그 회전 · 휠 확대 · 우클릭 이동.
 
 ## 문서
 
-| 경로                                             | 내용                              |
-| ------------------------------------------------ | --------------------------------- |
-| `docs/PROCESS.md`                                | monorepo 현재 상태 단일 출처      |
-| `keypad/docs/PROCESS.md`                         | split-keypad 프로젝트 단일 출처   |
-| `docs/acknowledge/fastening-stacked-redesign.md` | 결착 설계 진화·확정(현재 v3)      |
-| `docs/acknowledge/bom-aliexpress.md`             | 전체 구매 목록                    |
-| `docs/acknowledge/case-construction.md`          | 케이스 구조(§13 현재, §1~12 이력) |
-| `docs/memory/cherry-mx-dimensions.md`            | Cherry MX 표준 치수               |
+| 경로                                    | 내용                                  |
+| --------------------------------------- | ------------------------------------- |
+| `docs/PROCESS.md`                       | monorepo 현재 상태 단일 출처          |
+| `65/docs/fdm-m1-case.md`                | FDM 케이스 설계 정본(개정 2차 = 현행) |
+| `65/docs/pcb-build.md`                  | PCB 설계·JLCPCB 발주 사양             |
+| `keypad/docs/PROCESS.md`                | split-keypad 프로젝트 단일 출처       |
+| `docs/acknowledge/bom-aliexpress.md`    | 전체 구매 목록                        |
+| `docs/acknowledge/case-construction.md` | 아크릴 케이스 구조(이력)              |
+| `docs/memory/cherry-mx-dimensions.md`   | Cherry MX 표준 치수                   |
 
 ## 원본 레이아웃 (KLE-NG)
 
