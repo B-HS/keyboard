@@ -2,8 +2,8 @@
 
 > **새 세션은 이 문서를 먼저 읽는다.** 저장소 전체의 구조·뷰어·프로젝트별 상태·실행·남은 일을 정확히 담는다.
 > 기준 룰: `~/.claude/CLAUDE.md` + 코딩 컨벤션(ai-process / common / comments / fsd …).
-> 최종 갱신: 2026-07-07 · 브랜치 **`v0.0.1`** · ① **65 FDM 7.5° 틸트 도입**(§4.2) + Zen 실측 보정 ② **프론트 전면 개편(§1.5): React 19 + TypeScript(strict) + Tailwind 4 + shadcn 스타일, vite 8(rolldown), 온디맨드 렌더링, 부품별 색/투명도 + localStorage, CI(.github/workflows/ci.yml) 신설** ③ **웹 STL Export + keypad 렌더 제외 + 1/5 검증·사포 마감 결정** ④ **65 PCB 완결**(`65/docs/pcb-build.md` 정본): 가공(DO-35 홀·Ø5.4 NPTH×6·핫스왑 패드·fdmOutline)→실크 전삭제→JLC 룰→**사용자 라우팅 완료(양측 DRC 0·미연결 0·비아 0, 0.25 균일, 2331/2655mm)**→스키마틱·라이브러리 완전 정합. **거버 출력만 남음(발주 대기)** ⑤ **ESP32-C3 SuperMini 통합**: J1 와이어패드(1×12/13, pcb-build §7) + 하판 슬라이드 크래들(§4.2) + 실물 STEP→GLB 뷰어 렌더(esp32 독립 레이어, 색상병합 최적화 938→~6 드로우콜). 전부 미커밋. 푸시·main 병합 미요청.
-> 이전: 2026-06-27 커밋 `0a3e649`(다이오드 손납땜 구멍·스키마틱 심볼 삭제) + ESP32-S3-SuperMini 풋프린트 받음(PCB 추가 보류).
+> 최종 갱신: 2026-07-10 · 브랜치 **`split`** · **top STL 틸트 export 버그 수정**(`ebfd2b5`): `buildTopFdm3D` 베젤이 `tiltGeom`으로 기운 채 export되어 베드 접촉이 146.3×0.8mm 모서리 띠뿐이던 문제 → CLI(`export-fdm.ts`)·웹(`stl-parts.ts`) 양쪽 top에 `untiltGeom` 적용(**untilt→flip 순서**), 베젤 면 전체(146.4×108.2) 베드 밀착·top 높이 26.8mm. 뷰어 렌더는 틸트 유지. 상세 `docs/bug/2026-07-10-top-stl-tilt-export.md`.
+> 이전: 2026-07-07 배치(①65 FDM 7.5° 틸트 §4.2 ②프론트 전면 개편 §1.5 ③웹 STL Export·1/5 검증·사포 마감 ④65 PCB 라우팅 완결 ⑤ESP32-C3 통합)는 이후 전부 커밋 반영 — keypad TS 전환 `d3f3447` · 65 PCB 라우팅 `192ec67` · 문서 최신화 `d433119` · **JLCPCB 거버·드릴 생성+발주 사양 확정** `d4d1fd3`(`65/pcb/order/jlcpcb-{left,right}.zip`, pcb-build §6) · 뷰어 BASE_URL(GitHub Pages) `f14c200`. **65 PCB는 JLC 업로드·발주만 남음.** 그 이전: 2026-06-27 `0a3e649`.
 
 ---
 
@@ -78,7 +78,7 @@ src/
 - **계약 타입**(`@renderer/types`): `Side`/`ProjectUnit`/`LayerKey`/`LayerStyle`/`ReferenceToggle`. 65·keypad `project.ts`가 `createProject(onChange): ProjectUnit` 구현(비동기 모델 로드 완료 시 `onChange()`로 재렌더 요청).
 - **렌더링 성능(핵심)**: 구 구조는 TAA 컴포저가 **조작 중 매 프레임 8x SSAA** → 스위치 로드 후 급락. 신 구조(`scene.ts`)는 ① dirty 프레임 = 단일 `renderer.render`(MSAA) ② idle = TAA 누적(sampleLevel 4)을 40프레임까지 진행 후 **렌더 완전 정지**(0 GPU) ③ `invalidate()`로만 재개.
 - **하이브리드 투명도(그레인 제거)**: alphaHash는 조작 중 누적 불가라 원리적으로 자글자글 → `materials.ts`가 자동 전환: **조작 중(dirty) = 일반 알파 블렌딩**(그레인 0, 겹침 근사) / **idle = alphaHash + TAA 수렴**(정확). 재질에 `userData.translucent` 마킹, 모드 flip은 three 프로그램 캐시 재사용이라 저비용.
-- **웹 STL Export**: 패널 하단 섹션 — scale 입력(0.05~1, 프리셋 1/5·1/2·1:1) + Export 버튼 → 브라우저에서 `65/export/stl-parts.ts`(CLI와 동일 flip/dropToBed 배향) 직렬화, **좌우 × top/bottom/mock-pcb = STL 6장** 개별 다운로드. mock-pcb = fdmOutline + Ø5.4 홀 6, 두께 1.6(스케일 적용) 확인용 대용판.
+- **웹 STL Export**: 패널 하단 섹션 — scale 입력(0.05~1, 프리셋 1/5·1/2·1:1) + Export 버튼 → 브라우저에서 `65/export/stl-parts.ts`(CLI와 동일 배향: top은 untiltGeom→flip→dropToBed) 직렬화, **좌우 × top/bottom/mock-pcb = STL 6장** 개별 다운로드. mock-pcb = fdmOutline + Ø5.4 홀 6, 두께 1.6(스케일 적용) 확인용 대용판.
 - **keypad 렌더 제거(2026-07-07)**: 뷰어는 65만 렌더(PROJECTS에서 제외). 패널은 프로젝트가 보고하는 `layerKeys`만 표시 → 스페이서 행 자동 제거(65 FDM은 벽 없음). keypad 코드·export·smoke·CI는 유지.
 - **실모델 렌더 2종**: ① PCB = kicad-cli glb export(`assets/models/pcb/{left,right}.glb`, `65/viewer/pcb-model.ts`, rotateX90°+×1000+z=pcbBottom, 절차적→GLB 스왑) — **PCB 수정 시 glb 재export 필수**(명령: pcb-build §5). ② ESP32-C3 = SnapEDA STEP→더미보드 트릭 glb(`assets/models/esp32-c3.glb`), `65/viewer/esp32-model.ts`가 **색상별 지오메트리 병합**(938 드로우콜→~6, `mergeModelByColor` 재사용, 좌우 지오메트리 공유) 후 rotateX(π)(부품 위·USB 뒤)로 크래들 안착. esp32는 **독립 레이어**(패널 행·localStorage).
 - **부품별 스타일**: 8개 레이어(상판/PCB/하판/**ESP32**/스페이서/볼트/스위치/키캡) 각각 **visible·opacity·color** 독립 제어(`applyLayerStyle` — 기본색은 material.userData에 보존, color null=기본색 복귀). 두 프로젝트에 통합 적용.
@@ -163,7 +163,7 @@ src/
 - **비교 레퍼런스**: Zen 65 실측 반영(`reference-keyboard.js`) — 315×112, 옆면 앞 17.9 / 뒤 36(키캡 윗면 envelope), 틸트 9.18°. 케이스 바디 = envelope − 키캡높이 9.4. "Zen 높이만큼 허용" 판단의 비교 기준.
 - **검증**: `smoke:65`·`export:65-fdm`(STL 6장, A1 mini 베드 내)·`vite build` 통과. 뷰어 육안 검증은 사용자 진행.
 - **ESP32-C3 SuperMini 크래들(2026-07-07)**: 하판 뒤쪽 가장자리에 **슬라이드 크래들** 일체 프린트(`buildEsp32Cradle3D`, 상수 `ESP32_CRADLE`) — L자 레일 2개(립 0.5, 슬롯폭 18.3=보드18+0.3, 슬롯높이 1.8) + 앞 스톱벽 1.8, 레일높이 2.8. 모듈(22.52×18, 단면실장·바닥 평평, 데이터시트 `65/raw/`)을 **와이어 선납땜 후** 뒤에서 슬라이드 삽입(립 0.5는 핀홀 패드 밖 가장자리만 잡음 — 납땜 봉우리 비간섭, 슬롯 1.8 여유), 뒤끝 케이스 뒷변 플러시 → **USB-C가 개방부로 노출**. 그 지점 바텀갭 ~15mm ≫ 스택 ~6mm. J1 와이어 패드(pcb-build §7) 직하부라 배선 최단. 무서포트(립 브리지 0.8). 주의: 안테나가 앞끝(케이스 내부) — BLE 감도 실측 확인. **뷰어에 실물 모델 렌더**: SnapEDA STEP→kicad-cli 더미보드 트릭으로 GLB 변환(`assets/models/esp32-c3.glb`, 18×22.7×5.3), `65/viewer/esp32-model.ts`가 크래들 슬롯에 안착(하판 레이어 소속 — 토글·투명도 연동).
-- **미결**: ① ~~plate STL 틸트 export~~ → **해결(2026-07-07)**: `untiltGeom`(−7.5° 역회전)으로 CLI export에서 평판(1.5mm) 복원. ② top 파츠 배향(베젤 기움 + 기둥 수직 → 베드 밀착 불가, 기둥 7.5° 기운 채 출력은 무서포트 허용 범위). ③ 배터리(AAA Ø10.5는 갭 3.5에 불가 — 무선화 시 LiPo 파우치 방향, 갭 재검토).
+- **미결**: ① ~~plate STL 틸트 export~~ → **해결(2026-07-07)**: `untiltGeom`(−7.5° 역회전)으로 CLI export에서 평판(1.5mm) 복원. ② ~~top 파츠 배향~~ → **해결(2026-07-10, `ebfd2b5`)**: CLI·웹 export 양쪽 top에 `untiltGeom` 적용(untilt→flip 순) — 베젤 면 전체 베드 밀착(접촉 146.3×0.8 → 146.4×108.2), 기둥이 7.5° 기운 채 서는 무서포트 자세. 뷰어는 틸트 유지. `docs/bug/2026-07-10-top-stl-tilt-export.md`. ③ 배터리(AAA Ø10.5는 갭 3.5에 불가 — 무선화 시 LiPo 파우치 방향, 갭 재검토).
 - **출력 마감 결정(2026-07-07, 사용자)**: **서포트 0 유지**(3파츠 전부 평평면 베드 배향 — 서포트 자국이 더 나쁨). textured PEI 무늬가 베드면에 전사되는 문제(특히 top 뒤집기라 **베젤 상면=베드면**)는 스무스 플레이트 구매 대신 **사포 후처리**(400→800→1000 물사포)로 확정. 1/5 검증 출력에선 무관. 윗면은 슬라이서 ironing, 측면은 레이어 0.12~0.15 + seam aligned.
 - **검증 출력 확정(2026-07-07, 사용자)**: A1 mini에서 **1/5 스케일(SCALE=0.2)**로 끼움·조립 선검증(`export:65-fdm-mini`를 0.2로 변경). 1/5에서 가능: 기둥(Ø0.96)→보스 삽입, plate 안착, 틸트·비율. 불가: M1 포켓(Ø0.35), 실스위치 끼움, mock-pcb 0.32mm는 1~2레이어라 휨 주의.
 
@@ -198,11 +198,11 @@ bun run format       # prettier (no-semi·4칸·single-quote)
 - [x] **뷰어 통합 렌더**(드롭다운 제거, 65+keypad 동시) (`b1bb12e`) + **세로 2U 키캡 height 스트레치 수정** (`cbf2487`).
 - [x] **Phase 4(PCB, 미커밋)** — keypad 새 PCB/plate(19키, 세로2u 제거) raw 교체. `keypad/pcb` 발주본: Edge.Cuts 외곽 86.2·M2홀(Ø2.4 NPTH+키프아웃)·다이오드 19 **1N4148 DO-35 THT**(PCB+스키마틱). 세로 스태빌 없어 여백 5(DRC hole_to_hole 0). 65는 원래 충돌 없어 미변경.
 - [ ] **Phase 4(실행, 사용자)** — keypad PCB 핫스왑/컨트롤러·ROW 매트릭스 라우팅 반영 → CNC/PCB 발주 → 실물 조립·검증(`keypad/docs/quality-assurance.md`).
-- [x] **65 PCB(2026-07-07, 미커밋)** — raw(kbplacer) 가공→핫스왑·DO-35·Ø5.4×6·JLC룰→사용자 라우팅 완결(DRC 0·미연결 0)→ESP32-C3(J1 와이어패드+하판 크래들) 통합. **거버 출력·발주만 남음.** 정본 `65/docs/pcb-build.md`.
+- [x] **65 PCB** — raw(kbplacer) 가공→핫스왑·DO-35·Ø5.4×6·JLC룰→사용자 라우팅 완결(DRC 0·미연결 0)→ESP32-C3(J1 와이어패드+하판 크래들) 통합(`192ec67`) → JLCPCB 거버·드릴 생성 + 발주 사양 확정(`d4d1fd3`, `65/pcb/order/jlcpcb-*.zip`). **JLC 업로드·발주만 남음.** 정본 `65/docs/pcb-build.md`.
 - [ ] **Phase 5** — keypad 실물 검증값(컷아웃 끼움·볼트 길이·벽 강성) → split-65 반영 후 65 발주(케이스 1/5 선검증 + PCB 거버).
 - [~] 65 전용 design docs의 `65/docs/` 재배치는 cross-reference 보존 위해 보류(루트 `docs/`가 65 design 문서 보유, umbrella 겸).
 
-남은 사용자 작업: 65 PCB 거버 출력·JLC 발주 / 케이스 1/5→1:1 출력 검증 / keypad PCB(ROW 라우팅·컨트롤러) / 부자재 구매. 컨트롤러 = **ESP32-C3 SuperMini 확정**(양측 각 1, 하판 크래들 + J1 와이어, 무선-BLE).
+남은 사용자 작업: 65 PCB JLC 발주(거버 zip 생성 완료) / 케이스 1/5→1:1 출력 검증 / keypad PCB(ROW 라우팅·컨트롤러) / 부자재 구매. 컨트롤러 = **ESP32-C3 SuperMini 확정**(양측 각 1, 하판 크래들 + J1 와이어, 무선-BLE).
 
 ---
 
@@ -220,6 +220,7 @@ bun run format       # prettier (no-semi·4칸·single-quote)
 ## 8. 검증 상태
 
 - `smoke:65`·`smoke:keypad` 통과. `export:65`(10장)·`export:keypad`(5장)·`export:65-fdm`(STL 6장) 생성. `vite build`·`prettier --check` 통과.
+- **top STL 베드 밀착 검증(2026-07-10)**: z 0~0.1 슬랩 교집합 footprint — untilt 수정 전 146.3×0.8(모서리 띠) → 수정 후 146.4×108.2(베젤 면 전체). `typecheck`·`format:check`·`smoke:65`·`export:65-fdm` 재통과.
 - 뷰어 육안: 65(좌+우)+keypad 한 화면 동시 렌더 확인(2026-06-27). 틸트(7.5°) 적용 후 육안 검증은 **사용자가 직접 진행**(기둥-PCB 겹침 1건 발견→수정 완료, 이후 재확인 사용자 몫).
 
 ---
@@ -237,6 +238,7 @@ bun run format       # prettier (no-semi·4칸·single-quote)
 | `docs/acknowledge/render-export-workflow.md`                             | 뷰어/렌더/export 작업 방식                           |
 | `docs/acknowledge/open-questions.md`                                     | 미해결                                               |
 | `docs/acknowledge/typing-tilt-redesign.md`                               | 틸트 검토(6° 폐기)→**7.5° FDM 재도입**(§7) 결정 이력 |
+| `docs/bug/2026-07-10-top-stl-tilt-export.md`                             | top STL 틸트 export 버그(증상·원인·해결·검증)        |
 | `65/docs/fdm-m1-case.md`                                                 | **65 FDM(A1 mini) + M1 + 7.5° 틸트 정본**            |
 | `docs/memory/cherry-mx-dimensions.md` · `reference/cherry-mx-sources.md` | Cherry MX 표준(공유)                                 |
 | `docs/memory/project-overview.md`                                        | 원본 생성물(KLE-NG/kbplacer)                         |

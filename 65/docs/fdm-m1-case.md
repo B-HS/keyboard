@@ -6,8 +6,8 @@
 > - **기하 정합**: 기둥·보스·인서트포켓·나사홀 XY는 `tiltY(y)=pivot+(y−pivot)·cos7.5°`(기운 PCB 홀의 투영 위치). 받침면(보스 top·칼라 밑/top·넥 끝)은 `above/belowTiltPlane`으로 **7.5° 경사면 컷** → PCB·plate와 면접촉. 이 보정 없이는 기둥이 PCB를 관통(발견→수정 완료).
 > - **관통홀 확대**: 기운 판 ↔ 수직 핀이라 PCB 마운트홀 Ø5.0→**Ø5.4**, plate 넥 클리어런스 Ø3.2→**Ø3.4** (필요폭 4.8/cos7.5+1.6·tan7.5≈5.05).
 > - **PCB 외곽 = `fdmOutline`**(caseOutline+1.5/변): 좌 **146.35×108.25** / 우 **165.40×108.25**, 홀↔가장자리 4.0(칼라 r2.9·보스 r3.3 내포). 홀 좌표는 `SIDES[k].mountHoles` **원본**(보드 로컬 — tiltY는 조립 공간용).
-> - **STL 실측(개정 후)**: top 27.0 / plate 15.6 / bottom 17.0mm 높이(좌·우 동일 footprint, A1 mini 베드 내).
-> - **미결(틸트분)**: ~~plate STL 틸트 export~~(해결 — `untiltGeom`으로 평판 1.5mm 복원), top 배향 재검토(베젤 기움+기둥 수직 — 기둥 7.5° 기운 출력은 무서포트 허용), 아래 초판 "미결·주의"의 챔퍼·keepout·fit-coupon은 계속 유효.
+> - **STL 실측(개정 후, 2026-07-10 top untilt 반영)**: top 26.8 / plate 1.5 / bottom 17.0mm 높이(좌·우 동일 footprint, A1 mini 베드 내).
+> - **미결(틸트분)**: ~~plate STL 틸트 export~~(해결 — `untiltGeom`으로 평판 1.5mm 복원) · ~~top 배향~~(**해결 2026-07-10, `ebfd2b5`** — CLI·웹 export 양쪽 top도 `untiltGeom` 적용(untilt→flip 순): 베젤 면 전체 베드 밀착(접촉 146.3×0.8→146.4×108.2), 기둥 7.5° 기운 타워, 무서포트. 뷰어는 틸트 유지. `docs/bug/2026-07-10-top-stl-tilt-export.md`), 아래 초판 "미결·주의"의 챔퍼·keepout·fit-coupon은 계속 유효.
 > - **검증 출력 계획(2026-07-07 확정)**: A1 mini **1/5(SCALE=0.2)** 선출력으로 끼움·조립 검증 — `bun run export:65-fdm-mini`(0.2로 변경) 또는 **웹패널 STL Export**(scale 지정, top/bottom/**mock-pcb** 좌우 6장 개별 다운로드, `65/export/stl-parts.ts`). mock-pcb = fdmOutline + Ø5.4 홀 6, 두께 1.6×scale. 1/5에서 검증 가능: 기둥(Ø0.96)→보스 삽입·plate 안착·틸트 비율 / 불가: M1 포켓(Ø0.35)·실스위치 끼움(컷 2.8), mock-pcb 0.32mm(1~2레이어) 휨 주의.
 > - **마감 결정(2026-07-07, 사용자)**: **서포트 0 유지**(자국이 텍스처보다 나쁨). textured PEI 무늬 전사 — top 뒤집기 배향이라 **베젤 상면=베드면**에 무늬가 새겨짐 — 는 스무스 플레이트 구매 없이 **사포 후처리(400→800→1000 물사포)**로 해결 확정. 윗면 ironing, 측면 레이어 0.12~0.15 + seam aligned. 베드 굴곡 자체는 A1 오토레벨링이 보정(문제 아님).
 
@@ -70,7 +70,7 @@
 
 ## 출력 배향·세팅
 
-- 배향(`export-fdm.js`): **TOP 뒤집음**(bezel 상면 베드, 기둥 위로 타워, 인서트 포켓 위로) / **BOTTOM 정방향**(보스 위) / **PLATE 정방향**(평판). 전부 서포트 0.
+- 배향(`export-fdm.ts`): **TOP untilt 후 뒤집음**(export 시 `untiltGeom`으로 7.5° 제거 → bezel 상면이 베드에 평평히 밀착, 기둥은 7.5° 기운 타워, 인서트 포켓 위로 — 2026-07-10 `ebfd2b5`) / **BOTTOM 정방향**(보스 위) / **PLATE 정방향**(untilt 평판). 전부 서포트 0.
 - 재료 PLA · 레이어 0.15mm · 엘리펀트풋 0.1~~0.15 · 브림 5~~8mm · 컷아웃 14.0 반영이므로 슬라이서 XY hole comp OFF
 - **1/5 검증 모형(현행)**: `bun run export:65-fdm-mini`(SCALE=0.2) → `65/export-out/fdm-mini/` (29~33mm). 끼움·조립 검증용 — 상세는 상단 개정 블록. 웹패널 Export로도 동일 산출 가능
 
