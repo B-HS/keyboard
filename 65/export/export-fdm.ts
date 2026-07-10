@@ -23,7 +23,7 @@ const dropToBed = (geom: Geom3) => {
 const scaled = (geom: Geom3) => (SCALE === 1 ? geom : scale([SCALE, SCALE, SCALE], geom))
 
 const layersOf = (side: Side) => [
-    { name: 'top', geom: scaled(dropToBed(flipZ(buildTopFdm3D(side)))) },
+    { name: 'top', geom: scaled(dropToBed(flipZ(untiltGeom(buildTopFdm3D(side))))) },
     { name: 'plate', geom: scaled(dropToBed(untiltGeom(buildPlateFdm3D(side)))) },
     { name: 'bottom', geom: scaled(dropToBed(buildBottomFdm3D(side))) },
 ]

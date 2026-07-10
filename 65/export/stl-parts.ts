@@ -1,7 +1,7 @@
 import { booleans, extrusions, measurements, transforms, type Geom3 } from '@jscad/modeling'
 import type { Side } from '@renderer/types'
 import { SIDES } from '../config/layout'
-import { buildTopFdm3D, buildBottomFdm3D, fdmOutline } from '../parts/case-fdm'
+import { buildTopFdm3D, buildBottomFdm3D, fdmOutline, untiltGeom } from '../parts/case-fdm'
 import { rect, mountHoleCuts } from '../parts/shapes'
 import { PCB_THICKNESS, PCB_MOUNT_HOLE_FDM } from '../config/dimensions'
 
@@ -26,7 +26,7 @@ export const buildPrintParts = (scaleFactor: number): PrintPart[] =>
     (Object.keys(SIDES) as (keyof typeof SIDES)[]).flatMap((key) => {
         const side = SIDES[key]
         const parts = [
-            { name: `${key}-top`, geom: dropToBed(flipZ(buildTopFdm3D(side))) },
+            { name: `${key}-top`, geom: dropToBed(flipZ(untiltGeom(buildTopFdm3D(side)))) },
             { name: `${key}-bottom`, geom: dropToBed(buildBottomFdm3D(side)) },
             { name: `${key}-mock-pcb`, geom: dropToBed(buildMockPcb3D(side)) },
         ]
