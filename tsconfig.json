@@ -21,9 +21,8 @@
             "@entities/*": ["./src/entities/*"],
             "@shared/*": ["./src/shared/*"],
             "@renderer/*": ["./src/shared/renderer/*"],
-            "@65/*": ["./65/*"],
-            "@keypad/*": ["./keypad/*"]
+            "@keypad-17/*": ["./keypad-17/*"]
         }
     },
-    "include": ["src", "65", "keypad", "types"]
+    "include": ["src", "keypad-17", "types"]
 }

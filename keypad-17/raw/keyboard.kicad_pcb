@@ -1,0 +1,6228 @@
+(kicad_pcb
+	(version 20240108)
+	(generator "keebforge")
+	(generator_version "8.0")
+	(general
+		(thickness 1.6)
+	)
+	(paper "A4")
+	(layers
+		(0 "F.Cu" signal)
+		(31 "B.Cu" signal)
+		(32 "B.Adhes" user "B.Adhesive")
+		(33 "F.Adhes" user "F.Adhesive")
+		(34 "B.Paste" user)
+		(35 "F.Paste" user)
+		(36 "B.SilkS" user "B.Silkscreen")
+		(37 "F.SilkS" user "F.Silkscreen")
+		(38 "B.Mask" user)
+		(39 "F.Mask" user)
+		(40 "Dwgs.User" user "User.Drawings")
+		(41 "Cmts.User" user "User.Comments")
+		(42 "Eco1.User" user "User.Eco1")
+		(43 "Eco2.User" user "User.Eco2")
+		(44 "Edge.Cuts" user)
+		(45 "Margin" user)
+		(46 "B.CrtYd" user "B.Courtyard")
+		(47 "F.CrtYd" user "F.Courtyard")
+		(48 "B.Fab" user)
+		(49 "F.Fab" user)
+	)
+	(setup
+		(pad_to_mask_clearance 0)
+	)
+	(net 0 "")
+	(net 1 "ROW0")
+	(net 2 "ROW1")
+	(net 3 "ROW2")
+	(net 4 "ROW3")
+	(net 5 "ROW4")
+	(net 6 "COL0")
+	(net 7 "COL1")
+	(net 8 "COL2")
+	(net 9 "COL3")
+	(net 10 "N_R0_C0")
+	(net 11 "N_R0_C1")
+	(net 12 "N_R0_C2")
+	(net 13 "N_R0_C3")
+	(net 14 "N_R1_C0")
+	(net 15 "N_R1_C1")
+	(net 16 "N_R1_C2")
+	(net 17 "N_R1_C3")
+	(net 18 "N_R2_C0")
+	(net 19 "N_R2_C1")
+	(net 20 "N_R2_C2")
+	(net 21 "N_R3_C0")
+	(net 22 "N_R3_C1")
+	(net 23 "N_R3_C2")
+	(net 24 "N_R3_C3")
+	(net 25 "N_R4_C0")
+	(net 26 "N_R4_C2")
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 9.525 9.525 -180)
+			(uuid "00000000-0000-4000-8000-000000000028")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW1"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000000")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "0,0"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000001")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000002")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000003")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000004")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000005")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000006")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000007")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000008")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000009")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000010")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000011")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000012")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000013")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000014")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000015")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000016")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000017")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000018")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000019")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000020")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000021")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000022")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000023")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000024")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000025")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 6 "COL0")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000026")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 10 "N_R0_C0")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000027")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 13.335 4.445 -180)
+			(uuid "00000000-0000-4000-8000-000000000035")
+		(property "Reference" "D1"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000029")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000030")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000031")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000032")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 1 "ROW0")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000033")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 10 "N_R0_C0")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000034")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 28.575 9.525 -180)
+			(uuid "00000000-0000-4000-8000-000000000064")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW2"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000036")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "0,1"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000037")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000038")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000039")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000040")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000041")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000042")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000043")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000044")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000045")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000046")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000047")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000048")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000049")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000050")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000051")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000052")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000053")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000054")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000055")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000056")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000057")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000058")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000059")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000060")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000061")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 7 "COL1")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000062")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 11 "N_R0_C1")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000063")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 32.385 4.445 -180)
+			(uuid "00000000-0000-4000-8000-000000000071")
+		(property "Reference" "D2"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000065")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000066")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000067")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000068")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 1 "ROW0")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000069")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 11 "N_R0_C1")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000070")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 47.625 9.525 -180)
+			(uuid "00000000-0000-4000-8000-000000000100")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW3"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000072")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "0,2"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000073")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000074")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000075")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000076")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000077")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000078")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000079")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000080")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000081")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000082")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000083")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000084")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000085")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000086")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000087")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000088")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000089")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000090")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000091")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000092")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000093")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000094")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000095")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000096")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000097")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 8 "COL2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000098")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 12 "N_R0_C2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000099")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 51.435 4.445 -180)
+			(uuid "00000000-0000-4000-8000-000000000107")
+		(property "Reference" "D3"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000101")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000102")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000103")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000104")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 1 "ROW0")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000105")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 12 "N_R0_C2")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000106")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 66.675 9.525 -180)
+			(uuid "00000000-0000-4000-8000-000000000136")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW4"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000108")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "0,3"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000109")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000110")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000111")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000112")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000113")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000114")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000115")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000116")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000117")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000118")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000119")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000120")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000121")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000122")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000123")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000124")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000125")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000126")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000127")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000128")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000129")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000130")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000131")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000132")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000133")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 9 "COL3")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000134")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 13 "N_R0_C3")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000135")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 70.485 4.445 -180)
+			(uuid "00000000-0000-4000-8000-000000000143")
+		(property "Reference" "D4"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000137")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000138")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000139")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000140")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 1 "ROW0")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000141")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 13 "N_R0_C3")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000142")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 9.525 28.575 -180)
+			(uuid "00000000-0000-4000-8000-000000000172")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW5"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000144")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "1,0"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000145")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000146")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000147")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000148")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000149")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000150")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000151")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000152")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000153")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000154")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000155")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000156")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000157")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000158")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000159")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000160")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000161")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000162")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000163")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000164")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000165")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000166")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000167")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000168")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000169")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 6 "COL0")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000170")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 14 "N_R1_C0")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000171")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 13.335 23.495 -180)
+			(uuid "00000000-0000-4000-8000-000000000179")
+		(property "Reference" "D5"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000173")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000174")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000175")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000176")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 2 "ROW1")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000177")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 14 "N_R1_C0")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000178")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 28.575 28.575 -180)
+			(uuid "00000000-0000-4000-8000-000000000208")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW6"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000180")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "1,1"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000181")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000182")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000183")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000184")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000185")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000186")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000187")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000188")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000189")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000190")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000191")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000192")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000193")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000194")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000195")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000196")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000197")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000198")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000199")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000200")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000201")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000202")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000203")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000204")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000205")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 7 "COL1")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000206")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 15 "N_R1_C1")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000207")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 32.385 23.495 -180)
+			(uuid "00000000-0000-4000-8000-000000000215")
+		(property "Reference" "D6"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000209")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000210")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000211")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000212")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 2 "ROW1")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000213")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 15 "N_R1_C1")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000214")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 47.625 28.575 -180)
+			(uuid "00000000-0000-4000-8000-000000000244")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW7"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000216")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "1,2"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000217")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000218")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000219")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000220")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000221")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000222")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000223")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000224")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000225")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000226")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000227")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000228")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000229")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000230")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000231")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000232")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000233")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000234")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000235")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000236")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000237")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000238")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000239")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000240")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000241")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 8 "COL2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000242")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 16 "N_R1_C2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000243")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 51.435 23.495 -180)
+			(uuid "00000000-0000-4000-8000-000000000251")
+		(property "Reference" "D7"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000245")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000246")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000247")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000248")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 2 "ROW1")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000249")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 16 "N_R1_C2")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000250")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_2.00u_90deg" (layer "F.Cu")
+			(at 66.675 38.1 -180)
+			(uuid "00000000-0000-4000-8000-000000000252")
+	  (descr "Cherry MX keyswitch PCB Mount Keycap 2.00u 90deg")
+	  (tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 2.00u 90deg")
+	  (fp_text reference "SW8" (at 0 -8) (layer F.SilkS)
+	    (effects (font (size 1 1) (thickness 0.15)))
+	  )
+	  (fp_text value "1,3" (at 0 8) (layer F.Fab)
+	    (effects (font (size 1 1) (thickness 0.15)))
+	  )
+	  (fp_line (start -7 -7) (end -7 7) (layer F.Fab) (width 0.1))
+	  (fp_line (start -7 7) (end 7 7) (layer F.Fab) (width 0.1))
+	  (fp_line (start 7 7) (end 7 -7) (layer F.Fab) (width 0.1))
+	  (fp_line (start 7 -7) (end -7 -7) (layer F.Fab) (width 0.1))
+	  (fp_line (start -7.1 -7.1) (end -7.1 7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start -7.1 7.1) (end 7.1 7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start 7.1 7.1) (end 7.1 -7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start 7.1 -7.1) (end -7.1 -7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start -7.25 -7.25) (end -7.25 7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start -7.25 7.25) (end 7.25 7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start 7.25 7.25) (end 7.25 -7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start 7.25 -7.25) (end -7.25 -7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start -7 -7) (end -7 7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start -7 7) (end 7 7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start 7 7) (end 7 -7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start 7 -7) (end -7 -7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start 9.525 -19.05) (end 9.525 19.05) (layer Dwgs.User) (width 0.1))
+	  (fp_line (start 9.525 19.05) (end -9.525 19.05) (layer Dwgs.User) (width 0.1))
+	  (fp_line (start -9.525 19.05) (end -9.525 -19.05) (layer Dwgs.User) (width 0.1))
+	  (fp_line (start -9.525 -19.05) (end 9.525 -19.05) (layer Dwgs.User) (width 0.1))
+	  (pad 1 thru_hole circle (at -3.81 -2.54 -180) (size 2.5 2.5) (drill 1.5) (layers *.Cu *.Mask) (net 9 "COL3"))
+	  (pad 2 thru_hole circle (at 2.54 -5.08 -180) (size 2.5 2.5) (drill 1.5) (layers *.Cu *.Mask) (net 17 "N_R1_C3"))
+	  (pad "" np_thru_hole circle (at 0 0 -180) (size 4 4) (drill 4) (layers *.Cu *.Mask))
+	  (pad "" np_thru_hole circle (at -5.08 0 -180) (size 1.75 1.75) (drill 1.75) (layers *.Cu *.Mask))
+	  (pad "" np_thru_hole circle (at 5.08 0 -180) (size 1.75 1.75) (drill 1.75) (layers *.Cu *.Mask))
+	  (fp_text user %R (at 0 0) (layer F.Fab)
+	    (effects (font (size 1 1) (thickness 0.15)))
+	  )
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 70.485 33.02 -180)
+			(uuid "00000000-0000-4000-8000-000000000259")
+		(property "Reference" "D8"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000253")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000254")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000255")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000256")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 2 "ROW1")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000257")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 17 "N_R1_C3")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000258")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 9.525 47.625 -180)
+			(uuid "00000000-0000-4000-8000-000000000288")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW9"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000260")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "2,0"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000261")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000262")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000263")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000264")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000265")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000266")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000267")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000268")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000269")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000270")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000271")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000272")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000273")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000274")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000275")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000276")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000277")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000278")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000279")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000280")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000281")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000282")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000283")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000284")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000285")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 6 "COL0")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000286")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 18 "N_R2_C0")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000287")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 13.335 42.545 -180)
+			(uuid "00000000-0000-4000-8000-000000000295")
+		(property "Reference" "D9"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000289")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000290")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000291")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000292")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 3 "ROW2")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000293")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 18 "N_R2_C0")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000294")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 28.575 47.625 -180)
+			(uuid "00000000-0000-4000-8000-000000000324")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW10"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000296")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "2,1"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000297")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000298")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000299")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000300")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000301")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000302")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000303")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000304")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000305")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000306")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000307")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000308")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000309")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000310")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000311")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000312")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000313")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000314")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000315")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000316")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000317")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000318")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000319")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000320")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000321")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 7 "COL1")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000322")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 19 "N_R2_C1")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000323")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 32.385 42.545 -180)
+			(uuid "00000000-0000-4000-8000-000000000331")
+		(property "Reference" "D10"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000325")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000326")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000327")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000328")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 3 "ROW2")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000329")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 19 "N_R2_C1")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000330")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 47.625 47.625 -180)
+			(uuid "00000000-0000-4000-8000-000000000360")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW11"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000332")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "2,2"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000333")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000334")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000335")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000336")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000337")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000338")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000339")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000340")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000341")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000342")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000343")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000344")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000345")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000346")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000347")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000348")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000349")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000350")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000351")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000352")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000353")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000354")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000355")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000356")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000357")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 8 "COL2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000358")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 20 "N_R2_C2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000359")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 51.435 42.545 -180)
+			(uuid "00000000-0000-4000-8000-000000000367")
+		(property "Reference" "D11"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000361")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000362")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000363")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000364")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 3 "ROW2")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000365")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 20 "N_R2_C2")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000366")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 9.525 66.675 -180)
+			(uuid "00000000-0000-4000-8000-000000000396")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW12"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000368")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "3,0"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000369")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000370")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000371")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000372")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000373")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000374")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000375")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000376")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000377")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000378")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000379")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000380")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000381")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000382")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000383")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000384")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000385")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000386")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000387")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000388")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000389")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000390")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000391")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000392")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000393")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 6 "COL0")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000394")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 21 "N_R3_C0")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000395")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 13.335 61.595 -180)
+			(uuid "00000000-0000-4000-8000-000000000403")
+		(property "Reference" "D12"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000397")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000398")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000399")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000400")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 4 "ROW3")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000401")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 21 "N_R3_C0")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000402")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 28.575 66.675 -180)
+			(uuid "00000000-0000-4000-8000-000000000432")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW13"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000404")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "3,1"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000405")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000406")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000407")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000408")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000409")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000410")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000411")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000412")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000413")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000414")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000415")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000416")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000417")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000418")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000419")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000420")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000421")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000422")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000423")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000424")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000425")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000426")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000427")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000428")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000429")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 7 "COL1")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000430")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 22 "N_R3_C1")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000431")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 32.385 61.595 -180)
+			(uuid "00000000-0000-4000-8000-000000000439")
+		(property "Reference" "D13"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000433")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000434")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000435")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000436")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 4 "ROW3")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000437")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 22 "N_R3_C1")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000438")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 47.625 66.675 -180)
+			(uuid "00000000-0000-4000-8000-000000000468")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW14"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000440")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "3,2"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000441")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000442")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000443")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000444")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000445")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000446")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000447")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000448")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000449")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000450")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000451")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000452")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000453")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000454")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000455")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000456")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000457")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000458")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000459")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000460")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000461")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000462")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000463")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000464")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000465")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 8 "COL2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000466")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 23 "N_R3_C2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000467")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 51.435 61.595 -180)
+			(uuid "00000000-0000-4000-8000-000000000475")
+		(property "Reference" "D14"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000469")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000470")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000471")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000472")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 4 "ROW3")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000473")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 23 "N_R3_C2")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000474")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_2.00u_90deg" (layer "F.Cu")
+			(at 66.675 76.2 -180)
+			(uuid "00000000-0000-4000-8000-000000000476")
+	  (descr "Cherry MX keyswitch PCB Mount Keycap 2.00u 90deg")
+	  (tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 2.00u 90deg")
+	  (fp_text reference "SW15" (at 0 -8) (layer F.SilkS)
+	    (effects (font (size 1 1) (thickness 0.15)))
+	  )
+	  (fp_text value "3,3" (at 0 8) (layer F.Fab)
+	    (effects (font (size 1 1) (thickness 0.15)))
+	  )
+	  (fp_line (start -7 -7) (end -7 7) (layer F.Fab) (width 0.1))
+	  (fp_line (start -7 7) (end 7 7) (layer F.Fab) (width 0.1))
+	  (fp_line (start 7 7) (end 7 -7) (layer F.Fab) (width 0.1))
+	  (fp_line (start 7 -7) (end -7 -7) (layer F.Fab) (width 0.1))
+	  (fp_line (start -7.1 -7.1) (end -7.1 7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start -7.1 7.1) (end 7.1 7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start 7.1 7.1) (end 7.1 -7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start 7.1 -7.1) (end -7.1 -7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start -7.25 -7.25) (end -7.25 7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start -7.25 7.25) (end 7.25 7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start 7.25 7.25) (end 7.25 -7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start 7.25 -7.25) (end -7.25 -7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start -7 -7) (end -7 7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start -7 7) (end 7 7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start 7 7) (end 7 -7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start 7 -7) (end -7 -7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start 9.525 -19.05) (end 9.525 19.05) (layer Dwgs.User) (width 0.1))
+	  (fp_line (start 9.525 19.05) (end -9.525 19.05) (layer Dwgs.User) (width 0.1))
+	  (fp_line (start -9.525 19.05) (end -9.525 -19.05) (layer Dwgs.User) (width 0.1))
+	  (fp_line (start -9.525 -19.05) (end 9.525 -19.05) (layer Dwgs.User) (width 0.1))
+	  (pad 1 thru_hole circle (at -3.81 -2.54 -180) (size 2.5 2.5) (drill 1.5) (layers *.Cu *.Mask) (net 9 "COL3"))
+	  (pad 2 thru_hole circle (at 2.54 -5.08 -180) (size 2.5 2.5) (drill 1.5) (layers *.Cu *.Mask) (net 24 "N_R3_C3"))
+	  (pad "" np_thru_hole circle (at 0 0 -180) (size 4 4) (drill 4) (layers *.Cu *.Mask))
+	  (pad "" np_thru_hole circle (at -5.08 0 -180) (size 1.75 1.75) (drill 1.75) (layers *.Cu *.Mask))
+	  (pad "" np_thru_hole circle (at 5.08 0 -180) (size 1.75 1.75) (drill 1.75) (layers *.Cu *.Mask))
+	  (fp_text user %R (at 0 0) (layer F.Fab)
+	    (effects (font (size 1 1) (thickness 0.15)))
+	  )
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 70.485 71.12 -180)
+			(uuid "00000000-0000-4000-8000-000000000483")
+		(property "Reference" "D15"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000477")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000478")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000479")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000480")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 4 "ROW3")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000481")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 24 "N_R3_C3")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000482")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_2.00u" (layer "F.Cu")
+			(at 19.05 85.725 -180)
+			(uuid "00000000-0000-4000-8000-000000000484")
+	  (descr "Cherry MX keyswitch PCB Mount Keycap 2.00u")
+	  (tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 2.00u")
+	  (fp_text reference "SW16" (at 0 -8) (layer F.SilkS)
+	    (effects (font (size 1 1) (thickness 0.15)))
+	  )
+	  (fp_text value "4,0" (at 0 8) (layer F.Fab)
+	    (effects (font (size 1 1) (thickness 0.15)))
+	  )
+	  (fp_line (start -7 -7) (end -7 7) (layer F.Fab) (width 0.1))
+	  (fp_line (start -7 7) (end 7 7) (layer F.Fab) (width 0.1))
+	  (fp_line (start 7 7) (end 7 -7) (layer F.Fab) (width 0.1))
+	  (fp_line (start 7 -7) (end -7 -7) (layer F.Fab) (width 0.1))
+	  (fp_line (start -7.1 -7.1) (end -7.1 7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start -7.1 7.1) (end 7.1 7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start 7.1 7.1) (end 7.1 -7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start 7.1 -7.1) (end -7.1 -7.1) (layer F.SilkS) (width 0.12))
+	  (fp_line (start -7.25 -7.25) (end -7.25 7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start -7.25 7.25) (end 7.25 7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start 7.25 7.25) (end 7.25 -7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start 7.25 -7.25) (end -7.25 -7.25) (layer F.CrtYd) (width 0.05))
+	  (fp_line (start -7 -7) (end -7 7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start -7 7) (end 7 7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start 7 7) (end 7 -7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start 7 -7) (end -7 -7) (layer Eco1.User) (width 0.1))
+	  (fp_line (start -19.05 -9.525) (end -19.05 9.525) (layer Dwgs.User) (width 0.1))
+	  (fp_line (start -19.05 9.525) (end 19.05 9.525) (layer Dwgs.User) (width 0.1))
+	  (fp_line (start 19.05 9.525) (end 19.05 -9.525) (layer Dwgs.User) (width 0.1))
+	  (fp_line (start 19.05 -9.525) (end -19.05 -9.525) (layer Dwgs.User) (width 0.1))
+	  (pad 1 thru_hole circle (at -3.81 -2.54 -180) (size 2.5 2.5) (drill 1.5) (layers *.Cu *.Mask) (net 6 "COL0"))
+	  (pad 2 thru_hole circle (at 2.54 -5.08 -180) (size 2.5 2.5) (drill 1.5) (layers *.Cu *.Mask) (net 25 "N_R4_C0"))
+	  (pad "" np_thru_hole circle (at 0 0 -180) (size 4 4) (drill 4) (layers *.Cu *.Mask))
+	  (pad "" np_thru_hole circle (at -5.08 0 -180) (size 1.75 1.75) (drill 1.75) (layers *.Cu *.Mask))
+	  (pad "" np_thru_hole circle (at 5.08 0 -180) (size 1.75 1.75) (drill 1.75) (layers *.Cu *.Mask))
+	  (fp_text user %R (at 0 0) (layer F.Fab)
+	    (effects (font (size 1 1) (thickness 0.15)))
+	  )
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 22.86 80.645 -180)
+			(uuid "00000000-0000-4000-8000-000000000491")
+		(property "Reference" "D16"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000485")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000486")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000487")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000488")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 5 "ROW4")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000489")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 25 "N_R4_C0")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000490")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SW_Cherry_MX_PCB_1.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 47.625 85.725 -180)
+			(uuid "00000000-0000-4000-8000-000000000520")
+		(descr "Cherry MX keyswitch PCB Mount Keycap 1.00u")
+		(tags "Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
+		(property "Reference" "SW17"
+			(at 0 -8 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000492")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "4,2"
+			(at 0 8 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000493")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000494")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000495")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -9.525 -9.525)
+			(end -9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000496")
+		)
+		(fp_line
+			(start -9.525 9.525)
+			(end 9.525 9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000497")
+		)
+		(fp_line
+			(start 9.525 -9.525)
+			(end -9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000498")
+		)
+		(fp_line
+			(start 9.525 9.525)
+			(end 9.525 -9.525)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000499")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000500")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000501")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000502")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000503")
+		)
+		(fp_line
+			(start -7.25 -7.25)
+			(end -7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000504")
+		)
+		(fp_line
+			(start -7.25 7.25)
+			(end 7.25 7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000505")
+		)
+		(fp_line
+			(start 7.25 -7.25)
+			(end -7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000506")
+		)
+		(fp_line
+			(start 7.25 7.25)
+			(end 7.25 -7.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "00000000-0000-4000-8000-000000000507")
+		)
+		(fp_line
+			(start -7 -7)
+			(end -7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000508")
+		)
+		(fp_line
+			(start -7 7)
+			(end 7 7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000509")
+		)
+		(fp_line
+			(start 7 -7)
+			(end -7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000510")
+		)
+		(fp_line
+			(start 7 7)
+			(end 7 -7)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000511")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000512")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000513")
+		)
+		(pad "" np_thru_hole circle
+			(at -3.81 -2.54 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000514")
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0 -180)
+			(size 4 4)
+			(drill 4)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000515")
+		)
+		(pad "" np_thru_hole circle
+			(at 2.54 -5.08 -180)
+			(size 3.05 3.05)
+			(drill 3.05)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000516")
+		)
+		(pad "" np_thru_hole circle
+			(at 5.08 0 -180)
+			(size 1.75 1.75)
+			(drill 1.75)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000517")
+		)
+		(pad "1" smd rect
+			(at -7.035 -2.54 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 8 "COL2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000518")
+		)
+		(pad "2" smd rect
+			(at 5.765 -5.08 -180)
+			(size 2.9 2.5)
+			(layers "B.Cu" "B.Mask" "B.Paste") (net 26 "N_R4_C2")
+			(thermal_bridge_angle 45)
+			(uuid "00000000-0000-4000-8000-000000000519")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/mx_switch.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "D_DO-35_SOD27_P7.62mm_Horizontal"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 51.435 80.645 -180)
+			(uuid "00000000-0000-4000-8000-000000000527")
+		(property "Reference" "D17"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000521")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4148"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000522")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000523")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000524")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(duplicate_pad_numbers_are_jumpers no)
+		(pad "1" thru_hole circle
+			(at 0 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 5 "ROW4")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000525")
+		)
+		(pad "2" thru_hole circle
+			(at 7.62 0 -180)
+			(size 1.6 1.6)
+			(drill 0.8)
+			(layers "*.Cu" "*.Mask") (net 26 "N_R4_C2")
+			(remove_unused_layers no)
+			(uuid "00000000-0000-4000-8000-000000000526")
+		)
+		(embedded_fonts no)
+		(model "${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "Stabilizer_Cherry_MX_2.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 66.675 38.1 90)
+			(uuid "00000000-0000-4000-8000-000000000547")
+		(descr "Cherry MX PCB Stabilizer 2.00u 2.25u 2.50u 2.75u")
+		(tags "Cherry MX Keyboard Stabilizer 2.00u 2.25u 2.50u 2.75u Cutout")
+		(property "Reference" "ST1"
+			(at 0 -2 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000528")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "SW_stab"
+			(at 0 2 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000529")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000530")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000531")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -2 0)
+			(end 2 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000532")
+		)
+		(fp_line
+			(start 0 2)
+			(end 0 -2)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000533")
+		)
+		(fp_line
+			(start -15.313 -5.53)
+			(end -15.313 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000534")
+		)
+		(fp_line
+			(start -15.313 6.77)
+			(end -8.563 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000535")
+		)
+		(fp_line
+			(start -8.563 -5.53)
+			(end -15.313 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000536")
+		)
+		(fp_line
+			(start -8.563 6.77)
+			(end -8.563 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000537")
+		)
+		(fp_line
+			(start 8.563 -5.53)
+			(end 8.563 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000538")
+		)
+		(fp_line
+			(start 8.563 6.77)
+			(end 15.313 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000539")
+		)
+		(fp_line
+			(start 15.313 -5.53)
+			(end 8.563 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000540")
+		)
+		(fp_line
+			(start 15.313 6.77)
+			(end 15.313 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000541")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000542")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -11.938 -6.985 90)
+			(size 3.048 3.048)
+			(drill 3.048)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000543")
+		)
+		(pad "" np_thru_hole circle
+			(at -11.938 8.225 90)
+			(size 3.9878 3.9878)
+			(drill 3.9878)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000544")
+		)
+		(pad "" np_thru_hole circle
+			(at 11.938 -6.985 90)
+			(size 3.048 3.048)
+			(drill 3.048)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000545")
+		)
+		(pad "" np_thru_hole circle
+			(at 11.938 8.225 90)
+			(size 3.9878 3.9878)
+			(drill 3.9878)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000546")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "Stabilizer_Cherry_MX_2.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 66.675 76.2 90)
+			(uuid "00000000-0000-4000-8000-000000000567")
+		(descr "Cherry MX PCB Stabilizer 2.00u 2.25u 2.50u 2.75u")
+		(tags "Cherry MX Keyboard Stabilizer 2.00u 2.25u 2.50u 2.75u Cutout")
+		(property "Reference" "ST2"
+			(at 0 -2 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000548")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "SW_stab"
+			(at 0 2 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000549")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000550")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000551")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -2 0)
+			(end 2 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000552")
+		)
+		(fp_line
+			(start 0 2)
+			(end 0 -2)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000553")
+		)
+		(fp_line
+			(start -15.313 -5.53)
+			(end -15.313 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000554")
+		)
+		(fp_line
+			(start -15.313 6.77)
+			(end -8.563 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000555")
+		)
+		(fp_line
+			(start -8.563 -5.53)
+			(end -15.313 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000556")
+		)
+		(fp_line
+			(start -8.563 6.77)
+			(end -8.563 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000557")
+		)
+		(fp_line
+			(start 8.563 -5.53)
+			(end 8.563 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000558")
+		)
+		(fp_line
+			(start 8.563 6.77)
+			(end 15.313 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000559")
+		)
+		(fp_line
+			(start 15.313 -5.53)
+			(end 8.563 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000560")
+		)
+		(fp_line
+			(start 15.313 6.77)
+			(end 15.313 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000561")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000562")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -11.938 -6.985 90)
+			(size 3.048 3.048)
+			(drill 3.048)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000563")
+		)
+		(pad "" np_thru_hole circle
+			(at -11.938 8.225 90)
+			(size 3.9878 3.9878)
+			(drill 3.9878)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000564")
+		)
+		(pad "" np_thru_hole circle
+			(at 11.938 -6.985 90)
+			(size 3.048 3.048)
+			(drill 3.048)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000565")
+		)
+		(pad "" np_thru_hole circle
+			(at 11.938 8.225 90)
+			(size 3.9878 3.9878)
+			(drill 3.9878)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000566")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "Stabilizer_Cherry_MX_2.00u"
+		(version 20260206)
+		(generator "pcbnew")
+		(generator_version "10.0")
+		(layer "F.Cu")
+			(at 19.05 85.725)
+			(uuid "00000000-0000-4000-8000-000000000587")
+		(descr "Cherry MX PCB Stabilizer 2.00u 2.25u 2.50u 2.75u")
+		(tags "Cherry MX Keyboard Stabilizer 2.00u 2.25u 2.50u 2.75u Cutout")
+		(property "Reference" "ST3"
+			(at 0 -2 180)
+			(layer "F.SilkS")
+			(uuid "00000000-0000-4000-8000-000000000568")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "SW_stab"
+			(at 0 2 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000569")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000570")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00000000-0000-4000-8000-000000000571")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -2 0)
+			(end 2 0)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000572")
+		)
+		(fp_line
+			(start 0 2)
+			(end 0 -2)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Dwgs.User")
+			(uuid "00000000-0000-4000-8000-000000000573")
+		)
+		(fp_line
+			(start -15.313 -5.53)
+			(end -15.313 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000574")
+		)
+		(fp_line
+			(start -15.313 6.77)
+			(end -8.563 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000575")
+		)
+		(fp_line
+			(start -8.563 -5.53)
+			(end -15.313 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000576")
+		)
+		(fp_line
+			(start -8.563 6.77)
+			(end -8.563 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000577")
+		)
+		(fp_line
+			(start 8.563 -5.53)
+			(end 8.563 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000578")
+		)
+		(fp_line
+			(start 8.563 6.77)
+			(end 15.313 6.77)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000579")
+		)
+		(fp_line
+			(start 15.313 -5.53)
+			(end 8.563 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000580")
+		)
+		(fp_line
+			(start 15.313 6.77)
+			(end 15.313 -5.53)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "Eco1.User")
+			(uuid "00000000-0000-4000-8000-000000000581")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "00000000-0000-4000-8000-000000000582")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at -11.938 -6.985)
+			(size 3.048 3.048)
+			(drill 3.048)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000583")
+		)
+		(pad "" np_thru_hole circle
+			(at -11.938 8.225)
+			(size 3.9878 3.9878)
+			(drill 3.9878)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000584")
+		)
+		(pad "" np_thru_hole circle
+			(at 11.938 -6.985)
+			(size 3.048 3.048)
+			(drill 3.048)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000585")
+		)
+		(pad "" np_thru_hole circle
+			(at 11.938 8.225)
+			(size 3.9878 3.9878)
+			(drill 3.9878)
+			(layers "*.Cu" "*.Mask")
+			(uuid "00000000-0000-4000-8000-000000000586")
+		)
+		(embedded_fonts no)
+	)
+)

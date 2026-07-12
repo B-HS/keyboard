@@ -16,9 +16,6 @@ jobs:
             - run: bun install --frozen-lockfile
             - run: bun run typecheck
             - run: bun run format:check
-            - run: bun run smoke:65
-            - run: bun run smoke:keypad
-            - run: bun run export:65
-            - run: bun run export:65-fdm
-            - run: bun run export:keypad
+            - run: bun run smoke:keypad-17
+            - run: bun run export:keypad-17
             - run: bun run build

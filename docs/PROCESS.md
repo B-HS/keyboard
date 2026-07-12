@@ -2,14 +2,36 @@
 
 > **새 세션은 이 문서를 먼저 읽는다.** 저장소 전체의 구조·뷰어·프로젝트별 상태·실행·남은 일을 정확히 담는다.
 > 기준 룰: `~/.claude/CLAUDE.md` + 코딩 컨벤션(ai-process / common / comments / fsd …).
-> 최종 갱신: 2026-07-10(3차) · 브랜치 **`split`** · **기둥 발거 파단 대책**(미커밋): 실척 분리 시 기둥 뜯김 → 보스 보어 Ø5.0→**5.5**(슬립핏)·OD Ø6.6→**7.1**, 기둥 팁 챔퍼(0.5/Ø3.8)·뿌리 필렛 콘(1.0/Ø5.8)·보어 입구 챔퍼(0.3/Ø6.1)·인서트 포켓 입구 챔퍼(0.3/Ø2.2). PCB(Ø5.4)·plate(Ø6.4 기출력분) 무변경 호환, **재출력 top·bottom만**. 상세 `docs/bug/2026-07-10-pillar-torn-on-extraction.md` · fdm-m1-case.md 개정 3차 블록.
+> 최종 갱신: 2026-07-12 · 브랜치 **`keypad-17`** · **keypad-17 신규 프로젝트 부트스트랩**(미커밋): 3D print + handwire(PCB 없음) 17키 키패드. 구 split 프로젝트(`65/`·`keypad/`) 제거(히스토리는 `split` 브랜치 보존), 공유 인프라(뷰어·설정·CI) 중립화, `keypad-17/raw/` 신설 — 사용자 제공 plate·pcb 파일 대기. **아래 §0~§9의 monorepo·65·keypad 서술은 split 기준 이력** — keypad-17 구조 확정 후 재작성 예정.
+> 이전: 2026-07-10(3차) · 브랜치 `split` · **기둥 발거 파단 대책**(커밋 `a625597`·`1231777`): 실척 분리 시 기둥 뜯김 → 보스 보어 Ø5.0→**5.5**(슬립핏)·OD Ø6.6→**7.1**, 기둥 팁 챔퍼(0.5/Ø3.8)·뿌리 필렛 콘(1.0/Ø5.8)·보어 입구 챔퍼(0.3/Ø6.1)·인서트 포켓 입구 챔퍼(0.3/Ø2.2). PCB(Ø5.4)·plate(Ø6.4 기출력분) 무변경 호환, **재출력 top·bottom만**. 상세 `docs/bug/2026-07-10-pillar-torn-on-extraction.md` · fdm-m1-case.md 개정 3차 블록.
 > 이전: 2026-07-10(2차) · **plate 조립 불가 결함 수정 + 틸트 삭제**(미커밋): 분리 plate(홀 Ø3.4)가 기둥 Ø4.8·캡 Ø5.8을 통과 못 해 조립 경로가 없던 결함 → 사용자 확정으로 ①plate 홀 **Ø6.4**(스위치 샌드위치 고정, 트레이마운트 방식) ②기둥 넥 제거(캡 위 몸통 **Ø4.8 일정**) ③**7.5° 틸트 삭제**(`TILT_DEG=0`, 유틸은 항등으로 유지) ④웹 export에 plate 추가(측당 4장). STL: top 15.1/plate 1.5/bottom 5.0, 총 스택 16.6mm. 발주 PCB(Ø5.4) 무변경 호환. 상세 `docs/bug/2026-07-10-plate-captive-assembly.md` · `65/docs/fdm-m1-case.md` 개정 2차 블록. 아래 §4.2 틸트 서술은 **이력**.
 > 이전: 2026-07-10 · **top STL 틸트 export 버그 수정**(`ebfd2b5`): `buildTopFdm3D` 베젤이 `tiltGeom`으로 기운 채 export되어 베드 접촉이 146.3×0.8mm 모서리 띠뿐이던 문제 → CLI(`export-fdm.ts`)·웹(`stl-parts.ts`) 양쪽 top에 `untiltGeom` 적용(**untilt→flip 순서**), 베젤 면 전체(146.4×108.2) 베드 밀착·top 높이 26.8mm. 뷰어 렌더는 틸트 유지. 상세 `docs/bug/2026-07-10-top-stl-tilt-export.md`.
 > 이전: 2026-07-07 배치(①65 FDM 7.5° 틸트 §4.2 ②프론트 전면 개편 §1.5 ③웹 STL Export·1/5 검증·사포 마감 ④65 PCB 라우팅 완결 ⑤ESP32-C3 통합)는 이후 전부 커밋 반영 — keypad TS 전환 `d3f3447` · 65 PCB 라우팅 `192ec67` · 문서 최신화 `d433119` · **JLCPCB 거버·드릴 생성+발주 사양 확정** `d4d1fd3`(`65/pcb/order/jlcpcb-{left,right}.zip`, pcb-build §6) · 뷰어 BASE_URL(GitHub Pages) `f14c200`. **65 PCB는 JLC 업로드·발주만 남음.** 그 이전: 2026-06-27 `0a3e649`.
 
 ---
 
-## 진행 중 (2026-07-10 3차): 기둥 발거 파단 대책 — 보어 슬립핏 + 챔퍼 + 뿌리 필렛
+## 진행 중 (2026-07-12): keypad-17 신규 프로젝트 — 3D print + handwire (PCB 없음)
+
+> 사용자 확정: 새 17키 키패드. **PCB 미사용(핸드와이어)**, 케이스 기본 구조는 split-65 FDM 방식(top bezel+기둥 / plate / bottom, M1 하단 체결)에서 **PCB만 제거**한 형태로 승계. plate·기준 pcb 파일은 사용자가 `keypad-17/raw/`에 제공 예정 — 그 파일로 레이아웃·케이스를 재시작. 스택은 기존 그대로(Bun·Vite·JSCAD·three.js·React 19+컴파일러).
+
+- [x] a. 브랜치 `keypad-17` 생성 (base `split` `1231777`)
+- [x] b. split 프로젝트 제거 — `65/`·`keypad/` 전체(케이스·PCB·export·raw·프로젝트 docs). 히스토리·재생성은 `split` 브랜치에서 가능
+- [x] c. 공유 인프라 중립화 — 뷰어 `PROJECTS` 빈 배열(빈 상태 카메라 가드 추가), control-panel의 65 STL export 배선 제거(`ExportSection` 삭제 — 재구축 시 git에서 복원), tsconfig·vite alias `@keypad-17` 교체, package.json export/smoke 스크립트 제거, CI 해당 스텝 제거
+- [x] d. `keypad-17/raw/` 생성 — 사용자 plate·pcb 파일 대기
+- [x] e. 검증 — typecheck·format:check·build
+- [x] f. raw 파일 수령·검증 (2026-07-12) — `plate.jscad`: 82.2×101.25×1.5, 코너 r3, 스위치 컷 14.0 ×17 + 2u 스태빌 컷(6.65×12.3) ×6, 피치 19.05, 그리드(4×5u) 둘레 margin 3. `keyboard.kicad_{pcb,sch,pro}`(keebforge): SW1–17 좌표가 plate 컷 중심과 **1:1 동일 좌표계**, 5×4 매트릭스(ROW0–4/COL0–3) + 1N4148 DO-35 ×17, 배선 0(핸드와이어 레퍼런스)·Edge.Cuts 0·마운트홀 0·컨트롤러 없음. 레이아웃 = 표준 넘패드(+·Enter 세로 2u, 0 가로 2u)
+- [x] g. 설계 결정 (사용자 확정) — ESP32-C3 SuperMini / 기둥+plate 홀 / 바텀갭 6→**7.0**(크래들 레일↔스위치 핀 0.1 간섭 발견, 근본 해결). 기록: `docs/acknowledge/keypad-17-design-decisions.md`
+- [x] h. 재구축 — `keypad-17/` config(dimensions·layout y-up 변환)/parts(shapes·top-frame vSpan·case=top+plate+bottom)/export(stl-parts·export·smoke)/viewer(case-meshes)/project.ts + src 재연결(PROJECTS·ExportSection 복원) + scripts(`smoke:keypad-17`·`export:keypad-17`[-mini]) + CI 스텝 복구
+- [x] i. 검증 — typecheck·format·build·smoke(17키/6슬롯/홀6, 스택 18.5)·export(top 88.2×107.2×16.8 / plate ×1.5 / bottom ×12.0, A1 mini 내)·**raw 대조 23/23 컷 일치**. 뷰어 육안 확인은 사용자 dev 서버에서
+- [x] k. **ESP32 모듈↔스위치 핀 간섭 수정 (2026-07-12, 사용자 발견)** — 바텀갭 7.0 결정이 레일↔핀만 검증, 모듈 본체(쉴드 변종 시 솔더 기준 0.9 관통)·솔더 여유 누락. `BOTTOM_GAP` 파생식 **9.0**(=3.3+1.2+3.4+마진 1.1 — 마진은 0.6에서 사용자 요청으로 상향)·`ESP32_MODULE` 상수 신설·뷰어 실물 외형 3박스(PCB+본체+USB)·smoke 간섭 가드 3종. 스택 18.5→**20.5**, export top 18.8/plate 1.5/bottom 14.0. typecheck·format·smoke(여유 1.1/2.9/1.03)·export(1:1 `fdm/` + 1/5 `fdm-mini/` 생성)·build 통과. 상세: `docs/bug/2026-07-12-esp32-switch-pin-overlap.md`
+- [x] l. **plate 흔들림 수정 (2026-07-12, 사용자 지적)** — plate 홀 Ø6.4(split-65 캡 통과 조건의 잔재, 캡 없는 keypad-17 에선 유격 ±0.3 · M1 마찰 의존) → 관통 **Ø5.4** + 상단 1.0mm **카운터싱크 Ø5.4→6.0**(뿌리 필렛 +0.1/측). 유격 ±0.1 + 테이퍼 자가 센터링, 슬라이드 조립성 유지. smoke 핏 가드 2종 추가, 정점 측정(top Ø6.0 / 몸통 Ø5.4) 일치. STL 재export(1:1·1/5). 상세: design-decisions #2 정정
+- [x] m. **조립 간섭 전수검사 (2026-07-12, 사용자 요청)** — 전 계면 수치 검증(`docs/quality-assurance/keypad-17-assembly-audit.md`). 발견·반영: ①나사머리 0.8 돌출 → 카운터보어 Ø2.8×0.9 + 포켓 3.0→3.6(M1×4 유지, 풀 물림 2.5, 나사끝 여유 0.4) ②중앙 보스↔하우징 0.33 → `MOUNT_HOLE_OUTSET` 1.5→2.0(갭 0.83) ③USB 제거 시 모듈 이탈 위험 → 실물 검증 후 결정(QA 체크리스트) ④fit coupon 생략(사용자). smoke 가드 2종 추가(M1 스택·boss 갭). 정점 측정(카운터보어 Ø2.8/천장 Ø1.2) 일치. typecheck·format·smoke·export(1:1+1/5 재생성)·build 통과.
+- [x] n. **split(65) 브랜치 동일 전수검사 (2026-07-12, 사용자 요청)** — worktree로 split 검사. **치명 발견: 틸트 삭제(7-10 2차)가 ESP32 크래들 전제(후방 갭 ~15mm)를 붕괴** — 균일 갭 3.5에 모듈(USB 4.2) PCB 0.7 관통·삽입 불가, 본체(쉴드 worst) 소켓 간섭, 뷰어 GLB는 PCB 관통 렌더. 수정(사용자 승인, split 커밋 `a171b39`): `BOTTOM_GAP` 파생식 5.7(=소켓 2.0+마진 0.3+PCB 1.0+본체 2.4 — 최초 보고 5.0은 베어 SoC 기준이라 쉴드 worst로 정정), smoke 가드 3종, 스택 16.6→18.8, PCB·plate 무변경. 여유 0.3/1.5/2.9 검증. 그 외 정상(boss↔하우징 3.56·웹 3.91/0.80·스태빌 1.54·M1 2.5). 기둥 팁 여유 0 과구속은 실물 테스트 후 재검토(사용자 결정), 나사머리 돌출은 고무발 결정 기존 기록 유효. 상세: split 브랜치 `docs/bug/2026-07-12-esp32-cradle-tilt-removal.md`·fdm-m1-case 개정 4차. push는 미실행(요청 시).
+- [ ] j. (대기) 뷰어 육안 확인 → 1/5 검증 출력(`export:keypad-17-mini`) → 실물 출력·조립(QA 체크리스트 `keypad-17-assembly-audit.md` §3 병행). 미결: plate 중앙(0키 부근) 처짐 시 rest post 추가, 핸드와이어 가이드 문서
+
+---
+
+## 이력 (2026-07-10 3차, `split`): 기둥 발거 파단 대책 — 보어 슬립핏 + 챔퍼 + 뿌리 필렛
 
 > 발견: 실척 출력물 상·하판 결합 후 분리 시 **기둥 1개가 기둥째 뜯김**. 원인 = 보스 보어 Ø5.0 vs 기둥 Ø4.8(편측 0.1)이 FDM 구멍 수축으로 사실상 억지끼움 → 발거 마찰력이 기둥의 레이어 간 인장강도(수직 타워 적층 = 최약 방향) 초과 + 뿌리 직각 응력 집중. 유지력·정렬은 M1 나사(클리어런스 Ø1.2)가 담당하므로 보스 마찰은 불필요. 사용자 확정: 가능한 대책 전부 적용. PCB(Ø5.4 발주분)·plate(Ø6.4 기출력분) 무변경 호환.
 

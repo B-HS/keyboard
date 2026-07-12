@@ -1,10 +1,10 @@
 import { useEffect, useRef, type FC } from 'react'
 import { createViewer, type Viewer } from '@renderer/scene'
-import { LAYER_KEYS, type LayerKey, type ProjectUnit, type ReferenceToggle } from '@renderer/types'
+import { LAYER_KEYS, type LayerKey, type ProjectModule, type ProjectUnit, type ReferenceToggle } from '@renderer/types'
 import type { ViewerSettings } from '@entities/viewer-settings/viewer-settings'
-import * as project65 from '@65/project'
+import * as projectKeypad17 from '@keypad-17/project'
 
-const PROJECTS = [project65]
+const PROJECTS: ProjectModule[] = [projectKeypad17]
 const GAP_BETWEEN = 80
 
 type ViewerCanvasProps = {
@@ -31,12 +31,14 @@ export const ViewerCanvas: FC<ViewerCanvasProps> = ({ settings, onReady }) => {
             cursor += unit.bounds.xMax - unit.bounds.xMin + GAP_BETWEEN
             units.push(unit)
         }
-        const width = cursor - GAP_BETWEEN
-        const centerX = width / 2
-        const yCenter = (Math.min(...units.map((u) => u.bounds.yMin)) + Math.max(...units.map((u) => u.bounds.yMax))) / 2
-        viewer.camera.position.set(centerX, 5 + width * 0.7, -yCenter + width * 1.1)
-        viewer.controls.target.set(centerX, 5, -yCenter)
-        viewer.controls.update()
+        if (units.length > 0) {
+            const width = cursor - GAP_BETWEEN
+            const centerX = width / 2
+            const yCenter = (Math.min(...units.map((u) => u.bounds.yMin)) + Math.max(...units.map((u) => u.bounds.yMax))) / 2
+            viewer.camera.position.set(centerX, 5 + width * 0.7, -yCenter + width * 1.1)
+            viewer.controls.target.set(centerX, 5, -yCenter)
+            viewer.controls.update()
+        }
 
         const references = units.flatMap((u) => u.references)
         const layerKeys = LAYER_KEYS.filter((key) => units.some((u) => u.layerKeys.includes(key)))

@@ -12,7 +12,7 @@ export const ExportSection: FC<ExportSectionProps> = ({ busy, onExport }) => {
 
     return (
         <div className='mt-2 border-t border-border pt-2'>
-            <div className='mb-1 text-[10px] text-muted-foreground'>STL Export — 상판·하판·mock PCB (좌우 6장)</div>
+            <div className='mb-1 text-[10px] text-muted-foreground'>STL Export — 상판·플레이트·하판 (3장)</div>
             <div className='flex items-center gap-2'>
                 <label className='flex items-center gap-1 text-xs'>
                     scale

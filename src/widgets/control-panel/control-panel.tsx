@@ -1,7 +1,7 @@
 import { useState, type FC } from 'react'
 import stlSerializer from '@jscad/stl-serializer'
 import type { LayerKey, LayerStyle, ReferenceToggle } from '@renderer/types'
-import { buildPrintParts } from '@65/export/stl-parts'
+import { buildPrintParts } from '@keypad-17/export/stl-parts'
 import { createDefaultSettings, type ViewerSettings } from '@entities/viewer-settings/viewer-settings'
 import { LayerControlRow } from '@features/layer-control/layer-control-row'
 import { ExportSection } from '@features/export-controls/export-section'
@@ -53,7 +53,7 @@ export const ControlPanel: FC<ControlPanelProps> = ({ settings, references, laye
     return (
         <div className='fixed top-3 left-3 w-72 border border-border bg-card p-3 text-sm text-card-foreground select-none backdrop-blur'>
             <div className='mb-2 flex items-baseline justify-between'>
-                <h1 className='text-sm font-semibold'>split-65 (좌+우)</h1>
+                <h1 className='text-sm font-semibold'>keypad-17</h1>
                 <button
                     type='button'
                     className='cursor-pointer text-[10px] text-muted-foreground hover:text-foreground'
