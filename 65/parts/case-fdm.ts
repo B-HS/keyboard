@@ -9,9 +9,12 @@ import {
     PILLAR_BODY_DIAMETER,
     PILLAR_PCB_CAP_DIAMETER,
     PILLAR_PCB_CAP_HEIGHT,
+    PILLAR_TIP_CHAMFER,
+    PILLAR_ROOT_FILLET,
     PLATE_PILLAR_CLEARANCE_DIAMETER,
     BOTTOM_BOSS_OUTER_DIAMETER,
     BOTTOM_BOSS_BORE_DIAMETER,
+    BOSS_BORE_ENTRY_CHAMFER,
     FDM_MARGIN_EXTRA,
     SWITCH_CUTOUT_FDM,
     SWITCH_CUTOUT_RADIUS,
@@ -28,7 +31,7 @@ import type { MountHole, Side } from '@renderer/types'
 
 const { subtract, union, intersect } = booleans
 const { extrudeLinear } = extrusions
-const { circle, roundedRectangle, cylinder, cuboid } = primitives
+const { circle, roundedRectangle, cylinder, cylinderElliptic, cuboid } = primitives
 const { translate, rotateX } = transforms
 
 const SEG = 32
@@ -53,12 +56,21 @@ export const fdmOutline = (side: Side) => ({
 const post = (h: { x: number; y: number }, z0: number, z1: number, diameter: number) =>
     translate([h.x, h.y, (z0 + z1) / 2], cylinder({ height: z1 - z0, radius: diameter / 2, segments: SEG }))
 
+const cone = (h: { x: number; y: number }, z0: number, z1: number, d0: number, d1: number) =>
+    translate(
+        [h.x, h.y, (z0 + z1) / 2],
+        cylinderElliptic({ height: z1 - z0, startRadius: [d0 / 2, d0 / 2], endRadius: [d1 / 2, d1 / 2], segments: SEG }),
+    )
+
 const pillarSolid = (h: MountHole) => {
     const hp = { x: h.x, y: tiltY(h.y) }
     const r = tiltRise(h.y)
     const over = 3
+    const rootZ = Z.plateTop + r
+    const rootOverDiameter = PILLAR_ROOT_FILLET.diameter + (over * (PILLAR_ROOT_FILLET.diameter - PILLAR_BODY_DIAMETER)) / PILLAR_ROOT_FILLET.height
     return union(
-        belowTiltPlane(Z.pcbTop, post(hp, Z.bottomTop, Z.pcbTop + r + over, PILLAR_BODY_DIAMETER)),
+        cone(hp, Z.bottomTop, Z.bottomTop + PILLAR_TIP_CHAMFER.height, PILLAR_TIP_CHAMFER.diameter, PILLAR_BODY_DIAMETER),
+        belowTiltPlane(Z.pcbTop, post(hp, Z.bottomTop + PILLAR_TIP_CHAMFER.height, Z.pcbTop + r + over, PILLAR_BODY_DIAMETER)),
         aboveTiltPlane(
             Z.pcbTop,
             belowTiltPlane(
@@ -70,10 +82,17 @@ const pillarSolid = (h: MountHole) => {
             Z.pcbTop + PILLAR_PCB_CAP_HEIGHT,
             belowTiltPlane(Z.plateTop, post(hp, Z.pcbTop + r - over, Z.plateTop + r + over, PILLAR_BODY_DIAMETER)),
         ),
+        belowTiltPlane(Z.plateTop, cone(hp, rootZ - PILLAR_ROOT_FILLET.height, rootZ + over, PILLAR_BODY_DIAMETER, rootOverDiameter)),
     )
 }
 
-const insertPocket = (h: MountHole) => post({ x: h.x, y: tiltY(h.y) }, Z.bottomTop, Z.bottomTop + M1.insertPocketDepth, M1.insertBoreDiameter)
+const insertPocket = (h: MountHole) => {
+    const hp = { x: h.x, y: tiltY(h.y) }
+    return union(
+        post(hp, Z.bottomTop, Z.bottomTop + M1.insertPocketDepth, M1.insertBoreDiameter),
+        cone(hp, Z.bottomTop, Z.bottomTop + M1.insertEntryChamfer.depth, M1.insertEntryChamfer.diameter, M1.insertBoreDiameter),
+    )
+}
 
 export const buildTopFdm3D = (side: Side) => {
     const bezel = tiltGeom(atZ(Z.topFrameBottom, extrudeLinear({ height: TOP_FRAME_THICKNESS }, buildTopFrame2D(side, fdmOutline(side)))))
@@ -125,6 +144,19 @@ export const buildBottomFdm3D = (side: Side) => {
         belowTiltPlane(Z.pcbBottom, post({ x: h.x, y: tiltY(h.y) }, Z.bottomTop, Z.pcbBottom + tiltRise(h.y) + 3, BOTTOM_BOSS_OUTER_DIAMETER)),
     )
     const bores = side.mountHoles.map((h) => post({ x: h.x, y: tiltY(h.y) }, Z.bottomTop, Z.pcbBottom + tiltRise(h.y) + 4, BOTTOM_BOSS_BORE_DIAMETER))
+    const chamferOver = 1
+    const chamferOverDiameter =
+        BOSS_BORE_ENTRY_CHAMFER.diameter +
+        (chamferOver * (BOSS_BORE_ENTRY_CHAMFER.diameter - BOTTOM_BOSS_BORE_DIAMETER)) / BOSS_BORE_ENTRY_CHAMFER.depth
+    const entryChamfers = side.mountHoles.map((h) =>
+        cone(
+            { x: h.x, y: tiltY(h.y) },
+            Z.pcbBottom + tiltRise(h.y) - BOSS_BORE_ENTRY_CHAMFER.depth,
+            Z.pcbBottom + tiltRise(h.y) + chamferOver,
+            BOTTOM_BOSS_BORE_DIAMETER,
+            chamferOverDiameter,
+        ),
+    )
     const screwHoles = side.mountHoles.map((h) => post({ x: h.x, y: tiltY(h.y) }, Z.bottomBottom, Z.bottomTop, M1.screwClearanceDiameter))
-    return subtract(union(base, cradle, ...bosses), union(...bores, ...screwHoles))
+    return subtract(union(base, cradle, ...bosses), union(...bores, ...entryChamfers, ...screwHoles))
 }

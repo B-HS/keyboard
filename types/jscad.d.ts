@@ -21,6 +21,7 @@ declare module '@jscad/modeling' {
         roundedRectangle: (options: { size: Vec2; roundRadius: number; segments?: number; center?: Vec2 }) => Geom2
         circle: (options: { radius: number; segments?: number; center?: Vec2 }) => Geom2
         cylinder: (options: { height: number; radius: number; segments?: number; center?: Vec3 }) => Geom3
+        cylinderElliptic: (options: { height: number; startRadius: Vec2; endRadius: Vec2; segments?: number; center?: Vec3 }) => Geom3
         cuboid: (options: { size: Vec3; center?: Vec3 }) => Geom3
     }
 

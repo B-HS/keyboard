@@ -23,10 +23,13 @@ export const MOUNT_HOLE_INSET_FROM_EDGE = 2.5
 export const PILLAR_BODY_DIAMETER = 4.8
 export const PILLAR_PCB_CAP_DIAMETER = 5.8
 export const PILLAR_PCB_CAP_HEIGHT = 0.8
+export const PILLAR_TIP_CHAMFER = { height: 0.5, diameter: 3.8 }
+export const PILLAR_ROOT_FILLET = { height: 1.0, diameter: 5.8 }
 export const PLATE_PILLAR_CLEARANCE_DIAMETER = 6.4
 export const PCB_MOUNT_HOLE_FDM = 5.4
-export const BOTTOM_BOSS_OUTER_DIAMETER = 6.6
-export const BOTTOM_BOSS_BORE_DIAMETER = 5.0
+export const BOTTOM_BOSS_OUTER_DIAMETER = 7.1
+export const BOTTOM_BOSS_BORE_DIAMETER = 5.5
+export const BOSS_BORE_ENTRY_CHAMFER = { depth: 0.3, diameter: 6.1 }
 export const FDM_MARGIN_EXTRA = 1.5
 
 export const M1 = {
@@ -34,6 +37,7 @@ export const M1 = {
     insertLength: 2.5,
     insertBoreDiameter: 1.75,
     insertPocketDepth: 3.0,
+    insertEntryChamfer: { depth: 0.3, diameter: 2.2 },
     screwClearanceDiameter: 1.2,
     screwHeadDiameter: 2.0,
     screwHeadHeight: 0.8,
