@@ -2,9 +2,23 @@
 
 > **새 세션은 이 문서를 먼저 읽는다.** 저장소 전체의 구조·뷰어·프로젝트별 상태·실행·남은 일을 정확히 담는다.
 > 기준 룰: `~/.claude/CLAUDE.md` + 코딩 컨벤션(ai-process / common / comments / fsd …).
-> 최종 갱신: 2026-07-10(2차) · 브랜치 **`split`** · **plate 조립 불가 결함 수정 + 틸트 삭제**(미커밋): 분리 plate(홀 Ø3.4)가 기둥 Ø4.8·캡 Ø5.8을 통과 못 해 조립 경로가 없던 결함 → 사용자 확정으로 ①plate 홀 **Ø6.4**(스위치 샌드위치 고정, 트레이마운트 방식) ②기둥 넥 제거(캡 위 몸통 **Ø4.8 일정**) ③**7.5° 틸트 삭제**(`TILT_DEG=0`, 유틸은 항등으로 유지) ④웹 export에 plate 추가(측당 4장). STL: top 15.1/plate 1.5/bottom 5.0, 총 스택 16.6mm. 발주 PCB(Ø5.4) 무변경 호환. 상세 `docs/bug/2026-07-10-plate-captive-assembly.md` · `65/docs/fdm-m1-case.md` 개정 2차 블록. 아래 §4.2 틸트 서술은 **이력**.
+> 최종 갱신: 2026-07-10(3차) · 브랜치 **`split`** · **기둥 발거 파단 대책**(미커밋): 실척 분리 시 기둥 뜯김 → 보스 보어 Ø5.0→**5.5**(슬립핏)·OD Ø6.6→**7.1**, 기둥 팁 챔퍼(0.5/Ø3.8)·뿌리 필렛 콘(1.0/Ø5.8)·보어 입구 챔퍼(0.3/Ø6.1)·인서트 포켓 입구 챔퍼(0.3/Ø2.2). PCB(Ø5.4)·plate(Ø6.4 기출력분) 무변경 호환, **재출력 top·bottom만**. 상세 `docs/bug/2026-07-10-pillar-torn-on-extraction.md` · fdm-m1-case.md 개정 3차 블록.
+> 이전: 2026-07-10(2차) · **plate 조립 불가 결함 수정 + 틸트 삭제**(미커밋): 분리 plate(홀 Ø3.4)가 기둥 Ø4.8·캡 Ø5.8을 통과 못 해 조립 경로가 없던 결함 → 사용자 확정으로 ①plate 홀 **Ø6.4**(스위치 샌드위치 고정, 트레이마운트 방식) ②기둥 넥 제거(캡 위 몸통 **Ø4.8 일정**) ③**7.5° 틸트 삭제**(`TILT_DEG=0`, 유틸은 항등으로 유지) ④웹 export에 plate 추가(측당 4장). STL: top 15.1/plate 1.5/bottom 5.0, 총 스택 16.6mm. 발주 PCB(Ø5.4) 무변경 호환. 상세 `docs/bug/2026-07-10-plate-captive-assembly.md` · `65/docs/fdm-m1-case.md` 개정 2차 블록. 아래 §4.2 틸트 서술은 **이력**.
 > 이전: 2026-07-10 · **top STL 틸트 export 버그 수정**(`ebfd2b5`): `buildTopFdm3D` 베젤이 `tiltGeom`으로 기운 채 export되어 베드 접촉이 146.3×0.8mm 모서리 띠뿐이던 문제 → CLI(`export-fdm.ts`)·웹(`stl-parts.ts`) 양쪽 top에 `untiltGeom` 적용(**untilt→flip 순서**), 베젤 면 전체(146.4×108.2) 베드 밀착·top 높이 26.8mm. 뷰어 렌더는 틸트 유지. 상세 `docs/bug/2026-07-10-top-stl-tilt-export.md`.
 > 이전: 2026-07-07 배치(①65 FDM 7.5° 틸트 §4.2 ②프론트 전면 개편 §1.5 ③웹 STL Export·1/5 검증·사포 마감 ④65 PCB 라우팅 완결 ⑤ESP32-C3 통합)는 이후 전부 커밋 반영 — keypad TS 전환 `d3f3447` · 65 PCB 라우팅 `192ec67` · 문서 최신화 `d433119` · **JLCPCB 거버·드릴 생성+발주 사양 확정** `d4d1fd3`(`65/pcb/order/jlcpcb-{left,right}.zip`, pcb-build §6) · 뷰어 BASE_URL(GitHub Pages) `f14c200`. **65 PCB는 JLC 업로드·발주만 남음.** 그 이전: 2026-06-27 `0a3e649`.
+
+---
+
+## 진행 중 (2026-07-10 3차): 기둥 발거 파단 대책 — 보어 슬립핏 + 챔퍼 + 뿌리 필렛
+
+> 발견: 실척 출력물 상·하판 결합 후 분리 시 **기둥 1개가 기둥째 뜯김**. 원인 = 보스 보어 Ø5.0 vs 기둥 Ø4.8(편측 0.1)이 FDM 구멍 수축으로 사실상 억지끼움 → 발거 마찰력이 기둥의 레이어 간 인장강도(수직 타워 적층 = 최약 방향) 초과 + 뿌리 직각 응력 집중. 유지력·정렬은 M1 나사(클리어런스 Ø1.2)가 담당하므로 보스 마찰은 불필요. 사용자 확정: 가능한 대책 전부 적용. PCB(Ø5.4 발주분)·plate(Ø6.4 기출력분) 무변경 호환.
+
+- [x] a. `dimensions.ts` — 보어 Ø5.0→**5.5**(슬립핏), 보스 OD Ø6.6→**7.1**(벽 0.8 유지), 신규 `PILLAR_TIP_CHAMFER`(0.5/Ø3.8)·`PILLAR_ROOT_FILLET`(1.0/Ø5.8=캡 동일)·`BOSS_BORE_ENTRY_CHAMFER`(0.3/Ø6.1)·`M1.insertEntryChamfer`(0.3/Ø2.2)
+- [x] b. `case-fdm.ts` — `cone` 헬퍼(cylinderElliptic, `types/jscad.d.ts`에 선언 추가), pillarSolid 팁 챔퍼+뿌리 필렛 콘(overshoot+clip 기존 패턴), insertPocket 입구 챔퍼, buildBottomFdm3D 보어 입구 챔퍼
+- [x] c. 검증 — typecheck·format:check·smoke:65·export:65-fdm(외형 불변 top 15.1/plate 1.5/bottom 5.0)·vite build 통과 + 정점 측정으로 신규 형상 6종 전부 기대 지름 일치 확인
+- [x] d. 문서 — `docs/bug/2026-07-10-pillar-torn-on-extraction.md` + fdm-m1-case.md 개정 3차 블록 + 이 문서 (커밋은 사용자 요청 대기)
+- [ ] e. 실물 — top·bottom 재출력 → 삽입·발거 반복 테스트(손힘 분리), 보스 접촉 링(Ø5.5–7.1) 하부 PCB 트레이스 확인
+- [x] f. 조립 가이드 — `65/docs/assembly.md` 신설(준비물 M1×4·인서트 12, 출력 세팅, 인서트 압입, 샌드위치 선조립, 슬립핏 결합·수직 분해, 첫 조립 QA 체크)
 
 ---
 
