@@ -45,7 +45,10 @@ export const M1 = {
 }
 
 export const PLATE_BOTTOM_TO_PCB_TOP = 3.5
-export const BOTTOM_GAP = 3.5
+export const HOTSWAP_SOCKET_BELOW_PCB = 2.0
+export const ESP32_MODULE = { boardThickness: 1.0, bodyHeight: 2.4, usbHeight: 3.2 }
+export const ESP32_CLEARANCE_MARGIN = 0.3
+export const BOTTOM_GAP = HOTSWAP_SOCKET_BELOW_PCB + ESP32_CLEARANCE_MARGIN + ESP32_MODULE.boardThickness + ESP32_MODULE.bodyHeight
 export const PLATE_TOP_TO_STEM_TOP = 11.6
 
 export const TILT_DEG = 0
