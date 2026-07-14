@@ -1,0 +1,39 @@
+[keyboard]
+name = "keypad17"
+product_name = "keypad17"
+vendor_id = 0x4c4b
+product_id = 0x0011
+manufacturer = "HS"
+chip = "esp32c3"
+usb_enable = false
+
+[matrix]
+row_pins = ["GPIO21", "GPIO20", "GPIO10", "GPIO5", "GPIO6"]
+col_pins = ["GPIO3", "GPIO2", "GPIO1", "GPIO0"]
+
+[layout]
+rows = 5
+cols = 4
+layers = 2
+keymap = [
+    [
+        ["NumLock", "KpSlash", "KpAsterisk", "KpMinus"],
+        ["Kp7", "Kp8", "Kp9", "No"],
+        ["Kp4", "Kp5", "Kp6", "KpPlus"],
+        ["Kp1", "Kp2", "Kp3", "No"],
+        ["Kp0", "No", "KpDot", "KpEnter"]
+    ],
+    [
+        ["_", "_", "_", "_"],
+        ["_", "_", "_", "_"],
+        ["_", "_", "_", "_"],
+        ["_", "_", "_", "_"],
+        ["_", "_", "_", "_"]
+    ],
+]
+
+[storage]
+enabled = true
+
+[ble]
+enabled = true

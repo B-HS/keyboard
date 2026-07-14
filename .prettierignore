@@ -4,4 +4,5 @@ keycaps/
 keyswitch_model/
 **/raw/
 **/export-out/
+**/target/
 keypad/pcb/
